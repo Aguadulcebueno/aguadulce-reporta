@@ -9,159 +9,49 @@
 
 <style>
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f1f5f2;
-  color:#19352e;
-}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f1f5f2;color:#19352e}
 header{background:#123d35;color:white}
-.topbar{
-  max-width:1050px;
-  margin:auto;
-  padding:22px 18px;
-  display:flex;
-  align-items:center;
-  gap:18px;
-}
-.logo{
-  width:90px;
-  height:90px;
-  object-fit:contain;
-  background:white;
-  border-radius:12px;
-  padding:5px;
-}
+.topbar{max-width:1050px;margin:auto;padding:22px 18px;display:flex;align-items:center;gap:18px}
+.logo{width:90px;height:90px;object-fit:contain;background:white;border-radius:12px;padding:5px}
 .topbar h1{margin:0 0 8px;font-size:29px}
 .topbar p{margin:0;color:#d4e7de}
 nav{background:#0c3029;padding:12px 18px}
-.navlinks{
-  max-width:1050px;
-  margin:auto;
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
-}
-nav a{
-  color:white;
-  text-decoration:none;
-  font-size:14px;
-  font-weight:bold;
-}
+.navlinks{max-width:1050px;margin:auto;display:flex;gap:20px;flex-wrap:wrap}
+nav a{color:white;text-decoration:none;font-size:14px;font-weight:bold}
 main{max-width:1050px;margin:25px auto;padding:0 16px}
-.hero{
-  background:linear-gradient(120deg,#176b50,#123d35);
-  color:white;
-  border-radius:16px;
-  padding:30px;
-  margin-bottom:20px;
-}
+.hero{background:linear-gradient(120deg,#176b50,#123d35);color:white;border-radius:16px;padding:30px;margin-bottom:20px}
 .hero h2{font-size:25px;margin:0 0 10px}
 .hero p{line-height:1.6;margin:0;color:#e4f2eb}
-.layout{
-  display:grid;
-  grid-template-columns:1.4fr 1fr;
-  gap:20px;
-  align-items:start;
-}
-.card{
-  background:white;
-  border-radius:14px;
-  padding:22px;
-  margin-bottom:18px;
-  box-shadow:0 3px 12px #163c3010;
-}
+.layout{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:start}
+.card{background:white;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 3px 12px #163c3010}
 h2{font-size:21px;margin:0 0 15px}
 h3{font-size:17px;margin:0 0 9px}
 p{line-height:1.55}
-label{
-  display:block;
-  font-weight:bold;
-  margin:14px 0 7px;
-  font-size:14px;
-}
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  border:1px solid #cbd9d1;
-  border-radius:8px;
-  font:inherit;
-  background:white;
-}
+label{display:block;font-weight:bold;margin:14px 0 7px;font-size:14px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cbd9d1;border-radius:8px;font:inherit;background:white}
 textarea{min-height:110px;resize:vertical}
-button{
-  width:100%;
-  border:0;
-  border-radius:9px;
-  padding:13px;
-  margin-top:13px;
-  background:#176b50;
-  color:white;
-  font-weight:bold;
-  font-size:15px;
-  cursor:pointer;
-}
+button{width:100%;border:0;border-radius:9px;padding:13px;margin-top:13px;background:#176b50;color:white;font-weight:bold;font-size:15px;cursor:pointer}
 button:disabled{opacity:.55;cursor:not-allowed}
 .secondary{background:#e6f1ea;color:#176b50}
 .note{font-size:13px;color:#64766b;line-height:1.55}
-.report-card{
-  border:1px solid #e0eae3;
-  border-radius:12px;
-  padding:18px;
-  margin:14px 0;
-  background:white;
-  overflow-wrap:anywhere;
-}
+.report-card{border:1px solid #e0eae3;border-radius:12px;padding:18px;margin:14px 0;background:white;overflow-wrap:anywhere}
 .report-card p{white-space:pre-wrap}
 .report-meta{font-size:13px;color:#60766a}
-.tag{
-  display:inline-block;
-  border-radius:30px;
-  background:#e3f0e8;
-  color:#176b50;
-  padding:6px 10px;
-  font-size:12px;
-  font-weight:bold;
-}
-.admin-actions{
-  background:#f2f6f3;
-  border-radius:10px;
-  padding:14px;
-  margin-top:15px;
-}
-.section-heading{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.section-heading button{
-  width:auto;
-  margin:0;
-  padding:10px 14px;
-}
-.photo-preview{
-  display:block;
-  max-width:100%;
-  max-height:330px;
-  border-radius:10px;
-  margin-top:12px;
-}
+.tag{display:inline-block;border-radius:30px;background:#e3f0e8;color:#176b50;padding:6px 10px;font-size:12px;font-weight:bold}
+.admin-actions{background:#f2f6f3;border-radius:10px;padding:14px;margin-top:15px}
+.section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.section-heading button{width:auto;margin:0;padding:10px 14px}
+.photo-preview{display:block;width:100%;max-height:430px;object-fit:contain;border-radius:10px;margin-top:12px;background:#edf3ef}
 .cf-turnstile{margin-top:18px}
-footer{
-  text-align:center;
-  padding:30px;
-  color:#65766d;
-  font-size:13px;
-}
+footer{text-align:center;padding:30px;color:#65766d;font-size:13px}
 [hidden]{display:none!important}
 @media(max-width:760px){
-  .layout{grid-template-columns:1fr}
-  .topbar h1{font-size:23px}
-  .logo{width:70px;height:70px}
-  .hero{padding:23px}
-  .hero h2{font-size:22px}
+.layout{grid-template-columns:1fr}
+.topbar h1{font-size:23px}
+.logo{width:70px;height:70px}
+.hero{padding:23px}
+.hero h2{font-size:22px}
 }
 </style>
 </head>
@@ -169,248 +59,144 @@ footer{
 <body>
 
 <header>
-  <div class="topbar">
-    <img
-      src="logo.png"
-      alt="Logo de Aguadulce Malo y Bueno"
-      class="logo"
-    >
-    <div>
-      <h1>📍 Aguadulce Reporta</h1>
-      <p>Tu comunidad. Tu voz. Tu reporte.</p>
-    </div>
-  </div>
+<div class="topbar">
+<img src="logo.png" alt="Logo de Aguadulce Malo y Bueno" class="logo">
+<div>
+<h1>📍 Aguadulce Reporta</h1>
+<p>Tu comunidad. Tu voz. Tu reporte.</p>
+</div>
+</div>
 
-  <nav>
-    <div class="navlinks">
-      <a href="#inicio">Inicio</a>
-      <a href="#publicos">Reportes públicos</a>
-      <a href="#enviar">Enviar reporte</a>
-      <a href="#administracion">Administración</a>
-    </div>
-  </nav>
+<nav>
+<div class="navlinks">
+<a href="#inicio">Inicio</a>
+<a href="#publicos">Reportes públicos</a>
+<a href="#enviar">Enviar reporte</a>
+<a href="#administracion">Administración</a>
+</div>
+</nav>
 </header>
 
 <main>
 
 <section class="hero" id="inicio">
-  <h2>Una comunidad informada puede hacer la diferencia</h2>
-  <p>
-    Reporta problemas de calles, alumbrado, agua,
-    limpieza y otras necesidades de Aguadulce.
-    Ahora puedes adjuntar una fotografía para
-    documentar el problema.
-  </p>
+<h2>Una comunidad informada puede hacer la diferencia</h2>
+<p>Reporta problemas de calles, alumbrado, agua, limpieza y otras necesidades de Aguadulce. También puedes adjuntar una fotografía.</p>
 </section>
 
 <div class="layout">
 
-  <div>
-    <section class="card" id="publicos">
-      <div class="section-heading">
-        <h2>📰 Reportes de la comunidad</h2>
-        <button
-          type="button"
-          id="publicRefresh"
-          class="secondary"
-        >↻ Actualizar</button>
-      </div>
+<div>
+<section class="card" id="publicos">
+<div class="section-heading">
+<h2>📰 Reportes de la comunidad</h2>
+<button type="button" id="publicRefresh" class="secondary">↻ Actualizar</button>
+</div>
+<p class="note">Solamente aparecen reportes públicos aprobados por la administración.</p>
+<p id="publicMessage" class="note" role="status"></p>
+<div id="publicReports"></div>
+</section>
+</div>
 
-      <p class="note">
-        Solamente aparecen reportes públicos
-        aprobados por la administración.
-      </p>
+<div>
 
-      <p id="publicMessage" class="note" role="status"></p>
-      <div id="publicReports"></div>
-    </section>
-  </div>
+<section class="card" id="enviar">
+<h2>📨 Enviar un reporte</h2>
 
-  <div>
+<form id="reportForm">
 
-    <section class="card" id="enviar">
-      <h2>📨 Enviar un reporte</h2>
+<label for="category">Categoría</label>
+<select id="category" required>
+<option value="">Selecciona una categoría</option>
+<option>Calles y aceras</option>
+<option>Basura y limpieza</option>
+<option>Agua y alcantarillado</option>
+<option>Alumbrado público</option>
+<option>Protección animal</option>
+<option>Otros problemas comunitarios</option>
+</select>
 
-      <form id="reportForm">
+<label for="area">Comunidad o corregimiento</label>
+<input id="area" maxlength="120" placeholder="Ej.: El Roble, Pocrí..." required>
 
-        <label for="category">Categoría</label>
-        <select id="category" required>
-          <option value="">Selecciona una categoría</option>
-          <option>Calles y aceras</option>
-          <option>Basura y limpieza</option>
-          <option>Agua y alcantarillado</option>
-          <option>Alumbrado público</option>
-          <option>Protección animal</option>
-          <option>Otros problemas comunitarios</option>
-        </select>
+<label for="description">Descripción del problema</label>
+<textarea id="description" maxlength="1500" minlength="10" placeholder="Explica qué sucede y dónde..." required></textarea>
 
-        <label for="area">Comunidad o corregimiento</label>
-        <input
-          id="area"
-          maxlength="120"
-          placeholder="Ej.: El Roble, Pocrí..."
-          required
-        >
+<label for="photo">📷 Adjuntar fotografía (opcional)</label>
+<input id="photo" type="file" accept="image/jpeg,image/png,image/webp">
+<p class="note">Una sola fotografía JPG, PNG o WebP. Máximo 5 MB.</p>
 
-        <label for="description">
-          Descripción del problema
-        </label>
-        <textarea
-          id="description"
-          maxlength="1500"
-          minlength="10"
-          placeholder="Explica qué sucede y dónde..."
-          required
-        ></textarea>
+<label for="visibility">Tipo de reporte</label>
+<select id="visibility" required>
+<option value="private">Privado: solo administración</option>
+<option value="public">Solicitar publicación pública</option>
+</select>
 
-        <label for="photo">
-          📷 Adjuntar fotografía (opcional)
-        </label>
-        <input
-          id="photo"
-          type="file"
-          accept="image/jpeg,image/png,image/webp"
-        >
+<p class="note">Evita incluir nombres, teléfonos, direcciones particulares o datos sensibles. Los reportes y fotografías deben revisarse antes de publicarse.</p>
 
-        <p class="note">
-          Una sola fotografía. Formatos JPG, PNG o WebP.
-          Tamaño máximo: 5 MB.
-        </p>
+<label>Verificación de seguridad</label>
+<div class="cf-turnstile"
+data-sitekey="0x4AAAAAAFWBvw2cZEIy5XVD"
+data-theme="light"></div>
 
-        <label for="visibility">Tipo de reporte</label>
-        <select id="visibility" required>
-          <option value="private">
-            Privado: solo administración
-          </option>
-          <option value="public">
-            Solicitar publicación pública
-          </option>
-        </select>
+<button type="submit" id="reportButton">Enviar reporte</button>
+<p id="reportMessage" class="note" role="status"></p>
 
-        <p class="note">
-          No incluyas nombres, teléfonos,
-          direcciones particulares ni información
-          sensible. Los reportes se revisan antes
-          de publicarse. Las fotografías permanecen
-          privadas para revisión administrativa.
-        </p>
+</form>
+</section>
 
-        <label>Verificación de seguridad</label>
+<section class="card" id="administracion">
 
-        <div
-          class="cf-turnstile"
-          data-sitekey="0x4AAAAAAFWBvw2cZEIy5XVD"
-          data-theme="light"
-        ></div>
+<div id="adminLogin">
+<h2>🔐 Administración</h2>
+<p class="note">Acceso exclusivo para administradores.</p>
 
-        <button type="submit" id="reportButton">
-          Enviar reporte
-        </button>
+<form id="loginForm">
+<label for="adminEmail">Correo electrónico</label>
+<input id="adminEmail" type="email" autocomplete="username" required>
 
-        <p id="reportMessage" class="note" role="status"></p>
+<label for="adminPassword">Contraseña</label>
+<input id="adminPassword" type="password" autocomplete="current-password" required>
 
-      </form>
-    </section>
+<button type="submit" id="loginButton">Iniciar sesión</button>
+</form>
 
-    <section class="card" id="administracion">
+<button type="button" id="forgotButton" class="secondary">Olvidé mi contraseña</button>
+<p id="loginMessage" class="note" role="status"></p>
+</div>
 
-      <div id="adminLogin">
-        <h2>🔐 Administración</h2>
-        <p class="note">
-          Acceso exclusivo para administradores.
-        </p>
+<div id="recoverySection" hidden>
+<h2>🔑 Nueva contraseña</h2>
 
-        <form id="loginForm">
-          <label for="adminEmail">Correo electrónico</label>
-          <input
-            id="adminEmail"
-            type="email"
-            autocomplete="username"
-            required
-          >
+<form id="recoveryForm">
+<label for="newPassword">Nueva contraseña</label>
+<input id="newPassword" type="password" minlength="8" required>
 
-          <label for="adminPassword">Contraseña</label>
-          <input
-            id="adminPassword"
-            type="password"
-            autocomplete="current-password"
-            required
-          >
+<label for="confirmPassword">Confirmar contraseña</label>
+<input id="confirmPassword" type="password" minlength="8" required>
 
-          <button type="submit" id="loginButton">
-            Iniciar sesión
-          </button>
-        </form>
+<button type="submit">Guardar contraseña</button>
+</form>
 
-        <button
-          type="button"
-          id="forgotButton"
-          class="secondary"
-        >
-          Olvidé mi contraseña
-        </button>
+<p id="recoveryMessage" class="note"></p>
+</div>
 
-        <p id="loginMessage" class="note" role="status"></p>
-      </div>
+<div id="adminPanel" hidden>
+<h2>📋 Panel de administración</h2>
+<button type="button" id="refreshButton">↻ Actualizar reportes</button>
+<button type="button" id="logoutButton" class="secondary">Cerrar sesión</button>
+<p id="adminMessage" class="note" role="status"></p>
+<div id="reportsList"></div>
+</div>
 
-      <div id="recoverySection" hidden>
-        <h2>🔑 Nueva contraseña</h2>
-        <form id="recoveryForm">
-          <label for="newPassword">Nueva contraseña</label>
-          <input
-            id="newPassword"
-            type="password"
-            minlength="8"
-            required
-          >
+</section>
 
-          <label for="confirmPassword">
-            Confirmar contraseña
-          </label>
-          <input
-            id="confirmPassword"
-            type="password"
-            minlength="8"
-            required
-          >
-
-          <button type="submit">
-            Guardar contraseña
-          </button>
-        </form>
-
-        <p id="recoveryMessage" class="note"></p>
-      </div>
-
-      <div id="adminPanel" hidden>
-        <h2>📋 Panel de administración</h2>
-
-        <button type="button" id="refreshButton">
-          ↻ Actualizar reportes
-        </button>
-
-        <button
-          type="button"
-          id="logoutButton"
-          class="secondary"
-        >
-          Cerrar sesión
-        </button>
-
-        <p id="adminMessage" class="note" role="status"></p>
-        <div id="reportsList"></div>
-      </div>
-
-    </section>
-
-  </div>
+</div>
 </div>
 
 </main>
 
-<footer>
-  Aguadulce Reporta · Una iniciativa comunitaria
-</footer>
+<footer>Aguadulce Reporta · Una iniciativa comunitaria</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 
@@ -423,6 +209,9 @@ const SUPABASE_KEY =
 
 const FUNCTION_URL =
   SUPABASE_URL + "/functions/v1/enviar-reporte";
+
+const PUBLIC_PHOTO_URL =
+  SUPABASE_URL + "/functions/v1/foto-publica";
 
 const BUCKET = "Foto de reportes";
 
@@ -440,8 +229,6 @@ const db = window.supabase.createClient(
   }
 );
 
-// Cliente sin sesión administrativa para
-// consultar exclusivamente los reportes públicos.
 const publicDb = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY,
@@ -482,15 +269,17 @@ function statusName(status) {
 
 function formatDate(date) {
   if (!date) return "Sin fecha";
+
   const value = new Date(date);
+
   return isNaN(value.getTime())
     ? "Sin fecha"
     : value.toLocaleString("es-PA");
 }
 
-// ========================================
-// REPORTES PÚBLICOS
-// ========================================
+// ======================================
+// REPORTES PÚBLICOS CON FOTOGRAFÍAS
+// ======================================
 
 async function loadPublicReports() {
   const container = $("publicReports");
@@ -525,11 +314,7 @@ async function loadPublicReports() {
 
       card.append(
         element("h3", report.category),
-        element(
-          "p",
-          "📍 " + report.area,
-          "report-meta"
-        ),
+        element("p", "📍 " + report.area, "report-meta"),
         element("p", report.description),
         element(
           "span",
@@ -544,6 +329,26 @@ async function loadPublicReports() {
         )
       );
 
+      // La función foto-publica comprueba
+      // si este reporte tiene una imagen
+      // autorizada para mostrar al público.
+      const photo = document.createElement("img");
+
+      photo.className = "photo-preview";
+      photo.alt = "Fotografía del reporte";
+      photo.loading = "lazy";
+      photo.referrerPolicy = "no-referrer";
+
+      // Si el reporte no tiene fotografía
+      // o no está disponible, ocultarla.
+      photo.onerror = () => photo.remove();
+
+      photo.src =
+        PUBLIC_PHOTO_URL +
+        "?id=" +
+        encodeURIComponent(report.id);
+
+      card.appendChild(photo);
       container.appendChild(card);
     }
 
@@ -556,9 +361,9 @@ async function loadPublicReports() {
 
 $("publicRefresh").onclick = loadPublicReports;
 
-// ========================================
-// ENVIAR REPORTE CON FOTO Y TURNSTILE
-// ========================================
+// ======================================
+// ENVIAR REPORTE CON FOTOGRAFÍA
+// ======================================
 
 $("reportForm").addEventListener(
   "submit",
@@ -589,11 +394,10 @@ $("reportForm").addEventListener(
       }
     }
 
-    const tokenInput = document.querySelector(
-      'input[name="cf-turnstile-response"]'
-    );
-
-    const token = tokenInput?.value || "";
+    const token =
+      document.querySelector(
+        'input[name="cf-turnstile-response"]'
+      )?.value || "";
 
     if (!token) {
       message.textContent =
@@ -635,7 +439,8 @@ $("reportForm").addEventListener(
 
       if (!response.ok || !result.success) {
         throw new Error(
-          result.error || "No se pudo enviar el reporte."
+          result.error ||
+          "No se pudo enviar el reporte."
         );
       }
 
@@ -664,9 +469,9 @@ $("reportForm").addEventListener(
   }
 );
 
-// ========================================
+// ======================================
 // ADMINISTRACIÓN
-// ========================================
+// ======================================
 
 async function showAdminPanel() {
   if (recoveryMode) return;
@@ -676,8 +481,10 @@ async function showAdminPanel() {
 
   if (error || isAdmin !== true) {
     await db.auth.signOut();
+
     $("adminLogin").hidden = false;
     $("adminPanel").hidden = true;
+
     $("loginMessage").textContent =
       "Esta cuenta no tiene permisos de administrador.";
     return;
@@ -751,13 +558,13 @@ async function loadAdminReports() {
         )
       );
 
-      // FOTO PRIVADA: se solicita una URL temporal
-      // usando la sesión del administrador.
+      // Fotografía privada para administradores
       if (report.photo_path) {
         const photoButton = element(
           "button",
           "📷 Ver fotografía"
         );
+
         photoButton.type = "button";
         photoButton.className = "secondary";
 
@@ -780,6 +587,7 @@ async function loadAdminReports() {
             if (error) throw error;
 
             const img = document.createElement("img");
+
             img.src = data.signedUrl;
             img.alt = "Fotografía del reporte";
             img.className = "photo-preview";
@@ -830,6 +638,7 @@ async function loadAdminReports() {
         "button",
         "Guardar estado"
       );
+
       saveButton.type = "button";
       saveButton.disabled = true;
 
@@ -899,8 +708,8 @@ async function loadAdminReports() {
             }
 
             if (!confirm(
-              "¿Revisaste el reporte y confirmas " +
-              "que puede publicarse?"
+              "¿Revisaste el reporte y su fotografía " +
+              "y confirmas que pueden publicarse?"
             )) return;
           }
 
@@ -943,6 +752,7 @@ async function loadAdminReports() {
 
   } catch (error) {
     console.error("Administración:", error);
+
     message.textContent =
       "No se pudieron cargar los reportes: " +
       error.message;
@@ -951,9 +761,9 @@ async function loadAdminReports() {
 
 $("refreshButton").onclick = loadAdminReports;
 
-// ========================================
-// INICIO Y CIERRE DE SESIÓN
-// ========================================
+// ======================================
+// INICIO DE SESIÓN
+// ======================================
 
 $("loginForm").addEventListener(
   "submit",
@@ -981,6 +791,7 @@ $("loginForm").addEventListener(
       $("loginMessage").textContent =
         "No se pudo iniciar sesión: " +
         error.message;
+
     } finally {
       $("loginButton").disabled = false;
     }
@@ -993,13 +804,14 @@ $("logoutButton").onclick = async () => {
   $("adminPanel").hidden = true;
   $("adminLogin").hidden = false;
   $("reportsList").replaceChildren();
+
   $("loginMessage").textContent =
     "Sesión cerrada.";
 };
 
-// ========================================
+// ======================================
 // RECUPERAR CONTRASEÑA
-// ========================================
+// ======================================
 
 $("forgotButton").onclick = async () => {
   const email = $("adminEmail").value.trim();
@@ -1024,6 +836,7 @@ $("forgotButton").onclick = async () => {
 
 function showRecovery() {
   recoveryMode = true;
+
   $("adminLogin").hidden = true;
   $("adminPanel").hidden = true;
   $("recoverySection").hidden = false;
@@ -1037,13 +850,16 @@ db.auth.onAuthStateChange((event, session) => {
   if (event === "PASSWORD_RECOVERY") {
     showRecovery();
     recoveryReady = true;
+
     $("recoveryMessage").textContent =
       "Enlace verificado. Escribe tu nueva contraseña.";
   }
 
-  if (recoveryMode &&
-      event === "SIGNED_IN" &&
-      session) {
+  if (
+    recoveryMode &&
+    event === "SIGNED_IN" &&
+    session
+  ) {
     recoveryReady = true;
   }
 });
@@ -1096,9 +912,9 @@ $("recoveryForm").addEventListener(
   }
 );
 
-// ========================================
+// ======================================
 // INICIAR PÁGINA
-// ========================================
+// ======================================
 
 async function initialize() {
   await loadPublicReports();
@@ -1111,6 +927,7 @@ async function initialize() {
       $("recoveryMessage").textContent =
         "Escribe tu nueva contraseña.";
     }
+
     return;
   }
 
@@ -1125,10 +942,10 @@ initialize();
 </script>
 
 <script
-  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-  async
-  defer
-></script>
+src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+async
+defer>
+</script>
 
 </body>
 </html>
