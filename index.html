@@ -6,56 +6,181 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#123d35">
 <title>Aguadulce Reporta | Portal comunitario</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f1f5f2;color:#19352e}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f1f5f2;
+  color:#19352e;
+}
 header{background:#123d35;color:white}
-.topbar{max-width:1050px;margin:auto;padding:28px 18px}
-.topbar h1{margin:0 0 8px;font-size:30px}
+.topbar{
+  max-width:1050px;
+  margin:auto;
+  padding:22px 18px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+.logo{
+  width:90px;
+  height:90px;
+  object-fit:contain;
+  background:white;
+  border-radius:12px;
+  padding:5px;
+}
+.topbar h1{margin:0 0 8px;font-size:29px}
 .topbar p{margin:0;color:#d4e7de}
 nav{background:#0c3029;padding:12px 18px}
-.navlinks{max-width:1050px;margin:auto;display:flex;gap:20px;flex-wrap:wrap}
-nav a{color:white;text-decoration:none;font-size:14px;font-weight:bold}
+.navlinks{
+  max-width:1050px;
+  margin:auto;
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+}
+nav a{
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:bold;
+}
 main{max-width:1050px;margin:25px auto;padding:0 16px}
-.hero{background:linear-gradient(120deg,#176b50,#123d35);color:white;border-radius:16px;padding:30px;margin-bottom:20px}
-.hero h2{font-size:26px;margin:0 0 10px}
+.hero{
+  background:linear-gradient(120deg,#176b50,#123d35);
+  color:white;
+  border-radius:16px;
+  padding:30px;
+  margin-bottom:20px;
+}
+.hero h2{font-size:25px;margin:0 0 10px}
 .hero p{line-height:1.6;margin:0;color:#e4f2eb}
-.layout{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:start}
-.card{background:white;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 3px 12px #163c3010}
+.layout{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:20px;
+  align-items:start;
+}
+.card{
+  background:white;
+  border-radius:14px;
+  padding:22px;
+  margin-bottom:18px;
+  box-shadow:0 3px 12px #163c3010;
+}
 h2{font-size:21px;margin:0 0 15px}
 h3{font-size:17px;margin:0 0 9px}
 p{line-height:1.55}
-label{display:block;font-weight:bold;margin:14px 0 7px;font-size:14px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #cbd9d1;border-radius:8px;font:inherit;background:white}
+label{
+  display:block;
+  font-weight:bold;
+  margin:14px 0 7px;
+  font-size:14px;
+}
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #cbd9d1;
+  border-radius:8px;
+  font:inherit;
+  background:white;
+}
 textarea{min-height:110px;resize:vertical}
-button{width:100%;border:0;border-radius:9px;padding:13px;margin-top:13px;background:#176b50;color:white;font-weight:bold;font-size:15px;cursor:pointer}
+button{
+  width:100%;
+  border:0;
+  border-radius:9px;
+  padding:13px;
+  margin-top:13px;
+  background:#176b50;
+  color:white;
+  font-weight:bold;
+  font-size:15px;
+  cursor:pointer;
+}
 button:disabled{opacity:.55;cursor:not-allowed}
 .secondary{background:#e6f1ea;color:#176b50}
 .note{font-size:13px;color:#64766b;line-height:1.55}
-.report-card{border:1px solid #e0eae3;border-radius:12px;padding:18px;margin:14px 0;background:#fff;overflow-wrap:anywhere}
+.report-card{
+  border:1px solid #e0eae3;
+  border-radius:12px;
+  padding:18px;
+  margin:14px 0;
+  background:white;
+  overflow-wrap:anywhere;
+}
 .report-card p{white-space:pre-wrap}
 .report-meta{font-size:13px;color:#60766a}
-.tag{display:inline-block;border-radius:30px;background:#e3f0e8;color:#176b50;padding:6px 10px;font-size:12px;font-weight:bold;margin:4px 5px 5px 0}
-.admin-actions{background:#f2f6f3;border-radius:10px;padding:14px;margin-top:15px}
-.section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.section-heading button{width:auto;margin:0;padding:10px 14px}
-footer{text-align:center;padding:30px;color:#65766d;font-size:13px}
+.tag{
+  display:inline-block;
+  border-radius:30px;
+  background:#e3f0e8;
+  color:#176b50;
+  padding:6px 10px;
+  font-size:12px;
+  font-weight:bold;
+}
+.admin-actions{
+  background:#f2f6f3;
+  border-radius:10px;
+  padding:14px;
+  margin-top:15px;
+}
+.section-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.section-heading button{
+  width:auto;
+  margin:0;
+  padding:10px 14px;
+}
+.photo-preview{
+  display:block;
+  max-width:100%;
+  max-height:330px;
+  border-radius:10px;
+  margin-top:12px;
+}
+.cf-turnstile{margin-top:18px}
+footer{
+  text-align:center;
+  padding:30px;
+  color:#65766d;
+  font-size:13px;
+}
 [hidden]{display:none!important}
 @media(max-width:760px){
-.layout{grid-template-columns:1fr}
-.topbar h1{font-size:26px}
-.hero{padding:23px}
-.hero h2{font-size:22px}
+  .layout{grid-template-columns:1fr}
+  .topbar h1{font-size:23px}
+  .logo{width:70px;height:70px}
+  .hero{padding:23px}
+  .hero h2{font-size:22px}
 }
 </style>
 </head>
+
 <body>
 
 <header>
   <div class="topbar">
-    <h1>📍 Aguadulce Reporta</h1>
-    <p>Tu comunidad. Tu voz. Tu reporte.</p>
+    <img
+      src="logo.png"
+      alt="Logo de Aguadulce Malo y Bueno"
+      class="logo"
+    >
+    <div>
+      <h1>📍 Aguadulce Reporta</h1>
+      <p>Tu comunidad. Tu voz. Tu reporte.</p>
+    </div>
   </div>
+
   <nav>
     <div class="navlinks">
       <a href="#inicio">Inicio</a>
@@ -67,265 +192,327 @@ footer{text-align:center;padding:30px;color:#65766d;font-size:13px}
 </header>
 
 <main>
-  <section class="hero" id="inicio">
-    <h2>Una comunidad informada puede hacer la diferencia</h2>
-    <p>
-      Reporta problemas de calles, alumbrado, agua,
-      limpieza y otras necesidades de Aguadulce.
-      Cada reporte será revisado antes de publicarse.
-    </p>
-  </section>
 
-  <div class="layout">
+<section class="hero" id="inicio">
+  <h2>Una comunidad informada puede hacer la diferencia</h2>
+  <p>
+    Reporta problemas de calles, alumbrado, agua,
+    limpieza y otras necesidades de Aguadulce.
+    Ahora puedes adjuntar una fotografía para
+    documentar el problema.
+  </p>
+</section>
 
-    <div>
-      <!-- REPORTES PUBLICOS -->
-      <section class="card" id="publicos">
-        <div class="section-heading">
-          <h2>📰 Reportes de la comunidad</h2>
-          <button type="button" id="publicRefresh" class="secondary">
-            ↻ Actualizar
-          </button>
-        </div>
+<div class="layout">
+
+  <div>
+    <section class="card" id="publicos">
+      <div class="section-heading">
+        <h2>📰 Reportes de la comunidad</h2>
+        <button
+          type="button"
+          id="publicRefresh"
+          class="secondary"
+        >↻ Actualizar</button>
+      </div>
+
+      <p class="note">
+        Solamente aparecen reportes públicos
+        aprobados por la administración.
+      </p>
+
+      <p id="publicMessage" class="note" role="status"></p>
+      <div id="publicReports"></div>
+    </section>
+  </div>
+
+  <div>
+
+    <section class="card" id="enviar">
+      <h2>📨 Enviar un reporte</h2>
+
+      <form id="reportForm">
+
+        <label for="category">Categoría</label>
+        <select id="category" required>
+          <option value="">Selecciona una categoría</option>
+          <option>Calles y aceras</option>
+          <option>Basura y limpieza</option>
+          <option>Agua y alcantarillado</option>
+          <option>Alumbrado público</option>
+          <option>Protección animal</option>
+          <option>Otros problemas comunitarios</option>
+        </select>
+
+        <label for="area">Comunidad o corregimiento</label>
+        <input
+          id="area"
+          maxlength="120"
+          placeholder="Ej.: El Roble, Pocrí..."
+          required
+        >
+
+        <label for="description">
+          Descripción del problema
+        </label>
+        <textarea
+          id="description"
+          maxlength="1500"
+          minlength="10"
+          placeholder="Explica qué sucede y dónde..."
+          required
+        ></textarea>
+
+        <label for="photo">
+          📷 Adjuntar fotografía (opcional)
+        </label>
+        <input
+          id="photo"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+        >
+
         <p class="note">
-          Aquí aparecen únicamente los reportes públicos
-          aprobados por la administración.
+          Una sola fotografía. Formatos JPG, PNG o WebP.
+          Tamaño máximo: 5 MB.
         </p>
-        <p id="publicMessage" class="note" role="status"></p>
-        <div id="publicReports"></div>
-      </section>
-    </div>
 
-    <div>
-      <!-- ENVIAR REPORTE -->
-      <section class="card" id="enviar">
-        <h2>📨 Enviar un reporte</h2>
-        <form id="reportForm">
+        <label for="visibility">Tipo de reporte</label>
+        <select id="visibility" required>
+          <option value="private">
+            Privado: solo administración
+          </option>
+          <option value="public">
+            Solicitar publicación pública
+          </option>
+        </select>
 
-          <label for="category">Categoría</label>
-          <select id="category" required>
-            <option value="">Selecciona una categoría</option>
-            <option>Calles y aceras</option>
-            <option>Basura y limpieza</option>
-            <option>Agua y alcantarillado</option>
-            <option>Alumbrado público</option>
-            <option>Protección animal</option>
-            <option>Otros problemas comunitarios</option>
-          </select>
+        <p class="note">
+          No incluyas nombres, teléfonos,
+          direcciones particulares ni información
+          sensible. Los reportes se revisan antes
+          de publicarse. Las fotografías permanecen
+          privadas para revisión administrativa.
+        </p>
 
-          <label for="area">Comunidad o corregimiento</label>
-          <input id="area" maxlength="120"
-            placeholder="Ej.: El Roble, Pocrí..." required>
+        <label>Verificación de seguridad</label>
 
-          <label for="description">Descripción del problema</label>
-          <textarea id="description" maxlength="1500"
-            placeholder="Explica qué sucede y dónde..."
-            required></textarea>
+        <div
+          class="cf-turnstile"
+          data-sitekey="0x4AAAAAAFWBvw2cZEIy5XVD"
+          data-theme="light"
+        ></div>
 
-          <label for="photo">Fotografía (próximamente)</label>
-          <input id="photo" type="file" accept="image/*" disabled>
+        <button type="submit" id="reportButton">
+          Enviar reporte
+        </button>
 
-          <label for="visibility">Tipo de reporte</label>
-          <select id="visibility" required>
-            <option value="private">
-              Privado: solo administración
-            </option>
-            <option value="public">
-              Solicitar publicación pública
-            </option>
-          </select>
+        <p id="reportMessage" class="note" role="status"></p>
 
-          <p class="note">
-            No incluyas nombres, teléfonos, direcciones
-            particulares ni información sensible.
-            Los reportes no se publican automáticamente.
-          </p>
+      </form>
+    </section>
 
-          <button type="submit" id="reportButton">
-            Enviar reporte
+    <section class="card" id="administracion">
+
+      <div id="adminLogin">
+        <h2>🔐 Administración</h2>
+        <p class="note">
+          Acceso exclusivo para administradores.
+        </p>
+
+        <form id="loginForm">
+          <label for="adminEmail">Correo electrónico</label>
+          <input
+            id="adminEmail"
+            type="email"
+            autocomplete="username"
+            required
+          >
+
+          <label for="adminPassword">Contraseña</label>
+          <input
+            id="adminPassword"
+            type="password"
+            autocomplete="current-password"
+            required
+          >
+
+          <button type="submit" id="loginButton">
+            Iniciar sesión
           </button>
-          <p id="reportMessage" class="note" role="status"></p>
         </form>
-      </section>
 
-      <!-- ADMINISTRACION -->
-      <section class="card" id="administracion">
-        <div id="adminLogin">
-          <h2>🔐 Administración</h2>
-          <p class="note">Acceso exclusivo para administradores.</p>
-          <form id="loginForm">
-            <label for="adminEmail">Correo electrónico</label>
-            <input id="adminEmail" type="email"
-              autocomplete="username" required>
-            <label for="adminPassword">Contraseña</label>
-            <input id="adminPassword" type="password"
-              autocomplete="current-password" required>
-            <button id="loginButton" type="submit">
-              Iniciar sesión
-            </button>
-          </form>
-          <p id="loginMessage" class="note" role="status"></p>
-        </div>
+        <button
+          type="button"
+          id="forgotButton"
+          class="secondary"
+        >
+          Olvidé mi contraseña
+        </button>
 
-        <div id="recoverySection" hidden>
-          <h2>🔑 Crear contraseña nueva</h2>
-          <form id="recoveryForm">
-            <label for="newPassword">Nueva contraseña</label>
-            <input id="newPassword" type="password"
-              autocomplete="new-password" minlength="8" required>
-            <label for="confirmPassword">Confirmar contraseña</label>
-            <input id="confirmPassword" type="password"
-              autocomplete="new-password" minlength="8" required>
-            <button id="recoveryButton" type="submit">
-              Guardar contraseña
-            </button>
-          </form>
-          <p id="recoveryMessage" class="note" role="status"></p>
-        </div>
+        <p id="loginMessage" class="note" role="status"></p>
+      </div>
 
-        <div id="adminPanel" hidden>
-          <h2>📋 Panel de administración</h2>
-          <button type="button" id="refreshButton">
-            ↻ Actualizar reportes
+      <div id="recoverySection" hidden>
+        <h2>🔑 Nueva contraseña</h2>
+        <form id="recoveryForm">
+          <label for="newPassword">Nueva contraseña</label>
+          <input
+            id="newPassword"
+            type="password"
+            minlength="8"
+            required
+          >
+
+          <label for="confirmPassword">
+            Confirmar contraseña
+          </label>
+          <input
+            id="confirmPassword"
+            type="password"
+            minlength="8"
+            required
+          >
+
+          <button type="submit">
+            Guardar contraseña
           </button>
-          <button type="button" id="logoutButton" class="secondary">
-            Cerrar sesión
-          </button>
-          <p id="adminMessage" class="note" role="status"></p>
-          <div id="reportsList"></div>
-        </div>
-      </section>
-    </div>
+        </form>
+
+        <p id="recoveryMessage" class="note"></p>
+      </div>
+
+      <div id="adminPanel" hidden>
+        <h2>📋 Panel de administración</h2>
+
+        <button type="button" id="refreshButton">
+          ↻ Actualizar reportes
+        </button>
+
+        <button
+          type="button"
+          id="logoutButton"
+          class="secondary"
+        >
+          Cerrar sesión
+        </button>
+
+        <p id="adminMessage" class="note" role="status"></p>
+        <div id="reportsList"></div>
+      </div>
+
+    </section>
 
   </div>
+</div>
+
 </main>
 
 <footer>
-  Aguadulce Reporta · Portal comunitario en desarrollo
+  Aguadulce Reporta · Una iniciativa comunitaria
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
 <script>
-
-// CONEXION CON SUPABASE
-
 const SUPABASE_URL =
   "https://lrupvpgyjzhgyvprrmtl.supabase.co";
 
 const SUPABASE_KEY =
   "sb_publishable_toBA9zteOxIM1WivpdjwFQ_xUXsqfpf";
 
+const FUNCTION_URL =
+  SUPABASE_URL + "/functions/v1/enviar-reporte";
+
+const BUCKET = "Foto de reportes";
+
 const $ = id => document.getElementById(id);
 
-const db = window.supabase
-  ? window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY,
-      {
-        auth: {
-          detectSessionInUrl: true,
-          persistSession: true,
-          autoRefreshToken: true
-        }
-      }
-    )
-  : null;
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY,
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true
+    }
+  }
+);
 
-// CLIENTE INDEPENDIENTE PARA CONSULTAS PUBLICAS.
-// NO UTILIZA LA SESION DEL ADMINISTRADOR.
-
-const publicDb = window.supabase
-  ? window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY,
-      {
-        auth: {
-          persistSession: false,
-          autoRefreshToken: false,
-          detectSessionInUrl: false,
-          storageKey: "aguadulce-public-view"
-        }
-      }
-    )
-  : null;
-
-const loginSection = $("adminLogin");
-const panelSection = $("adminPanel");
-const recoverySection = $("recoverySection");
-
-const hashParams =
-  new URLSearchParams(location.hash.slice(1));
-
-const queryParams =
-  new URLSearchParams(location.search);
+// Cliente sin sesión administrativa para
+// consultar exclusivamente los reportes públicos.
+const publicDb = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY,
+  {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+      detectSessionInUrl: false,
+      storageKey: "aguadulce-public-reader"
+    }
+  }
+);
 
 let recoveryMode =
-  hashParams.get("type") === "recovery" ||
-  queryParams.get("type") === "recovery" ||
-  queryParams.has("code");
+  new URLSearchParams(location.hash.slice(1))
+    .get("type") === "recovery" ||
+  new URLSearchParams(location.search)
+    .has("code");
 
 let recoveryReady = false;
 
-function textElement(tag, value) {
-  const element = document.createElement(tag);
-  element.textContent = value == null ? "" : String(value);
-  return element;
+function element(tag, value, className = "") {
+  const node = document.createElement(tag);
+  node.textContent = value == null ? "" : String(value);
+  if (className) node.className = className;
+  return node;
 }
 
-function statusName(value) {
-  const statuses = {
+function statusName(status) {
+  return ({
     pending: "Pendiente",
     reviewing: "En revisión",
     referred: "Remitido",
     resolved: "Resuelto",
     rejected: "Rechazado"
-  };
-  return statuses[value] || value || "Sin estado";
+  })[status] || status || "Sin estado";
 }
 
-function formatDate(value) {
-  if (!value) return "Sin fecha";
-  const date = new Date(value);
-  return Number.isNaN(date.getTime())
+function formatDate(date) {
+  if (!date) return "Sin fecha";
+  const value = new Date(date);
+  return isNaN(value.getTime())
     ? "Sin fecha"
-    : date.toLocaleString("es-PA");
+    : value.toLocaleString("es-PA");
 }
 
-// REPORTES PUBLICOS
+// ========================================
+// REPORTES PÚBLICOS
+// ========================================
 
 async function loadPublicReports() {
   const container = $("publicReports");
   const message = $("publicMessage");
 
   container.replaceChildren();
-  message.textContent = "Cargando reportes públicos...";
-  $("publicRefresh").disabled = true;
+  message.textContent = "Cargando reportes...";
 
   try {
-    if (!publicDb) {
-      message.textContent = "No se pudo cargar Supabase.";
-      return;
-    }
-
-    // Las políticas RLS permiten a visitantes
-    // consultar solamente reportes públicos aprobados.
-    // No se solicitan campos privados.
     const { data, error } = await publicDb
       .from("reports")
-      .select("id,category,area,description,status,created_at")
+      .select(
+        "id,category,area,description,status,created_at"
+      )
       .order("created_at", { ascending: false })
       .limit(30);
 
-    if (error) {
-      console.error("Consulta pública:", error);
-      message.textContent =
-        "No se pudieron cargar los reportes públicos.";
-      return;
-    }
+    if (error) throw error;
 
-    if (!data || data.length === 0) {
+    if (!data.length) {
       message.textContent =
-        "Todavía no hay reportes aprobados para publicación.";
+        "Todavía no hay reportes públicos aprobados.";
       return;
     }
 
@@ -336,203 +523,293 @@ async function loadPublicReports() {
       const card = document.createElement("article");
       card.className = "report-card";
 
-      const title = textElement(
-        "h3",
-        report.category || "Reporte comunitario"
+      card.append(
+        element("h3", report.category),
+        element(
+          "p",
+          "📍 " + report.area,
+          "report-meta"
+        ),
+        element("p", report.description),
+        element(
+          "span",
+          statusName(report.status),
+          "tag"
+        ),
+        element(
+          "p",
+          "Reporte recibido: " +
+          formatDate(report.created_at),
+          "report-meta"
+        )
       );
 
-      const area = textElement(
-        "p",
-        "📍 " + (report.area || "Aguadulce")
-      );
-      area.className = "report-meta";
-
-      const description = textElement(
-        "p",
-        report.description || ""
-      );
-
-      const status = textElement(
-        "span",
-        statusName(report.status)
-      );
-      status.className = "tag";
-
-      const date = textElement(
-        "p",
-        "Publicado en el portal · Reporte recibido: " +
-        formatDate(report.created_at)
-      );
-      date.className = "report-meta";
-
-      card.append(title, area, description, status, date);
       container.appendChild(card);
     }
 
   } catch (error) {
     console.error(error);
     message.textContent =
-      "Error de conexión al cargar reportes.";
-  } finally {
-    $("publicRefresh").disabled = false;
+      "No se pudieron cargar los reportes.";
   }
 }
 
-$("publicRefresh").addEventListener(
-  "click",
-  loadPublicReports
-);
+$("publicRefresh").onclick = loadPublicReports;
 
-// ENVIAR REPORTES
+// ========================================
+// ENVIAR REPORTE CON FOTO Y TURNSTILE
+// ========================================
 
 $("reportForm").addEventListener(
   "submit",
   async event => {
     event.preventDefault();
 
-    const message = $("reportMessage");
     const button = $("reportButton");
+    const message = $("reportMessage");
+    const photo = $("photo").files[0];
 
-    if (!db) {
-      message.textContent = "No hay conexión con Supabase.";
+    if (photo) {
+      const allowed = [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+      ];
+
+      if (!allowed.includes(photo.type)) {
+        message.textContent =
+          "Solo se permiten fotografías JPG, PNG o WebP.";
+        return;
+      }
+
+      if (photo.size > 5 * 1024 * 1024) {
+        message.textContent =
+          "La fotografía no puede superar 5 MB.";
+        return;
+      }
+    }
+
+    const tokenInput = document.querySelector(
+      'input[name="cf-turnstile-response"]'
+    );
+
+    const token = tokenInput?.value || "";
+
+    if (!token) {
+      message.textContent =
+        "Completa la verificación de seguridad.";
       return;
     }
 
-    const category = $("category").value;
-    const area = $("area").value.trim();
-    const description = $("description").value.trim();
-    const visibility_requested = $("visibility").value;
+    const form = new FormData();
 
-    if (!category || !area || !description) {
-      message.textContent =
-        "Completa los campos obligatorios.";
-      return;
-    }
+    form.append("category", $("category").value);
+    form.append("area", $("area").value.trim());
+    form.append(
+      "description",
+      $("description").value.trim()
+    );
+    form.append(
+      "visibility_requested",
+      $("visibility").value
+    );
+    form.append("turnstile_token", token);
 
-    if (!["private", "public"].includes(visibility_requested)) {
-      message.textContent =
-        "Selecciona un tipo de reporte válido.";
-      return;
+    if (photo) {
+      form.append("photo", photo);
     }
 
     button.disabled = true;
     message.textContent = "Enviando reporte...";
 
     try {
-      const { error } = await db
-        .from("reports")
-        .insert({
-          category,
-          area,
-          description,
-          visibility_requested
-        });
+      const response = await fetch(FUNCTION_URL, {
+        method: "POST",
+        headers: {
+          apikey: SUPABASE_KEY
+        },
+        body: form
+      });
 
-      if (error) {
-        console.error("Error al enviar:", error);
-        message.textContent =
-          "No se pudo enviar el reporte. Intenta nuevamente.";
-        return;
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.error || "No se pudo enviar el reporte."
+        );
       }
 
       $("reportForm").reset();
+
       message.textContent =
         "¡Reporte recibido correctamente! " +
         "Quedará pendiente de revisión.";
 
-      if (!panelSection.hidden) {
+      if (!$("adminPanel").hidden) {
         await loadAdminReports();
       }
 
     } catch (error) {
-      console.error(error);
+      console.error("Envío:", error);
       message.textContent =
-        "Error de conexión. Intenta nuevamente.";
+        error.message || "Error al enviar el reporte.";
+
     } finally {
       button.disabled = false;
+
+      if (window.turnstile) {
+        window.turnstile.reset();
+      }
     }
   }
 );
 
-// PANEL ADMINISTRATIVO
+// ========================================
+// ADMINISTRACIÓN
+// ========================================
+
+async function showAdminPanel() {
+  if (recoveryMode) return;
+
+  const { data: isAdmin, error } =
+    await db.rpc("is_app_admin");
+
+  if (error || isAdmin !== true) {
+    await db.auth.signOut();
+    $("adminLogin").hidden = false;
+    $("adminPanel").hidden = true;
+    $("loginMessage").textContent =
+      "Esta cuenta no tiene permisos de administrador.";
+    return;
+  }
+
+  $("adminLogin").hidden = true;
+  $("recoverySection").hidden = true;
+  $("adminPanel").hidden = false;
+
+  await loadAdminReports();
+}
 
 async function loadAdminReports() {
-  if (!db || panelSection.hidden) return;
+  if ($("adminPanel").hidden) return;
 
   const container = $("reportsList");
-  container.replaceChildren();
+  const message = $("adminMessage");
 
-  $("adminMessage").textContent = "Cargando reportes...";
-  $("refreshButton").disabled = true;
+  container.replaceChildren();
+  message.textContent = "Cargando reportes...";
 
   try {
     const { data, error } = await db
       .from("reports")
       .select(
         "id,category,area,description,status," +
-        "visibility_requested,is_published,created_at"
+        "visibility_requested,is_published," +
+        "photo_path,created_at"
       )
       .order("created_at", { ascending: false })
       .limit(50);
 
-    if (error) {
-      $("adminMessage").textContent =
-        "Error al consultar reportes: " + error.message;
-      return;
-    }
+    if (error) throw error;
 
-    $("adminMessage").textContent =
+    message.textContent =
       "Reportes encontrados: " + data.length;
 
     for (const report of data) {
       const card = document.createElement("article");
       card.className = "report-card";
 
-      const heading = textElement("h3", report.category);
-      const area = textElement(
-        "p",
-        "📍 Comunidad: " + report.area
+      card.append(
+        element("h3", report.category),
+        element(
+          "p",
+          "📍 Comunidad: " + report.area
+        ),
+        element("p", report.description),
+        element(
+          "p",
+          "Fecha: " + formatDate(report.created_at),
+          "report-meta"
+        ),
+        element(
+          "p",
+          "Estado: " + statusName(report.status)
+        ),
+        element(
+          "p",
+          "Tipo: " +
+          (report.visibility_requested === "public"
+            ? "Solicitó publicación pública"
+            : "Privado")
+        ),
+        element(
+          "p",
+          "Publicación: " +
+          (report.is_published
+            ? "Aprobada"
+            : "No aprobada")
+        )
       );
-      const description = textElement(
-        "p",
-        report.description
-      );
-      const date = textElement(
-        "p",
-        "Fecha: " + formatDate(report.created_at)
-      );
-      date.className = "report-meta";
 
-      const state = textElement(
-        "p",
-        "Estado: " + statusName(report.status)
-      );
+      // FOTO PRIVADA: se solicita una URL temporal
+      // usando la sesión del administrador.
+      if (report.photo_path) {
+        const photoButton = element(
+          "button",
+          "📷 Ver fotografía"
+        );
+        photoButton.type = "button";
+        photoButton.className = "secondary";
 
-      const type = textElement(
-        "p",
-        "Tipo: " +
-        (report.visibility_requested === "public"
-          ? "Solicitó publicación pública"
-          : "Privado")
-      );
+        const photoContainer =
+          document.createElement("div");
 
-      const publication = textElement(
-        "p",
-        "Publicación: " +
-        (report.is_published ? "Aprobada" : "No aprobada")
-      );
+        photoButton.onclick = async () => {
+          photoButton.disabled = true;
+          photoButton.textContent =
+            "Cargando fotografía...";
+
+          try {
+            const { data, error } = await db.storage
+              .from(BUCKET)
+              .createSignedUrl(
+                report.photo_path,
+                60
+              );
+
+            if (error) throw error;
+
+            const img = document.createElement("img");
+            img.src = data.signedUrl;
+            img.alt = "Fotografía del reporte";
+            img.className = "photo-preview";
+
+            photoContainer.replaceChildren(img);
+
+            photoButton.textContent =
+              "Fotografía disponible";
+
+          } catch (error) {
+            console.error(error);
+            photoButton.textContent =
+              "No se pudo abrir la fotografía";
+            photoButton.disabled = false;
+          }
+        };
+
+        card.append(photoButton, photoContainer);
+      }
 
       const actions = document.createElement("div");
       actions.className = "admin-actions";
 
-      const statusLabel = textElement(
-        "label",
-        "Cambiar estado"
+      actions.appendChild(
+        element("label", "Cambiar estado del reporte")
       );
 
       const select = document.createElement("select");
 
-      const options = [
+      const states = [
         ["pending", "Pendiente"],
         ["reviewing", "En revisión"],
         ["referred", "Remitido"],
@@ -540,35 +817,41 @@ async function loadAdminReports() {
         ["rejected", "Rechazado"]
       ];
 
-      for (const [value, label] of options) {
+      for (const [value, name] of states) {
         const option = document.createElement("option");
         option.value = value;
-        option.textContent = label;
+        option.textContent = name;
         select.appendChild(option);
       }
 
       select.value = report.status;
 
-      const saveButton = document.createElement("button");
+      const saveButton = element(
+        "button",
+        "Guardar estado"
+      );
       saveButton.type = "button";
-      saveButton.textContent = "Guardar estado";
       saveButton.disabled = true;
 
-      select.addEventListener("change", () => {
-        saveButton.disabled = select.value === report.status;
-      });
+      select.onchange = () => {
+        saveButton.disabled =
+          select.value === report.status;
+      };
 
-      const actionMessage = textElement("p", "");
-      actionMessage.className = "note";
-      actionMessage.setAttribute("role", "status");
+      const actionMessage = element(
+        "p",
+        "",
+        "note"
+      );
 
-      saveButton.addEventListener("click", async () => {
+      saveButton.onclick = async () => {
         saveButton.disabled = true;
         actionMessage.textContent = "Guardando...";
 
-        const changes = { status: select.value };
+        const changes = {
+          status: select.value
+        };
 
-        // Un reporte rechazado no debe seguir publicado.
         if (select.value === "rejected") {
           changes.is_published = false;
         }
@@ -580,313 +863,272 @@ async function loadAdminReports() {
 
         if (error) {
           actionMessage.textContent =
-            "No se pudo guardar: " + error.message;
+            "Error: " + error.message;
           saveButton.disabled = false;
           return;
         }
 
         await loadAdminReports();
         await loadPublicReports();
-      });
+      };
 
-      actions.append(statusLabel, select, saveButton);
+      actions.append(select, saveButton);
 
       if (report.visibility_requested === "public") {
-        const publishButton = document.createElement("button");
-        publishButton.type = "button";
+        const publishButton = element(
+          "button",
+          report.is_published
+            ? "Retirar publicación"
+            : "Aprobar publicación"
+        );
 
-        publishButton.textContent = report.is_published
-          ? "Retirar publicación"
-          : "Aprobar publicación";
+        publishButton.type = "button";
 
         if (report.is_published) {
           publishButton.className = "secondary";
         }
 
-        publishButton.addEventListener("click", async () => {
+        publishButton.onclick = async () => {
           const publish = !report.is_published;
 
           if (publish) {
             if (report.status === "rejected") {
               actionMessage.textContent =
-                "Primero cambia el estado del reporte rechazado.";
+                "Primero cambia el estado rechazado.";
               return;
             }
 
-            const confirmed = confirm(
-              "¿Revisaste el contenido y confirmas que " +
-              "puede mostrarse públicamente?"
-            );
-
-            if (!confirmed) return;
+            if (!confirm(
+              "¿Revisaste el reporte y confirmas " +
+              "que puede publicarse?"
+            )) return;
           }
 
           publishButton.disabled = true;
-          actionMessage.textContent = "Guardando...";
 
           const { error } = await db
             .from("reports")
-            .update({ is_published: publish })
+            .update({
+              is_published: publish
+            })
             .eq("id", report.id);
 
           if (error) {
             actionMessage.textContent =
-              "No se pudo actualizar: " + error.message;
+              "Error: " + error.message;
             publishButton.disabled = false;
             return;
           }
 
           await loadAdminReports();
           await loadPublicReports();
-        });
+        };
 
         actions.appendChild(publishButton);
 
       } else {
-        const privateNote = textElement(
-          "p",
-          "🔒 Reporte privado: no puede publicarse."
+        actions.appendChild(
+          element(
+            "p",
+            "🔒 Reporte privado: no se puede publicar.",
+            "note"
+          )
         );
-        privateNote.className = "note";
-        actions.appendChild(privateNote);
       }
 
       actions.appendChild(actionMessage);
-
-      card.append(
-        heading,
-        area,
-        description,
-        date,
-        state,
-        type,
-        publication,
-        actions
-      );
-
+      card.appendChild(actions);
       container.appendChild(card);
     }
 
   } catch (error) {
-    console.error(error);
-    $("adminMessage").textContent =
-      "Error de conexión al cargar reportes.";
-  } finally {
-    $("refreshButton").disabled = false;
+    console.error("Administración:", error);
+    message.textContent =
+      "No se pudieron cargar los reportes: " +
+      error.message;
   }
 }
 
-async function showAdminPanel() {
-  if (!db || recoveryMode) return;
+$("refreshButton").onclick = loadAdminReports;
 
-  const { data: isAdmin, error } =
-    await db.rpc("is_app_admin");
-
-  if (error || isAdmin !== true) {
-    await db.auth.signOut();
-    $("loginMessage").textContent =
-      "Esta cuenta no tiene acceso administrativo.";
-    loginSection.hidden = false;
-    panelSection.hidden = true;
-    return;
-  }
-
-  loginSection.hidden = true;
-  recoverySection.hidden = true;
-  panelSection.hidden = false;
-
-  await loadAdminReports();
-}
-
-$("refreshButton").addEventListener(
-  "click",
-  loadAdminReports
-);
-
-// INICIAR SESION
+// ========================================
+// INICIO Y CIERRE DE SESIÓN
+// ========================================
 
 $("loginForm").addEventListener(
   "submit",
   async event => {
     event.preventDefault();
 
-    if (!db) {
-      $("loginMessage").textContent =
-        "No se pudo conectar con Supabase.";
-      return;
-    }
-
     $("loginButton").disabled = true;
-    $("loginMessage").textContent = "Comprobando acceso...";
+    $("loginMessage").textContent =
+      "Comprobando acceso...";
 
     try {
-      const { error } = await db.auth.signInWithPassword({
-        email: $("adminEmail").value,
-        password: $("adminPassword").value
-      });
+      const { error } =
+        await db.auth.signInWithPassword({
+          email: $("adminEmail").value,
+          password: $("adminPassword").value
+        });
 
       $("adminPassword").value = "";
 
-      if (error) {
-        $("loginMessage").textContent =
-          "No se pudo iniciar sesión: " + error.message;
-        return;
-      }
+      if (error) throw error;
 
       await showAdminPanel();
 
     } catch (error) {
       $("loginMessage").textContent =
-        "Error de conexión. Intenta nuevamente.";
+        "No se pudo iniciar sesión: " +
+        error.message;
     } finally {
       $("loginButton").disabled = false;
     }
   }
 );
 
-// CERRAR SESION
+$("logoutButton").onclick = async () => {
+  await db.auth.signOut();
 
-$("logoutButton").addEventListener(
-  "click",
-  async () => {
-    if (db) await db.auth.signOut();
+  $("adminPanel").hidden = true;
+  $("adminLogin").hidden = false;
+  $("reportsList").replaceChildren();
+  $("loginMessage").textContent =
+    "Sesión cerrada.";
+};
 
-    panelSection.hidden = true;
-    loginSection.hidden = false;
-    $("reportsList").replaceChildren();
-    $("loginMessage").textContent = "Sesión cerrada.";
+// ========================================
+// RECUPERAR CONTRASEÑA
+// ========================================
+
+$("forgotButton").onclick = async () => {
+  const email = $("adminEmail").value.trim();
+
+  if (!email) {
+    $("loginMessage").textContent =
+      "Escribe primero tu correo electrónico.";
+    return;
   }
-);
 
-// RECUPERACION DE CONTRASEÑA
+  const { error } =
+    await db.auth.resetPasswordForEmail(email, {
+      redirectTo:
+        "https://aguadulcebueno.github.io/aguadulce-reporta/"
+    });
 
-function showRecoveryForm() {
+  $("loginMessage").textContent = error
+    ? "No se pudo enviar el correo: " + error.message
+    : "Si el correo está registrado, recibirás " +
+      "un enlace para cambiar la contraseña.";
+};
+
+function showRecovery() {
   recoveryMode = true;
-  loginSection.hidden = true;
-  panelSection.hidden = true;
-  recoverySection.hidden = false;
+  $("adminLogin").hidden = true;
+  $("adminPanel").hidden = true;
+  $("recoverySection").hidden = false;
 }
 
 if (recoveryMode) {
-  showRecoveryForm();
-  $("recoveryMessage").textContent =
-    "Verificando enlace de recuperación...";
+  showRecovery();
 }
 
-if (db) {
-  db.auth.onAuthStateChange((event, session) => {
-    if (event === "PASSWORD_RECOVERY") {
-      showRecoveryForm();
-      recoveryReady = true;
-      $("recoveryMessage").textContent =
-        "Enlace verificado. Crea tu contraseña nueva.";
-    }
+db.auth.onAuthStateChange((event, session) => {
+  if (event === "PASSWORD_RECOVERY") {
+    showRecovery();
+    recoveryReady = true;
+    $("recoveryMessage").textContent =
+      "Enlace verificado. Escribe tu nueva contraseña.";
+  }
 
-    if (recoveryMode && event === "SIGNED_IN" && session) {
-      recoveryReady = true;
-    }
-  });
-}
+  if (recoveryMode &&
+      event === "SIGNED_IN" &&
+      session) {
+    recoveryReady = true;
+  }
+});
 
 $("recoveryForm").addEventListener(
   "submit",
   async event => {
     event.preventDefault();
 
-    if ($("newPassword").value !== $("confirmPassword").value) {
+    const password = $("newPassword").value;
+
+    if (password !== $("confirmPassword").value) {
       $("recoveryMessage").textContent =
         "Las contraseñas no coinciden.";
       return;
     }
 
-    if (!db || !recoveryReady) {
+    if (!recoveryReady) {
       $("recoveryMessage").textContent =
-        "Enlace no verificado. Solicita uno nuevo.";
+        "El enlace no se ha verificado.";
       return;
     }
 
-    $("recoveryButton").disabled = true;
+    const { error } = await db.auth.updateUser({
+      password
+    });
 
-    try {
-      const { data } = await db.auth.getSession();
-
-      if (!data.session) {
-        $("recoveryMessage").textContent =
-          "El enlace venció. Solicita uno nuevo.";
-        return;
-      }
-
-      const { error } = await db.auth.updateUser({
-        password: $("newPassword").value
-      });
-
-      if (error) {
-        $("recoveryMessage").textContent =
-          "No se pudo cambiar la contraseña: " + error.message;
-        return;
-      }
-
-      $("newPassword").value = "";
-      $("confirmPassword").value = "";
-
-      await db.auth.signOut();
-
-      recoveryMode = false;
-      recoveryReady = false;
-
-      history.replaceState(null, "", location.pathname);
-
-      recoverySection.hidden = true;
-      panelSection.hidden = true;
-      loginSection.hidden = false;
-
-      $("loginMessage").textContent =
-        "Contraseña actualizada. Ya puedes iniciar sesión.";
-
-    } catch (error) {
+    if (error) {
       $("recoveryMessage").textContent =
-        "Error de conexión.";
-    } finally {
-      $("recoveryButton").disabled = false;
+        "Error: " + error.message;
+      return;
     }
+
+    await db.auth.signOut();
+
+    recoveryMode = false;
+    recoveryReady = false;
+
+    history.replaceState(
+      null,
+      "",
+      location.pathname
+    );
+
+    $("recoverySection").hidden = true;
+    $("adminLogin").hidden = false;
+
+    $("loginMessage").textContent =
+      "Contraseña actualizada. Inicia sesión.";
   }
 );
 
-// RECUPERAR SESION
+// ========================================
+// INICIAR PÁGINA
+// ========================================
 
-async function checkSession() {
-  if (!db) return;
+async function initialize() {
+  await loadPublicReports();
 
-  try {
+  if (recoveryMode) {
     const { data } = await db.auth.getSession();
 
-    if (recoveryMode) {
-      if (data.session) {
-        recoveryReady = true;
-        $("recoveryMessage").textContent =
-          "Enlace verificado. Escribe tu contraseña nueva.";
-      } else {
-        $("recoveryMessage").textContent =
-          "No se pudo verificar el enlace.";
-      }
-      return;
+    if (data.session) {
+      recoveryReady = true;
+      $("recoveryMessage").textContent =
+        "Escribe tu nueva contraseña.";
     }
+    return;
+  }
 
-    const { data: userData, error } =
-      await db.auth.getUser();
+  const { data, error } = await db.auth.getUser();
 
-    if (!error && userData.user) {
-      await showAdminPanel();
-    }
-
-  } catch (error) {
-    console.error("Sesión:", error);
+  if (!error && data.user) {
+    await showAdminPanel();
   }
 }
 
-loadPublicReports();
-checkSession();
-
+initialize();
 </script>
+
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></script>
+
 </body>
 </html>
