@@ -24,11 +24,18 @@ header {
   text-align: center;
 }
 
-header h1 { margin: 0 0 8px; font-size: 27px; }
-header p { margin: 0; color: #d5e8df; }
+header h1 {
+  margin: 0 0 8px;
+  font-size: 27px;
+}
+
+header p {
+  margin: 0;
+  color: #d5e8df;
+}
 
 main {
-  max-width: 620px;
+  max-width: 680px;
   margin: 24px auto;
   padding: 0 16px;
 }
@@ -42,7 +49,7 @@ main {
 }
 
 h2 { margin-top: 0; font-size: 20px; }
-h3 { font-size: 17px; }
+h3 { margin-bottom: 8px; font-size: 17px; }
 
 label {
   display: block;
@@ -59,22 +66,28 @@ input, select, textarea {
   background: white;
 }
 
-textarea { min-height: 110px; resize: vertical; }
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
 
 button {
   width: 100%;
-  margin-top: 18px;
-  padding: 14px;
+  margin-top: 14px;
+  padding: 13px;
   border: 0;
   border-radius: 9px;
   background: #176b50;
   color: white;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
 }
 
-button:disabled { opacity: .6; cursor: wait; }
+button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
 
 .secondary {
   background: #e7f1eb;
@@ -88,7 +101,7 @@ button:disabled { opacity: .6; cursor: wait; }
 }
 
 .report-item {
-  padding: 15px 0;
+  padding: 18px 0;
   border-bottom: 1px solid #e1e8e3;
   overflow-wrap: anywhere;
 }
@@ -98,7 +111,40 @@ button:disabled { opacity: .6; cursor: wait; }
   white-space: pre-wrap;
 }
 
-[hidden] { display: none !important; }
+.report-actions {
+  background: #f3f6f4;
+  padding: 14px;
+  border-radius: 10px;
+  margin-top: 14px;
+}
+
+.report-actions label {
+  margin-top: 0;
+}
+
+.status-tag {
+  display: inline-block;
+  padding: 5px 9px;
+  background: #e7f1eb;
+  color: #176b50;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.success-text {
+  color: #176b50;
+  font-weight: bold;
+}
+
+.error-text {
+  color: #a52b2b;
+  font-weight: bold;
+}
+
+[hidden] {
+  display: none !important;
+}
 
 footer {
   text-align: center;
@@ -125,11 +171,12 @@ footer {
     problemas comunitarios y darles seguimiento.
   </p>
   <p class="note">
-    Los reportes serán revisados antes de publicarse.
+    Los reportes se revisan antes de publicarse.
+    No compartas información personal de terceros.
   </p>
 </section>
 
-<!-- FORMULARIO DE REPORTES -->
+<!-- FORMULARIO COMUNITARIO -->
 
 <section class="card">
   <h2>Enviar un reporte</h2>
@@ -147,7 +194,9 @@ footer {
       <option>Otros problemas comunitarios</option>
     </select>
 
-    <label for="area">Comunidad o corregimiento</label>
+    <label for="area">
+      Comunidad o corregimiento
+    </label>
     <input
       id="area"
       maxlength="120"
@@ -165,7 +214,9 @@ footer {
       required
     ></textarea>
 
-    <label for="photo">Fotografía (próximamente)</label>
+    <label for="photo">
+      Fotografía (próximamente)
+    </label>
     <input
       id="photo"
       type="file"
@@ -173,7 +224,9 @@ footer {
       disabled
     >
 
-    <label for="visibility">Tipo de reporte</label>
+    <label for="visibility">
+      Tipo de reporte
+    </label>
     <select id="visibility" required>
       <option value="private">
         Privado: solo administración
@@ -184,11 +237,9 @@ footer {
     </select>
 
     <p class="note">
-      Tu reporte será recibido para revisión.
-      No se publicará automáticamente.
-      Por ahora no se admiten fotografías.
-      Evita incluir nombres, teléfonos u otros
-      datos personales.
+      Los reportes se guardan pendientes de revisión.
+      No se publican automáticamente.
+      Las fotografías todavía no están disponibles.
     </p>
 
     <button type="submit" id="reportButton">
@@ -200,34 +251,38 @@ footer {
   </form>
 </section>
 
-<!-- CONSULTAR REPORTES -->
+<!-- CONSULTA PUBLICA -->
 
 <section class="card">
   <h2>Consultar un reporte</h2>
   <p>
     Próximamente podrás consultar el estado
-    de tu reporte.
+    de los reportes públicos.
   </p>
+
   <button
-    class="secondary"
     type="button"
+    class="secondary"
     id="consultButton"
   >
     Consultar estado
   </button>
 </section>
 
-<!-- INICIO DE SESION -->
+<!-- ACCESO ADMINISTRATIVO -->
 
 <section class="card" id="adminLogin">
   <h2>🔐 Administración</h2>
+
   <p class="note">
     Acceso exclusivo para administradores autorizados.
   </p>
 
   <form id="loginForm">
 
-    <label for="adminEmail">Correo electrónico</label>
+    <label for="adminEmail">
+      Correo electrónico
+    </label>
     <input
       id="adminEmail"
       type="email"
@@ -235,7 +290,9 @@ footer {
       required
     >
 
-    <label for="adminPassword">Contraseña</label>
+    <label for="adminPassword">
+      Contraseña
+    </label>
     <input
       id="adminPassword"
       type="password"
@@ -252,19 +309,21 @@ footer {
   <p id="loginMessage" class="note" role="status"></p>
 </section>
 
-<!-- RECUPERACION DE CONTRASEÑA -->
+<!-- RECUPERAR CONTRASEÑA -->
 
 <section class="card" id="recoverySection" hidden>
   <h2>🔑 Crear una contraseña nueva</h2>
 
   <p class="note">
-    Escribe tu nueva contraseña para recuperar
-    el acceso a la administración.
+    Introduce una contraseña nueva para recuperar
+    el acceso administrativo.
   </p>
 
   <form id="recoveryForm">
 
-    <label for="newPassword">Nueva contraseña</label>
+    <label for="newPassword">
+      Nueva contraseña
+    </label>
     <input
       id="newPassword"
       type="password"
@@ -290,25 +349,47 @@ footer {
 
   </form>
 
-  <p id="recoveryMessage" class="note" role="status"></p>
+  <p
+    id="recoveryMessage"
+    class="note"
+    role="status"
+  ></p>
 </section>
 
 <!-- PANEL ADMINISTRATIVO -->
 
 <section class="card" id="adminPanel" hidden>
+
   <h2>📋 Panel de administración</h2>
 
-  <p id="adminMessage" class="note" role="status"></p>
+  <p class="note">
+    Desde aquí puedes revisar reportes,
+    cambiar su estado y aprobar su publicación.
+  </p>
 
   <button
+    type="button"
+    id="refreshButton"
+  >
+    🔄 Actualizar reportes
+  </button>
+
+  <button
+    type="button"
     id="logoutButton"
     class="secondary"
-    type="button"
   >
     Cerrar sesión
   </button>
 
+  <p
+    id="adminMessage"
+    class="note"
+    role="status"
+  ></p>
+
   <div id="reportsList"></div>
+
 </section>
 
 </main>
@@ -321,7 +402,9 @@ footer {
 
 <script>
 
-// CONEXION CON SUPABASE
+// ======================================
+// CONFIGURACION
+// ======================================
 
 const SUPABASE_URL =
   "https://lrupvpgyjzhgyvprrmtl.supabase.co";
@@ -334,13 +417,16 @@ const $ = id => document.getElementById(id);
 const loginSection = $("adminLogin");
 const panelSection = $("adminPanel");
 const recoverySection = $("recoverySection");
+
 const loginMessage = $("loginMessage");
 const adminMessage = $("adminMessage");
 const recoveryMessage = $("recoveryMessage");
+
 const reportsList = $("reportsList");
 
 const hashParams =
   new URLSearchParams(location.hash.slice(1));
+
 const queryParams =
   new URLSearchParams(location.search);
 
@@ -365,7 +451,43 @@ const db = window.supabase
     )
   : null;
 
+// ======================================
+// FUNCIONES AUXILIARES
+// ======================================
+
+function createText(tag, content) {
+  const element = document.createElement(tag);
+  element.textContent = content;
+  return element;
+}
+
+function statusName(status) {
+  const names = {
+    pending: "Pendiente",
+    reviewing: "En revisión",
+    referred: "Remitido",
+    resolved: "Resuelto",
+    rejected: "Rechazado"
+  };
+
+  return names[status] || status;
+}
+
+function formatDate(value) {
+  if (!value) return "Sin fecha";
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "Sin fecha";
+  }
+
+  return date.toLocaleString("es-PA");
+}
+
+// ======================================
 // RECUPERACION DE CONTRASEÑA
+// ======================================
 
 function showRecoveryForm() {
   recoveryMode = true;
@@ -376,28 +498,37 @@ function showRecoveryForm() {
 
 if (recoveryMode) {
   showRecoveryForm();
+
   recoveryMessage.textContent =
     "Verificando enlace de recuperación...";
 }
 
 if (db) {
   db.auth.onAuthStateChange((event, session) => {
+
     if (event === "PASSWORD_RECOVERY") {
       showRecoveryForm();
       recoveryReady = true;
+
       recoveryMessage.textContent =
-        "Enlace verificado. Crea tu contraseña.";
+        "Enlace verificado. Crea tu contraseña nueva.";
     }
 
-    if (recoveryMode && event === "SIGNED_IN" && session) {
+    if (
+      recoveryMode &&
+      event === "SIGNED_IN" &&
+      session
+    ) {
       recoveryReady = true;
     }
+
   });
 }
 
 $("recoveryForm").addEventListener(
   "submit",
   async function(event) {
+
     event.preventDefault();
 
     const password = $("newPassword").value;
@@ -420,6 +551,7 @@ $("recoveryForm").addEventListener(
       "Guardando contraseña...";
 
     try {
+
       const { data } = await db.auth.getSession();
 
       if (!data.session) {
@@ -461,19 +593,27 @@ $("recoveryForm").addEventListener(
         "Contraseña actualizada. Ya puedes iniciar sesión.";
 
     } catch (error) {
+
       recoveryMessage.textContent =
         "Error de conexión. Intenta nuevamente.";
+
     } finally {
+
       $("recoveryButton").disabled = false;
+
     }
+
   }
 );
 
-// ENVIAR REPORTES REALES
+// ======================================
+// ENVIAR REPORTE
+// ======================================
 
 $("reportForm").addEventListener(
   "submit",
   async function(event) {
+
     event.preventDefault();
 
     const message = $("reportMessage");
@@ -481,7 +621,7 @@ $("reportForm").addEventListener(
 
     if (!db) {
       message.textContent =
-        "No hay conexión con Supabase.";
+        "No se pudo conectar con Supabase.";
       return;
     }
 
@@ -492,7 +632,7 @@ $("reportForm").addEventListener(
 
     if (!category || !area || !description) {
       message.textContent =
-        "Completa todos los campos obligatorios.";
+        "Completa los campos obligatorios.";
       return;
     }
 
@@ -509,6 +649,7 @@ $("reportForm").addEventListener(
     message.textContent = "Enviando reporte...";
 
     try {
+
       const { error } = await db
         .from("reports")
         .insert({
@@ -519,7 +660,8 @@ $("reportForm").addEventListener(
         });
 
       if (error) {
-        console.error("Error al enviar reporte:", error);
+        console.error("Error al enviar:", error);
+
         message.textContent =
           "No se pudo enviar el reporte. Intenta nuevamente.";
         return;
@@ -531,113 +673,422 @@ $("reportForm").addEventListener(
         "¡Reporte recibido correctamente! " +
         "Quedará pendiente de revisión.";
 
-      // Actualiza el panel si ya está abierto.
       if (!panelSection.hidden) {
         await loadReports();
       }
 
     } catch (error) {
+
       console.error("Error de conexión:", error);
+
       message.textContent =
         "No se pudo conectar. Revisa tu internet.";
+
     } finally {
+
       button.disabled = false;
+
     }
+
   }
 );
 
-// CONSULTA PUBLICA: PROXIMA FASE
+// ======================================
+// CONSULTA PUBLICA
+// ======================================
 
 $("consultButton").addEventListener("click", () => {
+
   alert(
     "La consulta pública estará disponible " +
     "en una siguiente fase."
   );
+
 });
 
-// CARGAR REPORTES ADMINISTRATIVOS
+// ======================================
+// CAMBIAR ESTADO DEL REPORTE
+// ======================================
 
-async function loadReports() {
-  reportsList.replaceChildren();
-  adminMessage.textContent = "Cargando reportes...";
+async function changeReportStatus(id, status, button, message) {
 
-  const { data, error } = await db
-    .from("reports")
-    .select(
-      "id,category,area,description," +
-      "status,visibility_requested," +
-      "is_published,created_at"
-    )
-    .order("created_at", { ascending: false })
-    .limit(50);
+  if (!db || panelSection.hidden) return;
 
-  if (error) {
-    adminMessage.textContent =
-      "No se pudieron consultar los reportes: " +
-      error.message;
-    return;
-  }
+  button.disabled = true;
+  message.textContent = "Guardando estado...";
 
-  if (!data || data.length === 0) {
-    adminMessage.textContent =
-      "Sesión activa. Todavía no hay reportes.";
-    return;
-  }
+  try {
 
-  adminMessage.textContent =
-    "Reportes encontrados: " + data.length;
+    const { error } = await db
+      .from("reports")
+      .update({
+        status: status
+      })
+      .eq("id", id);
 
-  for (const report of data) {
-    const item = document.createElement("div");
-    item.className = "report-item";
+    if (error) {
+      console.error("Error al cambiar estado:", error);
 
-    const heading = document.createElement("h3");
-    heading.textContent =
-      report.category || "Sin categoría";
+      message.textContent =
+        "No se pudo actualizar el estado: " +
+        error.message;
+      return;
+    }
 
-    const area = document.createElement("p");
-    area.textContent = "Comunidad: " + report.area;
+    message.textContent =
+      "Estado actualizado correctamente.";
 
-    const description = document.createElement("p");
-    description.textContent = report.description;
+    await loadReports();
 
-    const status = document.createElement("p");
-    status.textContent = "Estado: " + report.status;
+  } catch (error) {
 
-    const visibility = document.createElement("p");
-    visibility.textContent =
-      "Tipo: " +
-      (report.visibility_requested === "public"
-        ? "Solicitó publicación"
-        : "Privado");
+    console.error(error);
 
-    const published = document.createElement("p");
-    published.textContent =
-      "Publicación: " +
-      (report.is_published
-        ? "Aprobada"
-        : "No aprobada");
+    message.textContent =
+      "Error de conexión al guardar el estado.";
 
-    item.append(
-      heading,
-      area,
-      description,
-      status,
-      visibility,
-      published
-    );
+  } finally {
 
-    reportsList.appendChild(item);
+    button.disabled = false;
+
   }
 }
 
-// COMPROBAR PERMISOS DE ADMINISTRADOR
+// ======================================
+// APROBAR O RETIRAR PUBLICACION
+// ======================================
+
+async function changePublication(
+  id,
+  publish,
+  button,
+  message
+) {
+
+  if (!db || panelSection.hidden) return;
+
+  button.disabled = true;
+
+  message.textContent = publish
+    ? "Aprobando publicación..."
+    : "Retirando publicación...";
+
+  try {
+
+    const { error } = await db
+      .from("reports")
+      .update({
+        is_published: publish
+      })
+      .eq("id", id);
+
+    if (error) {
+
+      console.error("Error de publicación:", error);
+
+      message.textContent =
+        "No se pudo cambiar la publicación: " +
+        error.message;
+
+      return;
+    }
+
+    message.textContent =
+      publish
+        ? "Publicación aprobada."
+        : "Publicación retirada.";
+
+    await loadReports();
+
+  } catch (error) {
+
+    console.error(error);
+
+    message.textContent =
+      "Error de conexión al cambiar la publicación.";
+
+  } finally {
+
+    button.disabled = false;
+
+  }
+}
+
+// ======================================
+// MOSTRAR REPORTES EN ADMINISTRACION
+// ======================================
+
+async function loadReports() {
+
+  if (!db || panelSection.hidden) return;
+
+  reportsList.replaceChildren();
+
+  adminMessage.textContent =
+    "Cargando reportes...";
+
+  $("refreshButton").disabled = true;
+
+  try {
+
+    const { data, error } = await db
+      .from("reports")
+      .select(
+        "id,category,area,description," +
+        "status,visibility_requested," +
+        "is_published,created_at"
+      )
+      .order("created_at", {
+        ascending: false
+      })
+      .limit(50);
+
+    if (error) {
+
+      adminMessage.textContent =
+        "No se pudieron cargar los reportes: " +
+        error.message;
+
+      return;
+    }
+
+    if (!data || data.length === 0) {
+
+      adminMessage.textContent =
+        "Todavía no hay reportes registrados.";
+
+      return;
+    }
+
+    adminMessage.textContent =
+      "Reportes encontrados: " + data.length +
+      " (se muestran hasta 50).";
+
+    for (const report of data) {
+
+      const item = document.createElement("div");
+      item.className = "report-item";
+
+      const heading = createText(
+        "h3",
+        report.category || "Sin categoría"
+      );
+
+      const area = createText(
+        "p",
+        "📍 Comunidad: " + (report.area || "")
+      );
+
+      const description = createText(
+        "p",
+        report.description || ""
+      );
+
+      const date = createText(
+        "p",
+        "Fecha: " + formatDate(report.created_at)
+      );
+      date.className = "note";
+
+      const status = createText(
+        "span",
+        statusName(report.status)
+      );
+      status.className = "status-tag";
+
+      const visibility = createText(
+        "p",
+        "Tipo de reporte: " +
+        (
+          report.visibility_requested === "public"
+            ? "Solicitó publicación pública"
+            : "Privado"
+        )
+      );
+
+      const publication = createText(
+        "p",
+        "Publicación: " +
+        (
+          report.is_published
+            ? "Aprobada"
+            : "No aprobada"
+        )
+      );
+
+      const actions = document.createElement("div");
+      actions.className = "report-actions";
+
+      const statusLabel = createText(
+        "label",
+        "Cambiar estado del reporte"
+      );
+
+      const statusSelect =
+        document.createElement("select");
+
+      const options = [
+        ["pending", "Pendiente"],
+        ["reviewing", "En revisión"],
+        ["referred", "Remitido"],
+        ["resolved", "Resuelto"],
+        ["rejected", "Rechazado"]
+      ];
+
+      for (const [value, text] of options) {
+
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = text;
+
+        statusSelect.appendChild(option);
+
+      }
+
+      statusSelect.value = report.status || "pending";
+
+      const saveStatusButton =
+        document.createElement("button");
+
+      saveStatusButton.type = "button";
+      saveStatusButton.textContent =
+        "Guardar estado";
+
+      saveStatusButton.disabled =
+        statusSelect.value === report.status;
+
+      statusSelect.addEventListener("change", () => {
+
+        saveStatusButton.disabled =
+          statusSelect.value === report.status;
+
+      });
+
+      const actionMessage = createText("p", "");
+      actionMessage.className = "note";
+      actionMessage.setAttribute("role", "status");
+
+      saveStatusButton.addEventListener(
+        "click",
+        async () => {
+
+          await changeReportStatus(
+            report.id,
+            statusSelect.value,
+            saveStatusButton,
+            actionMessage
+          );
+
+        }
+      );
+
+      actions.append(
+        statusLabel,
+        statusSelect,
+        saveStatusButton
+      );
+
+      if (report.visibility_requested === "public") {
+
+        const publishButton =
+          document.createElement("button");
+
+        publishButton.type = "button";
+
+        publishButton.textContent =
+          report.is_published
+            ? "Retirar publicación"
+            : "Aprobar publicación";
+
+        if (report.is_published) {
+          publishButton.className = "secondary";
+        }
+
+        publishButton.addEventListener(
+          "click",
+          async () => {
+
+            if (!report.is_published) {
+
+              const confirmed = confirm(
+                "¿Confirmas que revisaste el contenido " +
+                "y autorizas su publicación pública?"
+              );
+
+              if (!confirmed) return;
+
+            }
+
+            await changePublication(
+              report.id,
+              !report.is_published,
+              publishButton,
+              actionMessage
+            );
+
+          }
+        );
+
+        actions.appendChild(publishButton);
+
+      } else {
+
+        const privateNote = createText(
+          "p",
+          "🔒 Este reporte es privado. " +
+          "No se puede aprobar su publicación."
+        );
+
+        privateNote.className = "note";
+
+        actions.appendChild(privateNote);
+
+      }
+
+      actions.appendChild(actionMessage);
+
+      item.append(
+        heading,
+        area,
+        description,
+        date,
+        status,
+        visibility,
+        publication,
+        actions
+      );
+
+      reportsList.appendChild(item);
+
+    }
+
+  } catch (error) {
+
+    console.error("Error al cargar reportes:", error);
+
+    adminMessage.textContent =
+      "Error de conexión al consultar los reportes.";
+
+  } finally {
+
+    $("refreshButton").disabled = false;
+
+  }
+}
+
+// ======================================
+// COMPROBAR ADMINISTRADOR
+// ======================================
 
 async function showAdminPanel() {
+
+  if (!db || recoveryMode) return;
+
   const { data: isAdmin, error } =
     await db.rpc("is_app_admin");
 
   if (error || isAdmin !== true) {
+
     await db.auth.signOut();
 
     loginMessage.textContent =
@@ -645,6 +1096,7 @@ async function showAdminPanel() {
 
     loginSection.hidden = false;
     panelSection.hidden = true;
+
     return;
   }
 
@@ -655,26 +1107,34 @@ async function showAdminPanel() {
   await loadReports();
 }
 
+// ======================================
 // INICIAR SESION
+// ======================================
 
 $("loginForm").addEventListener(
   "submit",
   async function(event) {
+
     event.preventDefault();
 
     if (!db) {
+
       loginMessage.textContent =
         "No se pudo conectar con Supabase.";
+
       return;
     }
 
     $("loginButton").disabled = true;
-    loginMessage.textContent = "Comprobando acceso...";
+
+    loginMessage.textContent =
+      "Comprobando acceso...";
 
     const email = $("adminEmail").value;
     const password = $("adminPassword").value;
 
     try {
+
       const { error } =
         await db.auth.signInWithPassword({
           email,
@@ -684,62 +1144,101 @@ $("loginForm").addEventListener(
       $("adminPassword").value = "";
 
       if (error) {
+
         loginMessage.textContent =
           "No se pudo iniciar sesión: " +
           error.message;
+
         return;
       }
 
       await showAdminPanel();
 
     } catch (error) {
+
       loginMessage.textContent =
         "Error de conexión. Intenta nuevamente.";
+
     } finally {
+
       $("loginButton").disabled = false;
+
     }
+
   }
 );
 
+// ======================================
+// ACTUALIZAR REPORTES
+// ======================================
+
+$("refreshButton").addEventListener(
+  "click",
+  async () => {
+
+    await loadReports();
+
+  }
+);
+
+// ======================================
 // CERRAR SESION
+// ======================================
 
 $("logoutButton").addEventListener(
   "click",
-  async function() {
+  async () => {
+
     if (db) {
       await db.auth.signOut();
     }
 
     panelSection.hidden = true;
     loginSection.hidden = false;
+
     reportsList.replaceChildren();
 
-    loginMessage.textContent = "Sesión cerrada.";
+    loginMessage.textContent =
+      "Sesión cerrada.";
+
   }
 );
 
-// RECUPERAR SESION EXISTENTE
+// ======================================
+// RECUPERAR SESION
+// ======================================
 
 async function checkSession() {
+
   if (!db) {
+
     loginMessage.textContent =
       "No se pudo cargar Supabase.";
+
     return;
   }
 
   try {
+
     const { data, error } =
       await db.auth.getSession();
 
     if (recoveryMode) {
+
       if (!error && data.session) {
+
         recoveryReady = true;
+
         recoveryMessage.textContent =
-          "Enlace verificado. Escribe tu nueva contraseña.";
+          "Enlace verificado. Escribe tu contraseña nueva.";
+
       } else {
+
         recoveryMessage.textContent =
           "No se pudo verificar el enlace.";
+
       }
+
       return;
     }
 
@@ -751,9 +1250,12 @@ async function checkSession() {
     }
 
   } catch (error) {
+
     loginMessage.textContent =
       "No se pudo conectar con Supabase.";
+
   }
+
 }
 
 checkSession();
