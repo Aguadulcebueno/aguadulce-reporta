@@ -4,495 +4,1123 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#123d35">
-<title>Aguadulce Reporta | Portal comunitario</title>
+<meta name="theme-color" content="#102f29">
+<meta name="description" content="Aguadulce Reporta: noticias, reportes ciudadanos y participación comunitaria.">
+<title>Aguadulce Reporta | La voz de nuestra comunidad</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+:root{
+  --green:#123e32;
+  --dark:#102e27;
+  --accent:#d5f05a;
+  --light:#f5f7f2;
+  --white:#fff;
+  --muted:#68786e;
+  --line:#e2e9e2;
+  --shadow:0 8px 30px rgba(17,48,37,.07);
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f1f5f2;color:#19352e}
-header{background:#123d35;color:white}
-.topbar{max-width:1050px;margin:auto;padding:22px 18px;display:flex;align-items:center;gap:18px}
-.logo{width:90px;height:90px;object-fit:contain;background:white;border-radius:12px;padding:5px}
-.topbar h1{margin:0 0 8px;font-size:29px}
-.topbar p{margin:0;color:#d4e7de}
-nav{background:#0c3029;padding:12px 18px}
-.navlinks{max-width:1050px;margin:auto;display:flex;gap:20px;flex-wrap:wrap}
-nav a{color:white;text-decoration:none;font-size:14px;font-weight:bold}
-main{max-width:1050px;margin:25px auto;padding:0 16px}
-.hero{background:linear-gradient(120deg,#176b50,#123d35);color:white;border-radius:16px;padding:30px;margin-bottom:20px}
-.hero h2{font-size:25px;margin:0 0 10px}
-.hero p{line-height:1.6;margin:0;color:#e4f2eb}
-.layout{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:start}
-.card{background:white;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 3px 12px #163c3010}
-h2{font-size:21px;margin:0 0 15px}
-h3{font-size:17px;margin:0 0 9px}
-p{line-height:1.55}
-label{display:block;font-weight:bold;margin:14px 0 7px;font-size:14px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #cbd9d1;border-radius:8px;font:inherit;background:white}
-textarea{min-height:110px;resize:vertical}
-button{width:100%;border:0;border-radius:9px;padding:13px;margin-top:13px;background:#176b50;color:white;font-weight:bold;font-size:15px;cursor:pointer}
-button:disabled{opacity:.55;cursor:not-allowed}
-.secondary{background:#e6f1ea;color:#176b50}
-.note{font-size:13px;color:#64766b;line-height:1.55}
-.report-card{border:1px solid #e0eae3;border-radius:12px;padding:18px;margin:14px 0;background:white;overflow-wrap:anywhere}
-.report-card p{white-space:pre-wrap}
-.report-meta{font-size:13px;color:#60766a}
-.tag{display:inline-block;border-radius:30px;background:#e3f0e8;color:#176b50;padding:6px 10px;font-size:12px;font-weight:bold}
-.admin-actions{background:#f2f6f3;border-radius:10px;padding:14px;margin-top:15px}
-.section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.section-heading button{width:auto;margin:0;padding:10px 14px}
-.photo-preview{display:block;width:100%;max-height:430px;object-fit:contain;border-radius:10px;margin-top:12px;background:#edf3ef}
-.cf-turnstile{margin-top:18px}
-footer{text-align:center;padding:30px;color:#65766d;font-size:13px}
+body{
+  margin:0;
+  background:var(--light);
+  color:#1c3028;
+  font-family:"DM Sans",Arial,sans-serif;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
 [hidden]{display:none!important}
-@media(max-width:760px){
-.layout{grid-template-columns:1fr}
-.topbar h1{font-size:23px}
-.logo{width:70px;height:70px}
-.hero{padding:23px}
-.hero h2{font-size:22px}
+.wrap{max-width:1200px;margin:auto;padding:0 22px}
+.top-strip{
+  background:#09261f;
+  color:#d6e9de;
+  font-size:12px;
+  letter-spacing:.04em;
+}
+.strip-inner{
+  min-height:34px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.live-dot{
+  display:inline-block;
+  width:8px;height:8px;
+  background:var(--accent);
+  border-radius:50%;
+  margin-right:7px;
+}
+.main-header{
+  background:var(--green);
+  color:white;
+}
+.header-inner{
+  min-height:108px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+.brand{display:flex;align-items:center;gap:15px}
+.brand-logo{
+  width:82px;height:82px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:16px;
+  padding:5px;
+}
+.brand-title{
+  font-family:Outfit,Arial,sans-serif;
+  font-size:clamp(24px,3.5vw,38px);
+  font-weight:900;
+  letter-spacing:-1.5px;
+  line-height:1;
+}
+.brand-subtitle{
+  font-size:12px;
+  color:#c4dbce;
+  margin-top:8px;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+.header-cta{
+  background:var(--accent);
+  color:#173525;
+  padding:14px 19px;
+  border-radius:11px;
+  font-size:13px;
+  font-weight:800;
+  white-space:nowrap;
+}
+.header-cta:hover{background:#e5fa83}
+.nav-bar{
+  background:#0b2c24;
+  color:#e9f4ed;
+  border-top:1px solid #ffffff15;
+}
+.nav-inner{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.nav-inner a{
+  padding:16px 0;
+  font-size:13px;
+  font-weight:800;
+  white-space:nowrap;
+  border-bottom:3px solid transparent;
+}
+.nav-inner a:hover{border-color:var(--accent)}
+.hero{
+  background:var(--dark);
+  color:white;
+  position:relative;
+  overflow:hidden;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  right:-100px;top:-170px;
+  width:480px;height:480px;
+  border:90px solid rgba(213,240,90,.055);
+  border-radius:50%;
+  pointer-events:none;
+}
+.hero-inner{
+  padding-top:67px;
+  padding-bottom:70px;
+  position:relative;
+  z-index:1;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  color:var(--accent);
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+}
+.hero h1{
+  font-family:Outfit,Arial,sans-serif;
+  font-weight:900;
+  font-size:clamp(39px,6.5vw,76px);
+  line-height:1.02;
+  letter-spacing:-2.8px;
+  max-width:820px;
+  margin:20px 0;
+}
+.hero h1 span{color:var(--accent)}
+.hero p{
+  color:#c2d5cb;
+  max-width:620px;
+  font-size:16px;
+  line-height:1.8;
+}
+.hero-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:29px;
+}
+.btn{
+  border:0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border-radius:11px;
+  padding:14px 19px;
+  font-weight:800;
+  font-size:13px;
+  transition:transform .2s,background .2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-lime{background:var(--accent);color:#163323}
+.btn-outline{background:#ffffff12;color:white;border:1px solid #ffffff3b}
+.btn-green{background:var(--green);color:white}
+.btn-soft{background:#eaf2eb;color:var(--green)}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:-27px;
+  position:relative;
+  z-index:2;
+}
+.stat{
+  background:white;
+  border-radius:15px;
+  padding:23px;
+  box-shadow:var(--shadow);
+  border:1px solid var(--line);
+}
+.stat strong{
+  display:block;
+  font-family:Outfit,Arial,sans-serif;
+  font-size:29px;
+  color:var(--green);
+}
+.stat span{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-top:5px;
+  font-weight:700;
+}
+.section{padding-top:58px}
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:24px;
+}
+.section-kicker{
+  color:#48836b;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+.section-title{
+  font-family:Outfit,Arial,sans-serif;
+  font-size:clamp(27px,4vw,39px);
+  line-height:1.12;
+  letter-spacing:-1px;
+  margin:8px 0 0;
+}
+.section-description{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.6;
+}
+.filters{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:16px;
+  display:flex;
+  gap:12px;
+  margin-bottom:24px;
+  box-shadow:var(--shadow);
+}
+.search-input,.filter-select{
+  border:1px solid #dce7dd;
+  border-radius:10px;
+  padding:13px 14px;
+  background:#f9fbf9;
+  outline:none;
+  min-width:0;
+}
+.search-input:focus,.filter-select:focus,
+.field:focus{border-color:#2f8765}
+.search-input{flex:1}
+.filter-select{width:230px}
+.report-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+}
+.report-card{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:17px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+.report-image-wrap{
+  height:210px;
+  overflow:hidden;
+  background:#e7efe8;
+}
+.report-image{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .35s;
+}
+.report-card:hover .report-image{transform:scale(1.04)}
+.report-content{
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+.report-label{
+  color:#277b57;
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+.report-title{
+  font-family:Outfit,Arial,sans-serif;
+  font-size:21px;
+  line-height:1.25;
+  margin:12px 0 9px;
+  overflow-wrap:anywhere;
+}
+.report-description{
+  color:#52665a;
+  line-height:1.7;
+  font-size:13px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  flex:1;
+}
+.report-footer{
+  border-top:1px solid var(--line);
+  margin-top:16px;
+  padding-top:14px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  font-size:11px;
+  color:var(--muted);
+}
+.status-pill{
+  display:inline-block;
+  background:#e8f2e9;
+  color:#236749;
+  padding:6px 10px;
+  border-radius:30px;
+  font-size:11px;
+  font-weight:800;
+}
+.empty{
+  grid-column:1/-1;
+  text-align:center;
+  background:white;
+  border:1px dashed #cbdccf;
+  border-radius:16px;
+  padding:48px 20px;
+  color:var(--muted);
+}
+.empty strong{display:block;color:var(--green);font-size:20px;margin-bottom:8px}
+.community-banner{
+  background:var(--green);
+  color:white;
+  border-radius:20px;
+  padding:34px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+  margin-top:42px;
+}
+.community-banner h2{
+  font-family:Outfit,Arial,sans-serif;
+  font-size:29px;
+  margin:0 0 10px;
+}
+.community-banner p{
+  color:#c7ded0;
+  line-height:1.6;
+  font-size:14px;
+  margin:0;
+}
+.form-section{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:35px;
+  align-items:start;
+  padding:65px 0;
+}
+.form-intro{
+  position:sticky;
+  top:20px;
+}
+.form-intro h2{
+  font-family:Outfit,Arial,sans-serif;
+  font-size:clamp(30px,4vw,45px);
+  line-height:1.1;
+  letter-spacing:-1.4px;
+}
+.form-intro p{line-height:1.8;color:var(--muted);font-size:14px}
+.steps{
+  margin-top:27px;
+  display:grid;
+  gap:17px;
+}
+.step{display:flex;align-items:start;gap:13px}
+.step-number{
+  flex:0 0 36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:#dcebdc;
+  color:var(--green);
+  font-weight:900;
+}
+.step strong{font-size:14px}
+.step p{font-size:12px;margin:5px 0 0}
+.form-card,.admin-card{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:30px;
+  box-shadow:var(--shadow);
+}
+.form-card h3,.admin-card h3{
+  font-family:Outfit,Arial,sans-serif;
+  font-size:25px;
+  margin:0 0 6px;
+}
+.form-card>p,.admin-card>p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+}
+.field-label{
+  display:block;
+  font-size:12px;
+  font-weight:800;
+  margin:18px 0 8px;
+}
+.field{
+  display:block;
+  width:100%;
+  padding:13px 14px;
+  border:1px solid #dce6de;
+  border-radius:10px;
+  background:#fafcf9;
+  color:#1c3028;
+  outline:none;
+}
+textarea.field{min-height:130px;resize:vertical}
+.small-note{color:var(--muted);font-size:11px;line-height:1.7}
+.form-card .btn,.admin-card .btn{width:100%;margin-top:15px}
+.photo-local-preview{
+  max-width:100%;
+  max-height:220px;
+  border-radius:12px;
+  margin-top:12px;
+}
+.turnstile-area{margin-top:20px}
+.message{font-size:13px;line-height:1.6;margin-top:14px;overflow-wrap:anywhere}
+.message:empty{display:none}
+.admin-section{padding:10px 0 70px}
+.admin-card{max-width:760px;margin:auto}
+.admin-report{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:19px;
+  margin-top:17px;
+  background:#fafcf9;
+  overflow-wrap:anywhere;
+}
+.admin-report h4{margin:0 0 9px;font-size:18px}
+.admin-report p{font-size:13px;line-height:1.7;white-space:pre-wrap}
+.admin-photo{max-width:100%;max-height:350px;object-fit:contain;border-radius:10px;margin-top:12px}
+.admin-actions{
+  background:white;
+  border-radius:11px;
+  padding:13px;
+  margin-top:13px;
+  border:1px solid var(--line);
+}
+.admin-actions .btn{margin-top:10px}
+.admin-top-actions{display:flex;gap:10px}
+.admin-top-actions .btn{flex:1}
+.footer{
+  background:#0c2921;
+  color:#b8d0c1;
+  padding:40px 0;
+  margin-top:20px;
+}
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+  gap:25px;
+  flex-wrap:wrap;
+}
+.footer strong{color:white;font-family:Outfit;font-size:21px}
+.footer p{font-size:12px;line-height:1.7}
+@media(max-width:950px){
+  .report-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .form-section{grid-template-columns:1fr}
+  .form-intro{position:static}
+}
+@media(max-width:600px){
+  .wrap{padding:0 16px}
+  .strip-inner{font-size:10px}
+  .header-inner{min-height:90px}
+  .brand-logo{width:62px;height:62px}
+  .brand-title{font-size:25px;letter-spacing:-.8px}
+  .brand-subtitle{font-size:9px}
+  .header-cta{padding:11px;font-size:11px}
+  .hero-inner{padding-top:47px;padding-bottom:63px}
+  .hero h1{letter-spacing:-1.7px}
+  .hero p{font-size:14px}
+  .stats{gap:7px}
+  .stat{padding:15px 10px}
+  .stat strong{font-size:23px}
+  .stat span{font-size:10px}
+  .section{padding-top:42px}
+  .section-head{align-items:start}
+  .report-grid{grid-template-columns:1fr}
+  .report-image-wrap{height:230px}
+  .filters{flex-direction:column}
+  .filter-select{width:100%}
+  .community-banner{flex-direction:column;align-items:start;padding:26px}
+  .form-section{padding:45px 0}
+  .form-card,.admin-card{padding:21px}
+  .footer-inner{flex-direction:column}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="topbar">
-<img src="logo.png" alt="Logo de Aguadulce Malo y Bueno" class="logo">
-<div>
-<h1>📍 Aguadulce Reporta</h1>
-<p>Tu comunidad. Tu voz. Tu reporte.</p>
-</div>
+<div class="top-strip">
+  <div class="wrap strip-inner">
+    <span><span class="live-dot"></span> INFORMACIÓN COMUNITARIA</span>
+    <span id="todayDate">AGUADULCE, PANAMÁ</span>
+  </div>
 </div>
 
-<nav>
-<div class="navlinks">
-<a href="#inicio">Inicio</a>
-<a href="#publicos">Reportes públicos</a>
-<a href="#enviar">Enviar reporte</a>
-<a href="#administracion">Administración</a>
-</div>
-</nav>
+<header class="main-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#inicio">
+      <img class="brand-logo" src="logo.png" alt="Logo Aguadulce Malo y Bueno">
+      <div>
+        <div class="brand-title">AGUADULCE<br>REPORTA<span style="color:#d5f05a">.</span></div>
+        <div class="brand-subtitle">La voz de nuestra comunidad</div>
+      </div>
+    </a>
+    <a class="header-cta" href="#enviar">✚ ENVIAR REPORTE</a>
+  </div>
 </header>
+
+<nav class="nav-bar">
+  <div class="wrap nav-inner">
+    <a href="#inicio">INICIO</a>
+    <a href="#reportes">REPORTES</a>
+    <a href="#enviar">REPORTAR UN PROBLEMA</a>
+    <a href="#como-funciona">CÓMO FUNCIONA</a>
+    <a href="#administracion">ADMINISTRACIÓN</a>
+  </div>
+</nav>
+
+<section class="hero" id="inicio">
+  <div class="wrap hero-inner">
+    <span class="eyebrow">● PERIODISMO Y PARTICIPACIÓN COMUNITARIA</span>
+    <h1>Lo que pasa en <span>Aguadulce</span>, nos importa a todos.</h1>
+    <p>
+      Un espacio para dar visibilidad a las necesidades de nuestros barrios
+      y comunidades. Comparte lo que sucede, documenta los problemas y
+      mantente informado sobre los reportes ciudadanos.
+    </p>
+    <div class="hero-actions">
+      <a href="#enviar" class="btn btn-lime">📢 HACER UN REPORTE →</a>
+      <a href="#reportes" class="btn btn-outline">VER REPORTES PÚBLICOS</a>
+    </div>
+  </div>
+</section>
 
 <main>
 
-<section class="hero" id="inicio">
-<h2>Una comunidad informada puede hacer la diferencia</h2>
-<p>Reporta problemas de calles, alumbrado, agua, limpieza y otras necesidades de Aguadulce. También puedes adjuntar una fotografía.</p>
-</section>
+<div class="wrap">
+  <div class="stats">
+    <div class="stat">
+      <strong id="statReports">—</strong>
+      <span>REPORTES PÚBLICOS</span>
+    </div>
+    <div class="stat">
+      <strong id="statAreas">—</strong>
+      <span>COMUNIDADES</span>
+    </div>
+    <div class="stat">
+      <strong id="statCategories">—</strong>
+      <span>CATEGORÍAS</span>
+    </div>
+  </div>
 
-<div class="layout">
+  <section class="section" id="reportes">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">ACTUALIDAD LOCAL</span>
+        <h2 class="section-title">Reportes de la comunidad</h2>
+        <p class="section-description">
+          Conoce las situaciones reportadas por los vecinos y aprobadas para publicación.
+        </p>
+      </div>
+      <button class="btn btn-soft" id="refreshPublic" type="button">↻ Actualizar</button>
+    </div>
 
-<div>
-<section class="card" id="publicos">
-<div class="section-heading">
-<h2>📰 Reportes de la comunidad</h2>
-<button type="button" id="publicRefresh" class="secondary">↻ Actualizar</button>
-</div>
-<p class="note">Solamente aparecen reportes públicos aprobados por la administración.</p>
-<p id="publicMessage" class="note" role="status"></p>
-<div id="publicReports"></div>
-</section>
-</div>
+    <div class="filters">
+      <input
+        class="search-input"
+        id="searchReports"
+        placeholder="🔎 Buscar por comunidad, problema o palabra..."
+        aria-label="Buscar reportes"
+      >
+      <select class="filter-select" id="categoryFilter" aria-label="Filtrar categoría">
+        <option value="">Todas las categorías</option>
+      </select>
+    </div>
 
-<div>
+    <p class="message" id="publicMessage" role="status"></p>
+    <div class="report-grid" id="publicReports"></div>
+  </section>
 
-<section class="card" id="enviar">
-<h2>📨 Enviar un reporte</h2>
+  <div class="community-banner">
+    <div>
+      <h2>¿Hay un problema en tu comunidad?</h2>
+      <p>Una fotografía y una descripción clara pueden ayudar a visibilizar lo que sucede.</p>
+    </div>
+    <a href="#enviar" class="btn btn-lime">ENVIAR MI REPORTE →</a>
+  </div>
 
-<form id="reportForm">
+  <section class="form-section" id="enviar">
 
-<label for="category">Categoría</label>
-<select id="category" required>
-<option value="">Selecciona una categoría</option>
-<option>Calles y aceras</option>
-<option>Basura y limpieza</option>
-<option>Agua y alcantarillado</option>
-<option>Alumbrado público</option>
-<option>Protección animal</option>
-<option>Otros problemas comunitarios</option>
-</select>
+    <div class="form-intro" id="como-funciona">
+      <span class="section-kicker">PARTICIPA Y HAZTE ESCUCHAR</span>
+      <h2>Tu comunidad tiene una historia. <span style="color:#287a56">Ayúdanos a contarla.</span></h2>
+      <p>
+        Reportar es sencillo y gratuito. Puedes solicitar que tu reporte
+        sea público o enviarlo de manera privada a la administración.
+      </p>
 
-<label for="area">Comunidad o corregimiento</label>
-<input id="area" maxlength="120" placeholder="Ej.: El Roble, Pocrí..." required>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">01</div>
+          <div>
+            <strong>Cuéntanos qué sucede</strong>
+            <p>Selecciona la categoría e indica la comunidad y el problema.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">02</div>
+          <div>
+            <strong>Adjunta una fotografía</strong>
+            <p>Opcionalmente, añade una imagen para documentar el reporte.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">03</div>
+          <div>
+            <strong>Revisamos tu reporte</strong>
+            <p>La administración decide si procede su publicación.</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<label for="description">Descripción del problema</label>
-<textarea id="description" maxlength="1500" minlength="10" placeholder="Explica qué sucede y dónde..." required></textarea>
+    <div class="form-card">
+      <h3>📨 Enviar reporte ciudadano</h3>
+      <p>Completa los campos para compartir una situación de tu comunidad.</p>
 
-<label for="photo">📷 Adjuntar fotografía (opcional)</label>
-<input id="photo" type="file" accept="image/jpeg,image/png,image/webp">
-<p class="note">Una sola fotografía JPG, PNG o WebP. Máximo 5 MB.</p>
+      <form id="reportForm">
+        <label class="field-label" for="category">CATEGORÍA DEL PROBLEMA</label>
+        <select class="field" id="category" required>
+          <option value="">Selecciona una categoría</option>
+          <option>Calles y aceras</option>
+          <option>Basura y limpieza</option>
+          <option>Agua y alcantarillado</option>
+          <option>Alumbrado público</option>
+          <option>Protección animal</option>
+          <option>Otros problemas comunitarios</option>
+        </select>
 
-<label for="visibility">Tipo de reporte</label>
-<select id="visibility" required>
-<option value="private">Privado: solo administración</option>
-<option value="public">Solicitar publicación pública</option>
-</select>
+        <label class="field-label" for="area">COMUNIDAD O CORREGIMIENTO</label>
+        <input class="field" id="area" maxlength="120"
+          placeholder="Ejemplo: El Roble, Pocrí, Barrios Unidos..." required>
 
-<p class="note">Evita incluir nombres, teléfonos, direcciones particulares o datos sensibles. Los reportes y fotografías deben revisarse antes de publicarse.</p>
+        <label class="field-label" for="description">DESCRIPCIÓN DEL PROBLEMA</label>
+        <textarea class="field" id="description" maxlength="1500"
+          minlength="10" placeholder="Describe lo que está pasando y dónde..." required></textarea>
 
-<label>Verificación de seguridad</label>
-<div class="cf-turnstile"
-data-sitekey="0x4AAAAAAFWBvw2cZEIy5XVD"
-data-theme="light"></div>
+        <label class="field-label" for="photo">FOTOGRAFÍA (OPCIONAL)</label>
+        <input class="field" type="file" id="photo"
+          accept="image/jpeg,image/png,image/webp">
+        <p class="small-note">JPG, PNG o WebP. Máximo 5 MB. Una fotografía por reporte.</p>
+        <img id="photoPreview" class="photo-local-preview" alt="Vista previa" hidden>
 
-<button type="submit" id="reportButton">Enviar reporte</button>
-<p id="reportMessage" class="note" role="status"></p>
+        <label class="field-label" for="visibility">PRIVACIDAD DEL REPORTE</label>
+        <select class="field" id="visibility">
+          <option value="private">Privado: solo administración</option>
+          <option value="public">Solicitar publicación pública</option>
+        </select>
 
-</form>
-</section>
+        <p class="small-note">
+          Evita publicar datos personales, acusaciones sin verificar
+          o fotografías que vulneren la privacidad de otras personas.
+          Todos los reportes quedan pendientes de revisión.
+        </p>
 
-<section class="card" id="administracion">
+        <div class="turnstile-area">
+          <div class="cf-turnstile"
+            data-sitekey="0x4AAAAAAFWBvw2cZEIy5XVD"
+            data-theme="light"></div>
+        </div>
 
-<div id="adminLogin">
-<h2>🔐 Administración</h2>
-<p class="note">Acceso exclusivo para administradores.</p>
+        <button type="submit" class="btn btn-green" id="reportButton">
+          📤 ENVIAR MI REPORTE
+        </button>
+        <p class="message" id="reportMessage" role="status"></p>
+      </form>
+    </div>
 
-<form id="loginForm">
-<label for="adminEmail">Correo electrónico</label>
-<input id="adminEmail" type="email" autocomplete="username" required>
+  </section>
 
-<label for="adminPassword">Contraseña</label>
-<input id="adminPassword" type="password" autocomplete="current-password" required>
+  <section class="admin-section" id="administracion">
+    <div class="admin-card">
 
-<button type="submit" id="loginButton">Iniciar sesión</button>
-</form>
+      <div id="adminLogin">
+        <span class="section-kicker">ACCESO RESTRINGIDO</span>
+        <h3>🔐 Administración</h3>
+        <p>Inicia sesión para revisar y administrar los reportes recibidos.</p>
 
-<button type="button" id="forgotButton" class="secondary">Olvidé mi contraseña</button>
-<p id="loginMessage" class="note" role="status"></p>
-</div>
+        <form id="loginForm">
+          <label class="field-label" for="adminEmail">CORREO ELECTRÓNICO</label>
+          <input class="field" type="email" id="adminEmail"
+            autocomplete="username" required>
 
-<div id="recoverySection" hidden>
-<h2>🔑 Nueva contraseña</h2>
+          <label class="field-label" for="adminPassword">CONTRASEÑA</label>
+          <input class="field" type="password" id="adminPassword"
+            autocomplete="current-password" required>
 
-<form id="recoveryForm">
-<label for="newPassword">Nueva contraseña</label>
-<input id="newPassword" type="password" minlength="8" required>
+          <button type="submit" class="btn btn-green" id="loginButton">
+            INICIAR SESIÓN
+          </button>
+        </form>
 
-<label for="confirmPassword">Confirmar contraseña</label>
-<input id="confirmPassword" type="password" minlength="8" required>
+        <button type="button" class="btn btn-soft" id="forgotButton">
+          Olvidé mi contraseña
+        </button>
+        <p class="message" id="loginMessage" role="status"></p>
+      </div>
 
-<button type="submit">Guardar contraseña</button>
-</form>
+      <div id="recoverySection" hidden>
+        <h3>🔑 Nueva contraseña</h3>
+        <form id="recoveryForm">
+          <label class="field-label" for="newPassword">NUEVA CONTRASEÑA</label>
+          <input class="field" id="newPassword" type="password" minlength="8" required>
 
-<p id="recoveryMessage" class="note"></p>
-</div>
+          <label class="field-label" for="confirmPassword">CONFIRMAR CONTRASEÑA</label>
+          <input class="field" id="confirmPassword" type="password" minlength="8" required>
 
-<div id="adminPanel" hidden>
-<h2>📋 Panel de administración</h2>
-<button type="button" id="refreshButton">↻ Actualizar reportes</button>
-<button type="button" id="logoutButton" class="secondary">Cerrar sesión</button>
-<p id="adminMessage" class="note" role="status"></p>
-<div id="reportsList"></div>
-</div>
+          <button class="btn btn-green" type="submit">GUARDAR CONTRASEÑA</button>
+        </form>
+        <p class="message" id="recoveryMessage"></p>
+      </div>
 
-</section>
+      <div id="adminPanel" hidden>
+        <span class="section-kicker">CENTRO DE CONTROL</span>
+        <h3>📋 Panel de reportes</h3>
+        <p>Revisa fotografías, cambia estados y aprueba publicaciones.</p>
 
-</div>
+        <div class="admin-top-actions">
+          <button type="button" class="btn btn-green" id="refreshAdmin">↻ Actualizar</button>
+          <button type="button" class="btn btn-soft" id="logoutButton">Salir</button>
+        </div>
+
+        <p class="message" id="adminMessage" role="status"></p>
+        <div id="adminReports"></div>
+      </div>
+
+    </div>
+  </section>
 </div>
 
 </main>
 
-<footer>Aguadulce Reporta · Una iniciativa comunitaria</footer>
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div>
+      <strong>AGUADULCE REPORTA.</strong>
+      <p>Un espacio para informar, participar y visibilizar las necesidades de nuestra comunidad.</p>
+    </div>
+    <div>
+      <p>Aguadulce, Coclé · Panamá</p>
+      <p>© <span id="year"></span> Aguadulce Reporta</p>
+    </div>
+  </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 
 <script>
-const SUPABASE_URL =
-  "https://lrupvpgyjzhgyvprrmtl.supabase.co";
+"use strict";
 
-const SUPABASE_KEY =
-  "sb_publishable_toBA9zteOxIM1WivpdjwFQ_xUXsqfpf";
-
-const FUNCTION_URL =
-  SUPABASE_URL + "/functions/v1/enviar-reporte";
-
-const PUBLIC_PHOTO_URL =
-  SUPABASE_URL + "/functions/v1/foto-publica";
-
+const SUPABASE_URL = "https://lrupvpgyjzhgyvprrmtl.supabase.co";
+const SUPABASE_KEY = "sb_publishable_toBA9zteOxIM1WivpdjwFQ_xUXsqfpf";
 const BUCKET = "Foto de reportes";
+
+const SEND_FUNCTION = SUPABASE_URL + "/functions/v1/enviar-reporte";
+const PHOTO_FUNCTION = SUPABASE_URL + "/functions/v1/foto-publica";
 
 const $ = id => document.getElementById(id);
 
-const db = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY,
-  {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true
-    }
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true
   }
-);
+});
 
-const publicDb = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY,
-  {
-    auth: {
-      persistSession: false,
-      autoRefreshToken: false,
-      detectSessionInUrl: false,
-      storageKey: "aguadulce-public-reader"
-    }
+const publicDb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: {
+    persistSession: false,
+    autoRefreshToken: false,
+    detectSessionInUrl: false,
+    storageKey: "aguadulce-public-reader"
   }
-);
+});
+
+let publicReportsData = [];
 
 let recoveryMode =
-  new URLSearchParams(location.hash.slice(1))
-    .get("type") === "recovery" ||
-  new URLSearchParams(location.search)
-    .has("code");
+  new URLSearchParams(location.hash.slice(1)).get("type") === "recovery" ||
+  new URLSearchParams(location.search).has("code");
 
 let recoveryReady = false;
 
-function element(tag, value, className = "") {
+function make(tag, value, className = "") {
   const node = document.createElement(tag);
   node.textContent = value == null ? "" : String(value);
   if (className) node.className = className;
   return node;
 }
 
-function statusName(status) {
+function statusName(value) {
   return ({
     pending: "Pendiente",
     reviewing: "En revisión",
     referred: "Remitido",
     resolved: "Resuelto",
     rejected: "Rechazado"
-  })[status] || status || "Sin estado";
+  })[value] || value || "Sin estado";
 }
 
-function formatDate(date) {
-  if (!date) return "Sin fecha";
-
-  const value = new Date(date);
-
-  return isNaN(value.getTime())
+function formatDate(value) {
+  if (!value) return "Sin fecha";
+  const date = new Date(value);
+  return isNaN(date.getTime())
     ? "Sin fecha"
-    : value.toLocaleString("es-PA");
+    : date.toLocaleDateString("es-PA", {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+      });
 }
 
-// ======================================
-// REPORTES PÚBLICOS CON FOTOGRAFÍAS
-// ======================================
+function showMessage(id, message, success = false) {
+  const node = $(id);
+  node.textContent = message;
+  node.style.color = success ? "#187a49" : "#68786e";
+}
+
+function buildPublicCard(report) {
+  const card = make("article", "", "report-card");
+
+  // El servidor solo entrega la fotografía
+  // si el reporte tiene autorización pública.
+  const imageWrap = make("div", "", "report-image-wrap");
+  const image = document.createElement("img");
+
+  image.className = "report-image";
+  image.alt = "Fotografía del reporte de " + report.area;
+  image.loading = "lazy";
+  image.referrerPolicy = "no-referrer";
+
+  image.onerror = () => imageWrap.remove();
+  image.src = PHOTO_FUNCTION + "?id=" + encodeURIComponent(report.id);
+
+  imageWrap.appendChild(image);
+  card.appendChild(imageWrap);
+
+  const content = make("div", "", "report-content");
+
+  content.appendChild(make("div", report.category, "report-label"));
+  content.appendChild(make("h3", report.area, "report-title"));
+  content.appendChild(make("p", report.description, "report-description"));
+
+  const footer = make("div", "", "report-footer");
+  footer.appendChild(make("span", "📅 " + formatDate(report.created_at)));
+  footer.appendChild(make("span", statusName(report.status), "status-pill"));
+
+  content.appendChild(footer);
+  card.appendChild(content);
+
+  return card;
+}
+
+function renderPublicReports() {
+  const container = $("publicReports");
+  container.replaceChildren();
+
+  const search = $("searchReports").value.trim().toLocaleLowerCase("es");
+  const category = $("categoryFilter").value;
+
+  const filtered = publicReportsData.filter(report => {
+    const searchable = [
+      report.category,
+      report.area,
+      report.description
+    ].join(" ").toLocaleLowerCase("es");
+
+    return (!search || searchable.includes(search)) &&
+      (!category || report.category === category);
+  });
+
+  if (!filtered.length) {
+    const empty = make("div", "", "empty");
+    empty.appendChild(make("strong", "No encontramos reportes"));
+    empty.appendChild(make("p",
+      publicReportsData.length
+        ? "Prueba otra palabra o categoría."
+        : "Todavía no hay reportes públicos aprobados."
+    ));
+    container.appendChild(empty);
+    return;
+  }
+
+  for (const report of filtered) {
+    container.appendChild(buildPublicCard(report));
+  }
+}
 
 async function loadPublicReports() {
-  const container = $("publicReports");
-  const message = $("publicMessage");
+  showMessage("publicMessage", "Cargando reportes...");
 
-  container.replaceChildren();
-  message.textContent = "Cargando reportes...";
+  const { data, error } = await publicDb
+    .from("reports")
+    .select("id,category,area,description,status,created_at")
+    .order("created_at", { ascending: false })
+    .limit(100);
+
+  if (error) {
+    console.error("Reportes públicos:", error);
+    showMessage("publicMessage", "No se pudieron cargar los reportes.");
+    return;
+  }
+
+  publicReportsData = data || [];
+
+  $("statReports").textContent = publicReportsData.length;
+  $("statAreas").textContent =
+    new Set(publicReportsData.map(r => r.area)).size;
+  $("statCategories").textContent =
+    new Set(publicReportsData.map(r => r.category)).size;
+
+  const categories = [
+    ...new Set(publicReportsData.map(r => r.category).filter(Boolean))
+  ].sort();
+
+  const selected = $("categoryFilter").value;
+  $("categoryFilter").replaceChildren();
+
+  const allOption = document.createElement("option");
+  allOption.value = "";
+  allOption.textContent = "Todas las categorías";
+  $("categoryFilter").appendChild(allOption);
+
+  for (const category of categories) {
+    const option = document.createElement("option");
+    option.value = category;
+    option.textContent = category;
+    $("categoryFilter").appendChild(option);
+  }
+
+  $("categoryFilter").value =
+    categories.includes(selected) ? selected : "";
+
+  showMessage("publicMessage",
+    publicReportsData.length + " reportes públicos recientes disponibles.",
+    true
+  );
+
+  renderPublicReports();
+}
+
+$("searchReports").addEventListener("input", renderPublicReports);
+$("categoryFilter").addEventListener("change", renderPublicReports);
+$("refreshPublic").addEventListener("click", loadPublicReports);
+
+// ====================================
+// VISTA PREVIA DE LA FOTOGRAFÍA
+// ====================================
+
+let previewUrl = null;
+
+function clearPreview() {
+  if (previewUrl) URL.revokeObjectURL(previewUrl);
+  previewUrl = null;
+  $("photoPreview").hidden = true;
+  $("photoPreview").removeAttribute("src");
+}
+
+$("photo").addEventListener("change", () => {
+  clearPreview();
+
+  const photo = $("photo").files[0];
+  if (!photo) return;
+
+  if (!["image/jpeg", "image/png", "image/webp"].includes(photo.type) ||
+      photo.size > 5 * 1024 * 1024) {
+    showMessage("reportMessage",
+      "La fotografía debe ser JPG, PNG o WebP y pesar máximo 5 MB.");
+    $("photo").value = "";
+    return;
+  }
+
+  previewUrl = URL.createObjectURL(photo);
+  $("photoPreview").src = previewUrl;
+  $("photoPreview").hidden = false;
+});
+
+// ====================================
+// ENVÍO DE REPORTES
+// ====================================
+
+$("reportForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const button = $("reportButton");
+  const photo = $("photo").files[0];
+
+  if (photo && (
+    !["image/jpeg", "image/png", "image/webp"].includes(photo.type) ||
+    photo.size > 5 * 1024 * 1024
+  )) {
+    showMessage("reportMessage", "Fotografía no válida.");
+    return;
+  }
+
+  const token = document.querySelector(
+    'input[name="cf-turnstile-response"]'
+  )?.value || "";
+
+  if (!token) {
+    showMessage("reportMessage", "Completa la verificación de seguridad.");
+    return;
+  }
+
+  const form = new FormData();
+  form.append("category", $("category").value);
+  form.append("area", $("area").value.trim());
+  form.append("description", $("description").value.trim());
+  form.append("visibility_requested", $("visibility").value);
+  form.append("turnstile_token", token);
+
+  if (photo) form.append("photo", photo);
+
+  button.disabled = true;
+  showMessage("reportMessage", "Enviando tu reporte...");
 
   try {
-    const { data, error } = await publicDb
-      .from("reports")
-      .select(
-        "id,category,area,description,status,created_at"
-      )
-      .order("created_at", { ascending: false })
-      .limit(30);
+    const response = await fetch(SEND_FUNCTION, {
+      method: "POST",
+      headers: { apikey: SUPABASE_KEY },
+      body: form
+    });
 
-    if (error) throw error;
+    const result = await response.json();
 
-    if (!data.length) {
-      message.textContent =
-        "Todavía no hay reportes públicos aprobados.";
-      return;
+    if (!response.ok || !result.success) {
+      throw new Error(result.error || "No se pudo enviar el reporte.");
     }
 
-    message.textContent =
-      "Reportes públicos disponibles: " + data.length;
+    $("reportForm").reset();
+    clearPreview();
 
-    for (const report of data) {
-      const card = document.createElement("article");
-      card.className = "report-card";
+    showMessage("reportMessage",
+      "✅ ¡Reporte recibido! Quedará pendiente de revisión.",
+      true
+    );
 
-      card.append(
-        element("h3", report.category),
-        element("p", "📍 " + report.area, "report-meta"),
-        element("p", report.description),
-        element(
-          "span",
-          statusName(report.status),
-          "tag"
-        ),
-        element(
-          "p",
-          "Reporte recibido: " +
-          formatDate(report.created_at),
-          "report-meta"
-        )
-      );
-
-      // La función foto-publica comprueba
-      // si este reporte tiene una imagen
-      // autorizada para mostrar al público.
-      const photo = document.createElement("img");
-
-      photo.className = "photo-preview";
-      photo.alt = "Fotografía del reporte";
-      photo.loading = "lazy";
-      photo.referrerPolicy = "no-referrer";
-
-      // Si el reporte no tiene fotografía
-      // o no está disponible, ocultarla.
-      photo.onerror = () => photo.remove();
-
-      photo.src =
-        PUBLIC_PHOTO_URL +
-        "?id=" +
-        encodeURIComponent(report.id);
-
-      card.appendChild(photo);
-      container.appendChild(card);
+    if (!$("adminPanel").hidden) {
+      await loadAdminReports();
     }
 
   } catch (error) {
     console.error(error);
-    message.textContent =
-      "No se pudieron cargar los reportes.";
+    showMessage("reportMessage", error.message || "Error al enviar.");
+
+  } finally {
+    button.disabled = false;
+    if (window.turnstile) window.turnstile.reset();
   }
-}
+});
 
-$("publicRefresh").onclick = loadPublicReports;
-
-// ======================================
-// ENVIAR REPORTE CON FOTOGRAFÍA
-// ======================================
-
-$("reportForm").addEventListener(
-  "submit",
-  async event => {
-    event.preventDefault();
-
-    const button = $("reportButton");
-    const message = $("reportMessage");
-    const photo = $("photo").files[0];
-
-    if (photo) {
-      const allowed = [
-        "image/jpeg",
-        "image/png",
-        "image/webp"
-      ];
-
-      if (!allowed.includes(photo.type)) {
-        message.textContent =
-          "Solo se permiten fotografías JPG, PNG o WebP.";
-        return;
-      }
-
-      if (photo.size > 5 * 1024 * 1024) {
-        message.textContent =
-          "La fotografía no puede superar 5 MB.";
-        return;
-      }
-    }
-
-    const token =
-      document.querySelector(
-        'input[name="cf-turnstile-response"]'
-      )?.value || "";
-
-    if (!token) {
-      message.textContent =
-        "Completa la verificación de seguridad.";
-      return;
-    }
-
-    const form = new FormData();
-
-    form.append("category", $("category").value);
-    form.append("area", $("area").value.trim());
-    form.append(
-      "description",
-      $("description").value.trim()
-    );
-    form.append(
-      "visibility_requested",
-      $("visibility").value
-    );
-    form.append("turnstile_token", token);
-
-    if (photo) {
-      form.append("photo", photo);
-    }
-
-    button.disabled = true;
-    message.textContent = "Enviando reporte...";
-
-    try {
-      const response = await fetch(FUNCTION_URL, {
-        method: "POST",
-        headers: {
-          apikey: SUPABASE_KEY
-        },
-        body: form
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(
-          result.error ||
-          "No se pudo enviar el reporte."
-        );
-      }
-
-      $("reportForm").reset();
-
-      message.textContent =
-        "¡Reporte recibido correctamente! " +
-        "Quedará pendiente de revisión.";
-
-      if (!$("adminPanel").hidden) {
-        await loadAdminReports();
-      }
-
-    } catch (error) {
-      console.error("Envío:", error);
-      message.textContent =
-        error.message || "Error al enviar el reporte.";
-
-    } finally {
-      button.disabled = false;
-
-      if (window.turnstile) {
-        window.turnstile.reset();
-      }
-    }
-  }
-);
-
-// ======================================
-// ADMINISTRACIÓN
-// ======================================
+// ====================================
+// PANEL DE ADMINISTRACIÓN
+// ====================================
 
 async function showAdminPanel() {
   if (recoveryMode) return;
 
-  const { data: isAdmin, error } =
-    await db.rpc("is_app_admin");
+  const { data: isAdmin, error } = await db.rpc("is_app_admin");
 
   if (error || isAdmin !== true) {
     await db.auth.signOut();
-
-    $("adminLogin").hidden = false;
     $("adminPanel").hidden = true;
-
-    $("loginMessage").textContent =
-      "Esta cuenta no tiene permisos de administrador.";
+    $("adminLogin").hidden = false;
+    showMessage("loginMessage", "Esta cuenta no tiene acceso administrativo.");
     return;
   }
 
   $("adminLogin").hidden = true;
-  $("recoverySection").hidden = true;
   $("adminPanel").hidden = false;
+  $("recoverySection").hidden = true;
 
   await loadAdminReports();
 }
@@ -500,180 +1128,177 @@ async function showAdminPanel() {
 async function loadAdminReports() {
   if ($("adminPanel").hidden) return;
 
-  const container = $("reportsList");
-  const message = $("adminMessage");
-
+  const container = $("adminReports");
   container.replaceChildren();
-  message.textContent = "Cargando reportes...";
 
-  try {
-    const { data, error } = await db
-      .from("reports")
-      .select(
-        "id,category,area,description,status," +
-        "visibility_requested,is_published," +
-        "photo_path,created_at"
-      )
-      .order("created_at", { ascending: false })
-      .limit(50);
+  showMessage("adminMessage", "Cargando reportes...");
 
-    if (error) throw error;
+  const { data, error } = await db
+    .from("reports")
+    .select(
+      "id,category,area,description,status," +
+      "visibility_requested,is_published,photo_path,created_at"
+    )
+    .order("created_at", { ascending: false })
+    .limit(100);
 
-    message.textContent =
-      "Reportes encontrados: " + data.length;
+  if (error) {
+    showMessage("adminMessage", "Error: " + error.message);
+    return;
+  }
 
-    for (const report of data) {
-      const card = document.createElement("article");
-      card.className = "report-card";
+  showMessage("adminMessage",
+    "Reportes encontrados: " + data.length,
+    true
+  );
 
-      card.append(
-        element("h3", report.category),
-        element(
-          "p",
-          "📍 Comunidad: " + report.area
-        ),
-        element("p", report.description),
-        element(
-          "p",
-          "Fecha: " + formatDate(report.created_at),
-          "report-meta"
-        ),
-        element(
-          "p",
-          "Estado: " + statusName(report.status)
-        ),
-        element(
-          "p",
-          "Tipo: " +
-          (report.visibility_requested === "public"
-            ? "Solicitó publicación pública"
-            : "Privado")
-        ),
-        element(
-          "p",
-          "Publicación: " +
-          (report.is_published
-            ? "Aprobada"
-            : "No aprobada")
-        )
-      );
+  for (const report of data) {
+    const card = make("article", "", "admin-report");
 
-      // Fotografía privada para administradores
-      if (report.photo_path) {
-        const photoButton = element(
-          "button",
-          "📷 Ver fotografía"
-        );
+    card.append(
+      make("h4", report.category + " · " + report.area),
+      make("p", report.description),
+      make("p", "📅 " + formatDate(report.created_at)),
+      make("p", "Estado: " + statusName(report.status)),
+      make("p", "Tipo: " + (
+        report.visibility_requested === "public"
+          ? "Solicitó publicación pública"
+          : "Privado"
+      )),
+      make("p", "Publicación: " + (
+        report.is_published ? "Aprobada" : "No aprobada"
+      ))
+    );
 
-        photoButton.type = "button";
-        photoButton.className = "secondary";
+    if (report.photo_path) {
+      const viewButton = make("button", "📷 Ver fotografía", "btn btn-soft");
+      viewButton.type = "button";
 
-        const photoContainer =
-          document.createElement("div");
+      const photoBox = document.createElement("div");
 
-        photoButton.onclick = async () => {
-          photoButton.disabled = true;
-          photoButton.textContent =
-            "Cargando fotografía...";
+      viewButton.onclick = async () => {
+        viewButton.disabled = true;
+        viewButton.textContent = "Cargando...";
 
-          try {
-            const { data, error } = await db.storage
-              .from(BUCKET)
-              .createSignedUrl(
-                report.photo_path,
-                60
-              );
+        const { data: photoData, error: photoError } =
+          await db.storage
+            .from(BUCKET)
+            .createSignedUrl(report.photo_path, 60);
 
-            if (error) throw error;
+        if (photoError || !photoData?.signedUrl) {
+          viewButton.textContent = "No se pudo abrir la fotografía";
+          viewButton.disabled = false;
+          return;
+        }
 
-            const img = document.createElement("img");
+        const image = document.createElement("img");
+        image.className = "admin-photo";
+        image.alt = "Fotografía privada del reporte";
+        image.src = photoData.signedUrl;
 
-            img.src = data.signedUrl;
-            img.alt = "Fotografía del reporte";
-            img.className = "photo-preview";
-
-            photoContainer.replaceChildren(img);
-
-            photoButton.textContent =
-              "Fotografía disponible";
-
-          } catch (error) {
-            console.error(error);
-            photoButton.textContent =
-              "No se pudo abrir la fotografía";
-            photoButton.disabled = false;
-          }
-        };
-
-        card.append(photoButton, photoContainer);
-      }
-
-      const actions = document.createElement("div");
-      actions.className = "admin-actions";
-
-      actions.appendChild(
-        element("label", "Cambiar estado del reporte")
-      );
-
-      const select = document.createElement("select");
-
-      const states = [
-        ["pending", "Pendiente"],
-        ["reviewing", "En revisión"],
-        ["referred", "Remitido"],
-        ["resolved", "Resuelto"],
-        ["rejected", "Rechazado"]
-      ];
-
-      for (const [value, name] of states) {
-        const option = document.createElement("option");
-        option.value = value;
-        option.textContent = name;
-        select.appendChild(option);
-      }
-
-      select.value = report.status;
-
-      const saveButton = element(
-        "button",
-        "Guardar estado"
-      );
-
-      saveButton.type = "button";
-      saveButton.disabled = true;
-
-      select.onchange = () => {
-        saveButton.disabled =
-          select.value === report.status;
+        photoBox.replaceChildren(image);
+        viewButton.textContent = "Fotografía cargada";
       };
 
-      const actionMessage = element(
-        "p",
-        "",
-        "note"
+      card.append(viewButton, photoBox);
+    }
+
+    const actions = make("div", "", "admin-actions");
+
+    actions.appendChild(make("label", "Cambiar estado", "field-label"));
+
+    const stateSelect = make("select", "", "field");
+
+    const states = [
+      ["pending", "Pendiente"],
+      ["reviewing", "En revisión"],
+      ["referred", "Remitido"],
+      ["resolved", "Resuelto"],
+      ["rejected", "Rechazado"]
+    ];
+
+    for (const [value, label] of states) {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      stateSelect.appendChild(option);
+    }
+
+    stateSelect.value = report.status;
+
+    const saveButton = make("button", "Guardar estado", "btn btn-green");
+    saveButton.type = "button";
+    saveButton.disabled = true;
+
+    stateSelect.onchange = () => {
+      saveButton.disabled = stateSelect.value === report.status;
+    };
+
+    const actionMessage = make("p", "", "message");
+
+    saveButton.onclick = async () => {
+      saveButton.disabled = true;
+
+      const changes = { status: stateSelect.value };
+
+      if (stateSelect.value === "rejected") {
+        changes.is_published = false;
+      }
+
+      const { error } = await db
+        .from("reports")
+        .update(changes)
+        .eq("id", report.id);
+
+      if (error) {
+        actionMessage.textContent = "Error: " + error.message;
+        saveButton.disabled = false;
+        return;
+      }
+
+      await loadAdminReports();
+      await loadPublicReports();
+    };
+
+    actions.append(stateSelect, saveButton);
+
+    if (report.visibility_requested === "public") {
+      const publishButton = make(
+        "button",
+        report.is_published
+          ? "Retirar publicación"
+          : "✓ Aprobar publicación",
+        report.is_published ? "btn btn-soft" : "btn btn-green"
       );
 
-      saveButton.onclick = async () => {
-        saveButton.disabled = true;
-        actionMessage.textContent = "Guardando...";
+      publishButton.type = "button";
 
-        const changes = {
-          status: select.value
-        };
+      publishButton.onclick = async () => {
+        const publish = !report.is_published;
 
-        if (select.value === "rejected") {
-          changes.is_published = false;
+        if (publish) {
+          if (report.status === "rejected") {
+            actionMessage.textContent =
+              "Primero cambia el estado rechazado.";
+            return;
+          }
+
+          if (!confirm(
+            "¿Revisaste el reporte y su fotografía y confirmas " +
+            "que pueden mostrarse públicamente?"
+          )) return;
         }
+
+        publishButton.disabled = true;
 
         const { error } = await db
           .from("reports")
-          .update(changes)
+          .update({ is_published: publish })
           .eq("id", report.id);
 
         if (error) {
-          actionMessage.textContent =
-            "Error: " + error.message;
-          saveButton.disabled = false;
+          actionMessage.textContent = "Error: " + error.message;
+          publishButton.disabled = false;
           return;
         }
 
@@ -681,242 +1306,159 @@ async function loadAdminReports() {
         await loadPublicReports();
       };
 
-      actions.append(select, saveButton);
+      actions.appendChild(publishButton);
 
-      if (report.visibility_requested === "public") {
-        const publishButton = element(
-          "button",
-          report.is_published
-            ? "Retirar publicación"
-            : "Aprobar publicación"
-        );
-
-        publishButton.type = "button";
-
-        if (report.is_published) {
-          publishButton.className = "secondary";
-        }
-
-        publishButton.onclick = async () => {
-          const publish = !report.is_published;
-
-          if (publish) {
-            if (report.status === "rejected") {
-              actionMessage.textContent =
-                "Primero cambia el estado rechazado.";
-              return;
-            }
-
-            if (!confirm(
-              "¿Revisaste el reporte y su fotografía " +
-              "y confirmas que pueden publicarse?"
-            )) return;
-          }
-
-          publishButton.disabled = true;
-
-          const { error } = await db
-            .from("reports")
-            .update({
-              is_published: publish
-            })
-            .eq("id", report.id);
-
-          if (error) {
-            actionMessage.textContent =
-              "Error: " + error.message;
-            publishButton.disabled = false;
-            return;
-          }
-
-          await loadAdminReports();
-          await loadPublicReports();
-        };
-
-        actions.appendChild(publishButton);
-
-      } else {
-        actions.appendChild(
-          element(
-            "p",
-            "🔒 Reporte privado: no se puede publicar.",
-            "note"
-          )
-        );
-      }
-
-      actions.appendChild(actionMessage);
-      card.appendChild(actions);
-      container.appendChild(card);
+    } else {
+      actions.appendChild(
+        make("p", "🔒 Reporte privado: no se puede publicar.", "small-note")
+      );
     }
 
-  } catch (error) {
-    console.error("Administración:", error);
-
-    message.textContent =
-      "No se pudieron cargar los reportes: " +
-      error.message;
+    actions.appendChild(actionMessage);
+    card.appendChild(actions);
+    container.appendChild(card);
   }
 }
 
-$("refreshButton").onclick = loadAdminReports;
+$("refreshAdmin").onclick = loadAdminReports;
 
-// ======================================
-// INICIO DE SESIÓN
-// ======================================
+// ====================================
+// ACCESO ADMINISTRATIVO
+// ====================================
 
-$("loginForm").addEventListener(
-  "submit",
-  async event => {
-    event.preventDefault();
+$("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
 
-    $("loginButton").disabled = true;
-    $("loginMessage").textContent =
-      "Comprobando acceso...";
+  $("loginButton").disabled = true;
+  showMessage("loginMessage", "Verificando acceso...");
 
-    try {
-      const { error } =
-        await db.auth.signInWithPassword({
-          email: $("adminEmail").value,
-          password: $("adminPassword").value
-        });
+  try {
+    const { error } = await db.auth.signInWithPassword({
+      email: $("adminEmail").value,
+      password: $("adminPassword").value
+    });
 
-      $("adminPassword").value = "";
+    $("adminPassword").value = "";
 
-      if (error) throw error;
+    if (error) throw error;
 
-      await showAdminPanel();
+    await showAdminPanel();
 
-    } catch (error) {
-      $("loginMessage").textContent =
-        "No se pudo iniciar sesión: " +
-        error.message;
+  } catch (error) {
+    showMessage("loginMessage", "No se pudo iniciar sesión: " + error.message);
 
-    } finally {
-      $("loginButton").disabled = false;
-    }
+  } finally {
+    $("loginButton").disabled = false;
   }
-);
+});
 
 $("logoutButton").onclick = async () => {
   await db.auth.signOut();
 
   $("adminPanel").hidden = true;
   $("adminLogin").hidden = false;
-  $("reportsList").replaceChildren();
+  $("adminReports").replaceChildren();
 
-  $("loginMessage").textContent =
-    "Sesión cerrada.";
+  showMessage("loginMessage", "Sesión cerrada.");
 };
 
-// ======================================
-// RECUPERAR CONTRASEÑA
-// ======================================
+// ====================================
+// RECUPERACIÓN DE CONTRASEÑA
+// ====================================
 
 $("forgotButton").onclick = async () => {
   const email = $("adminEmail").value.trim();
 
   if (!email) {
-    $("loginMessage").textContent =
-      "Escribe primero tu correo electrónico.";
+    showMessage("loginMessage", "Escribe primero tu correo.");
     return;
   }
 
-  const { error } =
-    await db.auth.resetPasswordForEmail(email, {
-      redirectTo:
-        "https://aguadulcebueno.github.io/aguadulce-reporta/"
-    });
+  const { error } = await db.auth.resetPasswordForEmail(email, {
+    redirectTo: "https://aguadulcebueno.github.io/aguadulce-reporta/"
+  });
 
-  $("loginMessage").textContent = error
-    ? "No se pudo enviar el correo: " + error.message
-    : "Si el correo está registrado, recibirás " +
-      "un enlace para cambiar la contraseña.";
+  showMessage("loginMessage", error
+    ? "Error: " + error.message
+    : "Si el correo está registrado, recibirás un enlace de recuperación."
+  );
 };
 
 function showRecovery() {
   recoveryMode = true;
-
   $("adminLogin").hidden = true;
   $("adminPanel").hidden = true;
   $("recoverySection").hidden = false;
 }
 
-if (recoveryMode) {
-  showRecovery();
-}
+if (recoveryMode) showRecovery();
 
 db.auth.onAuthStateChange((event, session) => {
   if (event === "PASSWORD_RECOVERY") {
     showRecovery();
     recoveryReady = true;
-
-    $("recoveryMessage").textContent =
-      "Enlace verificado. Escribe tu nueva contraseña.";
+    showMessage("recoveryMessage",
+      "Enlace verificado. Escribe tu nueva contraseña.");
   }
 
-  if (
-    recoveryMode &&
-    event === "SIGNED_IN" &&
-    session
-  ) {
+  if (recoveryMode && event === "SIGNED_IN" && session) {
     recoveryReady = true;
   }
 });
 
-$("recoveryForm").addEventListener(
-  "submit",
-  async event => {
-    event.preventDefault();
+$("recoveryForm").addEventListener("submit", async event => {
+  event.preventDefault();
 
-    const password = $("newPassword").value;
+  const password = $("newPassword").value;
 
-    if (password !== $("confirmPassword").value) {
-      $("recoveryMessage").textContent =
-        "Las contraseñas no coinciden.";
-      return;
-    }
-
-    if (!recoveryReady) {
-      $("recoveryMessage").textContent =
-        "El enlace no se ha verificado.";
-      return;
-    }
-
-    const { error } = await db.auth.updateUser({
-      password
-    });
-
-    if (error) {
-      $("recoveryMessage").textContent =
-        "Error: " + error.message;
-      return;
-    }
-
-    await db.auth.signOut();
-
-    recoveryMode = false;
-    recoveryReady = false;
-
-    history.replaceState(
-      null,
-      "",
-      location.pathname
-    );
-
-    $("recoverySection").hidden = true;
-    $("adminLogin").hidden = false;
-
-    $("loginMessage").textContent =
-      "Contraseña actualizada. Inicia sesión.";
+  if (password !== $("confirmPassword").value) {
+    showMessage("recoveryMessage", "Las contraseñas no coinciden.");
+    return;
   }
-);
 
-// ======================================
-// INICIAR PÁGINA
-// ======================================
+  if (!recoveryReady) {
+    showMessage("recoveryMessage", "El enlace aún no se ha verificado.");
+    return;
+  }
+
+  const { error } = await db.auth.updateUser({ password });
+
+  if (error) {
+    showMessage("recoveryMessage", "Error: " + error.message);
+    return;
+  }
+
+  await db.auth.signOut();
+
+  recoveryMode = false;
+  recoveryReady = false;
+
+  history.replaceState(null, "", location.pathname);
+
+  $("recoverySection").hidden = true;
+  $("adminLogin").hidden = false;
+
+  showMessage("loginMessage",
+    "Contraseña actualizada. Inicia sesión.",
+    true
+  );
+});
+
+// ====================================
+// INICIO
+// ====================================
 
 async function initialize() {
+  $("year").textContent = new Date().getFullYear();
+
+  $("todayDate").textContent =
+    new Date().toLocaleDateString("es-PA", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: "America/Panama"
+    }).toUpperCase();
+
   await loadPublicReports();
 
   if (recoveryMode) {
@@ -924,10 +1466,8 @@ async function initialize() {
 
     if (data.session) {
       recoveryReady = true;
-      $("recoveryMessage").textContent =
-        "Escribe tu nueva contraseña.";
+      showMessage("recoveryMessage", "Escribe tu nueva contraseña.");
     }
-
     return;
   }
 
@@ -942,9 +1482,8 @@ initialize();
 </script>
 
 <script
-src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-async
-defer>
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async defer>
 </script>
 
 </body>
