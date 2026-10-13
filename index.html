@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123d35">
+  <title>Aguadulce Reporta</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6f4;
+      color: #19352e;
+    }
+    header {
+      background: #123d35;
+      color: white;
+      padding: 28px 20px;
+      text-align: center;
+    }
+    header h1 { margin: 0 0 8px; font-size: 27px; }
+    header p { margin: 0; color: #d5e8df; }
+    main { max-width: 620px; margin: 24px auto; padding: 0 16px; }
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 3px 12px #163c3010;
+    }
+    h2 { margin-top: 0; font-size: 20px; }
+    label { display: block; margin: 15px 0 7px; font-weight: bold; }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccd8d1;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border: 0;
+      border-radius: 9px;
+      background: #176b50;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .secondary { background: #e7f1eb; color: #176b50; }
+    .note { font-size: 13px; color: #5e7068; line-height: 1.5; }
+    footer { text-align: center; padding: 22px; color: #65766d; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📍 Aguadulce Reporta</h1>
+    <p>Tu comunidad. Tu voz. Tu reporte.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>¿Qué sucede en tu comunidad?</h2>
+      <p>Esta plataforma busca ayudar a identificar problemas comunitarios y darles seguimiento.</p>
+      <p class="note">Los reportes deberán ser revisados antes de publicarse.</p>
+    </section>
+
+    <section class="card">
+      <h2>Enviar un reporte</h2>
+      <form id="reportForm">
+        <label for="category">Categoría</label>
+        <select id="category" required>
+          <option value="">Selecciona una categoría</option>
+          <option>Calles y aceras</option>
+          <option>Basura y limpieza</option>
+          <option>Agua y alcantarillado</option>
+          <option>Alumbrado público</option>
+          <option>Protección animal</option>
+          <option>Otros problemas comunitarios</option>
+        </select>
+
+        <label for="area">Comunidad o corregimiento</label>
+        <input id="area" placeholder="Ej.: El Roble, Pocrí..." required>
+
+        <label for="description">Descripción del problema</label>
+        <textarea id="description" maxlength="1500"
+          placeholder="Explica qué sucede y dónde..." required></textarea>
+
+        <label for="photo">Fotografía (opcional)</label>
+        <input id="photo" type="file" accept="image/*">
+
+        <label for="visibility">Tipo de reporte</label>
+        <select id="visibility" required>
+          <option value="private">Privado: solo administración</option>
+          <option value="public">Solicitar publicación pública</option>
+        </select>
+
+        <p class="note">
+          Prototipo de prueba: todavía no guarda ni envía denuncias.
+          No introduzcas datos personales ni fotografías reales.
+        </p>
+        <button type="submit">Probar formulario</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Consultar un reporte</h2>
+      <p>En la siguiente fase añadiremos un código para consultar el estado.</p>
+      <button class="secondary" type="button"
+        onclick="alert('La consulta estará disponible en la siguiente fase.')">
+        Consultar estado
+      </button>
+    </section>
+  </main>
+
+  <footer>
+    Aguadulce Reporta · Proyecto comunitario en desarrollo
+  </footer>
+
+  <script>
+    document.getElementById("reportForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("¡El formulario de prueba funciona! Todavía no se ha enviado ningún reporte.");
+    });
+  </script>
+</body>
+</html>
