@@ -5,24 +5,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#123d35">
+
   <title>Aguadulce Reporta</title>
+
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f3f6f4;
       color: #19352e;
     }
+
     header {
       background: #123d35;
       color: white;
       padding: 28px 20px;
       text-align: center;
     }
-    header h1 { margin: 0 0 8px; font-size: 27px; }
-    header p { margin: 0; color: #d5e8df; }
-    main { max-width: 620px; margin: 24px auto; padding: 0 16px; }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 27px;
+    }
+
+    header p {
+      margin: 0;
+      color: #d5e8df;
+    }
+
+    main {
+      max-width: 620px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
     .card {
       background: white;
       border-radius: 14px;
@@ -30,8 +50,22 @@
       margin-bottom: 18px;
       box-shadow: 0 3px 12px #163c3010;
     }
-    h2 { margin-top: 0; font-size: 20px; }
-    label { display: block; margin: 15px 0 7px; font-weight: bold; }
+
+    h2 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+
+    h3 {
+      font-size: 17px;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 7px;
+      font-weight: bold;
+    }
+
     input, select, textarea {
       width: 100%;
       padding: 12px;
@@ -40,7 +74,12 @@
       font-size: 16px;
       background: white;
     }
-    textarea { min-height: 110px; resize: vertical; }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
     button {
       width: 100%;
       margin-top: 18px;
@@ -53,30 +92,83 @@
       font-weight: bold;
       cursor: pointer;
     }
-    .secondary { background: #e7f1eb; color: #176b50; }
-    .note { font-size: 13px; color: #5e7068; line-height: 1.5; }
-    footer { text-align: center; padding: 22px; color: #65766d; font-size: 13px; }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .secondary {
+      background: #e7f1eb;
+      color: #176b50;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #5e7068;
+      line-height: 1.5;
+    }
+
+    .report-item {
+      padding: 15px 0;
+      border-bottom: 1px solid #e1e8e3;
+      overflow-wrap: anywhere;
+    }
+
+    .report-item p {
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    footer {
+      text-align: center;
+      padding: 22px;
+      color: #65766d;
+      font-size: 13px;
+    }
   </style>
 </head>
+
 <body>
+
   <header>
     <h1>📍 Aguadulce Reporta</h1>
     <p>Tu comunidad. Tu voz. Tu reporte.</p>
   </header>
 
   <main>
+
     <section class="card">
       <h2>¿Qué sucede en tu comunidad?</h2>
-      <p>Esta plataforma busca ayudar a identificar problemas comunitarios y darles seguimiento.</p>
-      <p class="note">Los reportes deberán ser revisados antes de publicarse.</p>
+
+      <p>
+        Esta plataforma busca ayudar a identificar
+        problemas comunitarios y darles seguimiento.
+      </p>
+
+      <p class="note">
+        Los reportes deberán ser revisados antes
+        de publicarse.
+      </p>
     </section>
+
+    <!-- FORMULARIO COMUNITARIO -->
 
     <section class="card">
       <h2>Enviar un reporte</h2>
+
       <form id="reportForm">
+
         <label for="category">Categoría</label>
+
         <select id="category" required>
-          <option value="">Selecciona una categoría</option>
+          <option value="">
+            Selecciona una categoría
+          </option>
           <option>Calles y aceras</option>
           <option>Basura y limpieza</option>
           <option>Agua y alcantarillado</option>
@@ -85,49 +177,496 @@
           <option>Otros problemas comunitarios</option>
         </select>
 
-        <label for="area">Comunidad o corregimiento</label>
-        <input id="area" placeholder="Ej.: El Roble, Pocrí..." required>
+        <label for="area">
+          Comunidad o corregimiento
+        </label>
 
-        <label for="description">Descripción del problema</label>
-        <textarea id="description" maxlength="1500"
-          placeholder="Explica qué sucede y dónde..." required></textarea>
+        <input
+          id="area"
+          maxlength="120"
+          placeholder="Ej.: El Roble, Pocrí..."
+          required
+        >
 
-        <label for="photo">Fotografía (opcional)</label>
-        <input id="photo" type="file" accept="image/*">
+        <label for="description">
+          Descripción del problema
+        </label>
 
-        <label for="visibility">Tipo de reporte</label>
+        <textarea
+          id="description"
+          maxlength="1500"
+          placeholder="Explica qué sucede y dónde..."
+          required
+        ></textarea>
+
+        <label for="photo">
+          Fotografía (opcional)
+        </label>
+
+        <input
+          id="photo"
+          type="file"
+          accept="image/*"
+        >
+
+        <label for="visibility">
+          Tipo de reporte
+        </label>
+
         <select id="visibility" required>
-          <option value="private">Privado: solo administración</option>
-          <option value="public">Solicitar publicación pública</option>
+          <option value="private">
+            Privado: solo administración
+          </option>
+          <option value="public">
+            Solicitar publicación pública
+          </option>
         </select>
 
         <p class="note">
-          Prototipo de prueba: todavía no guarda ni envía denuncias.
-          No introduzcas datos personales ni fotografías reales.
+          Prototipo de prueba: todavía no guarda
+          ni envía denuncias. No introduzcas datos
+          personales ni fotografías reales.
         </p>
-        <button type="submit">Probar formulario</button>
+
+        <button type="submit">
+          Probar formulario
+        </button>
+
       </form>
     </section>
 
+    <!-- CONSULTA DE REPORTES -->
+
     <section class="card">
       <h2>Consultar un reporte</h2>
-      <p>En la siguiente fase añadiremos un código para consultar el estado.</p>
-      <button class="secondary" type="button"
-        onclick="alert('La consulta estará disponible en la siguiente fase.')">
+
+      <p>
+        Próximamente podrás consultar el estado
+        de tu reporte.
+      </p>
+
+      <button
+        class="secondary"
+        type="button"
+        id="consultButton"
+      >
         Consultar estado
       </button>
     </section>
+
+    <!-- INICIO DE SESION -->
+
+    <section class="card" id="adminLogin">
+
+      <h2>🔐 Administración</h2>
+
+      <p class="note">
+        Acceso exclusivo para administradores
+        autorizados.
+      </p>
+
+      <form id="loginForm">
+
+        <label for="adminEmail">
+          Correo electrónico
+        </label>
+
+        <input
+          id="adminEmail"
+          type="email"
+          autocomplete="username"
+          required
+        >
+
+        <label for="adminPassword">
+          Contraseña
+        </label>
+
+        <input
+          id="adminPassword"
+          type="password"
+          autocomplete="current-password"
+          required
+        >
+
+        <button type="submit" id="loginButton">
+          Iniciar sesión
+        </button>
+
+      </form>
+
+      <p
+        id="loginMessage"
+        class="note"
+        role="status"
+      ></p>
+
+    </section>
+
+    <!-- PANEL ADMINISTRATIVO -->
+
+    <section
+      class="card"
+      id="adminPanel"
+      hidden
+    >
+
+      <h2>📋 Panel de administración</h2>
+
+      <p
+        id="adminMessage"
+        class="note"
+        role="status"
+      ></p>
+
+      <button
+        id="logoutButton"
+        class="secondary"
+        type="button"
+      >
+        Cerrar sesión
+      </button>
+
+      <div id="reportsList"></div>
+
+    </section>
+
   </main>
 
   <footer>
     Aguadulce Reporta · Proyecto comunitario en desarrollo
   </footer>
 
+  <!-- BIBLIOTECA DE SUPABASE -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
   <script>
-    document.getElementById("reportForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("¡El formulario de prueba funciona! Todavía no se ha enviado ningún reporte.");
-    });
+
+    // ======================================
+    // CONFIGURACION DE SUPABASE
+    // ======================================
+
+    // REEMPLAZA SOLAMENTE ESTOS DOS VALORES
+
+    const SUPABASE_URL =
+      "https://lrupvpgyjzhgyvprrmtl.supabase.co/rest/v1/";
+
+    const SUPABASE_KEY =
+      "sb_publishable_toBA9zteOxIM1WivpdjwFQ_xUXsqfpf";
+
+    const loginSection =
+      document.getElementById("adminLogin");
+
+    const panelSection =
+      document.getElementById("adminPanel");
+
+    const loginMessage =
+      document.getElementById("loginMessage");
+
+    const adminMessage =
+      document.getElementById("adminMessage");
+
+    const reportsList =
+      document.getElementById("reportsList");
+
+    const loginButton =
+      document.getElementById("loginButton");
+
+    const configured =
+      SUPABASE_URL.startsWith("https://") &&
+      !SUPABASE_KEY.startsWith("PEGA_AQUI_");
+
+    let db = null;
+
+    if (configured && window.supabase) {
+      db = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+    }
+
+    // ======================================
+    // FORMULARIO DE PRUEBA
+    // ======================================
+
+    document.getElementById("reportForm")
+      .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        alert(
+          "El formulario funciona. " +
+          "Todavía no se envían reportes reales."
+        );
+
+      });
+
+    document.getElementById("consultButton")
+      .addEventListener("click", function() {
+
+        alert(
+          "La consulta pública estará " +
+          "disponible en una siguiente fase."
+        );
+
+      });
+
+    // ======================================
+    // CARGAR REPORTES DEL ADMINISTRADOR
+    // ======================================
+
+    async function loadReports() {
+
+      reportsList.replaceChildren();
+
+      adminMessage.textContent =
+        "Cargando reportes...";
+
+      const { data, error } = await db
+        .from("reports")
+        .select(
+          "id,category,area,description," +
+          "status,visibility_requested," +
+          "is_published,created_at"
+        )
+        .order("created_at", {
+          ascending: false
+        })
+        .limit(50);
+
+      if (error) {
+
+        adminMessage.textContent =
+          "No se pudieron consultar los reportes: " +
+          error.message;
+
+        return;
+      }
+
+      if (!data || data.length === 0) {
+
+        adminMessage.textContent =
+          "Sesión activa. Todavía no hay " +
+          "reportes visibles.";
+
+        return;
+      }
+
+      adminMessage.textContent =
+        "Reportes encontrados: " + data.length;
+
+      for (const report of data) {
+
+        const item =
+          document.createElement("div");
+
+        item.className = "report-item";
+
+        const heading =
+          document.createElement("h3");
+
+        heading.textContent =
+          report.category || "Sin categoría";
+
+        const area =
+          document.createElement("p");
+
+        area.textContent =
+          "Comunidad: " + report.area;
+
+        const description =
+          document.createElement("p");
+
+        description.textContent =
+          report.description;
+
+        const status =
+          document.createElement("p");
+
+        status.textContent =
+          "Estado: " + report.status;
+
+        const visibility =
+          document.createElement("p");
+
+        visibility.textContent =
+          "Tipo: " +
+          (report.visibility_requested === "public"
+            ? "Solicitó publicación"
+            : "Privado");
+
+        const published =
+          document.createElement("p");
+
+        published.textContent =
+          "Publicación: " +
+          (report.is_published
+            ? "Aprobada"
+            : "No aprobada");
+
+        item.append(
+          heading,
+          area,
+          description,
+          status,
+          visibility,
+          published
+        );
+
+        reportsList.appendChild(item);
+      }
+    }
+
+    // ======================================
+    // VERIFICAR ADMINISTRADOR
+    // ======================================
+
+    async function showAdminPanel() {
+
+      const { data: isAdmin, error } =
+        await db.rpc("is_app_admin");
+
+      if (error || isAdmin !== true) {
+
+        await db.auth.signOut();
+
+        loginMessage.textContent =
+          "Esta cuenta no tiene acceso " +
+          "administrativo.";
+
+        loginSection.hidden = false;
+        panelSection.hidden = true;
+
+        return;
+      }
+
+      loginSection.hidden = true;
+      panelSection.hidden = false;
+
+      await loadReports();
+    }
+
+    // ======================================
+    // INICIAR SESION
+    // ======================================
+
+    document.getElementById("loginForm")
+      .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        if (!db) {
+
+          loginMessage.textContent =
+            "Falta configurar la conexión " +
+            "con Supabase.";
+
+          return;
+        }
+
+        loginButton.disabled = true;
+
+        loginMessage.textContent =
+          "Comprobando acceso...";
+
+        const email =
+          document.getElementById("adminEmail").value;
+
+        const password =
+          document.getElementById("adminPassword").value;
+
+        try {
+
+          const { error } =
+            await db.auth.signInWithPassword({
+              email,
+              password
+            });
+
+          document.getElementById(
+            "adminPassword"
+          ).value = "";
+
+          if (error) {
+
+            loginMessage.textContent =
+              "No se pudo iniciar sesión. " +
+              "Comprueba tus credenciales.";
+
+            return;
+          }
+
+          await showAdminPanel();
+
+        } catch (error) {
+
+          loginMessage.textContent =
+            "Error de conexión. Intenta nuevamente.";
+
+        } finally {
+
+          loginButton.disabled = false;
+
+        }
+      });
+
+    // ======================================
+    // CERRAR SESION
+    // ======================================
+
+    document.getElementById("logoutButton")
+      .addEventListener("click", async function() {
+
+        if (db) {
+          await db.auth.signOut();
+        }
+
+        panelSection.hidden = true;
+        loginSection.hidden = false;
+
+        reportsList.replaceChildren();
+
+        loginMessage.textContent =
+          "Sesión cerrada.";
+      });
+
+    // ======================================
+    // RECUPERAR SESION
+    // ======================================
+
+    async function checkSession() {
+
+      if (!db) {
+
+        loginMessage.textContent =
+          "Configura Project URL y " +
+          "Publishable key para activar " +
+          "el inicio de sesión.";
+
+        return;
+      }
+
+      try {
+
+        const { data, error } =
+          await db.auth.getUser();
+
+        if (!error && data.user) {
+          await showAdminPanel();
+        }
+
+      } catch (error) {
+
+        loginMessage.textContent =
+          "No se pudo conectar con Supabase.";
+
+      }
+    }
+
+    checkSession();
+
   </script>
+
 </body>
 </html>
