@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#123d35">
-
   <title>Aguadulce Reporta</title>
 
   <style>
@@ -303,6 +302,57 @@
 
     </section>
 
+    <!-- RECUPERACION DE CONTRASEÑA -->
+
+    <section class="card" id="recoverySection" hidden>
+
+      <h2>🔑 Crear una contraseña nueva</h2>
+
+      <p class="note">
+        Escribe tu nueva contraseña para recuperar
+        el acceso a la administración.
+      </p>
+
+      <form id="recoveryForm">
+
+        <label for="newPassword">
+          Nueva contraseña
+        </label>
+
+        <input
+          id="newPassword"
+          type="password"
+          autocomplete="new-password"
+          minlength="8"
+          required
+        >
+
+        <label for="confirmPassword">
+          Confirmar contraseña
+        </label>
+
+        <input
+          id="confirmPassword"
+          type="password"
+          autocomplete="new-password"
+          minlength="8"
+          required
+        >
+
+        <button id="recoveryButton" type="submit">
+          Guardar contraseña nueva
+        </button>
+
+      </form>
+
+      <p
+        id="recoveryMessage"
+        class="note"
+        role="status"
+      ></p>
+
+    </section>
+
     <!-- PANEL ADMINISTRATIVO -->
 
     <section
@@ -347,10 +397,13 @@
     // CONFIGURACION DE SUPABASE
     // ======================================
 
-    // REEMPLAZA SOLAMENTE ESTOS DOS VALORES
+    // URL BASE DEL PROYECTO
+    // NO AGREGAR /rest/v1/
 
     const SUPABASE_URL =
-      "https://lrupvpgyjzhgyvprrmtl.supabase.co/rest/v1/";
+      "https://lrupvpgyjzhgyvprrmtl.supabase.co";
+
+    // CLAVE PUBLICA DE SUPABASE
 
     const SUPABASE_KEY =
       "sb_publishable_toBA9zteOxIM1WivpdjwFQ_xUXsqfpf";
@@ -361,11 +414,17 @@
     const panelSection =
       document.getElementById("adminPanel");
 
+    const recoverySection =
+      document.getElementById("recoverySection");
+
     const loginMessage =
       document.getElementById("loginMessage");
 
     const adminMessage =
       document.getElementById("adminMessage");
+
+    const recoveryMessage =
+      document.getElementById("recoveryMessage");
 
     const reportsList =
       document.getElementById("reportsList");
@@ -373,18 +432,172 @@
     const loginButton =
       document.getElementById("loginButton");
 
+    const recoveryButton =
+      document.getElementById("recoveryButton");
+
+    const urlHash =
+      new URLSearchParams(window.location.hash.slice(1));
+
+    const urlQuery =
+      new URLSearchParams(window.location.search);
+
+    const recoveryRequested =
+      urlHash.get("type") === "recovery" ||
+      urlQuery.get("type") === "recovery" ||
+      urlQuery.has("code");
+
+    let recoveryMode = recoveryRequested;
+    let recoveryReady = false;
+    let db = null;
+
     const configured =
       SUPABASE_URL.startsWith("https://") &&
-      !SUPABASE_KEY.startsWith("PEGA_AQUI_");
-
-    let db = null;
+      SUPABASE_KEY.startsWith("sb_publishable_");
 
     if (configured && window.supabase) {
       db = window.supabase.createClient(
         SUPABASE_URL,
-        SUPABASE_KEY
+        SUPABASE_KEY,
+        {
+          auth: {
+            detectSessionInUrl: true,
+            persistSession: true,
+            autoRefreshToken: true
+          }
+        }
       );
     }
+
+    function showRecoveryForm() {
+      recoveryMode = true;
+      recoverySection.hidden = false;
+      loginSection.hidden = true;
+      panelSection.hidden = true;
+    }
+
+    if (recoveryRequested) {
+      showRecoveryForm();
+      recoveryMessage.textContent =
+        "Verificando enlace de recuperación...";
+    }
+
+    // ======================================
+    // EVENTOS DE AUTENTICACION
+    // ======================================
+
+    if (db) {
+      db.auth.onAuthStateChange((event, session) => {
+
+        if (event === "PASSWORD_RECOVERY") {
+          showRecoveryForm();
+          recoveryReady = true;
+          recoveryMessage.textContent =
+            "Enlace verificado. Ya puedes crear tu contraseña.";
+        }
+
+        if (
+          recoveryMode &&
+          event === "SIGNED_IN" &&
+          session
+        ) {
+          recoveryReady = true;
+        }
+      });
+    }
+
+    // ======================================
+    // GUARDAR CONTRASEÑA NUEVA
+    // ======================================
+
+    document.getElementById("recoveryForm")
+      .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        if (!db) {
+          recoveryMessage.textContent =
+            "No se pudo conectar con Supabase.";
+          return;
+        }
+
+        const password =
+          document.getElementById("newPassword").value;
+
+        const confirmation =
+          document.getElementById("confirmPassword").value;
+
+        if (password !== confirmation) {
+          recoveryMessage.textContent =
+            "Las contraseñas no coinciden.";
+          return;
+        }
+
+        recoveryButton.disabled = true;
+        recoveryMessage.textContent =
+          "Guardando contraseña...";
+
+        try {
+
+          const { data } = await db.auth.getSession();
+
+          if (!data.session || !recoveryReady) {
+            recoveryMessage.textContent =
+              "El enlace venció o no es válido. " +
+              "Solicita uno nuevo desde Supabase.";
+            return;
+          }
+
+          const { error } =
+            await db.auth.updateUser({ password });
+
+          if (error) {
+            recoveryMessage.textContent =
+              "No se pudo cambiar la contraseña: " +
+              error.message;
+            return;
+          }
+
+          document.getElementById(
+            "newPassword"
+          ).value = "";
+
+          document.getElementById(
+            "confirmPassword"
+          ).value = "";
+
+          recoveryMessage.textContent =
+            "Contraseña actualizada correctamente.";
+
+          await db.auth.signOut();
+
+          recoveryMode = false;
+          recoveryReady = false;
+
+          history.replaceState(
+            null,
+            "",
+            window.location.pathname
+          );
+
+          recoverySection.hidden = true;
+          panelSection.hidden = true;
+          loginSection.hidden = false;
+
+          loginMessage.textContent =
+            "Contraseña actualizada. " +
+            "Ya puedes iniciar sesión.";
+
+        } catch (error) {
+
+          recoveryMessage.textContent =
+            "Error de conexión. Intenta de nuevo.";
+
+        } finally {
+
+          recoveryButton.disabled = false;
+
+        }
+      });
 
     // ======================================
     // FORMULARIO DE PRUEBA
@@ -591,8 +804,8 @@
           if (error) {
 
             loginMessage.textContent =
-              "No se pudo iniciar sesión. " +
-              "Comprueba tus credenciales.";
+              "No se pudo iniciar sesión: " +
+              error.message;
 
             return;
           }
@@ -644,23 +857,51 @@
           "Publishable key para activar " +
           "el inicio de sesión.";
 
+        if (recoveryMode) {
+          recoveryMessage.textContent =
+            "No se pudo conectar con Supabase.";
+        }
+
         return;
       }
 
       try {
 
         const { data, error } =
+          await db.auth.getSession();
+
+        if (recoveryMode) {
+
+          if (!error && data.session) {
+            recoveryReady = true;
+            recoveryMessage.textContent =
+              "Enlace verificado. " +
+              "Escribe tu contraseña nueva.";
+          } else {
+            recoveryMessage.textContent =
+              "No se pudo verificar el enlace. " +
+              "Solicita uno nuevo.";
+          }
+
+          return;
+        }
+
+        const { data: userData, error: userError } =
           await db.auth.getUser();
 
-        if (!error && data.user) {
+        if (!userError && userData.user) {
           await showAdminPanel();
         }
 
       } catch (error) {
 
-        loginMessage.textContent =
-          "No se pudo conectar con Supabase.";
-
+        if (recoveryMode) {
+          recoveryMessage.textContent =
+            "No se pudo verificar el enlace.";
+        } else {
+          loginMessage.textContent =
+            "No se pudo conectar con Supabase.";
+        }
       }
     }
 
