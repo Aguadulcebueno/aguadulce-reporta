@@ -3,795 +3,509 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#102f29">
-<meta name="description" content="Aguadulce Reporta: noticias, reportes ciudadanos y participación comunitaria.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102e27">
+<meta name="description" content="Aguadulce Reporta: reportes ciudadanos, documentos encontrados y participación comunitaria en Aguadulce, Coclé.">
 <title>Aguadulce Reporta | La voz de nuestra comunidad</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap');
 
 :root{
-  --green:#123e32;
-  --dark:#102e27;
-  --accent:#d5f05a;
-  --light:#f5f7f2;
-  --white:#fff;
-  --muted:#68786e;
-  --line:#e2e9e2;
-  --shadow:0 8px 30px rgba(17,48,37,.07);
+ --dark:#102e27;
+ --green:#164936;
+ --green2:#21684c;
+ --lime:#d5f05a;
+ --bg:#f5f7f2;
+ --white:#fff;
+ --text:#1a3025;
+ --muted:#6c7b70;
+ --border:#e1e9e1;
+ --shadow:0 10px 35px rgba(10,42,27,.08);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  margin:0;
-  background:var(--light);
-  color:#1c3028;
-  font-family:"DM Sans",Arial,sans-serif;
-}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"DM Sans",Arial,sans-serif}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
 a{text-decoration:none;color:inherit}
 [hidden]{display:none!important}
-.wrap{max-width:1200px;margin:auto;padding:0 22px}
-.top-strip{
-  background:#09261f;
-  color:#d6e9de;
-  font-size:12px;
-  letter-spacing:.04em;
-}
-.strip-inner{
-  min-height:34px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-.live-dot{
-  display:inline-block;
-  width:8px;height:8px;
-  background:var(--accent);
-  border-radius:50%;
-  margin-right:7px;
-}
-.main-header{
-  background:var(--green);
-  color:white;
-}
-.header-inner{
-  min-height:108px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-}
-.brand{display:flex;align-items:center;gap:15px}
-.brand-logo{
-  width:82px;height:82px;
-  object-fit:contain;
-  background:#fff;
-  border-radius:16px;
-  padding:5px;
-}
-.brand-title{
-  font-family:Outfit,Arial,sans-serif;
-  font-size:clamp(24px,3.5vw,38px);
-  font-weight:900;
-  letter-spacing:-1.5px;
-  line-height:1;
-}
-.brand-subtitle{
-  font-size:12px;
-  color:#c4dbce;
-  margin-top:8px;
-  letter-spacing:.09em;
-  text-transform:uppercase;
-}
-.header-cta{
-  background:var(--accent);
-  color:#173525;
-  padding:14px 19px;
-  border-radius:11px;
-  font-size:13px;
-  font-weight:800;
-  white-space:nowrap;
-}
-.header-cta:hover{background:#e5fa83}
-.nav-bar{
-  background:#0b2c24;
-  color:#e9f4ed;
-  border-top:1px solid #ffffff15;
-}
-.nav-inner{
-  display:flex;
-  align-items:center;
-  gap:30px;
-  overflow-x:auto;
-  scrollbar-width:none;
-}
-.nav-inner a{
-  padding:16px 0;
-  font-size:13px;
-  font-weight:800;
-  white-space:nowrap;
-  border-bottom:3px solid transparent;
-}
-.nav-inner a:hover{border-color:var(--accent)}
-.hero{
-  background:var(--dark);
-  color:white;
-  position:relative;
-  overflow:hidden;
-}
-.hero:after{
-  content:"";
-  position:absolute;
-  right:-100px;top:-170px;
-  width:480px;height:480px;
-  border:90px solid rgba(213,240,90,.055);
-  border-radius:50%;
-  pointer-events:none;
-}
-.hero-inner{
-  padding-top:67px;
-  padding-bottom:70px;
-  position:relative;
-  z-index:1;
-}
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:9px;
-  color:var(--accent);
-  font-size:12px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.16em;
-}
-.hero h1{
-  font-family:Outfit,Arial,sans-serif;
-  font-weight:900;
-  font-size:clamp(39px,6.5vw,76px);
-  line-height:1.02;
-  letter-spacing:-2.8px;
-  max-width:820px;
-  margin:20px 0;
-}
-.hero h1 span{color:var(--accent)}
-.hero p{
-  color:#c2d5cb;
-  max-width:620px;
-  font-size:16px;
-  line-height:1.8;
-}
-.hero-actions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-top:29px;
-}
-.btn{
-  border:0;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  border-radius:11px;
-  padding:14px 19px;
-  font-weight:800;
-  font-size:13px;
-  transition:transform .2s,background .2s;
-}
-.btn:hover{transform:translateY(-2px)}
-.btn-lime{background:var(--accent);color:#163323}
-.btn-outline{background:#ffffff12;color:white;border:1px solid #ffffff3b}
+.container{max-width:1190px;margin:auto;padding:0 20px}
+.topline{background:#09251d;color:#d6e8dc}
+.topline .container{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:36px;font-size:11px;font-weight:700}
+.live{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--lime);margin-right:7px}
+.social-mini{display:flex;gap:15px}
+.social-mini a:hover{color:var(--lime)}
+.site-header{background:var(--dark);color:white;border-bottom:1px solid #ffffff16}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:116px}
+.brand{display:flex;align-items:center;gap:17px;min-width:0}
+.logo-box{width:103px;height:103px;background:white;border:3px solid var(--lime);border-radius:20px;display:flex;align-items:center;justify-content:center;padding:6px;flex-shrink:0;overflow:hidden;box-shadow:0 5px 22px #0003}
+.logo-box img{width:100%;height:100%;object-fit:contain}
+.logo-fallback{color:#163b2c;font-family:Outfit;font-weight:900;text-align:center;font-size:12px}
+.brand-name{font-family:Outfit,sans-serif;font-size:clamp(25px,4vw,42px);font-weight:900;letter-spacing:-1.5px;line-height:.96}
+.brand-name span{color:var(--lime)}
+.brand-caption{margin-top:10px;color:#c1d7c8;font-size:11px;letter-spacing:2px;text-transform:uppercase}
+.header-action{background:var(--lime);color:var(--dark);font-size:12px;font-weight:900;padding:14px 19px;border-radius:12px;white-space:nowrap}
+.nav{background:#0b2920;color:#e7f4ea}
+.nav-inner{display:flex;align-items:center;gap:29px;overflow-x:auto;scrollbar-width:none}
+.nav a{padding:16px 0;white-space:nowrap;font-size:12px;font-weight:800;border-bottom:3px solid transparent}
+.nav a:hover{border-color:var(--lime)}
+.hero{background:radial-gradient(circle at 83% 22%,#256448 0%,#143c2e 33%,#102e27 75%);color:white;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:540px;height:540px;border:90px solid #d5f05a0a;border-radius:50%;right:-160px;top:-150px}
+.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:45px;align-items:center;min-height:465px;padding-top:55px;padding-bottom:78px;position:relative;z-index:1}
+.kicker{font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--lime)}
+.hero h1{font-family:Outfit,sans-serif;font-size:clamp(40px,5.4vw,70px);line-height:1.02;letter-spacing:-2px;margin:20px 0}
+.hero h1 em{font-style:normal;color:var(--lime)}
+.hero p{font-size:15px;line-height:1.85;color:#c7d9cd;max-width:580px}
+.hero-buttons{display:flex;gap:11px;flex-wrap:wrap;margin-top:27px}
+.btn{border:0;border-radius:11px;padding:14px 18px;font-size:12px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-lime{background:var(--lime);color:var(--dark)}
+.btn-white{background:white;color:var(--dark)}
+.btn-outline{background:#ffffff10;color:white;border:1px solid #ffffff50}
 .btn-green{background:var(--green);color:white}
-.btn-soft{background:#eaf2eb;color:var(--green)}
-.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  margin-top:-27px;
-  position:relative;
-  z-index:2;
-}
-.stat{
-  background:white;
-  border-radius:15px;
-  padding:23px;
-  box-shadow:var(--shadow);
-  border:1px solid var(--line);
-}
-.stat strong{
-  display:block;
-  font-family:Outfit,Arial,sans-serif;
-  font-size:29px;
-  color:var(--green);
-}
-.stat span{
-  display:block;
-  font-size:12px;
-  color:var(--muted);
-  margin-top:5px;
-  font-weight:700;
-}
-.section{padding-top:58px}
-.section-head{
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:24px;
-}
-.section-kicker{
-  color:#48836b;
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-}
-.section-title{
-  font-family:Outfit,Arial,sans-serif;
-  font-size:clamp(27px,4vw,39px);
-  line-height:1.12;
-  letter-spacing:-1px;
-  margin:8px 0 0;
-}
-.section-description{
-  font-size:13px;
-  color:var(--muted);
-  line-height:1.6;
-}
-.filters{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:16px;
-  display:flex;
-  gap:12px;
-  margin-bottom:24px;
-  box-shadow:var(--shadow);
-}
-.search-input,.filter-select{
-  border:1px solid #dce7dd;
-  border-radius:10px;
-  padding:13px 14px;
-  background:#f9fbf9;
-  outline:none;
-  min-width:0;
-}
-.search-input:focus,.filter-select:focus,
-.field:focus{border-color:#2f8765}
-.search-input{flex:1}
-.filter-select{width:230px}
-.report-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:22px;
-}
-.report-card{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:17px;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-  display:flex;
-  flex-direction:column;
-  min-width:0;
-}
-.report-image-wrap{
-  height:210px;
-  overflow:hidden;
-  background:#e7efe8;
-}
-.report-image{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform .35s;
-}
-.report-card:hover .report-image{transform:scale(1.04)}
-.report-content{
-  padding:20px;
-  display:flex;
-  flex-direction:column;
-  flex:1;
-}
-.report-label{
-  color:#277b57;
-  font-size:10px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-}
-.report-title{
-  font-family:Outfit,Arial,sans-serif;
-  font-size:21px;
-  line-height:1.25;
-  margin:12px 0 9px;
-  overflow-wrap:anywhere;
-}
-.report-description{
-  color:#52665a;
-  line-height:1.7;
-  font-size:13px;
-  white-space:pre-wrap;
-  overflow-wrap:anywhere;
-  flex:1;
-}
-.report-footer{
-  border-top:1px solid var(--line);
-  margin-top:16px;
-  padding-top:14px;
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  flex-wrap:wrap;
-  font-size:11px;
-  color:var(--muted);
-}
-.status-pill{
-  display:inline-block;
-  background:#e8f2e9;
-  color:#236749;
-  padding:6px 10px;
-  border-radius:30px;
-  font-size:11px;
-  font-weight:800;
-}
-.empty{
-  grid-column:1/-1;
-  text-align:center;
-  background:white;
-  border:1px dashed #cbdccf;
-  border-radius:16px;
-  padding:48px 20px;
-  color:var(--muted);
-}
-.empty strong{display:block;color:var(--green);font-size:20px;margin-bottom:8px}
-.community-banner{
-  background:var(--green);
-  color:white;
-  border-radius:20px;
-  padding:34px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:25px;
-  margin-top:42px;
-}
-.community-banner h2{
-  font-family:Outfit,Arial,sans-serif;
-  font-size:29px;
-  margin:0 0 10px;
-}
-.community-banner p{
-  color:#c7ded0;
-  line-height:1.6;
-  font-size:14px;
-  margin:0;
-}
-.form-section{
-  display:grid;
-  grid-template-columns:.9fr 1.1fr;
-  gap:35px;
-  align-items:start;
-  padding:65px 0;
-}
-.form-intro{
-  position:sticky;
-  top:20px;
-}
-.form-intro h2{
-  font-family:Outfit,Arial,sans-serif;
-  font-size:clamp(30px,4vw,45px);
-  line-height:1.1;
-  letter-spacing:-1.4px;
-}
-.form-intro p{line-height:1.8;color:var(--muted);font-size:14px}
-.steps{
-  margin-top:27px;
-  display:grid;
-  gap:17px;
-}
-.step{display:flex;align-items:start;gap:13px}
-.step-number{
-  flex:0 0 36px;
-  height:36px;
-  display:grid;
-  place-items:center;
-  border-radius:11px;
-  background:#dcebdc;
-  color:var(--green);
-  font-weight:900;
-}
+.btn-soft{background:#e8f1e9;color:var(--green)}
+.hero-logo-card{background:linear-gradient(145deg,#ffffff,#e7eee7);border-radius:27px;padding:25px;transform:rotate(2deg);box-shadow:0 25px 65px #0004;position:relative}
+.hero-logo-card img{width:100%;height:auto;display:block;border-radius:13px}
+.hero-logo-card:after{content:"AGUADULCE MALO & BUENO";position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);background:var(--lime);color:#173b29;border-radius:30px;padding:10px 18px;font-size:10px;font-weight:900;white-space:nowrap;letter-spacing:1px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:-32px;position:relative;z-index:3}
+.stat{background:white;border:1px solid var(--border);border-radius:17px;padding:22px;box-shadow:var(--shadow)}
+.stat strong{display:block;font:900 30px Outfit;color:var(--green)}
+.stat span{font-size:11px;color:var(--muted);font-weight:800}
+.section{padding:65px 0 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:24px}
+.section-label{font-size:11px;color:var(--green2);font-weight:900;letter-spacing:2px}
+.section-title{font:900 clamp(27px,4vw,40px) Outfit;letter-spacing:-1px;margin:9px 0}
+.section-subtitle{font-size:13px;color:var(--muted);line-height:1.7;margin:0}
+.filters{display:flex;gap:12px;background:white;border:1px solid var(--border);padding:15px;border-radius:15px;margin-bottom:23px}
+.search,.filter,.field{padding:13px 14px;border:1px solid #d8e4da;background:#fbfcfa;border-radius:10px;outline:none;color:var(--text)}
+.search{flex:1;min-width:0}
+.filter{width:230px}
+.search:focus,.filter:focus,.field:focus{border-color:var(--green2)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.news-card{background:white;border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;min-width:0}
+.news-photo{width:100%;height:225px;object-fit:cover;display:block}
+.news-photo-box{background:#e9eee7;overflow:hidden}
+.news-content{padding:21px;display:flex;flex-direction:column;flex:1}
+.news-category{font-size:10px;letter-spacing:1.2px;color:#258159;font-weight:900;text-transform:uppercase}
+.news-content h3{font:800 23px Outfit;margin:10px 0;overflow-wrap:anywhere}
+.news-description{font-size:13px;color:#53675b;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere;flex:1}
+.news-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--border);margin-top:15px;padding-top:15px;font-size:11px;color:var(--muted);flex-wrap:wrap}
+.pill{background:#e6f2e7;color:#206b47;border-radius:30px;padding:7px 10px;font-size:10px;font-weight:900}
+.empty{grid-column:1/-1;background:white;border:1px dashed #c9dacb;border-radius:16px;text-align:center;padding:45px 20px;color:var(--muted);font-size:14px}
+.community-cta{margin-top:46px;background:var(--green);border-radius:21px;color:white;padding:32px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.community-cta h2{font:900 30px Outfit;margin:0 0 10px}
+.community-cta p{font-size:13px;line-height:1.7;color:#c8dfd0;margin:0}
+.documents{background:#e9efe5;padding:65px 0;margin-top:65px}
+.documents-banner{background:var(--dark);color:white;border-radius:22px;padding:33px;display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:30px}
+.documents-banner h2{font:900 33px Outfit;margin:0 0 10px}
+.documents-banner p{color:#c4d8ca;font-size:13px;line-height:1.7;margin:0}
+.document-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.document-card{background:white;border:1px solid #d9e5d9;border-radius:17px;padding:24px;overflow-wrap:anywhere}
+.document-icon{display:grid;place-items:center;width:54px;height:54px;background:#e8f3e7;border-radius:14px;font-size:26px;margin-bottom:15px}
+.document-card h3{font:800 21px Outfit;margin:0 0 12px}
+.document-card p{font-size:13px;color:#54685b;line-height:1.7;white-space:pre-wrap}
+.document-card small{display:block;border-top:1px solid var(--border);margin-top:15px;padding-top:13px;color:var(--muted)}
+.safety{font-size:12px;line-height:1.7;color:#4e6657;margin-top:22px}
+.form-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:45px;padding:75px 0;align-items:start}
+.form-info h2{font:900 clamp(32px,4vw,46px) Outfit;line-height:1.08;letter-spacing:-1px}
+.form-info h2 span{color:var(--green2)}
+.form-info p{font-size:14px;color:var(--muted);line-height:1.85}
+.step{display:flex;gap:14px;margin-top:22px}
+.step-num{width:38px;height:38px;flex-shrink:0;background:#e0eddf;color:var(--green);border-radius:11px;display:grid;place-items:center;font-weight:900}
 .step strong{font-size:14px}
-.step p{font-size:12px;margin:5px 0 0}
-.form-card,.admin-card{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:30px;
-  box-shadow:var(--shadow);
-}
-.form-card h3,.admin-card h3{
-  font-family:Outfit,Arial,sans-serif;
-  font-size:25px;
-  margin:0 0 6px;
-}
-.form-card>p,.admin-card>p{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.6;
-}
-.field-label{
-  display:block;
-  font-size:12px;
-  font-weight:800;
-  margin:18px 0 8px;
-}
-.field{
-  display:block;
-  width:100%;
-  padding:13px 14px;
-  border:1px solid #dce6de;
-  border-radius:10px;
-  background:#fafcf9;
-  color:#1c3028;
-  outline:none;
-}
-textarea.field{min-height:130px;resize:vertical}
-.small-note{color:var(--muted);font-size:11px;line-height:1.7}
-.form-card .btn,.admin-card .btn{width:100%;margin-top:15px}
-.photo-local-preview{
-  max-width:100%;
-  max-height:220px;
-  border-radius:12px;
-  margin-top:12px;
-}
-.turnstile-area{margin-top:20px}
-.message{font-size:13px;line-height:1.6;margin-top:14px;overflow-wrap:anywhere}
+.step p{font-size:12px;margin:6px 0}
+.panel{background:white;border:1px solid var(--border);border-radius:21px;padding:30px;box-shadow:var(--shadow)}
+.panel h3{font:900 26px Outfit;margin:0 0 9px}
+.panel>p{font-size:13px;color:var(--muted);line-height:1.7}
+.label{display:block;font-size:12px;font-weight:900;margin:18px 0 8px}
+.field{width:100%;display:block}
+textarea.field{min-height:135px;resize:vertical}
+.hint{font-size:11px;line-height:1.7;color:var(--muted)}
+.panel .btn{width:100%;margin-top:14px}
+.preview{max-width:100%;max-height:220px;border-radius:12px;margin-top:12px}
+.message{font-size:13px;line-height:1.7;margin-top:13px;overflow-wrap:anywhere}
 .message:empty{display:none}
-.admin-section{padding:10px 0 70px}
-.admin-card{max-width:760px;margin:auto}
-.admin-report{
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:19px;
-  margin-top:17px;
-  background:#fafcf9;
-  overflow-wrap:anywhere;
-}
-.admin-report h4{margin:0 0 9px;font-size:18px}
+.admin-section{padding-bottom:75px}
+.admin-panel{max-width:820px;margin:auto}
+.admin-report{border:1px solid var(--border);background:#fafcf9;border-radius:15px;padding:20px;margin-top:17px;overflow-wrap:anywhere}
+.admin-report h4{font-size:18px;margin:0 0 10px}
 .admin-report p{font-size:13px;line-height:1.7;white-space:pre-wrap}
-.admin-photo{max-width:100%;max-height:350px;object-fit:contain;border-radius:10px;margin-top:12px}
-.admin-actions{
-  background:white;
-  border-radius:11px;
-  padding:13px;
-  margin-top:13px;
-  border:1px solid var(--line);
-}
-.admin-actions .btn{margin-top:10px}
-.admin-top-actions{display:flex;gap:10px}
-.admin-top-actions .btn{flex:1}
-.footer{
-  background:#0c2921;
-  color:#b8d0c1;
-  padding:40px 0;
-  margin-top:20px;
-}
-.footer-inner{
-  display:flex;
-  justify-content:space-between;
-  gap:25px;
-  flex-wrap:wrap;
-}
-.footer strong{color:white;font-family:Outfit;font-size:21px}
+.admin-photo{max-width:100%;max-height:360px;object-fit:contain;border-radius:10px;margin-top:12px}
+.admin-actions{background:white;border:1px solid var(--border);border-radius:12px;padding:14px;margin-top:13px}
+.admin-buttons{display:flex;gap:10px}
+.admin-buttons .btn{flex:1}
+.social-section{background:var(--dark);color:white;padding:65px 0}
+.social-section h2{font:900 37px Outfit;margin:9px 0}
+.social-section p{font-size:14px;color:#c5d8cb;line-height:1.8}
+.social-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:17px;margin-top:25px}
+.social-card{display:flex;align-items:center;justify-content:space-between;gap:15px;border:1px solid #ffffff30;border-radius:16px;padding:24px;background:#ffffff0b}
+.social-card strong{font:800 21px Outfit}
+.social-card small{display:block;color:#bcd2c3;margin-top:6px}
+.social-arrow{background:var(--lime);color:var(--dark);border-radius:50%;width:40px;height:40px;display:grid;place-items:center;font-weight:900}
+.footer{background:#09241c;color:#b8d0c1;padding:34px 0}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer strong{font:900 22px Outfit;color:white}
 .footer p{font-size:12px;line-height:1.7}
 @media(max-width:950px){
-  .report-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .form-section{grid-template-columns:1fr}
-  .form-intro{position:static}
+.hero-inner{grid-template-columns:1fr .7fr;gap:20px}
+.cards,.document-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.form-layout{grid-template-columns:1fr}
 }
-@media(max-width:600px){
-  .wrap{padding:0 16px}
-  .strip-inner{font-size:10px}
-  .header-inner{min-height:90px}
-  .brand-logo{width:62px;height:62px}
-  .brand-title{font-size:25px;letter-spacing:-.8px}
-  .brand-subtitle{font-size:9px}
-  .header-cta{padding:11px;font-size:11px}
-  .hero-inner{padding-top:47px;padding-bottom:63px}
-  .hero h1{letter-spacing:-1.7px}
-  .hero p{font-size:14px}
-  .stats{gap:7px}
-  .stat{padding:15px 10px}
-  .stat strong{font-size:23px}
-  .stat span{font-size:10px}
-  .section{padding-top:42px}
-  .section-head{align-items:start}
-  .report-grid{grid-template-columns:1fr}
-  .report-image-wrap{height:230px}
-  .filters{flex-direction:column}
-  .filter-select{width:100%}
-  .community-banner{flex-direction:column;align-items:start;padding:26px}
-  .form-section{padding:45px 0}
-  .form-card,.admin-card{padding:21px}
-  .footer-inner{flex-direction:column}
+@media(max-width:680px){
+.container{padding:0 15px}
+.topline .container{font-size:9px}
+.header-inner{min-height:90px}
+.logo-box{width:68px;height:68px;border-radius:13px;padding:4px}
+.brand{gap:10px}
+.brand-name{font-size:24px;letter-spacing:-.7px}
+.brand-caption{font-size:8px;letter-spacing:1px}
+.header-action{font-size:10px;padding:11px}
+.nav-inner{gap:20px}
+.hero-inner{grid-template-columns:1fr;padding-top:47px;padding-bottom:66px}
+.hero h1{font-size:44px}
+.hero-logo-card{max-width:270px;margin:12px auto 0;transform:rotate(1deg);padding:13px}
+.stats{gap:7px}
+.stat{padding:15px 10px}
+.stat strong{font-size:23px}
+.stat span{font-size:9px}
+.section{padding-top:45px}
+.filters{flex-direction:column}
+.filter{width:100%}
+.cards,.document-grid,.social-cards{grid-template-columns:1fr}
+.community-cta,.documents-banner{flex-direction:column;align-items:start;padding:26px}
+.documents{padding:45px 0;margin-top:45px}
+.form-layout{padding:50px 0}
+.panel{padding:21px}
+.social-section{padding:50px 0}
 }
 </style>
 </head>
 
 <body>
 
-<div class="top-strip">
-  <div class="wrap strip-inner">
-    <span><span class="live-dot"></span> INFORMACIÓN COMUNITARIA</span>
-    <span id="todayDate">AGUADULCE, PANAMÁ</span>
-  </div>
+<div class="topline">
+<div class="container">
+<div><span class="live"></span> LA VOZ DE AGUADULCE</div>
+<div class="social-mini">
+<a href="https://www.instagram.com/aguadulcebueno/" target="_blank" rel="noopener noreferrer">Instagram</a>
+<a href="https://www.tiktok.com/@aguadulcemalo" target="_blank" rel="noopener noreferrer">TikTok</a>
+</div>
+</div>
 </div>
 
-<header class="main-header">
-  <div class="wrap header-inner">
-    <a class="brand" href="#inicio">
-      <img class="brand-logo" src="logo.png" alt="Logo Aguadulce Malo y Bueno">
-      <div>
-        <div class="brand-title">AGUADULCE<br>REPORTA<span style="color:#d5f05a">.</span></div>
-        <div class="brand-subtitle">La voz de nuestra comunidad</div>
-      </div>
-    </a>
-    <a class="header-cta" href="#enviar">✚ ENVIAR REPORTE</a>
-  </div>
+<header class="site-header">
+<div class="container header-inner">
+<a href="#inicio" class="brand">
+<div class="logo-box">
+<img src="logo.png" class="site-logo" alt="Logo original Aguadulce Malo y Bueno">
+<div class="logo-fallback" hidden>AGUADULCE<br>MALO & BUENO</div>
+</div>
+<div>
+<div class="brand-name">AGUADULCE<br>REPORTA<span>.</span></div>
+<div class="brand-caption">La voz de nuestra comunidad</div>
+</div>
+</a>
+<a href="#enviar" class="header-action">✚ REPORTAR</a>
+</div>
 </header>
 
-<nav class="nav-bar">
-  <div class="wrap nav-inner">
-    <a href="#inicio">INICIO</a>
-    <a href="#reportes">REPORTES</a>
-    <a href="#enviar">REPORTAR UN PROBLEMA</a>
-    <a href="#como-funciona">CÓMO FUNCIONA</a>
-    <a href="#administracion">ADMINISTRACIÓN</a>
-  </div>
+<nav class="nav">
+<div class="container nav-inner">
+<a href="#inicio">INICIO</a>
+<a href="#reportes">REPORTES</a>
+<a href="#documentos">DOCUMENTOS ENCONTRADOS</a>
+<a href="#enviar">ENVIAR REPORTE</a>
+<a href="#redes">REDES SOCIALES</a>
+<a href="#administracion">ADMINISTRACIÓN</a>
+</div>
 </nav>
 
 <section class="hero" id="inicio">
-  <div class="wrap hero-inner">
-    <span class="eyebrow">● PERIODISMO Y PARTICIPACIÓN COMUNITARIA</span>
-    <h1>Lo que pasa en <span>Aguadulce</span>, nos importa a todos.</h1>
-    <p>
-      Un espacio para dar visibilidad a las necesidades de nuestros barrios
-      y comunidades. Comparte lo que sucede, documenta los problemas y
-      mantente informado sobre los reportes ciudadanos.
-    </p>
-    <div class="hero-actions">
-      <a href="#enviar" class="btn btn-lime">📢 HACER UN REPORTE →</a>
-      <a href="#reportes" class="btn btn-outline">VER REPORTES PÚBLICOS</a>
-    </div>
-  </div>
+<div class="container hero-inner">
+<div>
+<div class="kicker">● EL PORTAL DE NUESTRA COMUNIDAD</div>
+<h1>Aguadulce tiene <em>voz.</em></h1>
+<p>
+Aquí compartimos lo que sucede en nuestras comunidades.
+Reportes ciudadanos, situaciones que necesitan atención
+y avisos de documentos encontrados, todo en un mismo lugar.
+</p>
+<div class="hero-buttons">
+<a class="btn btn-lime" href="#enviar">📢 ENVIAR REPORTE →</a>
+<a class="btn btn-outline" href="#reportes">VER REPORTES</a>
+<a class="btn btn-outline" href="#documentos">🪪 DOCUMENTOS</a>
+</div>
+</div>
+<div class="hero-logo-card" id="heroLogoCard">
+<img src="logo.png" class="site-logo" alt="Aguadulce Malo y Bueno">
+</div>
+</div>
 </section>
 
 <main>
 
-<div class="wrap">
-  <div class="stats">
-    <div class="stat">
-      <strong id="statReports">—</strong>
-      <span>REPORTES PÚBLICOS</span>
-    </div>
-    <div class="stat">
-      <strong id="statAreas">—</strong>
-      <span>COMUNIDADES</span>
-    </div>
-    <div class="stat">
-      <strong id="statCategories">—</strong>
-      <span>CATEGORÍAS</span>
-    </div>
-  </div>
+<div class="container">
 
-  <section class="section" id="reportes">
-    <div class="section-head">
-      <div>
-        <span class="section-kicker">ACTUALIDAD LOCAL</span>
-        <h2 class="section-title">Reportes de la comunidad</h2>
-        <p class="section-description">
-          Conoce las situaciones reportadas por los vecinos y aprobadas para publicación.
-        </p>
-      </div>
-      <button class="btn btn-soft" id="refreshPublic" type="button">↻ Actualizar</button>
-    </div>
+<div class="stats">
+<div class="stat"><strong id="statReports">—</strong><span>REPORTES RECIENTES</span></div>
+<div class="stat"><strong id="statAreas">—</strong><span>COMUNIDADES</span></div>
+<div class="stat"><strong id="statDocuments">—</strong><span>AVISOS DE DOCUMENTOS</span></div>
+</div>
 
-    <div class="filters">
-      <input
-        class="search-input"
-        id="searchReports"
-        placeholder="🔎 Buscar por comunidad, problema o palabra..."
-        aria-label="Buscar reportes"
-      >
-      <select class="filter-select" id="categoryFilter" aria-label="Filtrar categoría">
-        <option value="">Todas las categorías</option>
-      </select>
-    </div>
+<section class="section" id="reportes">
+<div class="section-head">
+<div>
+<div class="section-label">ACTUALIDAD COMUNITARIA</div>
+<h2 class="section-title">Lo que pasa en Aguadulce</h2>
+<p class="section-subtitle">Reportes ciudadanos revisados y aprobados para publicación.</p>
+</div>
+<button class="btn btn-soft" type="button" id="refreshPublic">↻ Actualizar</button>
+</div>
 
-    <p class="message" id="publicMessage" role="status"></p>
-    <div class="report-grid" id="publicReports"></div>
-  </section>
+<div class="filters">
+<input class="search" id="searchReports" placeholder="🔎 Buscar comunidad o problema..." aria-label="Buscar reportes">
+<select class="filter" id="categoryFilter" aria-label="Filtrar categoría">
+<option value="">Todas las categorías</option>
+</select>
+</div>
 
-  <div class="community-banner">
-    <div>
-      <h2>¿Hay un problema en tu comunidad?</h2>
-      <p>Una fotografía y una descripción clara pueden ayudar a visibilizar lo que sucede.</p>
-    </div>
-    <a href="#enviar" class="btn btn-lime">ENVIAR MI REPORTE →</a>
-  </div>
+<p class="message" id="publicMessage" role="status"></p>
+<div class="cards" id="publicReports"></div>
+</section>
 
-  <section class="form-section" id="enviar">
+<div class="community-cta">
+<div>
+<h2>¿Qué sucede en tu comunidad?</h2>
+<p>Ayúdanos a dar visibilidad a los problemas de Aguadulce.</p>
+</div>
+<a href="#enviar" class="btn btn-lime">HACER MI REPORTE →</a>
+</div>
 
-    <div class="form-intro" id="como-funciona">
-      <span class="section-kicker">PARTICIPA Y HAZTE ESCUCHAR</span>
-      <h2>Tu comunidad tiene una historia. <span style="color:#287a56">Ayúdanos a contarla.</span></h2>
-      <p>
-        Reportar es sencillo y gratuito. Puedes solicitar que tu reporte
-        sea público o enviarlo de manera privada a la administración.
-      </p>
+</div>
 
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">01</div>
-          <div>
-            <strong>Cuéntanos qué sucede</strong>
-            <p>Selecciona la categoría e indica la comunidad y el problema.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-number">02</div>
-          <div>
-            <strong>Adjunta una fotografía</strong>
-            <p>Opcionalmente, añade una imagen para documentar el reporte.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-number">03</div>
-          <div>
-            <strong>Revisamos tu reporte</strong>
-            <p>La administración decide si procede su publicación.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+<section class="documents" id="documentos">
+<div class="container">
 
-    <div class="form-card">
-      <h3>📨 Enviar reporte ciudadano</h3>
-      <p>Completa los campos para compartir una situación de tu comunidad.</p>
+<div class="documents-banner">
+<div>
+<h2>🪪 Documentos encontrados</h2>
+<p>Un espacio para ayudar a devolver documentos extraviados a sus propietarios.</p>
+</div>
+<a href="#enviar" class="btn btn-lime" id="documentReportLink">REPORTAR HALLAZGO →</a>
+</div>
 
-      <form id="reportForm">
-        <label class="field-label" for="category">CATEGORÍA DEL PROBLEMA</label>
-        <select class="field" id="category" required>
-          <option value="">Selecciona una categoría</option>
-          <option>Calles y aceras</option>
-          <option>Basura y limpieza</option>
-          <option>Agua y alcantarillado</option>
-          <option>Alumbrado público</option>
-          <option>Protección animal</option>
-          <option>Otros problemas comunitarios</option>
-        </select>
+<div class="section-head">
+<div>
+<div class="section-label">SERVICIO A LA COMUNIDAD</div>
+<h2 class="section-title">Avisos recientes</h2>
+<p class="section-subtitle">Avisos de hallazgos aprobados por la administración.</p>
+</div>
+</div>
 
-        <label class="field-label" for="area">COMUNIDAD O CORREGIMIENTO</label>
-        <input class="field" id="area" maxlength="120"
-          placeholder="Ejemplo: El Roble, Pocrí, Barrios Unidos..." required>
+<div class="document-grid" id="documentsList"></div>
 
-        <label class="field-label" for="description">DESCRIPCIÓN DEL PROBLEMA</label>
-        <textarea class="field" id="description" maxlength="1500"
-          minlength="10" placeholder="Describe lo que está pasando y dónde..." required></textarea>
+<p class="safety">
+🔒 <strong>Protegemos la privacidad.</strong>
+No publiques nombres completos, números de cédula,
+fotografías de documentos ni datos personales.
+La entrega debe coordinarse de forma segura y verificando
+que quien lo reclama sea su propietario.
+</p>
 
-        <label class="field-label" for="photo">FOTOGRAFÍA (OPCIONAL)</label>
-        <input class="field" type="file" id="photo"
-          accept="image/jpeg,image/png,image/webp">
-        <p class="small-note">JPG, PNG o WebP. Máximo 5 MB. Una fotografía por reporte.</p>
-        <img id="photoPreview" class="photo-local-preview" alt="Vista previa" hidden>
+</div>
+</section>
 
-        <label class="field-label" for="visibility">PRIVACIDAD DEL REPORTE</label>
-        <select class="field" id="visibility">
-          <option value="private">Privado: solo administración</option>
-          <option value="public">Solicitar publicación pública</option>
-        </select>
+<div class="container">
 
-        <p class="small-note">
-          Evita publicar datos personales, acusaciones sin verificar
-          o fotografías que vulneren la privacidad de otras personas.
-          Todos los reportes quedan pendientes de revisión.
-        </p>
+<section class="form-layout" id="enviar">
 
-        <div class="turnstile-area">
-          <div class="cf-turnstile"
-            data-sitekey="0x4AAAAAAFWBvw2cZEIy5XVD"
-            data-theme="light"></div>
-        </div>
+<div class="form-info">
+<div class="section-label">PARTICIPACIÓN CIUDADANA</div>
+<h2>Tu comunidad tiene una historia. <span>Ayúdanos a contarla.</span></h2>
+<p>
+Enviar un reporte es gratuito. Puedes compartir un problema
+de tu comunidad o avisar que encontraste un documento.
+Todos los reportes son revisados antes de su publicación.
+</p>
 
-        <button type="submit" class="btn btn-green" id="reportButton">
-          📤 ENVIAR MI REPORTE
-        </button>
-        <p class="message" id="reportMessage" role="status"></p>
-      </form>
-    </div>
+<div class="step">
+<div class="step-num">01</div>
+<div><strong>Selecciona una categoría</strong><p>Indica qué tipo de situación deseas reportar.</p></div>
+</div>
+<div class="step">
+<div class="step-num">02</div>
+<div><strong>Describe lo sucedido</strong><p>Escribe la comunidad y explica lo ocurrido.</p></div>
+</div>
+<div class="step">
+<div class="step-num">03</div>
+<div><strong>Revisamos tu reporte</strong><p>La administración evalúa si puede publicarse.</p></div>
+</div>
+</div>
 
-  </section>
+<div class="panel">
+<h3>📨 Enviar reporte</h3>
+<p>Completa la información para compartir tu reporte.</p>
 
-  <section class="admin-section" id="administracion">
-    <div class="admin-card">
+<form id="reportForm">
 
-      <div id="adminLogin">
-        <span class="section-kicker">ACCESO RESTRINGIDO</span>
-        <h3>🔐 Administración</h3>
-        <p>Inicia sesión para revisar y administrar los reportes recibidos.</p>
+<label class="label" for="category">CATEGORÍA</label>
+<select class="field" id="category" required>
+<option value="">Selecciona una categoría</option>
+<option>Calles y aceras</option>
+<option>Basura y limpieza</option>
+<option>Agua y alcantarillado</option>
+<option>Alumbrado público</option>
+<option>Protección animal</option>
+<option>Otros problemas comunitarios</option>
+<option value="Documentos encontrados">🪪 Documentos encontrados</option>
+</select>
 
-        <form id="loginForm">
-          <label class="field-label" for="adminEmail">CORREO ELECTRÓNICO</label>
-          <input class="field" type="email" id="adminEmail"
-            autocomplete="username" required>
+<div id="documentInstructions" hidden>
+<p class="hint">
+<strong>Documento encontrado:</strong>
+describe solamente el tipo de documento y la zona general
+del hallazgo. No escribas nombres, números de identificación
+ni otros datos personales. No adjuntes fotos del documento.
+</p>
+</div>
 
-          <label class="field-label" for="adminPassword">CONTRASEÑA</label>
-          <input class="field" type="password" id="adminPassword"
-            autocomplete="current-password" required>
+<label class="label" for="area">COMUNIDAD O CORREGIMIENTO</label>
+<input class="field" id="area" maxlength="120"
+placeholder="Ej.: El Roble, Pocrí, Barrios Unidos..." required>
 
-          <button type="submit" class="btn btn-green" id="loginButton">
-            INICIAR SESIÓN
-          </button>
-        </form>
+<label class="label" for="description">DESCRIPCIÓN</label>
+<textarea class="field" id="description" minlength="10" maxlength="1500"
+placeholder="Cuéntanos qué sucede..." required></textarea>
 
-        <button type="button" class="btn btn-soft" id="forgotButton">
-          Olvidé mi contraseña
-        </button>
-        <p class="message" id="loginMessage" role="status"></p>
-      </div>
+<div id="photoSection">
+<label class="label" for="photo">FOTOGRAFÍA (OPCIONAL)</label>
+<input class="field" id="photo" type="file"
+accept="image/jpeg,image/png,image/webp">
+<p class="hint">Una fotografía JPG, PNG o WebP, máximo 5 MB.</p>
+<img id="photoPreview" class="preview" alt="Vista previa" hidden>
+</div>
 
-      <div id="recoverySection" hidden>
-        <h3>🔑 Nueva contraseña</h3>
-        <form id="recoveryForm">
-          <label class="field-label" for="newPassword">NUEVA CONTRASEÑA</label>
-          <input class="field" id="newPassword" type="password" minlength="8" required>
+<label class="label" for="visibility">PRIVACIDAD</label>
+<select class="field" id="visibility">
+<option value="private">Privado: solo administración</option>
+<option value="public">Solicitar publicación pública</option>
+</select>
 
-          <label class="field-label" for="confirmPassword">CONFIRMAR CONTRASEÑA</label>
-          <input class="field" id="confirmPassword" type="password" minlength="8" required>
+<p class="hint">
+No incluyas datos privados, números de identificación
+ni acusaciones sin verificar. Los reportes requieren revisión.
+</p>
 
-          <button class="btn btn-green" type="submit">GUARDAR CONTRASEÑA</button>
-        </form>
-        <p class="message" id="recoveryMessage"></p>
-      </div>
+<div style="margin-top:20px">
+<div class="cf-turnstile"
+data-sitekey="0x4AAAAAAFWBvw2cZEIy5XVD"
+data-theme="light"></div>
+</div>
 
-      <div id="adminPanel" hidden>
-        <span class="section-kicker">CENTRO DE CONTROL</span>
-        <h3>📋 Panel de reportes</h3>
-        <p>Revisa fotografías, cambia estados y aprueba publicaciones.</p>
+<button type="submit" class="btn btn-green" id="reportButton">📤 ENVIAR MI REPORTE</button>
+<p class="message" id="reportMessage" role="status"></p>
 
-        <div class="admin-top-actions">
-          <button type="button" class="btn btn-green" id="refreshAdmin">↻ Actualizar</button>
-          <button type="button" class="btn btn-soft" id="logoutButton">Salir</button>
-        </div>
+</form>
+</div>
+</section>
 
-        <p class="message" id="adminMessage" role="status"></p>
-        <div id="adminReports"></div>
-      </div>
+<section class="admin-section" id="administracion">
+<div class="panel admin-panel">
 
-    </div>
-  </section>
+<div id="adminLogin">
+<div class="section-label">ACCESO RESTRINGIDO</div>
+<h3>🔐 Administración</h3>
+<p>Acceso exclusivo para revisar y administrar reportes.</p>
+
+<form id="loginForm">
+<label class="label" for="adminEmail">CORREO ELECTRÓNICO</label>
+<input class="field" type="email" id="adminEmail"
+autocomplete="username" required>
+
+<label class="label" for="adminPassword">CONTRASEÑA</label>
+<input class="field" type="password" id="adminPassword"
+autocomplete="current-password" required>
+
+<button type="submit" class="btn btn-green" id="loginButton">INICIAR SESIÓN</button>
+</form>
+
+<button type="button" class="btn btn-soft" id="forgotButton">Olvidé mi contraseña</button>
+<p class="message" id="loginMessage" role="status"></p>
+</div>
+
+<div id="recoverySection" hidden>
+<h3>🔑 Nueva contraseña</h3>
+<form id="recoveryForm">
+<label class="label" for="newPassword">NUEVA CONTRASEÑA</label>
+<input class="field" id="newPassword" type="password" minlength="8" required>
+<label class="label" for="confirmPassword">CONFIRMAR CONTRASEÑA</label>
+<input class="field" id="confirmPassword" type="password" minlength="8" required>
+<button class="btn btn-green" type="submit">GUARDAR CONTRASEÑA</button>
+</form>
+<p class="message" id="recoveryMessage"></p>
+</div>
+
+<div id="adminPanel" hidden>
+<div class="section-label">CENTRO DE CONTROL</div>
+<h3>📋 Panel de reportes</h3>
+<p>Revisa fotografías, cambia estados y aprueba publicaciones.</p>
+<div class="admin-buttons">
+<button class="btn btn-green" id="refreshAdmin" type="button">↻ Actualizar</button>
+<button class="btn btn-soft" id="logoutButton" type="button">Salir</button>
+</div>
+<p class="message" id="adminMessage" role="status"></p>
+<div id="adminReports"></div>
+</div>
+
+</div>
+</section>
+
 </div>
 
 </main>
 
+<section class="social-section" id="redes">
+<div class="container">
+<div class="kicker">SÍGUENOS EN REDES SOCIALES</div>
+<h2>La comunidad también está en las redes.</h2>
+<p>Conecta con Aguadulce Malo & Bueno y mantente al tanto de nuestras publicaciones.</p>
+
+<div class="social-cards">
+
+<a class="social-card" href="https://www.instagram.com/aguadulcebueno/"
+target="_blank" rel="noopener noreferrer">
+<div>
+<strong>📸 Instagram</strong>
+<small>@aguadulcebueno</small>
+</div>
+<div class="social-arrow">↗</div>
+</a>
+
+<a class="social-card" href="https://www.tiktok.com/@aguadulcemalo"
+target="_blank" rel="noopener noreferrer">
+<div>
+<strong>🎵 TikTok</strong>
+<small>@aguadulcemalo</small>
+</div>
+<div class="social-arrow">↗</div>
+</a>
+
+</div>
+</div>
+</section>
+
 <footer class="footer">
-  <div class="wrap footer-inner">
-    <div>
-      <strong>AGUADULCE REPORTA.</strong>
-      <p>Un espacio para informar, participar y visibilizar las necesidades de nuestra comunidad.</p>
-    </div>
-    <div>
-      <p>Aguadulce, Coclé · Panamá</p>
-      <p>© <span id="year"></span> Aguadulce Reporta</p>
-    </div>
-  </div>
+<div class="container footer-inner">
+<div>
+<strong>AGUADULCE REPORTA.</strong>
+<p>Una iniciativa comunitaria de Aguadulce Malo & Bueno.</p>
+</div>
+<div>
+<p>Aguadulce, Coclé · Panamá</p>
+<p>© <span id="year"></span> Aguadulce Reporta</p>
+</div>
+</div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -799,692 +513,723 @@ textarea.field{min-height:130px;resize:vertical}
 <script>
 "use strict";
 
-const SUPABASE_URL = "https://lrupvpgyjzhgyvprrmtl.supabase.co";
-const SUPABASE_KEY = "sb_publishable_toBA9zteOxIM1WivpdjwFQ_xUXsqfpf";
-const BUCKET = "Foto de reportes";
+const SUPABASE_URL="https://lrupvpgyjzhgyvprrmtl.supabase.co";
+const SUPABASE_KEY="sb_publishable_toBA9zteOxIM1WivpdjwFQ_xUXsqfpf";
+const BUCKET="Foto de reportes";
 
-const SEND_FUNCTION = SUPABASE_URL + "/functions/v1/enviar-reporte";
-const PHOTO_FUNCTION = SUPABASE_URL + "/functions/v1/foto-publica";
+const SEND_FUNCTION=SUPABASE_URL+"/functions/v1/enviar-reporte";
+const PHOTO_FUNCTION=SUPABASE_URL+"/functions/v1/foto-publica";
 
-const $ = id => document.getElementById(id);
+const $=id=>document.getElementById(id);
 
-const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: true
-  }
+const db=window.supabase.createClient(
+ SUPABASE_URL,SUPABASE_KEY,{
+ auth:{
+  persistSession:true,
+  autoRefreshToken:true,
+  detectSessionInUrl:true
+ }
 });
 
-const publicDb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
-  auth: {
-    persistSession: false,
-    autoRefreshToken: false,
-    detectSessionInUrl: false,
-    storageKey: "aguadulce-public-reader"
-  }
+const publicDb=window.supabase.createClient(
+ SUPABASE_URL,SUPABASE_KEY,{
+ auth:{
+  persistSession:false,
+  autoRefreshToken:false,
+  detectSessionInUrl:false,
+  storageKey:"aguadulce-public-reader"
+ }
 });
 
-let publicReportsData = [];
+let publicReportsData=[];
+let previewUrl=null;
 
-let recoveryMode =
-  new URLSearchParams(location.hash.slice(1)).get("type") === "recovery" ||
-  new URLSearchParams(location.search).has("code");
+let recoveryMode=
+ new URLSearchParams(location.hash.slice(1)).get("type")==="recovery"||
+ new URLSearchParams(location.search).has("code");
 
-let recoveryReady = false;
+let recoveryReady=false;
 
-function make(tag, value, className = "") {
-  const node = document.createElement(tag);
-  node.textContent = value == null ? "" : String(value);
-  if (className) node.className = className;
-  return node;
-}
-
-function statusName(value) {
-  return ({
-    pending: "Pendiente",
-    reviewing: "En revisión",
-    referred: "Remitido",
-    resolved: "Resuelto",
-    rejected: "Rechazado"
-  })[value] || value || "Sin estado";
-}
-
-function formatDate(value) {
-  if (!value) return "Sin fecha";
-  const date = new Date(value);
-  return isNaN(date.getTime())
-    ? "Sin fecha"
-    : date.toLocaleDateString("es-PA", {
-        day: "numeric",
-        month: "short",
-        year: "numeric"
-      });
-}
-
-function showMessage(id, message, success = false) {
-  const node = $(id);
-  node.textContent = message;
-  node.style.color = success ? "#187a49" : "#68786e";
-}
-
-function buildPublicCard(report) {
-  const card = make("article", "", "report-card");
-
-  // El servidor solo entrega la fotografía
-  // si el reporte tiene autorización pública.
-  const imageWrap = make("div", "", "report-image-wrap");
-  const image = document.createElement("img");
-
-  image.className = "report-image";
-  image.alt = "Fotografía del reporte de " + report.area;
-  image.loading = "lazy";
-  image.referrerPolicy = "no-referrer";
-
-  image.onerror = () => imageWrap.remove();
-  image.src = PHOTO_FUNCTION + "?id=" + encodeURIComponent(report.id);
-
-  imageWrap.appendChild(image);
-  card.appendChild(imageWrap);
-
-  const content = make("div", "", "report-content");
-
-  content.appendChild(make("div", report.category, "report-label"));
-  content.appendChild(make("h3", report.area, "report-title"));
-  content.appendChild(make("p", report.description, "report-description"));
-
-  const footer = make("div", "", "report-footer");
-  footer.appendChild(make("span", "📅 " + formatDate(report.created_at)));
-  footer.appendChild(make("span", statusName(report.status), "status-pill"));
-
-  content.appendChild(footer);
-  card.appendChild(content);
-
-  return card;
-}
-
-function renderPublicReports() {
-  const container = $("publicReports");
-  container.replaceChildren();
-
-  const search = $("searchReports").value.trim().toLocaleLowerCase("es");
-  const category = $("categoryFilter").value;
-
-  const filtered = publicReportsData.filter(report => {
-    const searchable = [
-      report.category,
-      report.area,
-      report.description
-    ].join(" ").toLocaleLowerCase("es");
-
-    return (!search || searchable.includes(search)) &&
-      (!category || report.category === category);
-  });
-
-  if (!filtered.length) {
-    const empty = make("div", "", "empty");
-    empty.appendChild(make("strong", "No encontramos reportes"));
-    empty.appendChild(make("p",
-      publicReportsData.length
-        ? "Prueba otra palabra o categoría."
-        : "Todavía no hay reportes públicos aprobados."
-    ));
-    container.appendChild(empty);
-    return;
+// LOGO
+document.querySelectorAll(".site-logo").forEach(img=>{
+ img.addEventListener("error",()=>{
+  if(img.closest(".logo-box")){
+   img.hidden=true;
+   document.querySelector(".logo-fallback").hidden=false;
+  }else{
+   document.getElementById("heroLogoCard").hidden=true;
   }
+ });
+});
 
-  for (const report of filtered) {
-    container.appendChild(buildPublicCard(report));
-  }
+function make(tag,value="",className=""){
+ const el=document.createElement(tag);
+ el.textContent=value==null?"":String(value);
+ if(className)el.className=className;
+ return el;
 }
 
-async function loadPublicReports() {
-  showMessage("publicMessage", "Cargando reportes...");
+function showMessage(id,value,success=false){
+ const el=$(id);
+ el.textContent=value;
+ el.style.color=success?"#1d8652":"#6c7b70";
+}
 
-  const { data, error } = await publicDb
-    .from("reports")
-    .select("id,category,area,description,status,created_at")
-    .order("created_at", { ascending: false })
-    .limit(100);
+function statusName(value){
+ return ({
+  pending:"Pendiente",
+  reviewing:"En revisión",
+  referred:"Remitido",
+  resolved:"Resuelto",
+  rejected:"Rechazado"
+ })[value]||value||"Sin estado";
+}
 
-  if (error) {
-    console.error("Reportes públicos:", error);
-    showMessage("publicMessage", "No se pudieron cargar los reportes.");
-    return;
-  }
+function formatDate(value){
+ if(!value)return "Sin fecha";
+ const d=new Date(value);
+ return isNaN(d.getTime())?"Sin fecha":
+ d.toLocaleDateString("es-PA",{
+  day:"numeric",month:"short",year:"numeric"
+ });
+}
 
-  publicReportsData = data || [];
+function isDocument(report){
+ return report.category==="Documentos encontrados";
+}
 
-  $("statReports").textContent = publicReportsData.length;
-  $("statAreas").textContent =
-    new Set(publicReportsData.map(r => r.area)).size;
-  $("statCategories").textContent =
-    new Set(publicReportsData.map(r => r.category)).size;
+// REPORTES PÚBLICOS
 
-  const categories = [
-    ...new Set(publicReportsData.map(r => r.category).filter(Boolean))
+function buildReportCard(report){
+ const card=make("article","","news-card");
+
+ const imageBox=make("div","","news-photo-box");
+ const img=document.createElement("img");
+ img.className="news-photo";
+ img.alt="Fotografía del reporte en "+report.area;
+ img.loading="lazy";
+ img.referrerPolicy="no-referrer";
+ img.onerror=()=>imageBox.remove();
+ img.src=PHOTO_FUNCTION+"?id="+encodeURIComponent(report.id);
+
+ imageBox.appendChild(img);
+ card.appendChild(imageBox);
+
+ const content=make("div","","news-content");
+ content.append(
+  make("div",report.category,"news-category"),
+  make("h3",report.area),
+  make("p",report.description,"news-description")
+ );
+
+ const footer=make("div","","news-bottom");
+ footer.append(
+  make("span","📅 "+formatDate(report.created_at)),
+  make("span",statusName(report.status),"pill")
+ );
+
+ content.appendChild(footer);
+ card.appendChild(content);
+ return card;
+}
+
+function renderReports(){
+ const box=$("publicReports");
+ box.replaceChildren();
+
+ const search=$("searchReports").value.trim().toLocaleLowerCase("es");
+ const category=$("categoryFilter").value;
+
+ const items=publicReportsData.filter(r=>{
+  if(isDocument(r))return false;
+  const text=[r.category,r.area,r.description]
+   .join(" ").toLocaleLowerCase("es");
+  return (!search||text.includes(search))&&
+   (!category||r.category===category);
+ });
+
+ if(!items.length){
+  box.appendChild(make("div",
+   "No encontramos reportes que coincidan con la búsqueda.",
+   "empty"));
+  return;
+ }
+
+ items.forEach(r=>box.appendChild(buildReportCard(r)));
+}
+
+// DOCUMENTOS ENCONTRADOS
+
+function renderDocuments(){
+ const box=$("documentsList");
+ box.replaceChildren();
+
+ const items=publicReportsData.filter(isDocument);
+
+ if(!items.length){
+  box.appendChild(make("div",
+   "Todavía no hay avisos de documentos encontrados aprobados.",
+   "empty"));
+  return;
+ }
+
+ items.forEach(r=>{
+  const card=make("article","","document-card");
+  card.append(
+   make("div","🪪","document-icon"),
+   make("h3",r.area),
+   make("p",r.description),
+   make("small","📅 "+formatDate(r.created_at)+
+    " · "+statusName(r.status))
+  );
+  box.appendChild(card);
+ });
+}
+
+async function loadPublicReports(){
+ showMessage("publicMessage","Cargando reportes...");
+
+ try{
+  const {data,error}=await publicDb
+   .from("reports")
+   .select("id,category,area,description,status,created_at")
+   .order("created_at",{ascending:false})
+   .limit(100);
+
+  if(error)throw error;
+
+  publicReportsData=data||[];
+
+  const reports=publicReportsData.filter(r=>!isDocument(r));
+  const documents=publicReportsData.filter(isDocument);
+
+  $("statReports").textContent=reports.length;
+  $("statAreas").textContent=
+   new Set(reports.map(r=>r.area)).size;
+  $("statDocuments").textContent=documents.length;
+
+  const categories=[
+   ...new Set(reports.map(r=>r.category).filter(Boolean))
   ].sort();
 
-  const selected = $("categoryFilter").value;
+  const selected=$("categoryFilter").value;
   $("categoryFilter").replaceChildren();
 
-  const allOption = document.createElement("option");
-  allOption.value = "";
-  allOption.textContent = "Todas las categorías";
-  $("categoryFilter").appendChild(allOption);
-
-  for (const category of categories) {
-    const option = document.createElement("option");
-    option.value = category;
-    option.textContent = category;
-    $("categoryFilter").appendChild(option);
-  }
-
-  $("categoryFilter").value =
-    categories.includes(selected) ? selected : "";
-
-  showMessage("publicMessage",
-    publicReportsData.length + " reportes públicos recientes disponibles.",
-    true
-  );
-
-  renderPublicReports();
-}
-
-$("searchReports").addEventListener("input", renderPublicReports);
-$("categoryFilter").addEventListener("change", renderPublicReports);
-$("refreshPublic").addEventListener("click", loadPublicReports);
-
-// ====================================
-// VISTA PREVIA DE LA FOTOGRAFÍA
-// ====================================
-
-let previewUrl = null;
-
-function clearPreview() {
-  if (previewUrl) URL.revokeObjectURL(previewUrl);
-  previewUrl = null;
-  $("photoPreview").hidden = true;
-  $("photoPreview").removeAttribute("src");
-}
-
-$("photo").addEventListener("change", () => {
-  clearPreview();
-
-  const photo = $("photo").files[0];
-  if (!photo) return;
-
-  if (!["image/jpeg", "image/png", "image/webp"].includes(photo.type) ||
-      photo.size > 5 * 1024 * 1024) {
-    showMessage("reportMessage",
-      "La fotografía debe ser JPG, PNG o WebP y pesar máximo 5 MB.");
-    $("photo").value = "";
-    return;
-  }
-
-  previewUrl = URL.createObjectURL(photo);
-  $("photoPreview").src = previewUrl;
-  $("photoPreview").hidden = false;
-});
-
-// ====================================
-// ENVÍO DE REPORTES
-// ====================================
-
-$("reportForm").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  const button = $("reportButton");
-  const photo = $("photo").files[0];
-
-  if (photo && (
-    !["image/jpeg", "image/png", "image/webp"].includes(photo.type) ||
-    photo.size > 5 * 1024 * 1024
-  )) {
-    showMessage("reportMessage", "Fotografía no válida.");
-    return;
-  }
-
-  const token = document.querySelector(
-    'input[name="cf-turnstile-response"]'
-  )?.value || "";
-
-  if (!token) {
-    showMessage("reportMessage", "Completa la verificación de seguridad.");
-    return;
-  }
-
-  const form = new FormData();
-  form.append("category", $("category").value);
-  form.append("area", $("area").value.trim());
-  form.append("description", $("description").value.trim());
-  form.append("visibility_requested", $("visibility").value);
-  form.append("turnstile_token", token);
-
-  if (photo) form.append("photo", photo);
-
-  button.disabled = true;
-  showMessage("reportMessage", "Enviando tu reporte...");
-
-  try {
-    const response = await fetch(SEND_FUNCTION, {
-      method: "POST",
-      headers: { apikey: SUPABASE_KEY },
-      body: form
-    });
-
-    const result = await response.json();
-
-    if (!response.ok || !result.success) {
-      throw new Error(result.error || "No se pudo enviar el reporte.");
-    }
-
-    $("reportForm").reset();
-    clearPreview();
-
-    showMessage("reportMessage",
-      "✅ ¡Reporte recibido! Quedará pendiente de revisión.",
-      true
-    );
-
-    if (!$("adminPanel").hidden) {
-      await loadAdminReports();
-    }
-
-  } catch (error) {
-    console.error(error);
-    showMessage("reportMessage", error.message || "Error al enviar.");
-
-  } finally {
-    button.disabled = false;
-    if (window.turnstile) window.turnstile.reset();
-  }
-});
-
-// ====================================
-// PANEL DE ADMINISTRACIÓN
-// ====================================
-
-async function showAdminPanel() {
-  if (recoveryMode) return;
-
-  const { data: isAdmin, error } = await db.rpc("is_app_admin");
-
-  if (error || isAdmin !== true) {
-    await db.auth.signOut();
-    $("adminPanel").hidden = true;
-    $("adminLogin").hidden = false;
-    showMessage("loginMessage", "Esta cuenta no tiene acceso administrativo.");
-    return;
-  }
-
-  $("adminLogin").hidden = true;
-  $("adminPanel").hidden = false;
-  $("recoverySection").hidden = true;
-
-  await loadAdminReports();
-}
-
-async function loadAdminReports() {
-  if ($("adminPanel").hidden) return;
-
-  const container = $("adminReports");
-  container.replaceChildren();
-
-  showMessage("adminMessage", "Cargando reportes...");
-
-  const { data, error } = await db
-    .from("reports")
-    .select(
-      "id,category,area,description,status," +
-      "visibility_requested,is_published,photo_path,created_at"
-    )
-    .order("created_at", { ascending: false })
-    .limit(100);
-
-  if (error) {
-    showMessage("adminMessage", "Error: " + error.message);
-    return;
-  }
-
-  showMessage("adminMessage",
-    "Reportes encontrados: " + data.length,
-    true
-  );
-
-  for (const report of data) {
-    const card = make("article", "", "admin-report");
-
-    card.append(
-      make("h4", report.category + " · " + report.area),
-      make("p", report.description),
-      make("p", "📅 " + formatDate(report.created_at)),
-      make("p", "Estado: " + statusName(report.status)),
-      make("p", "Tipo: " + (
-        report.visibility_requested === "public"
-          ? "Solicitó publicación pública"
-          : "Privado"
-      )),
-      make("p", "Publicación: " + (
-        report.is_published ? "Aprobada" : "No aprobada"
-      ))
-    );
-
-    if (report.photo_path) {
-      const viewButton = make("button", "📷 Ver fotografía", "btn btn-soft");
-      viewButton.type = "button";
-
-      const photoBox = document.createElement("div");
-
-      viewButton.onclick = async () => {
-        viewButton.disabled = true;
-        viewButton.textContent = "Cargando...";
-
-        const { data: photoData, error: photoError } =
-          await db.storage
-            .from(BUCKET)
-            .createSignedUrl(report.photo_path, 60);
-
-        if (photoError || !photoData?.signedUrl) {
-          viewButton.textContent = "No se pudo abrir la fotografía";
-          viewButton.disabled = false;
-          return;
-        }
-
-        const image = document.createElement("img");
-        image.className = "admin-photo";
-        image.alt = "Fotografía privada del reporte";
-        image.src = photoData.signedUrl;
-
-        photoBox.replaceChildren(image);
-        viewButton.textContent = "Fotografía cargada";
-      };
-
-      card.append(viewButton, photoBox);
-    }
-
-    const actions = make("div", "", "admin-actions");
-
-    actions.appendChild(make("label", "Cambiar estado", "field-label"));
-
-    const stateSelect = make("select", "", "field");
-
-    const states = [
-      ["pending", "Pendiente"],
-      ["reviewing", "En revisión"],
-      ["referred", "Remitido"],
-      ["resolved", "Resuelto"],
-      ["rejected", "Rechazado"]
-    ];
-
-    for (const [value, label] of states) {
-      const option = document.createElement("option");
-      option.value = value;
-      option.textContent = label;
-      stateSelect.appendChild(option);
-    }
-
-    stateSelect.value = report.status;
-
-    const saveButton = make("button", "Guardar estado", "btn btn-green");
-    saveButton.type = "button";
-    saveButton.disabled = true;
-
-    stateSelect.onchange = () => {
-      saveButton.disabled = stateSelect.value === report.status;
-    };
-
-    const actionMessage = make("p", "", "message");
-
-    saveButton.onclick = async () => {
-      saveButton.disabled = true;
-
-      const changes = { status: stateSelect.value };
-
-      if (stateSelect.value === "rejected") {
-        changes.is_published = false;
-      }
-
-      const { error } = await db
-        .from("reports")
-        .update(changes)
-        .eq("id", report.id);
-
-      if (error) {
-        actionMessage.textContent = "Error: " + error.message;
-        saveButton.disabled = false;
-        return;
-      }
-
-      await loadAdminReports();
-      await loadPublicReports();
-    };
-
-    actions.append(stateSelect, saveButton);
-
-    if (report.visibility_requested === "public") {
-      const publishButton = make(
-        "button",
-        report.is_published
-          ? "Retirar publicación"
-          : "✓ Aprobar publicación",
-        report.is_published ? "btn btn-soft" : "btn btn-green"
-      );
-
-      publishButton.type = "button";
-
-      publishButton.onclick = async () => {
-        const publish = !report.is_published;
-
-        if (publish) {
-          if (report.status === "rejected") {
-            actionMessage.textContent =
-              "Primero cambia el estado rechazado.";
-            return;
-          }
-
-          if (!confirm(
-            "¿Revisaste el reporte y su fotografía y confirmas " +
-            "que pueden mostrarse públicamente?"
-          )) return;
-        }
-
-        publishButton.disabled = true;
-
-        const { error } = await db
-          .from("reports")
-          .update({ is_published: publish })
-          .eq("id", report.id);
-
-        if (error) {
-          actionMessage.textContent = "Error: " + error.message;
-          publishButton.disabled = false;
-          return;
-        }
-
-        await loadAdminReports();
-        await loadPublicReports();
-      };
-
-      actions.appendChild(publishButton);
-
-    } else {
-      actions.appendChild(
-        make("p", "🔒 Reporte privado: no se puede publicar.", "small-note")
-      );
-    }
-
-    actions.appendChild(actionMessage);
-    card.appendChild(actions);
-    container.appendChild(card);
-  }
-}
-
-$("refreshAdmin").onclick = loadAdminReports;
-
-// ====================================
-// ACCESO ADMINISTRATIVO
-// ====================================
-
-$("loginForm").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  $("loginButton").disabled = true;
-  showMessage("loginMessage", "Verificando acceso...");
-
-  try {
-    const { error } = await db.auth.signInWithPassword({
-      email: $("adminEmail").value,
-      password: $("adminPassword").value
-    });
-
-    $("adminPassword").value = "";
-
-    if (error) throw error;
-
-    await showAdminPanel();
-
-  } catch (error) {
-    showMessage("loginMessage", "No se pudo iniciar sesión: " + error.message);
-
-  } finally {
-    $("loginButton").disabled = false;
-  }
-});
-
-$("logoutButton").onclick = async () => {
-  await db.auth.signOut();
-
-  $("adminPanel").hidden = true;
-  $("adminLogin").hidden = false;
-  $("adminReports").replaceChildren();
-
-  showMessage("loginMessage", "Sesión cerrada.");
-};
-
-// ====================================
-// RECUPERACIÓN DE CONTRASEÑA
-// ====================================
-
-$("forgotButton").onclick = async () => {
-  const email = $("adminEmail").value.trim();
-
-  if (!email) {
-    showMessage("loginMessage", "Escribe primero tu correo.");
-    return;
-  }
-
-  const { error } = await db.auth.resetPasswordForEmail(email, {
-    redirectTo: "https://aguadulcebueno.github.io/aguadulce-reporta/"
+  const all=make("option","Todas las categorías");
+  all.value="";
+  $("categoryFilter").appendChild(all);
+
+  categories.forEach(category=>{
+   const opt=make("option",category);
+   opt.value=category;
+   $("categoryFilter").appendChild(opt);
   });
 
-  showMessage("loginMessage", error
-    ? "Error: " + error.message
-    : "Si el correo está registrado, recibirás un enlace de recuperación."
-  );
-};
+  $("categoryFilter").value=
+   categories.includes(selected)?selected:"";
 
-function showRecovery() {
-  recoveryMode = true;
-  $("adminLogin").hidden = true;
-  $("adminPanel").hidden = true;
-  $("recoverySection").hidden = false;
+  showMessage("publicMessage",
+   reports.length+" reportes públicos recientes disponibles.",true);
+
+  renderReports();
+  renderDocuments();
+
+ }catch(error){
+  console.error(error);
+  showMessage("publicMessage",
+   "No se pudieron cargar los reportes.");
+ }
 }
 
-if (recoveryMode) showRecovery();
+$("searchReports").addEventListener("input",renderReports);
+$("categoryFilter").addEventListener("change",renderReports);
+$("refreshPublic").addEventListener("click",loadPublicReports);
 
-db.auth.onAuthStateChange((event, session) => {
-  if (event === "PASSWORD_RECOVERY") {
-    showRecovery();
-    recoveryReady = true;
-    showMessage("recoveryMessage",
-      "Enlace verificado. Escribe tu nueva contraseña.");
-  }
+// FORMULARIO
 
-  if (recoveryMode && event === "SIGNED_IN" && session) {
-    recoveryReady = true;
-  }
+function clearPreview(){
+ if(previewUrl)URL.revokeObjectURL(previewUrl);
+ previewUrl=null;
+ $("photoPreview").hidden=true;
+ $("photoPreview").removeAttribute("src");
+}
+
+function updateCategory(){
+ const doc=$("category").value==="Documentos encontrados";
+
+ $("documentInstructions").hidden=!doc;
+ $("photoSection").hidden=doc;
+ $("photo").disabled=doc;
+
+ if(doc){
+  $("photo").value="";
+  clearPreview();
+  $("description").placeholder=
+   "Ejemplo: Se encontró un carné en el sector del parque. "+
+   "Está resguardado para coordinar su entrega segura.";
+ }else{
+  $("description").placeholder=
+   "Describe lo que sucede sin incluir datos personales...";
+ }
+}
+
+$("category").addEventListener("change",updateCategory);
+
+$("documentReportLink").addEventListener("click",()=>{
+ $("category").value="Documentos encontrados";
+ updateCategory();
 });
 
-$("recoveryForm").addEventListener("submit", async event => {
-  event.preventDefault();
+$("photo").addEventListener("change",()=>{
+ clearPreview();
 
-  const password = $("newPassword").value;
+ const photo=$("photo").files[0];
+ if(!photo)return;
 
-  if (password !== $("confirmPassword").value) {
-    showMessage("recoveryMessage", "Las contraseñas no coinciden.");
-    return;
+ if(!["image/jpeg","image/png","image/webp"].includes(photo.type)||
+ photo.size>5*1024*1024){
+  showMessage("reportMessage",
+   "Solo JPG, PNG o WebP, máximo 5 MB.");
+  $("photo").value="";
+  return;
+ }
+
+ previewUrl=URL.createObjectURL(photo);
+ $("photoPreview").src=previewUrl;
+ $("photoPreview").hidden=false;
+});
+
+$("reportForm").addEventListener("submit",async event=>{
+ event.preventDefault();
+
+ const button=$("reportButton");
+ const doc=$("category").value==="Documentos encontrados";
+ const photo=doc?null:$("photo").files[0];
+
+ if(photo&&(
+  !["image/jpeg","image/png","image/webp"].includes(photo.type)||
+  photo.size>5*1024*1024
+ )){
+  showMessage("reportMessage","Fotografía no válida.");
+  return;
+ }
+
+ const token=document.querySelector(
+  'input[name="cf-turnstile-response"]'
+ )?.value||"";
+
+ if(!token){
+  showMessage("reportMessage",
+   "Completa la verificación de seguridad.");
+  return;
+ }
+
+ const form=new FormData();
+ form.append("category",$("category").value);
+ form.append("area",$("area").value.trim());
+ form.append("description",$("description").value.trim());
+ form.append("visibility_requested",$("visibility").value);
+ form.append("turnstile_token",token);
+
+ if(photo)form.append("photo",photo);
+
+ button.disabled=true;
+ showMessage("reportMessage","Enviando reporte...");
+
+ try{
+  const response=await fetch(SEND_FUNCTION,{
+   method:"POST",
+   headers:{apikey:SUPABASE_KEY},
+   body:form
+  });
+
+  const result=await response.json();
+
+  if(!response.ok||!result.success){
+   throw new Error(result.error||"No se pudo enviar.");
   }
 
-  if (!recoveryReady) {
-    showMessage("recoveryMessage", "El enlace aún no se ha verificado.");
-    return;
-  }
+  $("reportForm").reset();
+  clearPreview();
+  updateCategory();
 
-  const { error } = await db.auth.updateUser({ password });
+  showMessage("reportMessage",
+   "✅ Reporte recibido. Quedará pendiente de revisión.",
+   true);
 
-  if (error) {
-    showMessage("recoveryMessage", "Error: " + error.message);
-    return;
-  }
+  if(!$("adminPanel").hidden)await loadAdminReports();
 
+ }catch(error){
+  console.error(error);
+  showMessage("reportMessage",
+   error.message||"Error al enviar el reporte.");
+ }finally{
+  button.disabled=false;
+  if(window.turnstile)window.turnstile.reset();
+ }
+});
+
+// ADMINISTRACIÓN
+
+async function showAdminPanel(){
+ if(recoveryMode)return;
+
+ const {data:isAdmin,error}=await db.rpc("is_app_admin");
+
+ if(error||isAdmin!==true){
   await db.auth.signOut();
-
-  recoveryMode = false;
-  recoveryReady = false;
-
-  history.replaceState(null, "", location.pathname);
-
-  $("recoverySection").hidden = true;
-  $("adminLogin").hidden = false;
-
+  $("adminPanel").hidden=true;
+  $("adminLogin").hidden=false;
   showMessage("loginMessage",
-    "Contraseña actualizada. Inicia sesión.",
-    true
-  );
+   "Esta cuenta no tiene permisos de administrador.");
+  return;
+ }
+
+ $("adminLogin").hidden=true;
+ $("adminPanel").hidden=false;
+ $("recoverySection").hidden=true;
+ await loadAdminReports();
+}
+
+async function loadAdminReports(){
+ if($("adminPanel").hidden)return;
+
+ const container=$("adminReports");
+ container.replaceChildren();
+ showMessage("adminMessage","Cargando reportes...");
+
+ try{
+  const {data,error}=await db.from("reports")
+   .select(
+    "id,category,area,description,status,"+
+    "visibility_requested,is_published,photo_path,created_at"
+   )
+   .order("created_at",{ascending:false})
+   .limit(100);
+
+  if(error)throw error;
+
+  showMessage("adminMessage",
+   "Reportes encontrados: "+data.length,true);
+
+  for(const report of data){
+   const card=make("article","","admin-report");
+
+   card.append(
+    make("h4",report.category+" · "+report.area),
+    make("p",report.description),
+    make("p","📅 "+formatDate(report.created_at)),
+    make("p","Estado: "+statusName(report.status)),
+    make("p","Tipo: "+(
+     report.visibility_requested==="public"
+      ?"Solicitó publicación pública":"Privado"
+    )),
+    make("p","Publicación: "+(
+     report.is_published?"Aprobada":"No aprobada"
+    ))
+   );
+
+   if(isDocument(report)){
+    card.appendChild(make("p",
+     "⚠️ Revisa que el aviso no incluya datos personales.",
+     "hint"));
+   }
+
+   if(report.photo_path){
+    const view=make("button",
+     "📷 Ver fotografía","btn btn-soft");
+    view.type="button";
+
+    const photoBox=document.createElement("div");
+
+    view.onclick=async()=>{
+     view.disabled=true;
+     view.textContent="Cargando...";
+
+     const {data:photoData,error:photoError}=
+      await db.storage.from(BUCKET)
+       .createSignedUrl(report.photo_path,60);
+
+     if(photoError||!photoData?.signedUrl){
+      view.textContent="No se pudo abrir la fotografía";
+      view.disabled=false;
+      return;
+     }
+
+     const image=document.createElement("img");
+     image.className="admin-photo";
+     image.alt="Fotografía privada del reporte";
+     image.src=photoData.signedUrl;
+     photoBox.replaceChildren(image);
+     view.textContent="Fotografía cargada";
+    };
+
+    card.append(view,photoBox);
+   }
+
+   const actions=make("div","","admin-actions");
+   actions.appendChild(make("label",
+    "Cambiar estado","label"));
+
+   const stateSelect=make("select","","field");
+
+   const states=[
+    ["pending","Pendiente"],
+    ["reviewing","En revisión"],
+    ["referred","Remitido"],
+    ["resolved","Resuelto"],
+    ["rejected","Rechazado"]
+   ];
+
+   states.forEach(([value,label])=>{
+    const option=make("option",label);
+    option.value=value;
+    stateSelect.appendChild(option);
+   });
+
+   stateSelect.value=report.status;
+
+   const save=make("button",
+    "Guardar estado","btn btn-green");
+   save.type="button";
+   save.disabled=true;
+
+   stateSelect.onchange=()=>{
+    save.disabled=stateSelect.value===report.status;
+   };
+
+   const message=make("p","","message");
+
+   save.onclick=async()=>{
+    save.disabled=true;
+
+    const changes={status:stateSelect.value};
+    if(stateSelect.value==="rejected"){
+     changes.is_published=false;
+    }
+
+    const {error}=await db.from("reports")
+     .update(changes).eq("id",report.id);
+
+    if(error){
+     message.textContent="Error: "+error.message;
+     save.disabled=false;
+     return;
+    }
+
+    await loadAdminReports();
+    await loadPublicReports();
+   };
+
+   actions.append(stateSelect,save);
+
+   if(report.visibility_requested==="public"){
+    const publish=make("button",
+     report.is_published
+      ?"Retirar publicación"
+      :"✓ Aprobar publicación",
+     report.is_published?"btn btn-soft":"btn btn-green"
+    );
+
+    publish.type="button";
+
+    publish.onclick=async()=>{
+     const next=!report.is_published;
+
+     if(next){
+      if(report.status==="rejected"){
+       message.textContent=
+        "Primero cambia el estado rechazado.";
+       return;
+      }
+
+      const warning=isDocument(report)
+       ?"¿Verificaste que el aviso no contiene nombres, "+
+        "números de documento ni datos personales?"
+       :"¿Revisaste el reporte y la fotografía antes de publicarlos?";
+
+      if(!confirm(warning))return;
+     }
+
+     publish.disabled=true;
+
+     const {error}=await db.from("reports")
+      .update({is_published:next})
+      .eq("id",report.id);
+
+     if(error){
+      message.textContent="Error: "+error.message;
+      publish.disabled=false;
+      return;
+     }
+
+     await loadAdminReports();
+     await loadPublicReports();
+    };
+
+    actions.appendChild(publish);
+   }else{
+    actions.appendChild(make("p",
+     "🔒 Reporte privado: no se puede publicar.",
+     "hint"));
+   }
+
+   actions.appendChild(message);
+   card.appendChild(actions);
+   container.appendChild(card);
+  }
+
+ }catch(error){
+  console.error(error);
+  showMessage("adminMessage","Error: "+error.message);
+ }
+}
+
+$("refreshAdmin").onclick=loadAdminReports;
+
+// INICIAR SESIÓN
+
+$("loginForm").addEventListener("submit",async event=>{
+ event.preventDefault();
+ $("loginButton").disabled=true;
+ showMessage("loginMessage","Verificando acceso...");
+
+ try{
+  const {error}=await db.auth.signInWithPassword({
+   email:$("adminEmail").value,
+   password:$("adminPassword").value
+  });
+
+  $("adminPassword").value="";
+  if(error)throw error;
+  await showAdminPanel();
+
+ }catch(error){
+  showMessage("loginMessage",
+   "No se pudo iniciar sesión: "+error.message);
+ }finally{
+  $("loginButton").disabled=false;
+ }
 });
 
-// ====================================
-// INICIO
-// ====================================
+$("logoutButton").onclick=async()=>{
+ await db.auth.signOut();
+ $("adminPanel").hidden=true;
+ $("adminLogin").hidden=false;
+ $("adminReports").replaceChildren();
+ showMessage("loginMessage","Sesión cerrada.");
+};
 
-async function initialize() {
-  $("year").textContent = new Date().getFullYear();
+// RECUPERACIÓN DE CONTRASEÑA
 
-  $("todayDate").textContent =
-    new Date().toLocaleDateString("es-PA", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      timeZone: "America/Panama"
-    }).toUpperCase();
+$("forgotButton").onclick=async()=>{
+ const email=$("adminEmail").value.trim();
 
-  await loadPublicReports();
+ if(!email){
+  showMessage("loginMessage","Escribe primero tu correo.");
+  return;
+ }
 
-  if (recoveryMode) {
-    const { data } = await db.auth.getSession();
+ const {error}=await db.auth.resetPasswordForEmail(email,{
+  redirectTo:
+   "https://aguadulcebueno.github.io/aguadulce-reporta/"
+ });
 
-    if (data.session) {
-      recoveryReady = true;
-      showMessage("recoveryMessage", "Escribe tu nueva contraseña.");
-    }
-    return;
+ showMessage("loginMessage",error
+  ?"Error: "+error.message
+  :"Si el correo está registrado, recibirás un enlace.");
+};
+
+function showRecovery(){
+ recoveryMode=true;
+ $("adminLogin").hidden=true;
+ $("adminPanel").hidden=true;
+ $("recoverySection").hidden=false;
+}
+
+if(recoveryMode)showRecovery();
+
+db.auth.onAuthStateChange((event,session)=>{
+ if(event==="PASSWORD_RECOVERY"){
+  showRecovery();
+  recoveryReady=true;
+  showMessage("recoveryMessage",
+   "Enlace verificado. Escribe tu nueva contraseña.");
+ }
+
+ if(recoveryMode&&event==="SIGNED_IN"&&session){
+  recoveryReady=true;
+ }
+});
+
+$("recoveryForm").addEventListener("submit",async event=>{
+ event.preventDefault();
+
+ const password=$("newPassword").value;
+
+ if(password!==$("confirmPassword").value){
+  showMessage("recoveryMessage",
+   "Las contraseñas no coinciden.");
+  return;
+ }
+
+ if(!recoveryReady){
+  showMessage("recoveryMessage",
+   "El enlace aún no se ha verificado.");
+  return;
+ }
+
+ const {error}=await db.auth.updateUser({password});
+
+ if(error){
+  showMessage("recoveryMessage","Error: "+error.message);
+  return;
+ }
+
+ await db.auth.signOut();
+ recoveryMode=false;
+ recoveryReady=false;
+
+ history.replaceState(null,"",location.pathname);
+ $("recoverySection").hidden=true;
+ $("adminLogin").hidden=false;
+
+ showMessage("loginMessage",
+  "Contraseña actualizada. Inicia sesión.",true);
+});
+
+// INICIAR PÁGINA
+
+async function initialize(){
+ $("year").textContent=new Date().getFullYear();
+
+ updateCategory();
+ await loadPublicReports();
+
+ if(recoveryMode){
+  const {data}=await db.auth.getSession();
+
+  if(data.session){
+   recoveryReady=true;
+   showMessage("recoveryMessage",
+    "Escribe tu nueva contraseña.");
   }
+  return;
+ }
 
-  const { data, error } = await db.auth.getUser();
+ const {data,error}=await db.auth.getUser();
 
-  if (!error && data.user) {
-    await showAdminPanel();
-  }
+ if(!error&&data.user){
+  await showAdminPanel();
+ }
 }
 
 initialize();
 </script>
 
 <script
-  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-  async defer>
-</script>
+src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+async defer></script>
 
 </body>
 </html>
