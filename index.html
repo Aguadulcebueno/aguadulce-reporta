@@ -1323,7 +1323,7 @@ body{background:linear-gradient(180deg,#f2f7f2 0%,#f8faf7 44%,#eef6ee 100%)}
 .section-label{letter-spacing:1.2px}
 .btn{position:relative;overflow:hidden}
 @media(hover:hover) and (pointer:fine){.btn::after{content:"";position:absolute;top:0;bottom:0;left:-70%;width:35%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,#ffffff55,transparent);transition:left .55s ease;pointer-events:none}.btn:hover::after{left:140%}}
-/* Fecha, hora y visitas sin ocupar el área principal */
+/* Fecha y hora de Panamá */
 .ar-live-strip{background:#09291f;color:#d3e9da;border-bottom:1px solid #ffffff16}
 .ar-live-inner{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:38px;padding-block:7px;flex-wrap:wrap}
 .ar-live-left,.ar-live-right{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
@@ -1351,6 +1351,24 @@ body{background:linear-gradient(180deg,#f2f7f2 0%,#f8faf7 44%,#eef6ee 100%)}
 }
 @media(prefers-reduced-motion:reduce){.hero-card{animation:none!important}.btn::after{display:none}}
 
+
+/* Navegación real en los indicadores y guía integrada */
+.metric-link{color:inherit;text-decoration:none;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.metric-link:hover,.metric-link:focus-visible{transform:translateY(-4px);border-color:#80bf94;box-shadow:0 18px 34px #103b2b1c}
+.metric-link::after{content:"↗";margin-left:auto;align-self:flex-start;color:var(--green2);font-weight:900;font-size:18px}
+.report-guide{border:1px solid #d7e7da;border-radius:13px;background:#f3f9f2;margin:16px 0 18px;overflow:hidden}
+.report-guide summary{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:13px 15px;cursor:pointer;font-weight:900;color:var(--green);font-size:13px;list-style:none}
+.report-guide summary::-webkit-details-marker{display:none}
+.report-guide summary span{font-weight:600;color:var(--muted);font-size:11px}
+.report-guide summary::after{content:"⌄";margin-left:auto;font-size:19px;transition:transform .2s}
+.report-guide[open] summary::after{transform:rotate(180deg)}
+.report-guide-steps{margin:0;padding:0 15px 15px;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.report-guide-steps li{display:flex;align-items:flex-start;gap:9px;background:white;border:1px solid #e3ece4;padding:11px;border-radius:10px}
+.guide-index{flex:none;width:26px;height:26px;display:grid;place-items:center;background:#e6f3dd;color:var(--green);border-radius:8px;font-size:11px;font-weight:900}
+.report-guide-steps strong{display:block;font-size:12px;line-height:1.4}
+.report-guide-steps small{display:block;font-size:11px;color:var(--muted);line-height:1.5;margin-top:3px}
+@media(max-width:600px){.metric-link::after{font-size:14px}.report-guide-steps{grid-template-columns:1fr}}
+
 </style>
 </head>
 
@@ -1372,7 +1390,6 @@ body{background:linear-gradient(180deg,#f2f7f2 0%,#f8faf7 44%,#eef6ee 100%)}
   <div class="ar-live-left">
    <span class="ar-live-pill"><i class="ar-live-dot" aria-hidden="true"></i><span id="arLocalDate">Fecha de Panamá</span></span>
    <span class="ar-live-pill">🕒 <strong id="arLocalTime">--:--</strong></span>
-   <span class="ar-live-pill" title="Visitas registradas desde la activación del contador">👁 <span>Visitas:</span> <strong id="arVisitCount">—</strong></span>
   </div>
   <div class="ar-live-right"><span>AGUADULCE · COCLÉ · PANAMÁ</span></div>
  </div>
@@ -1462,29 +1479,29 @@ body{background:linear-gradient(180deg,#f2f7f2 0%,#f8faf7 44%,#eef6ee 100%)}
 
 <div class="container">
   <div class="metrics">
-    <div class="metric">
+    <a class="metric metric-link" href="#reportes" aria-label="Ir a los reportes recientes">
       <div class="metric-icon">📋</div>
       <div>
         <strong id="statReports">—</strong>
         <small>REPORTES RECIENTES</small>
       </div>
-    </div>
+    </a>
 
-    <div class="metric">
+    <a class="metric metric-link" href="#categorias" aria-label="Explorar las comunidades y categorías">
       <div class="metric-icon">📍</div>
       <div>
         <strong id="statAreas">—</strong>
         <small>COMUNIDADES</small>
       </div>
-    </div>
+    </a>
 
-    <div class="metric">
+    <a class="metric metric-link" href="#mascotas" aria-label="Ver avisos comunitarios">
       <div class="metric-icon">💚</div>
       <div>
         <strong id="statSpecial">—</strong>
         <small>AVISOS COMUNITARIOS</small>
       </div>
-    </div>
+    </a>
   </div>
 </div>
 
@@ -1511,43 +1528,21 @@ body{background:linear-gradient(180deg,#f2f7f2 0%,#f8faf7 44%,#eef6ee 100%)}
         o el afiche de un centro de acopio.
         No necesitas crear una cuenta.
       </p>
-
-      <div class="step">
-        <div class="step-number">01</div>
-        <div>
-          <strong>Selecciona el tipo de aviso</strong>
-          <p>Elige la categoría que corresponda.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-number">02</div>
-        <div>
-          <strong>Agrega los detalles</strong>
-          <p>Describe la situación y la comunidad.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-number">03</div>
-        <div>
-          <strong>Sube una foto o afiche</strong>
-          <p>Se optimizará automáticamente antes de enviarse.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-number">04</div>
-        <div>
-          <strong>Revisión antes de publicar</strong>
-          <p>Administración revisará el aviso solicitado.</p>
-        </div>
-      </div>
     </div>
 
     <div class="form-card">
       <h3>📨 Nueva publicación</h3>
       <p>Completa los campos y evita compartir datos privados.</p>
+      <details class="report-guide" id="reportGuide">
+        <summary>📖 ¿Cómo publicar? <span>Guía rápida de 4 pasos</span></summary>
+        <ol class="report-guide-steps">
+          <li><span class="guide-index">01</span><div><strong>Selecciona el tipo de aviso</strong><small>Elige la categoría que corresponda.</small></div></li>
+          <li><span class="guide-index">02</span><div><strong>Agrega los detalles</strong><small>Describe la situación y la comunidad.</small></div></li>
+          <li><span class="guide-index">03</span><div><strong>Sube una foto o afiche</strong><small>Se optimizará automáticamente antes de enviarse.</small></div></li>
+          <li><span class="guide-index">04</span><div><strong>Revisión antes de publicar</strong><small>Administración revisará el aviso solicitado.</small></div></li>
+        </ol>
+      </details>
+
 
       <form id="reportForm" novalidate>
 
@@ -4332,11 +4327,10 @@ initialize();
 
 
 <script>
-/* Fecha y hora de Panamá, con contador real opcional de Supabase. */
+/* Fecha y hora de Panamá. */
 (function(){
  const dateEl=document.getElementById('arLocalDate');
  const timeEl=document.getElementById('arLocalTime');
- const countEl=document.getElementById('arVisitCount');
  function refreshClock(){
   const now=new Date();
   dateEl.textContent=new Intl.DateTimeFormat('es-PA',{timeZone:'America/Panama',weekday:'short',day:'numeric',month:'short',year:'numeric'}).format(now);
@@ -4344,24 +4338,6 @@ initialize();
  }
  refreshClock();
  setInterval(refreshClock,30000);
- async function visits(){
-  try{
-   if(!window.supabase)return;
-   const client=window.supabase.createClient('https://lrupvpgyjzhgyvprrmtl.supabase.co','sb_publishable_toBA9zteOxIM1WivpdjwFQ_xUXsqfpf',{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},storageKey:'ar-visitor-count'});
-   let already=false;
-   try{already=sessionStorage.getItem('ar-visit-recorded')==='1'}catch(_){}
-   const {data,error}=await client.rpc(already?'get_site_visits':'register_site_visit');
-   if(error)throw error;
-   if(Number.isFinite(Number(data))){
-    countEl.textContent=new Intl.NumberFormat('es-PA').format(Number(data));
-    if(!already)try{sessionStorage.setItem('ar-visit-recorded','1')}catch(_){}
-   }
-  }catch(e){
-   countEl.textContent='—';
-   countEl.title='Activa el contador con el SQL incluido';
-  }
- }
- visits();
 })();
 </script>
 
