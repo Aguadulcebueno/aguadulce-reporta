@@ -1383,6 +1383,55 @@ body{background:linear-gradient(180deg,#f2f7f2 0%,#f8faf7 44%,#eef6ee 100%)}
 @media(max-width:600px){.share-action{flex:1 1 auto;font-size:11px;padding:10px 9px}.share-action svg{width:19px;height:19px}}
 @media(prefers-reduced-motion:reduce){.share-action{transition:none}}
 
+
+/* Refinamiento editorial: imágenes 4:5, espacios moderados y lectura móvil. */
+.report-photo-wrap{
+  height:auto!important;
+  aspect-ratio:4 / 5;
+  background:#eaf1eb;
+  display:grid;
+  place-items:center;
+}
+.report-photo-wrap img{
+  width:100%;height:100%;object-fit:contain;
+}
+/* La foto se muestra completa, sin recortar afiches ni avisos. */
+.report-photo-wrap:hover img{transform:scale(1.015)}
+.preview:not([hidden]){
+  width:min(100%,260px);height:auto;aspect-ratio:4 / 5;
+  max-height:none;object-fit:contain;background:#edf3ed;
+  border:1px solid #d9e8dc;padding:5px;
+}
+.preview[hidden]{display:none!important}
+.section{padding-block:36px}
+.section-title{margin-block:8px;line-height:1.13}
+.section-description{line-height:1.55;max-width:610px;margin-block:6px 12px}
+.reports-layout{margin-top:18px;gap:17px}
+.reports-toolbar{gap:8px}
+.report-grid,.special-grid,.special-feed{gap:13px}
+.special-grid,.special-feed,.category-grid{margin-top:14px}
+.special-card{padding:20px;border-radius:17px}
+.special-card h3{margin:11px 0 6px;font-size:22px}
+.special-card p{line-height:1.55}
+.report-body{padding:15px}
+.report-body h3{font-size:19px;margin:9px 0 7px}
+.report-body p{font-size:13px;line-height:1.55}
+.share-actions{gap:6px;margin-top:11px}
+.share-action{min-height:38px;padding:8px 9px}
+@media(max-width:600px){
+  .section{padding-block:25px}
+  .section-title{font-size:clamp(26px,7.2vw,33px)}
+  .section-description{font-size:13px;line-height:1.5}
+  .reports-layout{margin-top:12px;gap:12px}
+  .report-grid{gap:12px}
+  .report-body{padding:14px}
+  .special-card{padding:16px}
+  .special-card h3{font-size:20px}
+  .share-action{flex:1 1 calc(33.333% - 8px);font-size:10px}
+  .share-action svg{width:17px;height:17px}
+  .preview:not([hidden]){width:min(100%,230px)}
+}
+
 </style>
 </head>
 
@@ -1723,7 +1772,7 @@ body{background:linear-gradient(180deg,#f2f7f2 0%,#f8faf7 44%,#eef6ee 100%)}
     <div class="section-label">EL PULSO DE AGUADULCE</div>
     <h2 class="section-title">Últimos reportes de Aguadulce.</h2>
     <p class="section-description">
-      Historias y situaciones compartidas por vecinos. Los reportes pasan por revisión antes de aparecer aquí.
+      Reportes de vecinos, revisados antes de publicarse.
     </p>
 
     <div class="reports-layout">
@@ -1748,7 +1797,7 @@ body{background:linear-gradient(180deg,#f2f7f2 0%,#f8faf7 44%,#eef6ee 100%)}
         </div>
 
         <p class="message" id="publicMessage" role="status"></p>
-        <p class="hint" id="filterHelp">Busca por palabra o elige una categoría para encontrar reportes publicados.</p>
+        <p class="hint" id="filterHelp">Busca por palabra o categoría.</p>
 
         <div class="report-grid" id="publicReports" aria-live="polite">
           <div class="empty">Cargando reportes...</div>
