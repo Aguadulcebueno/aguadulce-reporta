@@ -1258,6 +1258,40 @@ body{line-height:1.55}
 #filterHelp{margin:0 0 12px}
 .reports-toolbar{margin-bottom:8px}
 @media(max-width:600px){.section{padding-top:35px;padding-bottom:35px}.hero-inner{padding-top:38px;padding-bottom:62px}}
+
+/* MICROINTERACCIONES — AGUADULCE REPORTA */
+@keyframes ar-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ar-pulse{0%,100%{box-shadow:0 0 0 0 rgba(215,245,104,.28)}55%{box-shadow:0 0 0 10px rgba(215,245,104,0)}}
+@keyframes ar-shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+.hero-tag{animation:ar-rise .65s ease-out both}
+.hero h1{animation:ar-rise .75s .1s ease-out both}
+.hero p{animation:ar-rise .75s .2s ease-out both}
+.hero-buttons{animation:ar-rise .75s .3s ease-out both}
+.hero-points{animation:ar-rise .75s .4s ease-out both}
+.hero-card{animation:ar-rise .85s .25s ease-out both}
+.btn,.category-tile,.report-card,.special-card,.location-card,.sidebar-card,.social-link,.metric,.emergency-card{
+ transition:transform .24s cubic-bezier(.2,.75,.3,1),box-shadow .24s ease,border-color .24s ease,background-color .24s ease;
+}
+@media(hover:hover) and (pointer:fine){
+ .btn:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(12,65,40,.17)}
+ .category-tile:hover,.report-card:hover,.special-card:hover,.location-card:hover,.sidebar-card:hover,.social-link:hover,.metric:hover,.emergency-card:hover{transform:translateY(-4px);box-shadow:0 16px 35px rgba(10,45,29,.11);border-color:#bddbbd}
+ .nav a,.mobile-nav a{transition:color .2s ease}
+ .nav a:hover{color:var(--lime)}
+}
+.btn:active,.category-tile:active{transform:scale(.975)}
+.field{transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.field:focus{background:white}
+.hero-buttons .btn-lime{animation:ar-pulse 3.5s 2s 2}
+/* Se activa con IntersectionObserver; si no hay JS, el contenido sigue visible. */
+.ar-reveal{opacity:1;transform:none}
+.ar-reveal.ar-pending{opacity:0;transform:translateY(18px)}
+.ar-reveal.ar-visible{opacity:1;transform:translateY(0);transition:opacity .62s ease,transform .62s cubic-bezier(.18,.8,.28,1)}
+@media(prefers-reduced-motion:reduce){
+ .hero-tag,.hero h1,.hero p,.hero-buttons,.hero-points,.hero-card,.hero-buttons .btn-lime{animation:none!important}
+ .ar-reveal,.ar-reveal.ar-pending,.ar-reveal.ar-visible{opacity:1!important;transform:none!important;transition:none!important}
+ .btn,.category-tile,.report-card,.special-card,.location-card,.sidebar-card,.social-link,.metric,.emergency-card{transition:none!important}
+}
+
 </style>
 </head>
 
@@ -4168,6 +4202,51 @@ initialize();
 <script
   src="https://challenges.cloudflare.com/turnstile/v0/api.js"
   async defer>
+</script>
+
+
+<script>
+/* Animaciones progresivas: no alteran la lógica de Supabase ni los formularios. */
+(function(){
+  function setupMotion(){
+    if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    const selector='.section-title,.section-description,.metric,.category-tile,.special-card,.location-card,.sidebar-card,.emergency-card,.social-link';
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.remove('ar-pending');
+          entry.target.classList.add('ar-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    },{threshold:.07,rootMargin:'0px 0px 45px 0px'});
+    const seen=new WeakSet();
+    function register(root){
+      const nodes=[];
+      if(root.nodeType===1&&root.matches?.(selector))nodes.push(root);
+      if(root.querySelectorAll)nodes.push(...root.querySelectorAll(selector));
+      nodes.forEach(node=>{
+        if(seen.has(node))return;
+        seen.add(node);
+        node.classList.add('ar-reveal');
+        if(node.getBoundingClientRect().top<window.innerHeight+40)return;
+        node.classList.add('ar-pending');
+        io.observe(node);
+      });
+    }
+    register(document);
+    /* Captura tarjetas que se crean al cargar los reportes. */
+    const mutationObserver=new MutationObserver(records=>{
+      records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType===1)register(node)}));
+    });
+    ['publicReports','categoryCounters','petsList'].forEach(id=>{
+      const node=document.getElementById(id);
+      if(node)mutationObserver.observe(node,{childList:true,subtree:false});
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setupMotion,{once:true});
+  else setupMotion();
+})();
 </script>
 
 </body>
