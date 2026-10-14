@@ -180,6 +180,7 @@ nav{background:var(--dark2);color:white}
  padding:13px;outline:none;color:#193227;
 }
 .field:focus{border-color:#318a61}
+.field.invalid{border:2px solid #c0392b;background:#fff8f7}
 .filters input{flex:1;min-width:0}
 .filters select{max-width:240px}
 .cards{
@@ -363,10 +364,25 @@ textarea.field{min-height:125px;resize:vertical}
  border-radius:11px;margin-top:12px;
 }
 .message{
- font-size:13px;line-height:1.6;
+ font-size:13px;line-height:1.7;
  margin-top:14px;overflow-wrap:anywhere;
 }
 .message:empty{display:none}
+.form-alert{
+ border-radius:12px;
+ padding:14px;
+ margin-top:15px;
+ background:#fff1e9;
+ border:1px solid #e6b69e;
+ color:#7e3d24;
+ font-size:13px;
+ line-height:1.7;
+}
+.form-alert.success{
+ background:#e5f5e9;
+ border-color:#a6d4b4;
+ color:#145c37;
+}
 .admin-panel{max-width:800px;margin:auto}
 .admin-report{
  background:#fafcf9;border:1px solid var(--line);
@@ -644,8 +660,6 @@ footer p{font-size:12px;line-height:1.7}
  </div>
 </section>
 
-<!-- DONACIONES Y UBICACIONES -->
-
 <section class="section donation" id="acopio">
  <div class="wrap">
 
@@ -691,7 +705,7 @@ footer p{font-size:12px;line-height:1.7}
    <div class="eyebrow">UBICACIONES EN AGUADULCE</div>
    <h2>📍 Selecciona un lugar</h2>
    <p class="section-desc">
-    Pulsa el nombre o el botón de cualquier lugar
+    Pulsa el botón de cualquier lugar
     para verlo directamente en Google Maps.
    </p>
   </div>
@@ -778,8 +792,6 @@ footer p{font-size:12px;line-height:1.7}
  </div>
 </section>
 
-<!-- DOCUMENTOS -->
-
 <section class="section documents" id="documentos">
  <div class="wrap">
   <div class="section-head">
@@ -803,8 +815,6 @@ footer p{font-size:12px;line-height:1.7}
   </p>
  </div>
 </section>
-
-<!-- FORMULARIO -->
 
 <section class="section" id="enviar">
  <div class="wrap form-layout">
@@ -845,9 +855,13 @@ footer p{font-size:12px;line-height:1.7}
 
   <div class="panel">
    <h3>📨 Enviar reporte ciudadano</h3>
-   <p>Comparte una situación de tu comunidad.</p>
+   <p>
+    No necesitas registrarte ni iniciar sesión
+    para enviar un reporte.
+   </p>
 
-   <form id="reportForm">
+   <!-- CORRECCIÓN: NOVALIDATE PARA MOSTRAR ERRORES -->
+   <form id="reportForm" novalidate>
 
     <label class="label" for="category">CATEGORÍA</label>
     <select class="field" id="category" required>
@@ -922,14 +936,16 @@ footer p{font-size:12px;line-height:1.7}
      📤 ENVIAR MI REPORTE
     </button>
 
+    <!-- MENSAJE VISIBLE PARA LOS CIUDADANOS -->
+    <div id="reportAlert" class="form-alert"
+         role="alert" aria-live="polite" hidden></div>
+
     <p class="message" id="reportMessage" role="status"></p>
    </form>
   </div>
 
  </div>
 </section>
-
-<!-- ADMINISTRACIÓN -->
 
 <section class="section" id="administracion" style="padding-top:0">
  <div class="wrap">
@@ -1008,8 +1024,6 @@ footer p{font-size:12px;line-height:1.7}
   </div>
  </div>
 </section>
-
-<!-- EMERGENCIAS AL FINAL -->
 
 <section class="section emergency-bottom" id="emergencias">
  <div class="wrap">
@@ -1092,8 +1106,6 @@ footer p{font-size:12px;line-height:1.7}
 </section>
 
 </main>
-
-<!-- REDES SOCIALES -->
 
 <section class="section social" id="redes">
  <div class="wrap">
@@ -1229,6 +1241,27 @@ function showMessage(id,text,success=false){
  const el=$(id);
  el.textContent=text;
  el.style.color=success?"#197c4a":"#627669";
+}
+
+function showReportAlert(text,success=false){
+ const alert=$("reportAlert");
+
+ alert.textContent=text;
+ alert.hidden=false;
+ alert.classList.toggle("success",success);
+
+ $("reportMessage").textContent="";
+
+ // Hace visible el error incluso en celulares.
+ alert.scrollIntoView({
+  behavior:"smooth",
+  block:"nearest"
+ });
+}
+
+function clearReportAlert(){
+ $("reportAlert").hidden=true;
+ $("reportAlert").textContent="";
 }
 
 function statusName(value){
@@ -1489,7 +1522,7 @@ $("searchReports").addEventListener("input",renderReports);
 $("categoryFilter").addEventListener("change",renderReports);
 $("refreshPublic").addEventListener("click",loadPublicReports);
 
-// FORMULARIO
+// FORMULARIO CIUDADANO
 
 function clearPreview(){
  if(previewUrl)URL.revokeObjectURL(previewUrl);
@@ -1544,9 +1577,8 @@ $("photo").addEventListener("change",()=>{
   !["image/jpeg","image/png","image/webp"].includes(photo.type)||
   photo.size>5*1024*1024
  ){
-  showMessage(
-   "reportMessage",
-   "Solo JPG, PNG o WebP, máximo 5 MB."
+  showReportAlert(
+   "⚠️ La fotografía debe ser JPG, PNG o WebP y pesar como máximo 5 MB."
   );
   $("photo").value="";
   return;
@@ -1557,8 +1589,78 @@ $("photo").addEventListener("change",()=>{
  $("photoPreview").hidden=false;
 });
 
+// Quita el aviso al corregir un campo.
+["category","area","description","visibility"].forEach(id=>{
+ $(id).addEventListener("input",()=>{
+  $(id).classList.remove("invalid");
+ });
+});
+
+function validateCitizenForm(){
+ const category=$("category");
+ const area=$("area");
+ const description=$("description");
+
+ [category,area,description].forEach(field=>{
+  field.classList.remove("invalid");
+ });
+
+ if(!category.value){
+  category.classList.add("invalid");
+  category.focus();
+  showReportAlert(
+   "⚠️ Debes seleccionar una categoría antes de enviar el reporte."
+  );
+  return false;
+ }
+
+ if(!area.value.trim()){
+  area.classList.add("invalid");
+  area.focus();
+  showReportAlert(
+   "⚠️ Debes escribir la comunidad o corregimiento."
+  );
+  return false;
+ }
+
+ if(area.value.trim().length>120){
+  area.classList.add("invalid");
+  area.focus();
+  showReportAlert(
+   "⚠️ El nombre de la comunidad es demasiado largo."
+  );
+  return false;
+ }
+
+ if(description.value.trim().length<10){
+  description.classList.add("invalid");
+  description.focus();
+  showReportAlert(
+   "⚠️ La descripción debe tener al menos 10 caracteres."
+  );
+  return false;
+ }
+
+ if(description.value.trim().length>1500){
+  description.classList.add("invalid");
+  description.focus();
+  showReportAlert(
+   "⚠️ La descripción no puede superar 1500 caracteres."
+  );
+  return false;
+ }
+
+ return true;
+}
+
 $("reportForm").addEventListener("submit",async event=>{
  event.preventDefault();
+ clearReportAlert();
+
+ // CORRECCIÓN: muestra errores visibles de validación.
+ if(!validateCitizenForm()){
+  return;
+ }
 
  const button=$("reportButton");
 
@@ -1571,7 +1673,9 @@ $("reportForm").addEventListener("submit",async event=>{
   !["image/jpeg","image/png","image/webp"].includes(photo.type)||
   photo.size>5*1024*1024
  )){
-  showMessage("reportMessage","Fotografía no válida.");
+  showReportAlert(
+   "⚠️ La fotografía no es válida. Usa JPG, PNG o WebP, máximo 5 MB."
+  );
   return;
  }
 
@@ -1580,9 +1684,9 @@ $("reportForm").addEventListener("submit",async event=>{
  )?.value||"";
 
  if(!token){
-  showMessage(
-   "reportMessage",
-   "Completa la verificación de seguridad."
+  showReportAlert(
+   "⚠️ La verificación de seguridad no está completa. "+
+   "Espera a que Cloudflare confirme la verificación e inténtalo de nuevo."
   );
   return;
  }
@@ -1598,28 +1702,73 @@ $("reportForm").addEventListener("submit",async event=>{
  if(photo)form.append("photo",photo);
 
  button.disabled=true;
- showMessage("reportMessage","Enviando reporte...");
+ button.textContent="⏳ ENVIANDO REPORTE...";
+
+ showReportAlert(
+  "⏳ Estamos enviando tu reporte. Espera un momento..."
+ );
 
  try{
-  const response=await fetch(SEND_FUNCTION,{
-   method:"POST",
-   headers:{apikey:SUPABASE_KEY},
-   body:form
-  });
+  // Evita que el formulario quede cargando indefinidamente.
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>{
+   controller.abort();
+  },30000);
 
-  const result=await response.json();
+  let response;
 
-  if(!response.ok||!result.success){
-   throw new Error(result.error||"No se pudo enviar.");
+  try{
+   response=await fetch(SEND_FUNCTION,{
+    method:"POST",
+    headers:{apikey:SUPABASE_KEY},
+    body:form,
+    signal:controller.signal
+   });
+  }finally{
+   clearTimeout(timeout);
+  }
+
+  // Lee tanto respuestas JSON como errores de texto.
+  const raw=await response.text();
+  let result={};
+
+  try{
+   result=raw?JSON.parse(raw):{};
+  }catch{
+   result={error:raw.slice(0,300)};
+  }
+
+  if(!response.ok){
+   throw new Error(
+    "El servidor respondió con error "+response.status+
+    (result.error?": "+result.error:
+     result.message?": "+result.message:"")
+   );
+  }
+
+  if(result.success===false){
+   throw new Error(
+    result.error||result.message||
+    "El servidor no aceptó el reporte."
+   );
+  }
+
+  // No se confirma el envío cuando el servidor
+  // devuelve una respuesta sin confirmación.
+  if(result.success!==true){
+   throw new Error(
+    "El servidor respondió, pero no confirmó que "+
+    "el reporte se haya guardado."
+   );
   }
 
   $("reportForm").reset();
   clearPreview();
   updateCategory();
 
-  showMessage(
-   "reportMessage",
-   "✅ Reporte recibido. Quedará pendiente de revisión.",
+  showReportAlert(
+   "✅ ¡Reporte enviado correctamente! "+
+   "Tu reporte fue recibido y quedó pendiente de revisión.",
    true
   );
 
@@ -1628,15 +1777,33 @@ $("reportForm").addEventListener("submit",async event=>{
   }
 
  }catch(error){
-  console.error(error);
-  showMessage(
-   "reportMessage",
-   error.message||"Error al enviar el reporte."
+  console.error("Error enviando reporte:",error);
+
+  let message=error.message||
+   "No se pudo completar el envío.";
+
+  if(error.name==="AbortError"){
+   message=
+    "La conexión tardó demasiado. Comprueba en administración "+
+    "si el reporte llegó antes de volver a enviarlo.";
+  }else if(error instanceof TypeError){
+   message=
+    "No se pudo conectar con el servidor. "+
+    "Puede ser un problema de red o de configuración de Supabase.";
+  }
+
+  showReportAlert(
+   "❌ No se pudo confirmar el envío del reporte. "+
+   message
   );
 
  }finally{
   button.disabled=false;
-  if(window.turnstile)window.turnstile.reset();
+  button.textContent="📤 ENVIAR MI REPORTE";
+
+  if(window.turnstile){
+   try{window.turnstile.reset();}catch(e){}
+  }
  }
 });
 
