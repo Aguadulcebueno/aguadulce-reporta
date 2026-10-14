@@ -1304,6 +1304,53 @@ body{line-height:1.55}
 #enviar .form-card{border:2px solid #d7e8d9}
 @media(max-width:600px){.report-quickbar-inner{gap:9px}.report-quickbar-inner>div{flex-basis:100%}.report-quickbar-inner .btn{flex:1 1 130px;font-size:11px;padding:12px 8px}#enviar{padding-top:37px;padding-bottom:43px}}
 
+
+/* EDICIÓN FUTURA — identidad digital ligera y móvil */
+:root{--ar-glow:#c7fa6a;--ar-cyan:#8ae7d7}
+html{scroll-padding-top:16px}
+body{background:linear-gradient(180deg,#f2f7f2 0%,#f8faf7 44%,#eef6ee 100%)}
+.header{background:linear-gradient(110deg,#061b17 0%,#103a2c 70%,#0a2722 100%);box-shadow:0 9px 25px #09271b1a}
+.hero{isolation:isolate;background:radial-gradient(ellipse at 84% 8%,#2a80604a,transparent 46%),radial-gradient(ellipse at 6% 90%,#77b94b29,transparent 46%),linear-gradient(125deg,#061b18,#0c3027 72%,#123d31)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.18;background-image:linear-gradient(#d7f56824 1px,transparent 1px),linear-gradient(90deg,#d7f56824 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(90deg,transparent,#000)}
+.hero h1 span{background:linear-gradient(95deg,#d7f568,#8be7bd);color:transparent;-webkit-background-clip:text;background-clip:text}
+.hero-tag{border-color:#b5f6ae66;background:#b5f6ae0b;box-shadow:0 0 25px #a3ff9320}
+.hero-buttons .btn-lime,.dock-primary{box-shadow:0 8px 25px #b3ec4c2b}
+.report-quickbar{background:linear-gradient(95deg,#e9f8e5,#f4f9f2);border-bottom:1px solid #cde2cb}
+.report-quickbar-inner{padding-top:14px;padding-bottom:14px}
+.form-card,.report-card,.special-card,.category-tile,.location-card,.sidebar-card,.metric{border:1px solid #dce9df;box-shadow:0 12px 32px #082e1c0b}
+.form-card{background:linear-gradient(145deg,#fff,#fbfefb);border-color:#a9d7b8!important;box-shadow:0 18px 48px #104a2818}
+.field:focus{border-color:#2caa78;box-shadow:0 0 0 4px #3cc48a25}
+.section-label{letter-spacing:1.2px}
+.btn{position:relative;overflow:hidden}
+@media(hover:hover) and (pointer:fine){.btn::after{content:"";position:absolute;top:0;bottom:0;left:-70%;width:35%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,#ffffff55,transparent);transition:left .55s ease;pointer-events:none}.btn:hover::after{left:140%}}
+/* Fecha, hora y visitas sin ocupar el área principal */
+.ar-live-strip{background:#09291f;color:#d3e9da;border-bottom:1px solid #ffffff16}
+.ar-live-inner{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:38px;padding-block:7px;flex-wrap:wrap}
+.ar-live-left,.ar-live-right{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+.ar-live-strip span{font-size:11px;font-weight:700;letter-spacing:.15px}
+.ar-live-pill{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border:1px solid #ffffff24;border-radius:999px;background:#ffffff09}
+.ar-live-dot{width:6px;height:6px;border-radius:50%;background:#d7f568;box-shadow:0 0 0 4px #d7f56822;display:inline-block}
+.ar-live-strip strong{color:#d7f568;font-variant-numeric:tabular-nums}
+@keyframes ar-softfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@media(min-width:851px){.hero-card{animation:ar-softfloat 7s ease-in-out infinite}}
+@media(max-width:600px){
+ .header-inner{min-height:68px}
+ .hero-inner{padding-top:32px;padding-bottom:57px}
+ .hero h1{font-size:clamp(35px,9.2vw,48px);letter-spacing:-1.2px}
+ .hero p{font-size:14px}
+ .hero-buttons{gap:9px}
+ .section{padding-block:30px}
+ .section-title{font-size:clamp(28px,8vw,35px)}
+ .form-card{padding:18px;border-radius:18px}
+ .ar-live-inner{justify-content:center;gap:5px;min-height:36px;padding-block:6px}
+ .ar-live-left{gap:6px;justify-content:center}
+ .ar-live-right{display:none}
+ .ar-live-pill{padding:5px 8px}
+ .ar-live-strip span{font-size:10px}
+ .mobile-dock{backdrop-filter:blur(16px);background:#fffffff0}
+}
+@media(prefers-reduced-motion:reduce){.hero-card{animation:none!important}.btn::after{display:none}}
+
 </style>
 </head>
 
@@ -1317,6 +1364,18 @@ body{line-height:1.55}
       <a href="https://www.tiktok.com/@aguadulcemalo" target="_blank" rel="noopener noreferrer">TikTok ↗</a>
     </div>
   </div>
+</div>
+
+
+<div class="ar-live-strip" aria-label="Información del sitio">
+ <div class="container ar-live-inner">
+  <div class="ar-live-left">
+   <span class="ar-live-pill"><i class="ar-live-dot" aria-hidden="true"></i><span id="arLocalDate">Fecha de Panamá</span></span>
+   <span class="ar-live-pill">🕒 <strong id="arLocalTime">--:--</strong></span>
+   <span class="ar-live-pill" title="Visitas registradas desde la activación del contador">👁 <span>Visitas:</span> <strong id="arVisitCount">—</strong></span>
+  </div>
+  <div class="ar-live-right"><span>AGUADULCE · COCLÉ · PANAMÁ</span></div>
+ </div>
 </div>
 
 <header class="header">
@@ -4268,6 +4327,41 @@ initialize();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setupMotion,{once:true});
   else setupMotion();
+})();
+</script>
+
+
+<script>
+/* Fecha y hora de Panamá, con contador real opcional de Supabase. */
+(function(){
+ const dateEl=document.getElementById('arLocalDate');
+ const timeEl=document.getElementById('arLocalTime');
+ const countEl=document.getElementById('arVisitCount');
+ function refreshClock(){
+  const now=new Date();
+  dateEl.textContent=new Intl.DateTimeFormat('es-PA',{timeZone:'America/Panama',weekday:'short',day:'numeric',month:'short',year:'numeric'}).format(now);
+  timeEl.textContent=new Intl.DateTimeFormat('es-PA',{timeZone:'America/Panama',hour:'2-digit',minute:'2-digit',hour12:true}).format(now);
+ }
+ refreshClock();
+ setInterval(refreshClock,30000);
+ async function visits(){
+  try{
+   if(!window.supabase)return;
+   const client=window.supabase.createClient('https://lrupvpgyjzhgyvprrmtl.supabase.co','sb_publishable_toBA9zteOxIM1WivpdjwFQ_xUXsqfpf',{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},storageKey:'ar-visitor-count'});
+   let already=false;
+   try{already=sessionStorage.getItem('ar-visit-recorded')==='1'}catch(_){}
+   const {data,error}=await client.rpc(already?'get_site_visits':'register_site_visit');
+   if(error)throw error;
+   if(Number.isFinite(Number(data))){
+    countEl.textContent=new Intl.NumberFormat('es-PA').format(Number(data));
+    if(!already)try{sessionStorage.setItem('ar-visit-recorded','1')}catch(_){}
+   }
+  }catch(e){
+   countEl.textContent='—';
+   countEl.title='Activa el contador con el SQL incluido';
+  }
+ }
+ visits();
 })();
 </script>
 
