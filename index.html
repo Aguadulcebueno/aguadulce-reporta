@@ -22,6 +22,7 @@
   <link rel="canonical" href="https://aguadulcebueno.github.io/aguadulce-reporta/">
 
 <meta charset="UTF-8">
+<meta name="color-scheme" content="light">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#071f19">
 <meta name="description" content="Aguadulce Reporta: reportes ciudadanos, mascotas perdidas, centros de acopio y noticias de nuestra comunidad.">
@@ -1139,6 +1140,110 @@ textarea.field{min-height:145px;resize:vertical}
     transition:none!important;
   }
 }
+
+/* AGUADULCE REPORTA · EDICIÓN 2.0 — diseño móvil primero */
+:root{--shadow:0 12px 32px rgba(10,45,29,.07)}
+body{line-height:1.55}
+:focus-visible{outline:3px solid #7cbf38;outline-offset:3px}
+.container{width:min(1160px,calc(100% - 40px))}
+.header{position:relative;z-index:5}
+.header-inner{min-height:80px}
+.brand img{width:58px;height:58px;border-radius:17px}
+.brand-name{font-size:24px;line-height:1.02}
+.brand-sub{font-size:10px;line-height:1.35;letter-spacing:.45px;max-width:320px}
+.nav a{font-size:13px}
+.topbar{font-size:11px}
+.hero{background:radial-gradient(circle at 85% 10%,#2a7550 0,transparent 42%),linear-gradient(125deg,#071f19,#12402e)}
+.hero-inner{padding:78px 0 96px;gap:46px}
+.hero h1{font-size:clamp(44px,5.3vw,76px);letter-spacing:-2.5px;line-height:1.07;max-width:740px}
+.hero p{font-size:16px;line-height:1.75}
+.hero-tag{font-size:12px;letter-spacing:.6px;background:#ffffff0b}
+.hero-buttons .btn{min-height:49px;font-size:13px}
+.hero-card{transform:none;padding:29px;border:1px solid #e0ece3}
+.hero-card>*{transform:none}
+.hero-card h3{font-size:27px}
+.metrics{margin-top:-33px}
+.metric{border-radius:19px}
+.section{padding:66px 0}
+.section-title{font-size:clamp(30px,4vw,46px)}
+.section-description{font-size:15px;line-height:1.7}
+.reports-section{background:#edf4ee}
+.reports-layout{grid-template-columns:minmax(0,1fr) 270px}
+.report-grid{gap:17px}
+.report-card{border-radius:18px;box-shadow:0 10px 25px #0a301c0c}
+.report-photo-wrap{height:215px}
+.report-body{padding:20px}
+.report-body h3{font-size:23px;margin:13px 0 8px}
+.report-body p{font-size:14px;line-height:1.65}
+.report-category{font-size:11px;padding:7px 10px}
+.report-bottom{font-size:12px;align-items:center}
+.share-action{min-height:39px;font-size:12px}
+.reports-toolbar .field{min-height:46px;font-size:14px}
+.category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.category-tile .name{font-size:15px}
+.category-tile small{font-size:12px}
+.category-tile strong{font-size:28px}
+.quake-status,.quake-info small,.quake-note,.quake-links,.sidebar-card p{font-size:12px}
+.hint,.message,.special-card p,.form-card>p,.form-intro>p{font-size:14px}
+.label{font-size:13px}
+.field{font-size:16px}
+.btn{font-size:13px}
+.mobile-dock{display:none}
+@media(max-width:850px){
+ .hero-inner{grid-template-columns:1fr;padding:65px 0 85px}
+ .hero-card{display:none}
+ .reports-layout{grid-template-columns:1fr}
+ .quake-widget{position:static}
+ .sidebar{order:2}
+ .form-layout{grid-template-columns:1fr;gap:35px}
+ .special-feed{grid-template-columns:repeat(2,1fr)}
+ .emergency-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+ body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+ .container{width:calc(100% - 32px)}
+ .section{padding:52px 0}
+ .topbar{display:none}
+ .header-inner{min-height:72px;gap:9px}
+ .brand{gap:9px;min-width:0}
+ .brand img{width:48px;height:48px;padding:3px;border-radius:13px;flex-shrink:0}
+ .brand-name{font-size:20px;letter-spacing:-.5px}
+ .brand-sub{font-size:9px;letter-spacing:0;max-width:195px}
+ .header .btn{font-size:11px;padding:11px 12px;white-space:nowrap}
+ .mobile-nav{display:none}
+ .hero-inner{padding:53px 0 75px}
+ .hero h1{font-size:clamp(39px,10vw,53px);letter-spacing:-1.6px;margin:20px 0}
+ .hero p{font-size:15px;line-height:1.7}
+ .hero-tag{font-size:10px;padding:9px 11px}
+ .hero-buttons{display:grid;grid-template-columns:1fr;gap:10px;margin-top:24px}
+ .hero-buttons .btn{width:100%;font-size:13px;min-height:51px}
+ .hero-points{gap:11px;font-size:11px}
+ .metrics{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:-26px}
+ .metric{padding:13px 9px;border-radius:14px;display:block}
+ .metric-icon{width:34px;height:34px;font-size:18px}
+ .metric strong{font-size:24px;margin-top:7px}
+ .metric small{font-size:10px;line-height:1.3}
+ .section-title{font-size:34px;letter-spacing:-.8px}
+ .section-description{font-size:14px}
+ .report-grid,.special-grid,.special-feed,.location-grid,.emergency-grid,.social-grid{grid-template-columns:1fr}
+ .reports-toolbar{flex-direction:column}
+ .reports-toolbar select{width:100%}
+ .report-photo-wrap{height:215px}
+ .report-body h3{font-size:23px}
+ .category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .category-tile{padding:17px}
+ .category-tile .name{font-size:14px}
+ .category-tile strong{font-size:24px}
+ .category-tile small{font-size:11px}
+ .donation-hero{grid-template-columns:1fr;padding:25px}
+ .form-card{padding:22px}
+ .mobile-dock{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;bottom:0;left:0;right:0;z-index:8000;background:#fff;border-top:1px solid #dbe9df;box-shadow:0 -7px 30px #071f1922;padding:7px 8px calc(7px + env(safe-area-inset-bottom,0px))}
+ .mobile-dock a{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1px;color:#244c36;min-height:53px;border-radius:11px;font-weight:800}
+ .mobile-dock a span{font-size:25px;line-height:1.1}
+ .mobile-dock a small{font-size:11px}
+ .mobile-dock .dock-primary{background:#d7f568;color:#071f19}
+}
+
 </style>
 </head>
 
@@ -1157,7 +1262,7 @@ textarea.field{min-height:145px;resize:vertical}
 <header class="header">
   <div class="container header-inner">
     <a class="brand" href="#inicio">
-      <img src="logo.png" id="brandLogo" alt="Logo original de Aguadulce Malo y Bueno">
+      <img src="logo.png" id="brandLogo" alt="Logo original de Aguadulce Malo y Bueno" width="65" height="65">
       <div>
         <div class="brand-name">AGUADULCE<br>REPORTA<span>.</span></div>
         <div class="brand-sub">UNA INICIATIVA DE AGUADULCE MALO &amp; BUENO</div>
@@ -1189,22 +1294,27 @@ textarea.field{min-height:145px;resize:vertical}
   </div>
 </nav>
 
+
+<nav class="mobile-dock" aria-label="Navegación rápida">
+  <a href="#inicio" aria-label="Ir al inicio"><span aria-hidden="true">⌂</span><small>Inicio</small></a>
+  <a href="#reportes" aria-label="Ver reportes"><span aria-hidden="true">▤</span><small>Reportes</small></a>
+  <a href="#enviar" class="dock-primary" aria-label="Enviar reporte"><span aria-hidden="true">＋</span><small>Reportar</small></a>
+</nav>
+
 <section class="hero" id="inicio">
   <div class="container hero-inner">
     <div>
-      <div class="hero-tag">● UNA INICIATIVA DE AGUADULCE MALO &amp; BUENO</div>
+      <div class="hero-tag">● LA VOZ DE NUESTRA COMUNIDAD</div>
 
-      <h1>Una ciudad.<br>Mil historias.<br><span>Una sola voz.</span></h1>
+      <h1>Lo que pasa en<br><span>Aguadulce,</span><br>contado por su gente.</h1>
 
       <p>
-        Aguadulce merece ser escuchada. Reporta problemas,
-        encuentra mascotas, comparte centros de acopio y ayuda
-        a construir una comunidad más conectada.
+        Tu comunidad tiene voz. Comparte un reporte, ayuda a encontrar mascotas y descubre avisos útiles para Aguadulce.
       </p>
 
       <div class="hero-buttons">
-        <a href="#enviar" class="btn btn-lime">📢 ENVIAR UN REPORTE →</a>
-        <a href="#reportes" class="btn btn-outline">VER PUBLICACIONES</a>
+        <a href="#enviar" class="btn btn-lime">＋ ENVIAR REPORTE</a>
+        <a href="#reportes" class="btn btn-outline">EXPLORAR REPORTES</a>
       </div>
 
       <div class="hero-points">
@@ -1256,37 +1366,17 @@ textarea.field{min-height:145px;resize:vertical}
   </div>
 </div>
 
-<section class="section" id="categorias">
-  <div class="container">
-    <div class="section-label">EXPLORA AGUADULCE</div>
-    <h2 class="section-title">Cada reporte cuenta.</h2>
-    <p class="section-description">
-      Explora los temas que importan a nuestra comunidad.
-      Selecciona una categoría para ver sus publicaciones.
-    </p>
-
-    <div class="category-grid" id="categoryCounters">
-      <div class="empty">Cargando categorías...</div>
-    </div>
-
-    <p class="hint">
-      Los contadores corresponden a los últimos 100 avisos públicos disponibles.
-    </p>
-  </div>
-</section>
-
 <section class="section reports-section" id="reportes">
   <div class="container">
     <div class="section-label">EL PULSO DE AGUADULCE</div>
-    <h2 class="section-title">Lo que está pasando.</h2>
+    <h2 class="section-title">Últimos reportes de Aguadulce.</h2>
     <p class="section-description">
-      Los reportes ciudadanos son el corazón de esta plataforma.
-      Conoce las situaciones que comparte nuestra gente.
+      Historias y situaciones compartidas por vecinos. Los reportes pasan por revisión antes de aparecer aquí.
     </p>
 
     <div class="reports-layout">
 
-      <main class="reports-main">
+      <main class="reports-main" aria-label="Publicaciones ciudadanas">
         <div class="reports-toolbar">
           <input
             id="searchReports"
@@ -1306,7 +1396,7 @@ textarea.field{min-height:145px;resize:vertical}
 
         <p class="message" id="publicMessage" role="status"></p>
 
-        <div class="report-grid" id="publicReports">
+        <div class="report-grid" id="publicReports" aria-live="polite">
           <div class="empty">Cargando reportes...</div>
         </div>
       </main>
@@ -1362,6 +1452,25 @@ textarea.field{min-height:145px;resize:vertical}
 
       </aside>
     </div>
+  </div>
+</section>
+
+<section class="section" id="categorias">
+  <div class="container">
+    <div class="section-label">EXPLORA AGUADULCE</div>
+    <h2 class="section-title">Cada reporte cuenta.</h2>
+    <p class="section-description">
+      Explora los temas que importan a nuestra comunidad.
+      Selecciona una categoría para ver sus publicaciones.
+    </p>
+
+    <div class="category-grid" id="categoryCounters">
+      <div class="empty">Cargando categorías...</div>
+    </div>
+
+    <p class="hint">
+      Los contadores corresponden a los últimos 100 avisos públicos disponibles.
+    </p>
   </div>
 </section>
 
