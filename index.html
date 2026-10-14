@@ -4,629 +4,1531 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#102e27">
-<title>Aguadulce Reporta | La voz de nuestra comunidad</title>
-<meta name="description" content="Reportes ciudadanos, sismos, solidaridad y emergencias en Aguadulce, Coclé.">
+<meta name="theme-color" content="#071f19">
+<meta name="description" content="Aguadulce Reporta: la plataforma ciudadana para informar, ayudar y transformar nuestra comunidad.">
+<title>Aguadulce Reporta — La voz que mueve nuestra comunidad</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
-:root{--dark:#102e27;--dark2:#08241c;--green:#17503a;--lime:#d5f05a;--bg:#f5f7f2;--line:#dfe8df;--muted:#627669}
+:root{
+  --ink:#0b241c;
+  --deep:#071f19;
+  --green:#13573d;
+  --green2:#207a53;
+  --lime:#d7f568;
+  --paper:#f6f8f4;
+  --white:#ffffff;
+  --muted:#6d8074;
+  --line:#e1eae2;
+  --shadow:0 16px 50px rgba(8,40,27,.075);
+  --radius:22px;
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:#193227;font-family:"DM Sans",Arial,sans-serif}
-a{text-decoration:none;color:inherit}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"DM Sans",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-button:disabled{opacity:.55;cursor:not-allowed}
+button:disabled{opacity:.6;cursor:not-allowed}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
 [hidden]{display:none!important}
-.wrap{max-width:1160px;margin:auto;padding:0 18px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:13px 18px;font-size:12px;font-weight:900;text-align:center}
-.btn-lime{background:var(--lime);color:var(--dark)}
-.btn-green{background:var(--green);color:white}
-.btn-soft{background:#e5f0e7;color:var(--green)}
-.btn-outline{border:1px solid #ffffff65;background:#ffffff10;color:white}
-.top{background:#08231c;color:#cde1d2;font-size:11px}
-.top .wrap{display:flex;justify-content:space-between;gap:10px;padding-top:10px;padding-bottom:10px}
-.top a{margin-left:13px}
-header{background:var(--dark);color:white}
-.header-row{min-height:110px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.brand{display:flex;align-items:center;gap:14px}
-.logo-box{width:94px;height:94px;flex-shrink:0;background:white;border:3px solid var(--lime);border-radius:18px;padding:6px;display:grid;place-items:center}
-.logo-box img{width:100%;height:100%;object-fit:contain}
-.logo-fallback{font-size:11px;font-weight:900;color:var(--dark);text-align:center}
-.brand-name{font:900 clamp(24px,4vw,41px)/.98 Outfit;letter-spacing:-1px}
-.brand-name span{color:var(--lime)}
-.brand-caption{font-size:10px;color:#c6dccd;letter-spacing:1.4px;margin-top:8px}
-nav{background:var(--dark2);color:white}
-.navlinks{display:flex;gap:24px;overflow-x:auto}
-.navlinks a{font-size:11px;font-weight:900;white-space:nowrap;padding:17px 0}
-.hero{background:radial-gradient(circle at 85% 30%,#246648,#123d2d 48%,#102e27 85%);color:white}
-.hero-grid{padding-top:65px;padding-bottom:85px}
-.hero-content{max-width:850px}
-.kicker{font-size:11px;font-weight:900;letter-spacing:2px;color:var(--lime)}
-.hero h1{font:900 clamp(42px,6vw,70px)/1.04 Outfit;letter-spacing:-2px;margin:19px 0}
-.hero h1 span{color:var(--lime)}
-.hero p{font-size:15px;line-height:1.8;color:#c6dacb;max-width:700px}
-.hero-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
-.section{padding:65px 0}
-.eyebrow{font-size:11px;color:#267a50;letter-spacing:1.5px;font-weight:900}
-.section h2{font:900 clamp(29px,4vw,40px) Outfit;letter-spacing:-1px;margin:8px 0 12px}
-.section-desc{font-size:13px;color:var(--muted);line-height:1.8}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:22px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:-28px;position:relative}
-.stat{background:white;padding:22px;border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 30px #102e2717}
-.stat strong{display:block;font:900 31px Outfit;color:var(--green)}
-.stat span{font-size:10px;font-weight:900;color:var(--muted)}
-.counter-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-top:22px}
-.counter{background:white;border:1px solid var(--line);border-radius:15px;padding:19px;text-align:left}
-.counter strong{display:block;font:900 29px Outfit;color:var(--green);margin:7px 0}
-.counter span{font-size:12px;font-weight:800}
-.counter small{display:block;margin-top:5px;font-size:10px;color:var(--muted)}
-.filters{display:flex;gap:10px;background:white;padding:14px;border:1px solid var(--line);border-radius:14px;margin:20px 0}
-.field{width:100%;border:1px solid #d7e4d9;background:#fbfcfa;border-radius:10px;padding:13px;outline:none;color:#193227}
-.field:focus{border-color:#318a61}
-.field.invalid{border:2px solid #c0392b;background:#fff8f7}
-.filters input{flex:1;min-width:0}
-.filters select{max-width:240px}
-.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.report-card{background:white;border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 10px 30px #102e2717;display:flex;flex-direction:column}
-.report-photo-box{height:210px;background:#e6eee7}
-.report-photo{width:100%;height:100%;object-fit:cover;display:block}
-.report-body{padding:20px;display:flex;flex-direction:column;flex:1;min-width:0}
-.report-category{font-size:10px;color:#267e55;font-weight:900;text-transform:uppercase}
-.report-body h3{font:800 22px Outfit;margin:11px 0;overflow-wrap:anywhere}
-.report-body p{font-size:13px;line-height:1.7;color:#526759;white-space:pre-wrap;overflow-wrap:anywhere;flex:1}
-.report-footer{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:13px;margin-top:15px;font-size:11px;color:var(--muted)}
-.pill{background:#e5f1e6;color:#206747;padding:6px 9px;border-radius:30px;font-weight:900}
-.empty{grid-column:1/-1;background:white;padding:35px 20px;text-align:center;border:1px dashed #c9daca;border-radius:15px;color:var(--muted)}
-.seismic{background:#103c35;color:white}
-.seismic .eyebrow{color:var(--lime)}
-.seismic .section-desc,.seismic .notice{color:#c5dcd0}
-.seismic-head{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
-.seismic .btn-soft{background:var(--lime);color:var(--dark)}
-.quake-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:22px}
-.quake-item{background:#ffffff12;border:1px solid #ffffff30;border-radius:16px;padding:20px}
-.quake-top{display:flex;gap:15px;align-items:center}
-.quake-mag{background:var(--lime);color:var(--dark);border-radius:13px;padding:12px;font:900 24px Outfit;min-width:75px;text-align:center}
-.quake-item h3{font:800 17px Outfit;margin:0 0 6px}
-.quake-item p{font-size:12px;color:#d1e4d8;line-height:1.7}
-.quake-item a{font-size:12px;color:var(--lime);font-weight:800}
-.seismic-links{display:flex;gap:20px;flex-wrap:wrap;margin-top:22px;font-size:13px;font-weight:800;color:var(--lime)}
-.banner{border-radius:21px;padding:30px;display:flex;align-items:center;justify-content:space-between;gap:22px}
-.banner h2{font:900 33px Outfit;margin:0 0 10px}
-.banner p{font-size:13px;line-height:1.7;margin:0}
-.quake{background:#fff3e5}
-.quake .banner{background:#773c25;color:white}
-.quake .banner p{color:#f5dacd}
-.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
-.tip{background:white;border:1px solid #e8e2d7;border-radius:13px;padding:20px}
-.tip strong{display:block;font-size:14px;margin-bottom:8px}
-.tip p{font-size:12px;line-height:1.7;color:#665e54;margin:0}
-.donation{background:linear-gradient(180deg,#eaf2df,#f4f8ef)}
-.donation .banner{background:linear-gradient(120deg,#214b35,#32794c);color:white}
-.donation .banner p{color:#d2e5d4}
-.donation-needs{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:22px}
-.donation-need{background:white;border:1px solid #d6e4d2;border-radius:14px;padding:19px}
-.donation-need strong{display:block;margin:9px 0;font-size:14px}
-.donation-need p{font-size:12px;line-height:1.7;color:var(--muted);margin:0}
-.locations{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px;margin-top:22px}
-.location-card{background:white;border:1px solid #d6e4d2;border-radius:19px;padding:24px;display:flex;flex-direction:column}
-.location-icon{font-size:34px}
-.location-card h3{font:800 23px Outfit;margin:12px 0 8px}
-.location-card p{font-size:13px;line-height:1.7;color:var(--muted);flex:1}
-.location-card .btn{width:100%;margin-top:13px}
-.location-status{display:inline-block;align-self:start;background:#fff1d5;color:#85510c;border-radius:30px;padding:7px 11px;font-size:10px;font-weight:900}
-.donation-note{background:#fff8e8;border:1px solid #e9d6a3;border-radius:14px;padding:18px;font-size:13px;line-height:1.8;color:#614a21;margin-top:22px}
-.documents{background:#e8efe6}
-.document-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
-.document-card{background:white;border:1px solid #d5e4d7;border-radius:16px;padding:23px}
-.document-card h3{font:800 21px Outfit;margin:12px 0}
-.document-card p{font-size:13px;line-height:1.7;color:#52675b;white-space:pre-wrap;overflow-wrap:anywhere}
-.document-card small{display:block;margin-top:15px;border-top:1px solid var(--line);padding-top:12px;color:var(--muted)}
-.notice{font-size:12px;color:#526659;line-height:1.8;margin-top:20px}
-.form-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:start}
-.form-intro h2{font:900 42px/1.1 Outfit;letter-spacing:-1px}
-.form-intro h2 span{color:#287f55}
-.form-intro p{font-size:14px;color:var(--muted);line-height:1.8}
-.step{display:flex;gap:12px;margin-top:20px;align-items:start}
-.step-num{width:36px;height:36px;flex-shrink:0;display:grid;place-items:center;background:#e0eddf;border-radius:10px;font-weight:900;color:var(--green)}
-.step strong{font-size:13px}
-.step p{font-size:12px;margin:5px 0}
-.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:0 10px 30px #102e2717}
-.panel h3{font:900 26px Outfit;margin:0 0 8px}
-.panel>p{font-size:13px;color:var(--muted);line-height:1.7}
-.label{display:block;font-size:12px;font-weight:900;margin:17px 0 8px}
-textarea.field{min-height:125px;resize:vertical}
-.hint{font-size:11px;line-height:1.7;color:var(--muted)}
-.preview{max-width:100%;max-height:240px;border-radius:11px;margin-top:12px}
-.message{font-size:13px;line-height:1.7;margin-top:14px;overflow-wrap:anywhere}
-.message:empty{display:none}
-.form-alert{border-radius:12px;padding:14px;margin-top:15px;background:#fff1e9;border:1px solid #e6b69e;color:#7e3d24;font-size:13px;line-height:1.7}
-.form-alert.success{background:#e5f5e9;border-color:#a6d4b4;color:#145c37}
-.compression-status{font-size:12px;font-weight:800;color:#176c42;line-height:1.7;margin-top:10px}
-.admin-panel{max-width:800px;margin:auto}
-.admin-report{background:#fafcf9;border:1px solid var(--line);border-radius:14px;padding:19px;margin-top:16px;overflow-wrap:anywhere}
-.admin-report h4{margin:0 0 10px;font-size:17px}
-.admin-report p{font-size:13px;line-height:1.7;white-space:pre-wrap}
-.admin-photo{max-width:100%;max-height:350px;object-fit:contain;border-radius:10px;margin-top:12px}
-.admin-actions{background:white;border:1px solid var(--line);border-radius:11px;padding:13px;margin-top:12px}
-.admin-top{display:flex;gap:10px}
-.admin-top .btn{flex:1}
-.emergency-bottom{background:#102e27;color:white}
-.emergency-bottom .eyebrow{color:var(--lime)}
-.emergency-bottom .section-desc{color:#c7d8ce}
-.emergency-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
-.emergency-card{background:white;border-radius:17px;padding:23px;color:#193227}
-.emergency-card h3{font:800 20px Outfit;margin:12px 0 7px}
-.emergency-card .number{font:900 32px Outfit;color:var(--green);margin:10px 0}
-.emergency-card p{font-size:12px;color:var(--muted);line-height:1.6}
-.emergency-card .btn{width:100%;margin-top:12px}
-.emergency-card.primary{background:var(--lime);color:var(--dark)}
-.emergency-card.primary .number{color:var(--dark)}
-.emergency-card.primary p{color:#365139}
-.emergency-bottom .notice{color:#c7d8ce}
-.social{background:#164532;color:white}
-.social h2{font:900 36px Outfit;margin:10px 0}
-.social p{color:#c5d9cb;font-size:13px;line-height:1.7}
-.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
-.social-card{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid #ffffff35;border-radius:16px;padding:23px;background:#ffffff0b}
-.social-card strong{font:800 21px Outfit}
-.social-card small{display:block;color:#bcd1c3;margin-top:7px}
-footer{background:#08241c;color:#b9d0c0;padding:32px 0}
-.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-footer strong{font:900 22px Outfit;color:white}
-footer p{font-size:12px;line-height:1.7}
-@media(max-width:950px){
-.cards,.document-grid,.emergency-grid,.counter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-.donation-needs{grid-template-columns:repeat(2,1fr)}
-.form-layout{grid-template-columns:1fr}
+.container{width:min(1180px,calc(100% - 40px));margin:auto}
+.section{padding:88px 0}
+.section-label{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  color:var(--green2);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
 }
-@media(max-width:650px){
-.wrap{padding:0 15px}
-.header-row{min-height:90px}
-.logo-box{width:68px;height:68px;border-radius:12px;padding:4px}
-.brand{gap:9px}
-.brand-name{font-size:24px}
-.brand-caption{font-size:8px}
-.header-row>.btn{padding:10px;font-size:10px}
-.hero-grid{padding:48px 0 65px}
-.hero h1{font-size:45px}
-.banner{flex-direction:column;align-items:start;padding:24px}
-.stats{gap:7px}
-.stat{padding:14px 9px}
-.stat strong{font-size:23px}
-.stat span{font-size:9px}
-.section{padding:45px 0}
-.filters{flex-direction:column}
-.filters select{max-width:none}
-.cards,.document-grid,.emergency-grid,.tips,.social-grid,.locations,.quake-list{grid-template-columns:1fr}
-.counter-grid,.donation-needs{grid-template-columns:repeat(2,minmax(0,1fr))}
-.counter{padding:14px}
-.counter strong{font-size:25px}
-.panel{padding:21px}
+.section-label:before{
+  content:"";
+  width:8px;height:8px;
+  border-radius:50%;
+  background:#5ab97e;
+}
+h1,h2,h3,h4{font-family:"Outfit",sans-serif}
+.section-title{
+  font-size:clamp(31px,4.5vw,49px);
+  line-height:1.1;
+  letter-spacing:-1.8px;
+  margin:14px 0 13px;
+  font-weight:900;
+}
+.section-subtitle{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.9;
+  max-width:680px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:14px 21px;
+  border:0;
+  border-radius:13px;
+  font-weight:900;
+  font-size:12px;
+  transition:transform .2s,background .2s,box-shadow .2s;
+  text-align:center;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-lime{background:var(--lime);color:var(--deep)}
+.btn-lime:hover{box-shadow:0 8px 25px #d7f56845}
+.btn-green{background:var(--green);color:white}
+.btn-soft{background:#e8f2e9;color:var(--green)}
+.btn-white{background:white;color:var(--deep)}
+.btn-ghost{background:#ffffff13;color:white;border:1px solid #ffffff40}
+.field{
+  width:100%;
+  padding:14px 15px;
+  border:1px solid #d9e5dc;
+  border-radius:12px;
+  background:#fbfcfa;
+  color:var(--ink);
+  outline:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.field:focus{
+  border-color:#45a36c;
+  box-shadow:0 0 0 4px #45a36c18;
+}
+textarea.field{min-height:140px;resize:vertical}
+.label{
+  display:block;
+  margin:20px 0 9px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.6px;
+}
+.hint{font-size:12px;color:var(--muted);line-height:1.8}
+.message{font-size:12px;line-height:1.8;color:var(--muted)}
+.message:empty{display:none}
+.card{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.eyebrow-light{color:var(--lime)}
+/* HEADER */
+.announcement{
+  background:#061a14;
+  color:#bdd6c6;
+  font-size:10px;
+  font-weight:700;
+}
+.announcement-inner{
+  min-height:35px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.live-dot{
+  display:inline-block;
+  width:7px;height:7px;
+  background:#78e5a0;
+  border-radius:50%;
+  margin-right:7px;
+  box-shadow:0 0 0 4px #78e5a01c;
+}
+.announcement a{margin-left:15px}
+.site-header{
+  position:relative;
+  z-index:5;
+  background:var(--deep);
+  color:white;
+  border-bottom:1px solid #ffffff13;
+}
+.header-inner{
+  min-height:94px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:22px;
+}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.brand-logo{
+  width:67px;height:67px;
+  border-radius:16px;
+  background:white;
+  border:2px solid var(--lime);
+  padding:5px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+.brand-title{
+  font-family:Outfit,sans-serif;
+  font-weight:900;
+  letter-spacing:-1.2px;
+  line-height:.98;
+  font-size:27px;
+}
+.brand-title em{font-style:normal;color:var(--lime)}
+.brand-sub{
+  margin-top:7px;
+  color:#a6c2b0;
+  font-size:9px;
+  letter-spacing:1.2px;
+}
+.desktop-nav{display:flex;align-items:center;gap:23px}
+.desktop-nav a{
+  font-size:11px;
+  font-weight:800;
+  color:#d1e1d5;
+  transition:color .2s;
+}
+.desktop-nav a:hover{color:var(--lime)}
+.header-actions{display:flex;align-items:center;gap:12px}
+.mobile-nav{
+  display:none;
+  background:#0c2a20;
+  border-top:1px solid #ffffff15;
+}
+.mobile-nav .container{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  padding-top:14px;
+  padding-bottom:14px;
+}
+.mobile-nav a{
+  white-space:nowrap;
+  font-size:11px;
+  font-weight:800;
+  color:#d3e5d8;
+}
+/* HERO */
+.hero{
+  position:relative;
+  overflow:hidden;
+  color:white;
+  background:
+    radial-gradient(circle at 88% 30%,#28764c 0%,transparent 34%),
+    radial-gradient(circle at 45% 100%,#16553b 0%,transparent 43%),
+    linear-gradient(125deg,#071f19,#103b2b 75%);
+}
+.hero:before{
+  content:"";
+  position:absolute;
+  width:590px;height:590px;
+  border:1px solid #ffffff12;
+  border-radius:50%;
+  right:-190px;top:-170px;
+  box-shadow:0 0 0 70px #ffffff05,0 0 0 145px #ffffff04;
+  pointer-events:none;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.12;
+  background-image:radial-gradient(#ffffff 0.7px,transparent .7px);
+  background-size:24px 24px;
+  pointer-events:none;
+}
+.hero-inner{
+  position:relative;
+  z-index:1;
+  padding:100px 0 115px;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:65px;
+  align-items:center;
+}
+.hero-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  border:1px solid #b3f5c936;
+  border-radius:50px;
+  background:#ffffff0d;
+  color:#d6f1df;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.3px;
+}
+.hero-tag span{
+  width:7px;height:7px;
+  background:var(--lime);
+  border-radius:50%;
+}
+.hero h1{
+  font-size:clamp(49px,6.2vw,83px);
+  font-weight:900;
+  line-height:1.02;
+  letter-spacing:-3.8px;
+  margin:24px 0;
+}
+.hero h1 span{color:var(--lime)}
+.hero-description{
+  color:#bed7c8;
+  font-size:15px;
+  line-height:1.95;
+  max-width:540px;
+}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:29px}
+.hero-trust{
+  display:flex;
+  flex-wrap:wrap;
+  gap:22px;
+  margin-top:35px;
+  color:#b9d2c2;
+  font-size:11px;
+  font-weight:800;
+}
+.hero-trust span:before{content:"✓";color:var(--lime);margin-right:8px}
+.hero-showcase{position:relative}
+.showcase-card{
+  background:#ffffff;
+  color:var(--ink);
+  border-radius:27px;
+  padding:29px;
+  transform:rotate(2deg);
+  box-shadow:0 30px 80px #00000032;
+  border:1px solid #ffffff90;
+}
+.showcase-card>*{transform:rotate(-2deg)}
+.showcase-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+.showcase-icon{
+  display:grid;
+  place-items:center;
+  width:52px;height:52px;
+  background:#eaf6e8;
+  border-radius:16px;
+  font-size:25px;
+}
+.showcase-badge{
+  background:#e5f4e8;
+  color:#247449;
+  border-radius:30px;
+  padding:9px 11px;
+  font-size:10px;
+  font-weight:900;
+}
+.showcase-card h3{
+  font-size:28px;
+  line-height:1.2;
+  margin:25px 0 10px;
+}
+.showcase-card p{
+  font-size:13px;
+  line-height:1.8;
+  color:var(--muted);
+}
+.showcase-divider{height:1px;background:var(--line);margin:22px 0}
+.showcase-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+.showcase-row strong{font-size:12px}
+.showcase-row small{display:block;font-size:11px;color:var(--muted);margin-top:6px}
+.showcase-circle{
+  display:grid;
+  place-items:center;
+  width:42px;height:42px;
+  border-radius:50%;
+  background:var(--lime);
+  font-size:19px;
+}
+/* METRICS */
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+  margin-top:-44px;
+  position:relative;
+  z-index:2;
+}
+.metric{
+  padding:27px 29px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:19px;
+  box-shadow:var(--shadow);
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+.metric-icon{
+  width:52px;height:52px;
+  flex-shrink:0;
+  display:grid;
+  place-items:center;
+  background:#edf5e9;
+  border-radius:15px;
+  font-size:23px;
+}
+.metric strong{
+  display:block;
+  font:900 34px Outfit;
+  color:var(--green);
+  line-height:1;
+}
+.metric small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:900;
+  margin-top:9px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+/* CATEGORY */
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:15px;
+  margin-top:30px;
+}
+.category-tile{
+  text-align:left;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:22px;
+  background:white;
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+  min-width:0;
+}
+.category-tile:hover{
+  transform:translateY(-5px);
+  border-color:#b7d5c1;
+  box-shadow:var(--shadow);
+}
+.category-tile .emoji{
+  display:grid;
+  place-items:center;
+  width:45px;height:45px;
+  border-radius:13px;
+  background:#eef6eb;
+  font-size:22px;
+}
+.category-tile strong{
+  display:block;
+  font:900 29px Outfit;
+  margin:17px 0 6px;
+  color:var(--green);
+}
+.category-tile .name{
+  display:block;
+  font-size:12px;
+  font-weight:900;
+  line-height:1.5;
+}
+.category-tile small{
+  display:block;
+  margin-top:10px;
+  color:var(--muted);
+  font-size:10px;
+}
+/* REPORTS + SIDEBAR */
+.reports-section{background:#edf3ed}
+.reports-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 300px;
+  gap:26px;
+  align-items:start;
+  margin-top:32px;
+}
+.reports-main{min-width:0}
+.reports-toolbar{
+  display:flex;
+  gap:11px;
+  flex-wrap:wrap;
+  margin-bottom:22px;
+}
+.reports-toolbar input{flex:1;min-width:180px}
+.reports-toolbar select{width:215px}
+.report-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+.report-card{
+  overflow:hidden;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:0 8px 25px #123a2610;
+  transition:transform .2s,box-shadow .2s;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+.report-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 45px #123a2620;
+}
+.report-photo-wrap{
+  position:relative;
+  height:190px;
+  background:#e5eee6;
+  overflow:hidden;
+}
+.report-photo{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .4s;
+}
+.report-card:hover .report-photo{transform:scale(1.04)}
+.report-body{padding:23px;display:flex;flex-direction:column;flex:1}
+.report-category{
+  display:inline-flex;
+  align-self:start;
+  padding:7px 10px;
+  background:#eaf5e9;
+  color:#22754a;
+  border-radius:8px;
+  font-size:10px;
+  font-weight:900;
+}
+.report-body h3{
+  font-size:23px;
+  line-height:1.25;
+  letter-spacing:-.5px;
+  margin:16px 0 9px;
+  overflow-wrap:anywhere;
+}
+.report-body p{
+  color:#607467;
+  font-size:13px;
+  line-height:1.8;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  flex:1;
+}
+.report-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  padding-top:17px;
+  margin-top:14px;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+}
+.status-pill{
+  background:#edf5e9;
+  color:#267a4f;
+  padding:7px 10px;
+  border-radius:30px;
+}
+.empty{
+  grid-column:1/-1;
+  padding:34px 22px;
+  background:white;
+  border:1px dashed #cbdccc;
+  border-radius:17px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.8;
+}
+/* SIDEBAR SISMOS */
+.sidebar{display:flex;flex-direction:column;gap:18px}
+.quake-widget{
+  position:sticky;
+  top:20px;
+  background:var(--deep);
+  color:white;
+  border-radius:21px;
+  padding:23px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.quake-widget:before{
+  content:"";
+  position:absolute;
+  width:150px;height:150px;
+  border:1px solid #ffffff12;
+  border-radius:50%;
+  right:-70px;top:-80px;
+}
+.widget-heading{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  position:relative;
+}
+.widget-icon{
+  display:grid;
+  place-items:center;
+  width:40px;height:40px;
+  background:#ffffff14;
+  border-radius:12px;
+  font-size:22px;
+}
+.widget-heading h3{
+  margin:0;
+  font-size:19px;
+  letter-spacing:-.5px;
+}
+.widget-heading small{
+  display:block;
+  margin-top:5px;
+  color:#b1c9ba;
+  font-size:10px;
+}
+.quake-status{
+  color:#b5d2c0;
+  font-size:10px;
+  line-height:1.7;
+  margin:16px 0;
+}
+.quake-list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.quake-item{
+  display:flex;
+  gap:11px;
+  padding:13px;
+  border:1px solid #ffffff17;
+  border-radius:12px;
+  background:#ffffff09;
+}
+.quake-mag{
+  flex-shrink:0;
+  width:53px;height:53px;
+  display:grid;
+  place-items:center;
+  background:var(--lime);
+  color:var(--deep);
+  border-radius:11px;
+  font:900 16px Outfit;
+}
+.quake-info{min-width:0}
+.quake-info strong{
+  display:block;
+  font-size:11px;
+  line-height:1.45;
+  overflow-wrap:anywhere;
+}
+.quake-info small{
+  display:block;
+  font-size:10px;
+  line-height:1.6;
+  margin-top:5px;
+  color:#bed4c6;
+}
+.quake-info a{
+  display:inline-block;
+  margin-top:7px;
+  color:var(--lime);
+  font-size:10px;
+  font-weight:900;
+}
+.quake-widget .btn{width:100%;margin-top:14px}
+.quake-links{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:17px;
+  font-size:10px;
+  font-weight:800;
+  color:var(--lime);
+}
+.quake-note{
+  margin-top:16px;
+  font-size:10px;
+  color:#b7ccbe;
+  line-height:1.7;
+}
+.sidebar-info{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:19px;
+  padding:23px;
+}
+.sidebar-info .icon{font-size:30px}
+.sidebar-info h3{font-size:20px;margin:14px 0 8px}
+.sidebar-info p{font-size:12px;line-height:1.8;color:var(--muted)}
+/* FEATURE */
+.feature-section{
+  background:linear-gradient(120deg,#f9efe5,#fff8ef);
+}
+.feature-banner{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:24px;
+  align-items:center;
+  padding:34px;
+  border-radius:22px;
+  background:linear-gradient(110deg,#753c29,#a5653c);
+  color:white;
+}
+.feature-banner h2{
+  font-size:clamp(27px,4vw,39px);
+  line-height:1.1;
+  margin:0 0 10px;
+}
+.feature-banner p{
+  color:#f7dfd0;
+  font-size:13px;
+  line-height:1.8;
+  max-width:650px;
+}
+.tips-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin-top:23px;
+}
+.tip-card{padding:24px;background:white;border-radius:17px;border:1px solid #eadfd4}
+.tip-card .icon{font-size:27px}
+.tip-card h3{font-size:19px;margin:14px 0 8px}
+.tip-card p{font-size:12px;color:var(--muted);line-height:1.8}
+/* DONATIONS */
+.donation-section{
+  background:#eaf3e8;
+}
+.donation-hero{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:25px;
+  padding:38px;
+  background:linear-gradient(115deg,#103b2b,#27734c);
+  border-radius:25px;
+  color:white;
+}
+.donation-hero h2{font-size:clamp(32px,4vw,45px);margin:10px 0}
+.donation-hero p{color:#cde3d3;font-size:13px;line-height:1.8;max-width:640px}
+.donation-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-top:22px;
+}
+.donation-item{background:white;border:1px solid var(--line);border-radius:16px;padding:22px}
+.donation-item .icon{font-size:27px}
+.donation-item strong{display:block;margin:13px 0 8px;font-size:13px}
+.donation-item p{font-size:12px;line-height:1.7;color:var(--muted)}
+.location-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  margin-top:24px;
+}
+.location-card{
+  padding:26px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:19px;
+  display:flex;
+  flex-direction:column;
+}
+.location-card .icon{font-size:30px}
+.location-card h3{font-size:23px;margin:15px 0 10px}
+.location-card p{font-size:12px;line-height:1.8;color:var(--muted);flex:1}
+.location-card .btn{margin-top:17px}
+.unconfirmed{
+  display:inline-block;
+  align-self:start;
+  background:#fff1d7;
+  color:#80500f;
+  border-radius:20px;
+  padding:7px 10px;
+  font-size:10px;
+  font-weight:900;
+}
+.notice{
+  padding:17px 20px;
+  border:1px solid #e8d9ac;
+  background:#fff9e8;
+  border-radius:13px;
+  font-size:12px;
+  color:#715728;
+  line-height:1.8;
+  margin-top:23px;
+}
+/* DOCUMENTS */
+.documents-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;margin-top:25px}
+.document-card{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:25px;
+}
+.document-card h3{font-size:22px;margin:13px 0}
+.document-card p{font-size:12px;line-height:1.8;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}
+.document-card small{display:block;border-top:1px solid var(--line);padding-top:12px;margin-top:16px;color:var(--muted)}
+/* FORM */
+.form-section{background:#fff}
+.form-layout{
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:70px;
+  align-items:start;
+}
+.form-intro h2{
+  font-size:clamp(36px,4.5vw,53px);
+  line-height:1.08;
+  letter-spacing:-2px;
+}
+.form-intro h2 span{color:var(--green2)}
+.form-intro>p{font-size:14px;color:var(--muted);line-height:1.9}
+.step{display:flex;gap:15px;margin-top:25px}
+.step-number{
+  width:43px;height:43px;
+  display:grid;place-items:center;
+  flex-shrink:0;
+  background:#e9f4e7;
+  border-radius:13px;
+  color:var(--green);
+  font:900 15px Outfit;
+}
+.step strong{font-size:13px}
+.step p{font-size:12px;line-height:1.7;color:var(--muted);margin:6px 0}
+.form-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:32px;
+  box-shadow:0 25px 70px #092c1b12;
+}
+.form-card h3{font-size:29px;margin:0 0 8px}
+.form-card>p{font-size:12px;line-height:1.8;color:var(--muted)}
+.preview{max-width:100%;max-height:240px;object-fit:contain;border-radius:12px;margin-top:13px}
+.compression-status{font-size:12px;color:#21734a;font-weight:800;line-height:1.7}
+.alert{
+  margin-top:15px;
+  padding:15px;
+  border-radius:12px;
+  background:#fff0e8;
+  border:1px solid #efc1aa;
+  color:#8b3c23;
+  font-size:12px;
+  line-height:1.8;
+}
+.alert.success{background:#e6f6e8;border-color:#b3dabb;color:#185f37}
+/* ADMIN */
+.admin-section{background:#edf3ed}
+.admin-shell{max-width:840px;margin:auto}
+.admin-report{
+  background:#fafcf9;
+  border:1px solid var(--line);
+  padding:20px;
+  border-radius:16px;
+  margin-top:15px;
+  overflow-wrap:anywhere;
+}
+.admin-report h4{font-size:19px;margin:0 0 12px}
+.admin-report p{font-size:12px;line-height:1.8;white-space:pre-wrap}
+.admin-photo{max-width:100%;max-height:350px;object-fit:contain;border-radius:12px;margin:13px 0}
+.admin-actions{border-top:1px solid var(--line);padding-top:15px;margin-top:15px}
+.admin-actions .btn{margin:10px 8px 0 0}
+/* EMERGENCY */
+.emergency-section{background:var(--deep);color:white}
+.emergency-section .section-label{color:var(--lime)}
+.emergency-section .section-subtitle{color:#b4d0bf}
+.emergency-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:17px;
+  margin-top:29px;
+}
+.emergency-card{
+  background:#ffffff0c;
+  border:1px solid #ffffff20;
+  border-radius:19px;
+  padding:25px;
+}
+.emergency-card.featured{
+  background:var(--lime);
+  color:var(--deep);
+  border-color:var(--lime);
+}
+.emergency-card .icon{font-size:28px}
+.emergency-card h3{font-size:19px;margin:13px 0}
+.emergency-number{font:900 34px Outfit;color:var(--lime)}
+.emergency-card.featured .emergency-number{color:var(--deep)}
+.emergency-card p{font-size:12px;line-height:1.7;color:#c1d7c9}
+.emergency-card.featured p{color:#466046}
+.emergency-card .btn{width:100%;margin-top:12px}
+/* FOOTER */
+.social-section{
+  background:#144b35;
+  color:white;
+  padding:65px 0;
+}
+.social-section h2{font-size:38px;margin:12px 0}
+.social-section p{font-size:13px;color:#c6dfce}
+.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px;margin-top:25px}
+.social-link{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  background:#ffffff10;
+  border:1px solid #ffffff28;
+  padding:23px;
+  border-radius:16px;
+  transition:background .2s;
+}
+.social-link:hover{background:#ffffff20}
+.social-link strong{font:800 21px Outfit}
+.social-link small{display:block;margin-top:7px;color:#b8d6c3;font-size:11px}
+.footer{
+  background:#061a14;
+  color:#aec8b8;
+  padding:34px 0;
+}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer strong{color:white;font:900 23px Outfit}
+.footer p{font-size:11px;line-height:1.8}
+/* ANIMATIONS */
+@media(prefers-reduced-motion:no-preference){
+  .fade-in{animation:fadeUp .65s both}
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+}
+@media(max-width:1100px){
+  .desktop-nav{display:none}
+  .mobile-nav{display:block}
+  .hero-inner{gap:35px}
+  .reports-layout{grid-template-columns:minmax(0,1fr) 270px}
+}
+@media(max-width:850px){
+  .hero-inner{grid-template-columns:1fr;padding:65px 0 95px}
+  .hero-showcase{display:none}
+  .metrics{gap:9px}
+  .metric{padding:20px 14px;gap:9px}
+  .metric-icon{width:38px;height:38px;font-size:19px}
+  .metric strong{font-size:27px}
+  .category-grid{grid-template-columns:repeat(2,1fr)}
+  .reports-layout{grid-template-columns:1fr}
+  .sidebar{order:2}
+  .quake-widget{position:static}
+  .form-layout{grid-template-columns:1fr;gap:35px}
+  .donation-grid{grid-template-columns:repeat(2,1fr)}
+  .emergency-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:580px){
+  .container{width:calc(100% - 30px)}
+  .section{padding:59px 0}
+  .brand-logo{width:56px;height:56px}
+  .brand-title{font-size:23px}
+  .brand-sub{font-size:8px}
+  .header-inner{min-height:80px}
+  .header-actions .btn{padding:12px 11px;font-size:10px}
+  .hero h1{font-size:51px;letter-spacing:-2.6px}
+  .hero-description{font-size:13px}
+  .hero-inner{padding:58px 0 85px}
+  .hero-trust{gap:13px}
+  .metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .metric{display:block;padding:15px 10px}
+  .metric-icon{width:35px;height:35px;margin-bottom:12px}
+  .metric strong{font-size:26px}
+  .metric small{font-size:8px;line-height:1.5}
+  .category-tile{padding:17px}
+  .report-grid{grid-template-columns:1fr}
+  .reports-toolbar{flex-direction:column}
+  .reports-toolbar select{width:100%}
+  .feature-banner,.donation-hero{grid-template-columns:1fr;padding:25px}
+  .tips-grid,.location-grid,.documents-grid,.emergency-grid,.social-grid{grid-template-columns:1fr}
+  .form-card{padding:22px}
+  .announcement-inner{font-size:9px}
+  .announcement a{margin-left:8px}
 }
 </style>
 </head>
+
 <body>
 
-<div class="top">
-<div class="wrap">
-<span>🟢 AGUADULCE MALO & BUENO</span>
-<div>
-<a href="https://www.instagram.com/aguadulcebueno/" target="_blank" rel="noopener noreferrer">Instagram</a>
-<a href="https://www.tiktok.com/@aguadulcemalo" target="_blank" rel="noopener noreferrer">TikTok</a>
-</div>
-</div>
+<div class="announcement">
+  <div class="container announcement-inner">
+    <span><span class="live-dot"></span> UNA COMUNIDAD MÁS CONECTADA</span>
+    <div>
+      <a href="https://www.instagram.com/aguadulcebueno/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+      <a href="https://www.tiktok.com/@aguadulcemalo" target="_blank" rel="noopener noreferrer">TikTok ↗</a>
+    </div>
+  </div>
 </div>
 
-<header>
-<div class="wrap header-row">
-<a class="brand" href="#inicio">
-<div class="logo-box" id="logoBox">
-<img src="logo.png" id="siteLogo" alt="Logo original Aguadulce Malo y Bueno">
-<div class="logo-fallback" id="logoFallback" hidden>AGUADULCE<br>MALO & BUENO</div>
-</div>
-<div>
-<div class="brand-name">AGUADULCE<br>REPORTA<span>.</span></div>
-<div class="brand-caption">La voz de nuestra comunidad</div>
-</div>
-</a>
-<a href="#enviar" class="btn btn-lime">✚ REPORTAR</a>
-</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#inicio">
+      <img src="logo.png" class="brand-logo" id="brandLogo" alt="Logo original Aguadulce Malo y Bueno">
+      <div>
+        <div class="brand-title">AGUADULCE<br>REPORTA<em>.</em></div>
+        <div class="brand-sub">LA VOZ DE NUESTRA COMUNIDAD</div>
+      </div>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#reportes">Reportes</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#sismos">Sismos</a>
+      <a href="#donaciones">Donaciones</a>
+      <a href="#emergencias">Emergencias</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#enviar" class="btn btn-lime">＋ REPORTAR</a>
+    </div>
+  </div>
 </header>
 
-<nav>
-<div class="wrap navlinks">
-<a href="#inicio">INICIO</a>
-<a href="#reportes">REPORTES</a>
-<a href="#categorias">CONTADORES</a>
-<a href="#sismos-registrados">SISMOS REGISTRADOS</a>
-<a href="#sismos">DAÑOS POR SISMO</a>
-<a href="#acopio">QUIERO DONAR</a>
-<a href="#documentos">DOCUMENTOS</a>
-<a href="#enviar">ENVIAR REPORTE</a>
-<a href="#emergencias">EMERGENCIAS</a>
-</div>
+<nav class="mobile-nav" aria-label="Navegación secundaria">
+  <div class="container">
+    <a href="#reportes">REPORTES</a>
+    <a href="#categorias">CATEGORÍAS</a>
+    <a href="#sismos">SISMOS</a>
+    <a href="#donaciones">DONACIONES</a>
+    <a href="#documentos">DOCUMENTOS</a>
+    <a href="#enviar">ENVIAR REPORTE</a>
+    <a href="#emergencias">EMERGENCIAS</a>
+  </div>
 </nav>
 
 <section class="hero" id="inicio">
-<div class="wrap hero-grid">
-<div class="hero-content">
-<div class="kicker">● EL PORTAL DE NUESTRA COMUNIDAD</div>
-<h1>Aguadulce tiene <span>voz.</span></h1>
-<p>Reporta situaciones de tu comunidad, daños en viviendas, documentos encontrados y problemas que necesitan atención. Un espacio para informar, ayudar y unir a Aguadulce.</p>
-<div class="hero-buttons">
-<a href="#enviar" class="btn btn-lime">📢 ENVIAR REPORTE</a>
-<a href="#lugares-acopio" class="btn btn-outline">❤️ QUIERO DONAR</a>
-<a href="#emergencias" class="btn btn-outline">🚨 EMERGENCIAS</a>
-</div>
-</div>
-</div>
+  <div class="container hero-inner">
+    <div class="fade-in">
+      <div class="hero-tag"><span></span> EL PORTAL DE NUESTRA COMUNIDAD</div>
+
+      <h1>Una ciudad.<br>Mil historias.<br><span>Una sola voz.</span></h1>
+
+      <p class="hero-description">
+        Aguadulce merece ser escuchada. Reporta problemas de tu comunidad,
+        comparte situaciones que necesitan atención y ayuda a construir
+        una ciudad mejor.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#enviar" class="btn btn-lime">📢 ENVIAR UN REPORTE →</a>
+        <a href="#reportes" class="btn btn-ghost">EXPLORAR REPORTES</a>
+      </div>
+
+      <div class="hero-trust">
+        <span>Participación gratuita</span>
+        <span>Reportes revisados</span>
+        <span>Hecho para Aguadulce</span>
+      </div>
+    </div>
+
+    <div class="hero-showcase">
+      <div class="showcase-card">
+        <div class="showcase-top">
+          <div class="showcase-icon">📢</div>
+          <div class="showcase-badge">● PARTICIPACIÓN CIUDADANA</div>
+        </div>
+        <h3>Lo que pasa en tu comunidad importa.</h3>
+        <p>
+          Un espacio para dar visibilidad a los problemas,
+          conectar a los vecinos y compartir información útil.
+        </p>
+        <div class="showcase-divider"></div>
+        <div class="showcase-row">
+          <div>
+            <strong>Tu voz puede marcar la diferencia</strong>
+            <small>Aguadulce, Coclé · Panamá</small>
+          </div>
+          <div class="showcase-circle">↗</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<main>
-
-<div class="wrap">
-<div class="stats">
-<div class="stat"><strong id="statReports">—</strong><span>REPORTES PÚBLICOS RECIENTES</span></div>
-<div class="stat"><strong id="statAreas">—</strong><span>COMUNIDADES</span></div>
-<div class="stat"><strong id="statDocuments">—</strong><span>DOCUMENTOS ENCONTRADOS</span></div>
+<div class="container">
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-icon">📋</div>
+      <div>
+        <strong id="statReports">—</strong>
+        <small>Reportes públicos recientes</small>
+      </div>
+    </div>
+    <div class="metric">
+      <div class="metric-icon">📍</div>
+      <div>
+        <strong id="statAreas">—</strong>
+        <small>Comunidades registradas</small>
+      </div>
+    </div>
+    <div class="metric">
+      <div class="metric-icon">🪪</div>
+      <div>
+        <strong id="statDocuments">—</strong>
+        <small>Documentos encontrados</small>
+      </div>
+    </div>
+  </div>
 </div>
 
 <section class="section" id="categorias">
-<div class="eyebrow">ESTADÍSTICAS COMUNITARIAS</div>
-<h2>📊 Reportes por categoría</h2>
-<p class="section-desc">Consulta los reportes aprobados de cada categoría. Toca una tarjeta para filtrar las publicaciones.</p>
-<div class="counter-grid" id="categoryCounters">
-<div class="empty">Cargando contadores...</div>
-</div>
-<p class="notice">Los contadores incluyen hasta 100 reportes públicos recientes, no el total histórico.</p>
+  <div class="container">
+    <div class="section-label">EXPLORA TU COMUNIDAD</div>
+    <h2 class="section-title">Cada reporte cuenta.</h2>
+    <p class="section-subtitle">
+      Descubre qué situaciones están reportando los ciudadanos.
+      Selecciona una categoría para ver sus publicaciones.
+    </p>
+
+    <div class="category-grid" id="categoryCounters">
+      <div class="empty">Cargando categorías...</div>
+    </div>
+    <p class="hint">Los contadores reflejan hasta 100 reportes públicos recientes.</p>
+  </div>
 </section>
 
-<section class="section" id="reportes">
-<div class="section-head">
-<div>
-<div class="eyebrow">ACTUALIDAD COMUNITARIA</div>
-<h2>Lo que pasa en Aguadulce</h2>
-<p class="section-desc">Reportes revisados y aprobados para publicación.</p>
-</div>
-<button class="btn btn-soft" type="button" id="refreshPublic">↻ Actualizar</button>
-</div>
-<div class="filters">
-<input class="field" id="searchReports" placeholder="🔎 Buscar comunidad o problema..." aria-label="Buscar reportes">
-<select class="field" id="categoryFilter" aria-label="Filtrar reportes">
-<option value="">Todas las categorías</option>
-</select>
-</div>
-<p class="message" id="publicMessage" role="status"></p>
-<div class="cards" id="publicReports"></div>
-</section>
-</div>
+<section class="section reports-section" id="reportes">
+  <div class="container">
+    <div class="section-label">EL PULSO DE AGUADULCE</div>
+    <h2 class="section-title">Lo que está pasando.</h2>
+    <p class="section-subtitle">
+      Historias, situaciones y reportes de nuestra gente.
+      Aquí la comunidad es protagonista.
+    </p>
 
-<section class="section seismic" id="sismos-registrados">
-<div class="wrap">
-<div class="eyebrow">ACTIVIDAD SÍSMICA · INFORMACIÓN AUTOMÁTICA</div>
-<div class="seismic-head">
-<div>
-<h2>🌎 Sismos registrados en Panamá</h2>
-<p class="section-desc">Registros del USGS de los últimos 30 días en Panamá y aguas cercanas. Los datos pueden ser preliminares y no incluyen necesariamente todos los sismos locales.</p>
-</div>
-<button class="btn btn-soft" type="button" id="refreshQuakes">↻ Actualizar sismos</button>
-</div>
-<p class="message" id="quakeStatus" role="status">Consultando registros sísmicos...</p>
-<div class="quake-list" id="quakeList"></div>
-<div class="seismic-links">
-<a href="https://earthquake.usgs.gov/earthquakes/map/" target="_blank" rel="noopener noreferrer">Ver registros USGS ↗</a>
-<a href="https://sismosgeociencias.up.ac.pa/" target="_blank" rel="noopener noreferrer">Instituto de Geociencias de Panamá ↗</a>
-</div>
-<p class="notice">⚠️ Esta información no es una alerta temprana. Si hay un sismo, sigue las recomendaciones de SINAPROC. La zona consultada incluye áreas próximas a Panamá.</p>
-</div>
-</section>
+    <div class="reports-layout">
+      <div class="reports-main">
 
-<section class="section quake" id="sismos">
-<div class="wrap">
-<div class="banner">
-<div>
-<h2>🏠 Reporta daños por sismo</h2>
-<p>¿Tu vivienda, negocio o comunidad presenta daños? Puedes informar sobre ellos sin exponerte a riesgos.</p>
-</div>
-<a href="#enviar" class="btn btn-lime" id="quakeReportLink">REPORTAR DAÑOS →</a>
-</div>
-<div class="tips">
-<div class="tip"><strong>🧱 Grietas y paredes</strong><p>Describe daños visibles sin entrar a estructuras inestables.</p></div>
-<div class="tip"><strong>🏚️ Techos y estructuras</strong><p>Reporta afectaciones sin acercarte a objetos que puedan caer.</p></div>
-<div class="tip"><strong>📞 Emergencias</strong><p>Si existe peligro inmediato, aléjate y llama al 911.</p></div>
-</div>
-<p class="notice">Los reportes no sustituyen una evaluación estructural ni se envían automáticamente a SINAPROC.</p>
-</div>
-</section>
+        <div class="reports-toolbar">
+          <input id="searchReports" class="field" placeholder="🔎 Buscar comunidad o situación..." aria-label="Buscar reportes">
+          <select id="categoryFilter" class="field" aria-label="Filtrar por categoría">
+            <option value="">Todas las categorías</option>
+          </select>
+          <button type="button" id="refreshPublic" class="btn btn-soft">↻</button>
+        </div>
 
-<section class="section donation" id="acopio">
-<div class="wrap">
-<div class="banner">
-<div>
-<div class="kicker">SOLIDARIDAD AGUADULCEÑA</div>
-<h2>❤️ Quiero donar</h2>
-<p>Si deseas apoyar a familias afectadas, consulta los lugares mencionados en Aguadulce. Selecciona uno para abrir su ubicación en Google Maps.</p>
-</div>
-<a href="#lugares-acopio" class="btn btn-lime">📍 VER LUGARES</a>
-</div>
+        <p class="message" id="publicMessage" role="status"></p>
+        <div class="report-grid" id="publicReports">
+          <div class="empty">Cargando reportes ciudadanos...</div>
+        </div>
+      </div>
 
-<div class="donation-needs">
-<div class="donation-need"><div style="font-size:28px">💧</div><strong>Agua potable</strong><p>Botellas selladas, cuando sean solicitadas.</p></div>
-<div class="donation-need"><div style="font-size:28px">🥫</div><strong>Alimentos</strong><p>Productos no perecederos y vigentes.</p></div>
-<div class="donation-need"><div style="font-size:28px">🧼</div><strong>Higiene</strong><p>Artículos nuevos y cerrados.</p></div>
-<div class="donation-need"><div style="font-size:28px">👕</div><strong>Otros artículos</strong><p>Solo si el organizador confirma que los necesita.</p></div>
-</div>
+      <aside class="sidebar">
+        <div class="quake-widget" id="sismos">
+          <div class="widget-heading">
+            <div class="widget-icon">🌎</div>
+            <div>
+              <h3>Últimos sismos</h3>
+              <small>Panamá y alrededores · USGS</small>
+            </div>
+          </div>
 
-<div id="lugares-acopio" style="padding-top:38px">
-<div class="eyebrow">UBICACIONES EN AGUADULCE</div>
-<h2>📍 Selecciona un lugar</h2>
-<p class="section-desc">Pulsa el botón de cualquier lugar para verlo en Google Maps.</p>
-</div>
+          <p class="quake-status" id="quakeStatus" role="status">Consultando actividad sísmica...</p>
+          <div class="quake-list" id="quakeList"></div>
 
-<div class="locations">
+          <button type="button" class="btn btn-lime" id="refreshQuakes">↻ ACTUALIZAR SISMOS</button>
 
-<article class="location-card">
-<div class="location-icon">🏥</div>
-<h3>Hospital Rafael Estévez</h3>
-<span class="location-status">Recepción de donaciones por confirmar</span>
-<p>Hospital Dr. Rafael Estévez, Aguadulce, Coclé. Consulta si está recibiendo donaciones y cuál es el acceso autorizado.</p>
-<a class="btn btn-green" href="https://www.google.com/maps/search/?api=1&query=Hospital+Dr+Rafael+Estevez+Aguadulce+Cocle+Panama" target="_blank" rel="noopener noreferrer">📍 VER EN GOOGLE MAPS ↗</a>
-</article>
+          <div class="quake-links">
+            <a href="https://earthquake.usgs.gov/earthquakes/map/" target="_blank" rel="noopener noreferrer">Ver más sismos en USGS ↗</a>
+            <a href="https://sismosgeociencias.up.ac.pa/" target="_blank" rel="noopener noreferrer">Instituto de Geociencias ↗</a>
+          </div>
 
-<article class="location-card">
-<div class="location-icon">🏛️</div>
-<h3>Casa del Pueblo de Aguadulce</h3>
-<span class="location-status">Recepción de donaciones por confirmar</span>
-<p>Casa del Pueblo, Aguadulce, Coclé. Confirma si existe una jornada de acopio activa, su horario y qué artículos reciben.</p>
-<a class="btn btn-green" href="https://www.google.com/maps/search/?api=1&query=Casa+del+Pueblo+Aguadulce+Cocle+Panama" target="_blank" rel="noopener noreferrer">📍 VER EN GOOGLE MAPS ↗</a>
-</article>
+          <p class="quake-note">
+            Actualización automática cada 5 minutos.
+            Datos preliminares; no constituyen alerta temprana.
+          </p>
+        </div>
 
-<article class="location-card">
-<div class="location-icon">🚌</div>
-<h3>Terminal OnDGo</h3>
-<span class="location-status">Recepción de donaciones por confirmar</span>
-<p>Terminal OnDGo, Aguadulce, Coclé. La ubicación puede consultarse en el mapa, pero no se ha confirmado una recepción activa.</p>
-<a class="btn btn-green" href="https://www.google.com/maps/search/?api=1&query=Terminal+OnDGo+Aguadulce+Panama" target="_blank" rel="noopener noreferrer">📍 VER EN GOOGLE MAPS ↗</a>
-</article>
-
-<article class="location-card">
-<div class="location-icon">🌳</div>
-<h3>Parque 19 de Octubre</h3>
-<span class="location-status">Recepción de donaciones por confirmar</span>
-<p>Parque 19 de Octubre, Aguadulce, Coclé. Confirma previamente si se está realizando una jornada de donaciones.</p>
-<a class="btn btn-green" href="https://www.google.com/maps/search/?api=1&query=Parque+19+de+Octubre+Aguadulce+Cocle+Panama" target="_blank" rel="noopener noreferrer">📍 VER EN GOOGLE MAPS ↗</a>
-</article>
-
-</div>
-
-<div class="donation-note">
-<strong>⚠️ Importante:</strong> estos lugares no están confirmados como centros de acopio activos. Antes de llevar donaciones, verifica los horarios, la recepción y los artículos solicitados.
-</div>
-</div>
+        <div class="sidebar-info">
+          <div class="icon">💚</div>
+          <h3>¿Viste algo que debemos conocer?</h3>
+          <p>Tu reporte puede ayudar a que una situación importante reciba atención.</p>
+          <a href="#enviar" class="btn btn-green" style="width:100%">ENVIAR MI REPORTE →</a>
+        </div>
+      </aside>
+    </div>
+  </div>
 </section>
 
-<section class="section documents" id="documentos">
-<div class="wrap">
-<div class="section-head">
-<div>
-<div class="eyebrow">SERVICIO A LA COMUNIDAD</div>
-<h2>🪪 Documentos encontrados</h2>
-<p class="section-desc">Ayudemos a que los documentos regresen a sus propietarios.</p>
-</div>
-<a href="#enviar" class="btn btn-green" id="documentReportLink">REPORTAR HALLAZGO</a>
-</div>
-<div class="document-grid" id="documentsList"></div>
-<p class="notice">🔒 No publiques nombres completos, números de identificación ni fotografías de documentos.</p>
-</div>
+<section class="section feature-section" id="danos-sismo">
+  <div class="container">
+    <div class="feature-banner">
+      <div>
+        <h2>🏠 ¿Tu comunidad sufrió daños por un sismo?</h2>
+        <p>
+          Ayuda a documentar los daños visibles en viviendas, calles y espacios
+          comunitarios. No te expongas a riesgos para tomar fotografías.
+        </p>
+      </div>
+      <a href="#enviar" class="btn btn-lime" id="quakeReportLink">REPORTAR DAÑOS →</a>
+    </div>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="icon">🧱</div>
+        <h3>Daños estructurales</h3>
+        <p>Describe grietas y afectaciones visibles desde un lugar seguro.</p>
+      </div>
+      <div class="tip-card">
+        <div class="icon">🚧</div>
+        <h3>Calles y accesos</h3>
+        <p>Informa sobre obstáculos o situaciones que afecten el paso.</p>
+      </div>
+      <div class="tip-card">
+        <div class="icon">🚨</div>
+        <h3>Emergencias</h3>
+        <p>Ante peligro inmediato, aléjate del área y llama al 911.</p>
+      </div>
+    </div>
+
+    <p class="hint">
+      Los reportes ciudadanos no sustituyen una evaluación técnica ni notifican automáticamente a las autoridades.
+    </p>
+  </div>
 </section>
 
-<section class="section" id="enviar">
-<div class="wrap form-layout">
+<section class="section donation-section" id="donaciones">
+  <div class="container">
+    <div class="donation-hero">
+      <div>
+        <div class="section-label eyebrow-light">AGUADULCE SOLIDARIA</div>
+        <h2>Ayudar también es hacer comunidad. ❤️</h2>
+        <p>
+          Cuando nuestra gente necesita apoyo, la solidaridad marca la diferencia.
+          Antes de donar, confirma qué artículos se necesitan y dónde los reciben.
+        </p>
+      </div>
+      <a href="#lugares-acopio" class="btn btn-lime">VER UBICACIONES →</a>
+    </div>
 
-<div class="form-intro">
-<div class="eyebrow">PARTICIPACIÓN COMUNITARIA</div>
-<h2>Tu comunidad tiene una historia. <span>Ayúdanos a contarla.</span></h2>
-<p>Reporta problemas comunitarios, daños por sismo o documentos encontrados. Todos los reportes quedan pendientes de revisión.</p>
-<div class="step"><div class="step-num">01</div><div><strong>Selecciona una categoría</strong><p>Elige el tipo de reporte.</p></div></div>
-<div class="step"><div class="step-num">02</div><div><strong>Describe lo sucedido</strong><p>Indica la comunidad y explica la situación.</p></div></div>
-<div class="step"><div class="step-num">03</div><div><strong>Revisión del reporte</strong><p>La administración evalúa su publicación.</p></div></div>
-</div>
+    <div class="donation-grid">
+      <div class="donation-item"><div class="icon">💧</div><strong>Agua potable</strong><p>Botellas selladas, cuando sean solicitadas.</p></div>
+      <div class="donation-item"><div class="icon">🥫</div><strong>Alimentos</strong><p>Productos no perecederos y vigentes.</p></div>
+      <div class="donation-item"><div class="icon">🧼</div><strong>Higiene</strong><p>Artículos nuevos y cerrados.</p></div>
+      <div class="donation-item"><div class="icon">👕</div><strong>Otros artículos</strong><p>Solo si existe una solicitud confirmada.</p></div>
+    </div>
 
-<div class="panel">
-<h3>📨 Enviar reporte ciudadano</h3>
-<p>No necesitas registrarte ni iniciar sesión para enviar un reporte.</p>
+    <div id="lugares-acopio" style="padding-top:55px">
+      <div class="section-label">PUNTOS DE REFERENCIA</div>
+      <h2 class="section-title">Ubicaciones en Aguadulce.</h2>
+      <p class="section-subtitle">
+        Estos lugares son referencias geográficas. La recepción de donaciones
+        todavía debe confirmarse.
+      </p>
+    </div>
 
-<form id="reportForm" novalidate>
+    <div class="location-grid">
+      <article class="location-card">
+        <div class="icon">🏥</div>
+        <h3>Hospital Rafael Estévez</h3>
+        <span class="unconfirmed">Recepción por confirmar</span>
+        <p>Consulta directamente si existe una campaña de donaciones activa.</p>
+        <a class="btn btn-green" href="https://www.google.com/maps/search/?api=1&query=Hospital+Dr+Rafael+Estevez+Aguadulce+Cocle+Panama" target="_blank" rel="noopener noreferrer">📍 ABRIR MAPA ↗</a>
+      </article>
 
-<label class="label" for="category">CATEGORÍA</label>
-<select class="field" id="category" required>
-<option value="">Selecciona una categoría</option>
-<option>Calles y aceras</option>
-<option>Basura y limpieza</option>
-<option>Agua y alcantarillado</option>
-<option>Alumbrado público</option>
-<option>Protección animal</option>
-<option>Otros problemas comunitarios</option>
-<option value="Daños por sismo">🏠 Daños por sismo</option>
-<option value="Documentos encontrados">🪪 Documentos encontrados</option>
-</select>
+      <article class="location-card">
+        <div class="icon">🏛️</div>
+        <h3>Casa del Pueblo de Aguadulce</h3>
+        <span class="unconfirmed">Recepción por confirmar</span>
+        <p>Verifica horarios y campañas antes de llevar artículos.</p>
+        <a class="btn btn-green" href="https://www.google.com/maps/search/?api=1&query=Casa+del+Pueblo+Aguadulce+Cocle+Panama" target="_blank" rel="noopener noreferrer">📍 ABRIR MAPA ↗</a>
+      </article>
 
-<div id="quakeInstructions" hidden>
-<p class="hint"><strong>Daños por sismo:</strong> describe el daño y la comunidad sin compartir direcciones particulares. No ingreses a estructuras peligrosas para tomar fotografías. En emergencias llama al 911.</p>
-</div>
+      <article class="location-card">
+        <div class="icon">🚌</div>
+        <h3>Terminal OnDGo</h3>
+        <span class="unconfirmed">Recepción por confirmar</span>
+        <p>Ubicación de referencia; no se ha confirmado un centro de acopio.</p>
+        <a class="btn btn-green" href="https://www.google.com/maps/search/?api=1&query=Terminal+OnDGo+Aguadulce+Panama" target="_blank" rel="noopener noreferrer">📍 ABRIR MAPA ↗</a>
+      </article>
 
-<div id="documentInstructions" hidden>
-<p class="hint"><strong>Documento encontrado:</strong> indica únicamente el tipo de documento y la zona general. No incluyas nombres ni números de identificación.</p>
-</div>
+      <article class="location-card">
+        <div class="icon">🌳</div>
+        <h3>Parque 19 de Octubre</h3>
+        <span class="unconfirmed">Recepción por confirmar</span>
+        <p>Consulta si hay alguna jornada de recolección programada.</p>
+        <a class="btn btn-green" href="https://www.google.com/maps/search/?api=1&query=Parque+19+de+Octubre+Aguadulce+Cocle+Panama" target="_blank" rel="noopener noreferrer">📍 ABRIR MAPA ↗</a>
+      </article>
+    </div>
 
-<label class="label" for="area">COMUNIDAD O CORREGIMIENTO</label>
-<input class="field" id="area" maxlength="120" placeholder="Ej.: El Roble, Pocrí, Barrios Unidos..." required>
-
-<label class="label" for="description">DESCRIPCIÓN</label>
-<textarea class="field" id="description" minlength="10" maxlength="1500" placeholder="Describe lo que sucede..." required></textarea>
-
-<div id="photoSection">
-<label class="label" for="photo">FOTOGRAFÍA (OPCIONAL)</label>
-<input class="field" id="photo" type="file" accept="image/jpeg,image/png,image/webp">
-<p class="hint">JPG, PNG o WebP. Máximo 5 MB de entrada. La fotografía se optimiza automáticamente antes de enviarse.</p>
-<p class="compression-status" id="compressionStatus" role="status"></p>
-<img class="preview" id="photoPreview" alt="Vista previa de fotografía optimizada" hidden>
-</div>
-
-<label class="label" for="visibility">PRIVACIDAD</label>
-<select class="field" id="visibility">
-<option value="private">Privado: solo administración</option>
-<option value="public">Solicitar publicación pública</option>
-</select>
-
-<p class="hint">Evita compartir datos personales o imágenes sensibles. Todos los reportes requieren revisión antes de publicarse.</p>
-
-<div style="margin-top:20px">
-<div class="cf-turnstile" data-sitekey="0x4AAAAAAFWBvw2cZEIy5XVD" data-theme="light"></div>
-</div>
-
-<button type="submit" class="btn btn-green" id="reportButton" style="width:100%;margin-top:16px">
-📤 ENVIAR MI REPORTE
-</button>
-
-<div id="reportAlert" class="form-alert" role="alert" aria-live="polite" hidden></div>
-<p class="message" id="reportMessage" role="status"></p>
-</form>
-</div>
-
-</div>
+    <div class="notice">
+      ⚠️ Ninguna de estas ubicaciones está confirmada como centro de acopio activo.
+      Consulta con los organizadores antes de acudir.
+    </div>
+  </div>
 </section>
 
-<section class="section" id="administracion" style="padding-top:0">
-<div class="wrap">
-<div class="panel admin-panel">
+<section class="section" id="documentos">
+  <div class="container">
+    <div class="section-label">SERVICIO COMUNITARIO</div>
+    <h2 class="section-title">Documentos encontrados. 🪪</h2>
+    <p class="section-subtitle">
+      Pequeñas acciones pueden hacer una gran diferencia.
+      Ayudemos a que los documentos regresen a sus propietarios.
+    </p>
 
-<div id="adminLogin">
-<div class="eyebrow">ACCESO RESTRINGIDO</div>
-<h3>🔐 Administración</h3>
-<p>Acceso exclusivo para revisar y administrar reportes.</p>
-<form id="loginForm">
-<label class="label" for="adminEmail">CORREO ELECTRÓNICO</label>
-<input class="field" type="email" id="adminEmail" autocomplete="username" required>
-<label class="label" for="adminPassword">CONTRASEÑA</label>
-<input class="field" type="password" id="adminPassword" autocomplete="current-password" required>
-<button type="submit" class="btn btn-green" id="loginButton" style="width:100%;margin-top:16px">INICIAR SESIÓN</button>
-</form>
-<button type="button" class="btn btn-soft" id="forgotButton" style="margin-top:12px">Olvidé mi contraseña</button>
-<p class="message" id="loginMessage" role="status"></p>
-</div>
+    <div class="documents-grid" id="documentsList">
+      <div class="empty">Cargando avisos...</div>
+    </div>
 
-<div id="recoverySection" hidden>
-<h3>🔑 Nueva contraseña</h3>
-<form id="recoveryForm">
-<label class="label" for="newPassword">NUEVA CONTRASEÑA</label>
-<input class="field" id="newPassword" type="password" minlength="8" required>
-<label class="label" for="confirmPassword">CONFIRMAR CONTRASEÑA</label>
-<input class="field" id="confirmPassword" type="password" minlength="8" required>
-<button class="btn btn-green" type="submit" style="margin-top:15px">GUARDAR CONTRASEÑA</button>
-</form>
-<p class="message" id="recoveryMessage"></p>
-</div>
+    <div style="margin-top:22px">
+      <a href="#enviar" class="btn btn-green" id="documentReportLink">REPORTAR DOCUMENTO ENCONTRADO →</a>
+    </div>
 
-<div id="adminPanel" hidden>
-<div class="eyebrow">CENTRO DE CONTROL</div>
-<h3>📋 Panel de reportes</h3>
-<p>Revisa fotografías, cambia estados y aprueba publicaciones.</p>
-<div class="admin-top">
-<button class="btn btn-green" type="button" id="refreshAdmin">↻ Actualizar</button>
-<button class="btn btn-soft" type="button" id="logoutButton">Salir</button>
-</div>
-<p class="message" id="adminMessage" role="status"></p>
-<div id="adminReports"></div>
-</div>
-
-</div>
-</div>
+    <p class="hint">
+      🔒 No publiques nombres completos, números de identificación ni fotografías de documentos.
+    </p>
+  </div>
 </section>
 
-<section class="section emergency-bottom" id="emergencias">
-<div class="wrap">
-<div class="eyebrow">DIRECTORIO DE AYUDA</div>
-<h2>🚨 Emergencias y autoridades</h2>
-<p class="section-desc">Ante una situación de peligro, comunícate directamente con los servicios de emergencia.</p>
-<div class="emergency-grid">
+<section class="section form-section" id="enviar">
+  <div class="container form-layout">
+    <div class="form-intro">
+      <div class="section-label">TU VOZ IMPORTA</div>
+      <h2>El cambio empieza cuando <span>alguien habla.</span></h2>
+      <p>
+        En Aguadulce Reporta puedes compartir situaciones que afectan
+        a tu comunidad. El proceso es gratuito y no requiere crear una cuenta.
+      </p>
 
-<div class="emergency-card primary">
-<div style="font-size:28px">🚑</div>
-<h3>Emergencias / SUME</h3>
-<div class="number">911</div>
-<p>Atención y coordinación de emergencias.</p>
-<a href="tel:911" class="btn btn-green">📞 LLAMAR 911</a>
-</div>
+      <div class="step">
+        <div class="step-number">01</div>
+        <div><strong>Cuéntanos qué sucede</strong><p>Selecciona una categoría y escribe tu reporte.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <div><strong>Agrega una fotografía</strong><p>Es opcional y se comprime automáticamente.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <div><strong>Revisión responsable</strong><p>Los reportes se revisan antes de hacerse públicos.</p></div>
+      </div>
+    </div>
 
-<div class="emergency-card">
-<div style="font-size:28px">🚒</div>
-<h3>Bomberos de Panamá</h3>
-<div class="number">103</div>
-<p>Incendios y emergencias.</p>
-<a href="tel:103" class="btn btn-green">📞 LLAMAR 103</a>
-</div>
+    <div class="form-card">
+      <h3>📨 Nuevo reporte</h3>
+      <p>Completa los datos de forma clara. No incluyas información privada.</p>
 
-<div class="emergency-card">
-<div style="font-size:28px">👮</div>
-<h3>Policía Nacional</h3>
-<div class="number">104</div>
-<p>Atención policial.</p>
-<a href="tel:104" class="btn btn-green">📞 LLAMAR 104</a>
-</div>
+      <form id="reportForm" novalidate>
+        <label class="label" for="category">CATEGORÍA DEL REPORTE</label>
+        <select class="field" id="category" required>
+          <option value="">Selecciona una categoría</option>
+          <option>Calles y aceras</option>
+          <option>Basura y limpieza</option>
+          <option>Agua y alcantarillado</option>
+          <option>Alumbrado público</option>
+          <option>Protección animal</option>
+          <option>Otros problemas comunitarios</option>
+          <option>Daños por sismo</option>
+          <option>Documentos encontrados</option>
+        </select>
 
-<div class="emergency-card">
-<div style="font-size:28px">⛑️</div>
-<h3>SINAPROC</h3>
-<div class="number">520-4426</div>
-<p>Protección Civil.</p>
-<a href="tel:+5075204426" class="btn btn-green">📞 LLAMAR</a>
-</div>
+        <div id="quakeInstructions" hidden>
+          <p class="hint">🏠 Describe únicamente daños visibles desde un lugar seguro. Ante una emergencia llama al 911.</p>
+        </div>
+        <div id="documentInstructions" hidden>
+          <p class="hint">🪪 No escribas nombres, números de identificación ni datos personales del documento.</p>
+        </div>
 
-<div class="emergency-card">
-<div style="font-size:28px">📍</div>
-<h3>SINAPROC Coclé</h3>
-<div class="number">524-3365</div>
-<p>Contacto regional de Protección Civil.</p>
-<a href="tel:+5075243365" class="btn btn-green">📞 LLAMAR</a>
-</div>
+        <label class="label" for="area">COMUNIDAD O CORREGIMIENTO</label>
+        <input class="field" id="area" maxlength="120" placeholder="Ej.: El Roble, Pocrí, Barrios Unidos..." required>
 
-<div class="emergency-card">
-<div style="font-size:28px">ℹ️</div>
-<h3>Información oficial</h3>
-<p>Consulta alertas y recomendaciones directamente con SINAPROC.</p>
-<a href="https://www.sinaproc.gob.pa/" target="_blank" rel="noopener noreferrer" class="btn btn-soft">VER SINAPROC ↗</a>
-</div>
+        <label class="label" for="description">DESCRIPCIÓN</label>
+        <textarea class="field" id="description" minlength="10" maxlength="1500" placeholder="Cuéntanos qué está pasando..." required></textarea>
 
-</div>
-<p class="notice">Aguadulce Reporta es una iniciativa comunitaria. Los reportes enviados no notifican automáticamente a las autoridades.</p>
-</div>
+        <div id="photoSection">
+          <label class="label" for="photo">FOTOGRAFÍA (OPCIONAL)</label>
+          <input class="field" id="photo" type="file" accept="image/jpeg,image/png,image/webp">
+          <p class="hint">JPG, PNG o WebP. Máximo 5 MB antes de comprimir.</p>
+          <p class="compression-status" id="compressionStatus" role="status"></p>
+          <img id="photoPreview" class="preview" alt="Vista previa de la fotografía" hidden>
+        </div>
+
+        <label class="label" for="visibility">PRIVACIDAD DEL REPORTE</label>
+        <select class="field" id="visibility">
+          <option value="private">Privado: solo administración</option>
+          <option value="public">Solicitar publicación pública</option>
+        </select>
+
+        <p class="hint">Todos los reportes quedan pendientes de revisión.</p>
+
+        <div style="margin-top:22px">
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAAFWBvw2cZEIy5XVD" data-theme="light"></div>
+        </div>
+
+        <button type="submit" id="reportButton" class="btn btn-green" style="width:100%;margin-top:19px;padding:17px">
+          📤 ENVIAR MI REPORTE →
+        </button>
+
+        <div class="alert" id="reportAlert" role="alert" aria-live="polite" hidden></div>
+      </form>
+    </div>
+  </div>
 </section>
 
-</main>
+<section class="section admin-section" id="administracion">
+  <div class="container">
+    <div class="admin-shell">
+      <div class="form-card">
+        <div id="adminLogin">
+          <div class="section-label">ACCESO RESTRINGIDO</div>
+          <h3 style="margin-top:15px">🔐 Administración</h3>
+          <p>Acceso exclusivo para revisar y administrar reportes.</p>
 
-<section class="section social" id="redes">
-<div class="wrap">
-<div class="kicker">NUESTRAS REDES SOCIALES</div>
-<h2>Sigue a Aguadulce Malo & Bueno</h2>
-<p>Información y contenido de nuestra comunidad.</p>
-<div class="social-grid">
-<a class="social-card" href="https://www.instagram.com/aguadulcebueno/" target="_blank" rel="noopener noreferrer">
-<div><strong>📸 Instagram</strong><small>@aguadulcebueno</small></div><strong>↗</strong>
-</a>
-<a class="social-card" href="https://www.tiktok.com/@aguadulcemalo" target="_blank" rel="noopener noreferrer">
-<div><strong>🎵 TikTok</strong><small>@aguadulcemalo</small></div><strong>↗</strong>
-</a>
-</div>
-</div>
+          <form id="loginForm">
+            <label class="label" for="adminEmail">CORREO ELECTRÓNICO</label>
+            <input class="field" id="adminEmail" type="email" autocomplete="username" required>
+
+            <label class="label" for="adminPassword">CONTRASEÑA</label>
+            <input class="field" id="adminPassword" type="password" autocomplete="current-password" required>
+
+            <button class="btn btn-green" type="submit" id="loginButton" style="width:100%;margin-top:18px">INICIAR SESIÓN</button>
+          </form>
+
+          <button class="btn btn-soft" type="button" id="forgotButton" style="margin-top:12px">Olvidé mi contraseña</button>
+          <p class="message" id="loginMessage" role="status"></p>
+        </div>
+
+        <div id="recoverySection" hidden>
+          <h3>🔑 Nueva contraseña</h3>
+          <form id="recoveryForm">
+            <label class="label" for="newPassword">NUEVA CONTRASEÑA</label>
+            <input class="field" id="newPassword" type="password" minlength="8" required>
+
+            <label class="label" for="confirmPassword">CONFIRMAR CONTRASEÑA</label>
+            <input class="field" id="confirmPassword" type="password" minlength="8" required>
+
+            <button class="btn btn-green" type="submit" style="margin-top:17px">GUARDAR CONTRASEÑA</button>
+          </form>
+          <p class="message" id="recoveryMessage"></p>
+        </div>
+
+        <div id="adminPanel" hidden>
+          <div class="section-label">CENTRO DE CONTROL</div>
+          <h3 style="margin-top:15px">📋 Panel de reportes</h3>
+          <p>Revisa, actualiza estados y aprueba publicaciones.</p>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px">
+            <button class="btn btn-green" id="refreshAdmin" type="button">↻ Actualizar</button>
+            <button class="btn btn-soft" id="logoutButton" type="button">Cerrar sesión</button>
+          </div>
+
+          <p class="message" id="adminMessage" role="status"></p>
+          <div id="adminReports"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<footer>
-<div class="wrap footer-inner">
-<div><strong>AGUADULCE REPORTA.</strong><p>Una iniciativa comunitaria de Aguadulce Malo & Bueno.</p></div>
-<div><p>Aguadulce, Coclé · Panamá</p><p>© <span id="year"></span> Aguadulce Reporta</p></div>
-</div>
+<section class="section emergency-section" id="emergencias">
+  <div class="container">
+    <div class="section-label">INFORMACIÓN QUE PUEDE AYUDAR</div>
+    <h2 class="section-title">En una emergencia, cada segundo cuenta.</h2>
+    <p class="section-subtitle">
+      Comunícate directamente con las instituciones de emergencia.
+      Un reporte en esta página no sustituye una llamada de auxilio.
+    </p>
+
+    <div class="emergency-grid">
+      <div class="emergency-card featured">
+        <div class="icon">🚑</div>
+        <h3>Emergencias / SUME</h3>
+        <div class="emergency-number">911</div>
+        <p>Atención y coordinación de emergencias.</p>
+        <a href="tel:911" class="btn btn-green">📞 LLAMAR 911</a>
+      </div>
+
+      <div class="emergency-card">
+        <div class="icon">🚒</div>
+        <h3>Bomberos</h3>
+        <div class="emergency-number">103</div>
+        <p>Incendios y otras emergencias.</p>
+        <a href="tel:103" class="btn btn-white">📞 LLAMAR 103</a>
+      </div>
+
+      <div class="emergency-card">
+        <div class="icon">👮</div>
+        <h3>Policía Nacional</h3>
+        <div class="emergency-number">104</div>
+        <p>Atención policial.</p>
+        <a href="tel:104" class="btn btn-white">📞 LLAMAR 104</a>
+      </div>
+
+      <div class="emergency-card">
+        <div class="icon">⛑️</div>
+        <h3>SINAPROC</h3>
+        <div class="emergency-number" style="font-size:27px">520-4426</div>
+        <p>Protección Civil.</p>
+        <a href="tel:+5075204426" class="btn btn-white">📞 LLAMAR</a>
+      </div>
+
+      <div class="emergency-card">
+        <div class="icon">📍</div>
+        <h3>SINAPROC Coclé</h3>
+        <div class="emergency-number" style="font-size:27px">524-3365</div>
+        <p>Contacto regional.</p>
+        <a href="tel:+5075243365" class="btn btn-white">📞 LLAMAR</a>
+      </div>
+
+      <div class="emergency-card">
+        <div class="icon">ℹ️</div>
+        <h3>Información oficial</h3>
+        <p>Consulta recomendaciones y avisos de Protección Civil.</p>
+        <a href="https://www.sinaproc.gob.pa/" target="_blank" rel="noopener noreferrer" class="btn btn-white">VISITAR SINAPROC ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="social-section">
+  <div class="container">
+    <div class="section-label eyebrow-light">MANTENTE CONECTADO</div>
+    <h2>Sigue la voz de Aguadulce.</h2>
+    <p>Encuéntranos en nuestras redes sociales.</p>
+
+    <div class="social-grid">
+      <a href="https://www.instagram.com/aguadulcebueno/" target="_blank" rel="noopener noreferrer" class="social-link">
+        <div><strong>📸 Instagram</strong><small>@aguadulcebueno</small></div>
+        <strong>↗</strong>
+      </a>
+      <a href="https://www.tiktok.com/@aguadulcemalo" target="_blank" rel="noopener noreferrer" class="social-link">
+        <div><strong>🎵 TikTok</strong><small>@aguadulcemalo</small></div>
+        <strong>↗</strong>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>
+      <strong>AGUADULCE REPORTA.</strong>
+      <p>Una iniciativa comunitaria de Aguadulce Malo & Bueno.</p>
+    </div>
+    <div>
+      <p>Aguadulce, Coclé · Panamá</p>
+      <p>© <span id="year"></span> Aguadulce Reporta</p>
+    </div>
+  </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -634,1503 +1536,1250 @@ footer p{font-size:12px;line-height:1.7}
 <script>
 "use strict";
 
+/* CONFIGURACIÓN EXISTENTE */
+
 const SUPABASE_URL="https://lrupvpgyjzhgyvprrmtl.supabase.co";
 const SUPABASE_KEY="sb_publishable_toBA9zteOxIM1WivpdjwFQ_xUXsqfpf";
 const BUCKET="Foto de reportes";
 const SEND_FUNCTION=SUPABASE_URL+"/functions/v1/enviar-reporte";
 const PHOTO_FUNCTION=SUPABASE_URL+"/functions/v1/foto-publica";
+
 const $=id=>document.getElementById(id);
 
 const db=window.supabase.createClient(
- SUPABASE_URL,SUPABASE_KEY,{
-  auth:{
-   persistSession:true,
-   autoRefreshToken:true,
-   detectSessionInUrl:true
+  SUPABASE_URL,
+  SUPABASE_KEY,
+  {
+    auth:{
+      persistSession:true,
+      autoRefreshToken:true,
+      detectSessionInUrl:true
+    }
   }
- }
 );
 
 const publicDb=window.supabase.createClient(
- SUPABASE_URL,SUPABASE_KEY,{
-  auth:{
-   persistSession:false,
-   autoRefreshToken:false,
-   detectSessionInUrl:false,
-   storageKey:"aguadulce-public-reader"
+  SUPABASE_URL,
+  SUPABASE_KEY,
+  {
+    auth:{
+      persistSession:false,
+      autoRefreshToken:false,
+      detectSessionInUrl:false,
+      storageKey:"aguadulce-public-reader"
+    }
   }
- }
 );
 
-const CATEGORY_LIST=[
- "Calles y aceras",
- "Basura y limpieza",
- "Agua y alcantarillado",
- "Alumbrado público",
- "Protección animal",
- "Otros problemas comunitarios",
- "Daños por sismo",
- "Documentos encontrados"
+const CATEGORIES=[
+  "Calles y aceras",
+  "Basura y limpieza",
+  "Agua y alcantarillado",
+  "Alumbrado público",
+  "Protección animal",
+  "Otros problemas comunitarios",
+  "Daños por sismo",
+  "Documentos encontrados"
 ];
 
-const CATEGORY_ICONS={
- "Calles y aceras":"🛣️",
- "Basura y limpieza":"🗑️",
- "Agua y alcantarillado":"💧",
- "Alumbrado público":"💡",
- "Protección animal":"🐾",
- "Otros problemas comunitarios":"📢",
- "Daños por sismo":"🏠",
- "Documentos encontrados":"🪪"
+const ICONS={
+  "Calles y aceras":"🛣️",
+  "Basura y limpieza":"🗑️",
+  "Agua y alcantarillado":"💧",
+  "Alumbrado público":"💡",
+  "Protección animal":"🐾",
+  "Otros problemas comunitarios":"📢",
+  "Daños por sismo":"🏠",
+  "Documentos encontrados":"🪪"
 };
 
-let publicReportsData=[];
-let previewUrl=null;
+let publicReports=[];
 let optimizedPhoto=null;
+let previewURL=null;
 let compressionPending=false;
 let compressionJob=0;
-let recoveryReady=false;
+
 let recoveryMode=
- new URLSearchParams(location.hash.slice(1)).get("type")==="recovery"||
- new URLSearchParams(location.search).has("code");
+  new URLSearchParams(location.hash.slice(1)).get("type")==="recovery"||
+  new URLSearchParams(location.search).has("code");
 
-// LOGO: NO MOSTRAR CUADROS ROTOS
+let recoveryReady=false;
 
-$("siteLogo").addEventListener("error",()=>{
- $("logoBox").hidden=true;
-});
+/* UTILIDADES */
 
-// UTILIDADES
-
-function make(tag,text="",className=""){
- const el=document.createElement(tag);
- el.textContent=text==null?"":String(text);
- if(className)el.className=className;
- return el;
+function element(tag,text="",className=""){
+  const node=document.createElement(tag);
+  node.textContent=text==null?"":String(text);
+  if(className)node.className=className;
+  return node;
 }
 
-function showMessage(id,text,success=false){
- const el=$(id);
- el.textContent=text;
- el.style.color=success?"#197c4a":"#627669";
-}
-
-function showReportAlert(text,success=false){
- const alert=$("reportAlert");
- alert.textContent=text;
- alert.hidden=false;
- alert.classList.toggle("success",success);
- $("reportMessage").textContent="";
- alert.scrollIntoView({behavior:"smooth",block:"nearest"});
-}
-
-function clearReportAlert(){
- $("reportAlert").hidden=true;
- $("reportAlert").textContent="";
-}
-
-function statusName(value){
- return ({
-  pending:"Pendiente",
-  reviewing:"En revisión",
-  referred:"Remitido",
-  resolved:"Resuelto",
-  rejected:"Rechazado"
- })[value]||value||"Sin estado";
-}
-
-function formatDate(value){
- if(!value)return "Sin fecha";
- const d=new Date(value);
- return isNaN(d.getTime())?"Sin fecha":
-  d.toLocaleDateString("es-PA",{
-   day:"numeric",month:"short",year:"numeric"
+function dateText(value){
+  const date=new Date(value);
+  if(isNaN(date.getTime()))return "Sin fecha";
+  return date.toLocaleDateString("es-PA",{
+    day:"numeric",
+    month:"short",
+    year:"numeric"
   });
+}
+
+function statusText(value){
+  return ({
+    pending:"Pendiente",
+    reviewing:"En revisión",
+    referred:"Remitido",
+    resolved:"Resuelto",
+    rejected:"Rechazado"
+  })[value]||value||"Sin estado";
+}
+
+function showMessage(id,message,success=false){
+  const node=$(id);
+  node.textContent=message;
+  node.style.color=success?"#238352":"";
+}
+
+function alertReport(message,success=false){
+  const node=$("reportAlert");
+  node.textContent=message;
+  node.hidden=false;
+  node.classList.toggle("success",success);
+}
+
+function clearAlert(){
+  $("reportAlert").hidden=true;
+  $("reportAlert").textContent="";
 }
 
 function isDocument(report){
- return report.category==="Documentos encontrados";
+  return report.category==="Documentos encontrados";
 }
 
-// CONTADORES
+/* LOGO ORIGINAL */
 
-function renderCategoryCounters(){
- const box=$("categoryCounters");
- box.replaceChildren();
+$("brandLogo").addEventListener("error",()=>{
+  $("brandLogo").hidden=true;
+});
 
- const counts={};
- CATEGORY_LIST.forEach(category=>counts[category]=0);
+/* CATEGORÍAS */
 
- publicReportsData.forEach(report=>{
-  const category=report.category||"Sin categoría";
-  counts[category]=(counts[category]||0)+1;
- });
+function renderCategories(){
+  const box=$("categoryCounters");
+  box.replaceChildren();
 
- const categories=[
-  ...CATEGORY_LIST,
-  ...Object.keys(counts).filter(
-   category=>!CATEGORY_LIST.includes(category)
-  ).sort()
- ];
+  const counts={};
+  CATEGORIES.forEach(category=>counts[category]=0);
 
- categories.forEach(category=>{
-  const card=make("button","","counter");
-  card.type="button";
-  card.append(
-   make("div",CATEGORY_ICONS[category]||"📌"),
-   make("strong",counts[category]||0),
-   make("span",category),
-   make("small","Ver reportes →")
-  );
+  publicReports.forEach(report=>{
+    const category=report.category||"Sin categoría";
+    counts[category]=(counts[category]||0)+1;
+  });
 
-  card.onclick=()=>{
-   if(category==="Documentos encontrados"){
-    location.hash="#documentos";
-    return;
-   }
+  const all=[
+    ...CATEGORIES,
+    ...Object.keys(counts).filter(
+      category=>!CATEGORIES.includes(category)
+    ).sort()
+  ];
 
-   const filter=$("categoryFilter");
-   const exists=[...filter.options].some(
-    option=>option.value===category
-   );
+  all.forEach(category=>{
+    const button=element("button","","category-tile");
+    button.type="button";
 
-   filter.value=exists?category:"";
-   $("searchReports").value="";
-   renderReports();
-   location.hash="#reportes";
-  };
+    button.append(
+      element("div",ICONS[category]||"📌","emoji"),
+      element("strong",counts[category]||0),
+      element("span",category,"name"),
+      element("small","Explorar reportes ↗")
+    );
 
-  box.appendChild(card);
- });
+    button.onclick=()=>{
+      if(category==="Documentos encontrados"){
+        location.hash="#documentos";
+        return;
+      }
+
+      const filter=$("categoryFilter");
+      const exists=[...filter.options].some(
+        option=>option.value===category
+      );
+
+      filter.value=exists?category:"";
+      $("searchReports").value="";
+      renderReports();
+      location.hash="#reportes";
+    };
+
+    box.appendChild(button);
+  });
 }
 
-// REPORTES PÚBLICOS
+/* TARJETAS DE REPORTES */
 
 function buildReportCard(report){
- const card=make("article","","report-card");
+  const card=element("article","","report-card");
 
- const imageBox=make("div","","report-photo-box");
- const image=document.createElement("img");
+  const imageBox=element("div","","report-photo-wrap");
+  const image=document.createElement("img");
 
- image.className="report-photo";
- image.alt="Fotografía del reporte en "+report.area;
- image.loading="lazy";
- image.referrerPolicy="no-referrer";
- image.onerror=()=>imageBox.remove();
- image.src=PHOTO_FUNCTION+"?id="+encodeURIComponent(report.id);
+  image.className="report-photo";
+  image.loading="lazy";
+  image.alt="Fotografía del reporte de "+report.area;
+  image.referrerPolicy="no-referrer";
+  image.src=PHOTO_FUNCTION+"?id="+encodeURIComponent(report.id);
+  image.onerror=()=>imageBox.remove();
 
- imageBox.appendChild(image);
- card.appendChild(imageBox);
+  imageBox.appendChild(image);
+  card.appendChild(imageBox);
 
- const body=make("div","","report-body");
- body.append(
-  make("div",report.category,"report-category"),
-  make("h3",report.area),
-  make("p",report.description)
- );
+  const body=element("div","","report-body");
 
- const footer=make("div","","report-footer");
- footer.append(
-  make("span","📅 "+formatDate(report.created_at)),
-  make("span",statusName(report.status),"pill")
- );
+  body.append(
+    element("span",report.category,"report-category"),
+    element("h3",report.area),
+    element("p",report.description)
+  );
 
- body.appendChild(footer);
- card.appendChild(body);
- return card;
+  const bottom=element("div","","report-bottom");
+
+  bottom.append(
+    element("span","📅 "+dateText(report.created_at)),
+    element("span",statusText(report.status),"status-pill")
+  );
+
+  body.appendChild(bottom);
+  card.appendChild(body);
+
+  return card;
 }
 
 function renderReports(){
- const box=$("publicReports");
- box.replaceChildren();
+  const box=$("publicReports");
+  box.replaceChildren();
 
- const search=$("searchReports").value
-  .trim().toLocaleLowerCase("es");
- const category=$("categoryFilter").value;
+  const query=$("searchReports").value
+    .trim().toLocaleLowerCase("es");
 
- const items=publicReportsData.filter(report=>{
-  if(isDocument(report))return false;
+  const category=$("categoryFilter").value;
 
-  const text=[
-   report.category,report.area,report.description
-  ].join(" ").toLocaleLowerCase("es");
+  const filtered=publicReports.filter(report=>{
+    if(isDocument(report))return false;
 
-  return (!search||text.includes(search))&&
-   (!category||report.category===category);
- });
+    const text=[
+      report.category,
+      report.area,
+      report.description
+    ].join(" ").toLocaleLowerCase("es");
 
- if(!items.length){
-  box.appendChild(make(
-   "div",
-   "No hay reportes que coincidan con esta búsqueda.",
-   "empty"
-  ));
-  return;
- }
+    return (!query||text.includes(query))&&
+      (!category||report.category===category);
+  });
 
- items.forEach(report=>box.appendChild(buildReportCard(report)));
+  if(!filtered.length){
+    box.appendChild(element(
+      "div",
+      "No encontramos reportes que coincidan con tu búsqueda.",
+      "empty"
+    ));
+    return;
+  }
+
+  filtered.forEach(report=>{
+    box.appendChild(buildReportCard(report));
+  });
 }
 
 function renderDocuments(){
- const box=$("documentsList");
- box.replaceChildren();
+  const box=$("documentsList");
+  box.replaceChildren();
 
- const items=publicReportsData.filter(isDocument);
+  const documents=publicReports.filter(isDocument);
 
- if(!items.length){
-  box.appendChild(make(
-   "div",
-   "Todavía no hay avisos de documentos encontrados aprobados.",
-   "empty"
-  ));
-  return;
- }
+  if(!documents.length){
+    box.appendChild(element(
+      "div",
+      "Por el momento no hay avisos de documentos encontrados aprobados.",
+      "empty"
+    ));
+    return;
+  }
 
- items.forEach(report=>{
-  const card=make("article","","document-card");
-  card.append(
-   make("div","🪪"),
-   make("h3",report.area),
-   make("p",report.description),
-   make(
-    "small",
-    "📅 "+formatDate(report.created_at)+
-    " · "+statusName(report.status)
-   )
-  );
-  box.appendChild(card);
- });
+  documents.forEach(report=>{
+    const card=element("article","","document-card");
+
+    card.append(
+      element("div","🪪"),
+      element("h3",report.area),
+      element("p",report.description),
+      element(
+        "small",
+        "📅 "+dateText(report.created_at)+
+        " · "+statusText(report.status)
+      )
+    );
+
+    box.appendChild(card);
+  });
 }
 
 async function loadPublicReports(){
- showMessage("publicMessage","Cargando reportes...");
+  showMessage("publicMessage","Cargando reportes...");
 
- try{
-  const {data,error}=await publicDb
-   .from("reports")
-   .select("id,category,area,description,status,created_at")
-   .order("created_at",{ascending:false})
-   .limit(100);
+  try{
+    const {data,error}=await publicDb
+      .from("reports")
+      .select("id,category,area,description,status,created_at")
+      .order("created_at",{ascending:false})
+      .limit(100);
 
-  if(error)throw error;
+    if(error)throw error;
 
-  publicReportsData=data||[];
+    publicReports=data||[];
 
-  const reports=publicReportsData.filter(
-   report=>!isDocument(report)
-  );
-  const documents=publicReportsData.filter(isDocument);
+    const reports=publicReports.filter(
+      report=>!isDocument(report)
+    );
 
-  $("statReports").textContent=reports.length;
-  $("statAreas").textContent=
-   new Set(reports.map(report=>report.area)).size;
-  $("statDocuments").textContent=documents.length;
+    const documents=publicReports.filter(isDocument);
 
-  const categories=[
-   ...new Set(
-    reports.map(report=>report.category).filter(Boolean)
-   )
-  ].sort();
+    $("statReports").textContent=reports.length;
 
-  const previous=$("categoryFilter").value;
-  $("categoryFilter").replaceChildren();
+    $("statAreas").textContent=new Set(
+      reports.map(report=>report.area)
+    ).size;
 
-  const all=make("option","Todas las categorías");
-  all.value="";
-  $("categoryFilter").appendChild(all);
+    $("statDocuments").textContent=documents.length;
 
-  categories.forEach(category=>{
-   const option=make("option",category);
-   option.value=category;
-   $("categoryFilter").appendChild(option);
-  });
+    const categories=[
+      ...new Set(
+        reports.map(report=>report.category).filter(Boolean)
+      )
+    ].sort();
 
-  $("categoryFilter").value=
-   categories.includes(previous)?previous:"";
+    const filter=$("categoryFilter");
+    const previous=filter.value;
+    filter.replaceChildren();
 
-  renderCategoryCounters();
-  renderReports();
-  renderDocuments();
+    const all=element("option","Todas las categorías");
+    all.value="";
+    filter.appendChild(all);
 
-  showMessage(
-   "publicMessage",
-   reports.length+" reportes públicos recientes disponibles.",
-   true
-  );
+    categories.forEach(category=>{
+      const option=element("option",category);
+      option.value=category;
+      filter.appendChild(option);
+    });
 
- }catch(error){
-  console.error(error);
-  showMessage(
-   "publicMessage",
-   "No se pudieron cargar los reportes."
-  );
- }
+    filter.value=categories.includes(previous)?previous:"";
+
+    renderCategories();
+    renderReports();
+    renderDocuments();
+
+    showMessage(
+      "publicMessage",
+      reports.length+" reportes públicos recientes.",
+      true
+    );
+
+  }catch(error){
+    console.error(error);
+    showMessage(
+      "publicMessage",
+      "No fue posible cargar los reportes."
+    );
+  }
 }
 
 $("searchReports").addEventListener("input",renderReports);
 $("categoryFilter").addEventListener("change",renderReports);
 $("refreshPublic").addEventListener("click",loadPublicReports);
 
-// SISMOS AUTOMÁTICOS DEL USGS
+/* SISMOS COMPACTOS — 3 REGISTROS */
 
 let quakeLoading=false;
 
-function quakeDate(value){
- const date=new Date(value);
- return date.toLocaleString("es-PA",{
-  timeZone:"America/Panama",
-  day:"numeric",
-  month:"short",
-  year:"numeric",
-  hour:"numeric",
-  minute:"2-digit"
- });
+function quakeDate(time){
+  return new Date(time).toLocaleString("es-PA",{
+    timeZone:"America/Panama",
+    day:"numeric",
+    month:"short",
+    hour:"numeric",
+    minute:"2-digit"
+  });
 }
 
 async function loadEarthquakes(){
- if(quakeLoading)return;
+  if(quakeLoading)return;
 
- quakeLoading=true;
- $("refreshQuakes").disabled=true;
- showMessage("quakeStatus","Consultando sismos registrados...");
+  quakeLoading=true;
+  $("refreshQuakes").disabled=true;
 
- const controller=new AbortController();
- const timeout=setTimeout(()=>controller.abort(),20000);
-
- try{
-  const end=new Date();
-  const start=new Date(
-   end.getTime()-30*24*60*60*1000
+  showMessage(
+    "quakeStatus",
+    "Consultando registros del USGS..."
   );
 
-  const params=new URLSearchParams({
-   format:"geojson",
-   starttime:start.toISOString().slice(0,10),
-   endtime:end.toISOString().slice(0,10),
-   minlatitude:"6.5",
-   maxlatitude:"10.5",
-   minlongitude:"-83.5",
-   maxlongitude:"-77.0",
-   minmagnitude:"1",
-   orderby:"time",
-   limit:"20"
-  });
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),20000);
 
-  const response=await fetch(
-   "https://earthquake.usgs.gov/fdsnws/event/1/query?"+
-   params.toString(),
-   {
-    cache:"no-store",
-    signal:controller.signal
-   }
-  );
+  try{
+    const end=new Date();
+    const start=new Date(end.getTime()-30*86400000);
 
-  if(!response.ok){
-   throw new Error(
-    "El servicio USGS respondió "+response.status
-   );
-  }
+    const params=new URLSearchParams({
+      format:"geojson",
+      starttime:start.toISOString().slice(0,10),
+      endtime:end.toISOString().slice(0,10),
+      minlatitude:"6.5",
+      maxlatitude:"10.5",
+      minlongitude:"-83.5",
+      maxlongitude:"-77.0",
+      minmagnitude:"1",
+      orderby:"time",
+      limit:"3"
+    });
 
-  const data=await response.json();
-  const earthquakes=Array.isArray(data.features)
-   ?data.features:[];
-
-  const box=$("quakeList");
-  box.replaceChildren();
-
-  if(!earthquakes.length){
-   box.appendChild(make(
-    "div",
-    "No se encontraron sismos en esta zona "+
-    "con los filtros utilizados.",
-    "empty"
-   ));
-  }
-
-  earthquakes.forEach(quake=>{
-   const properties=quake.properties||{};
-   const coordinates=quake.geometry?.coordinates||[];
-
-   const card=make("article","","quake-item");
-   const top=make("div","","quake-top");
-   const magnitude=make(
-    "div",
-    "M "+(
-     Number.isFinite(properties.mag)
-      ?properties.mag.toFixed(1)
-      :"—"
-    ),
-    "quake-mag"
-   );
-
-   const info=make("div");
-   info.append(
-    make(
-     "h3",
-     properties.place||"Ubicación no indicada"
-    ),
-    make(
-     "p",
-     "📅 "+quakeDate(properties.time)
-    )
-   );
-
-   top.append(magnitude,info);
-   card.appendChild(top);
-
-   if(Number.isFinite(coordinates[2])){
-    card.appendChild(make(
-     "p",
-     "Profundidad: "+
-     coordinates[2].toFixed(1)+" km"
-    ));
-   }
-
-   if(
-    typeof properties.url==="string"&&
-    properties.url.startsWith(
-     "https://earthquake.usgs.gov/"
-    )
-   ){
-    const link=make(
-     "a",
-     "Ver detalles en USGS ↗"
+    const response=await fetch(
+      "https://earthquake.usgs.gov/fdsnws/event/1/query?"+
+      params.toString(),
+      {
+        cache:"no-store",
+        signal:controller.signal
+      }
     );
-    link.href=properties.url;
-    link.target="_blank";
-    link.rel="noopener noreferrer";
-    card.appendChild(link);
-   }
 
-   box.appendChild(card);
-  });
+    if(!response.ok)throw new Error("USGS "+response.status);
 
-  showMessage(
-   "quakeStatus",
-   earthquakes.length+
-   " registros recientes encontrados. "+
-   "Última consulta: "+
-   new Date().toLocaleTimeString("es-PA",{
-    timeZone:"America/Panama",
-    hour:"numeric",
-    minute:"2-digit"
-   })+
-   " (hora de Panamá).",
-   true
-  );
+    const result=await response.json();
+    const quakes=Array.isArray(result.features)
+      ?result.features:[];
 
- }catch(error){
-  console.error("Error consultando USGS:",error);
+    const box=$("quakeList");
+    box.replaceChildren();
 
-  showMessage(
-   "quakeStatus",
-   "No fue posible actualizar los sismos. "+
-   "Puedes consultar directamente "+
-   "las fuentes oficiales."
-  );
+    if(!quakes.length){
+      box.appendChild(element(
+        "div",
+        "Sin registros para los filtros actuales.",
+        "quake-status"
+      ));
+    }
 
- }finally{
-  clearTimeout(timeout);
-  quakeLoading=false;
-  $("refreshQuakes").disabled=false;
- }
+    quakes.forEach(quake=>{
+      const properties=quake.properties||{};
+      const coordinates=quake.geometry?.coordinates||[];
+
+      const card=element("article","","quake-item");
+
+      const mag=element(
+        "div",
+        "M "+(
+          Number.isFinite(properties.mag)
+            ?properties.mag.toFixed(1)
+            :"—"
+        ),
+        "quake-mag"
+      );
+
+      const info=element("div","","quake-info");
+
+      info.append(
+        element(
+          "strong",
+          properties.place||"Ubicación no indicada"
+        ),
+        element(
+          "small",
+          quakeDate(properties.time)+
+          (
+            Number.isFinite(coordinates[2])
+              ?" · "+coordinates[2].toFixed(1)+" km"
+              :""
+          )
+        )
+      );
+
+      if(
+        typeof properties.url==="string"&&
+        properties.url.startsWith(
+          "https://earthquake.usgs.gov/"
+        )
+      ){
+        const link=element("a","Detalles ↗");
+        link.href=properties.url;
+        link.target="_blank";
+        link.rel="noopener noreferrer";
+        info.appendChild(link);
+      }
+
+      card.append(mag,info);
+      box.appendChild(card);
+    });
+
+    showMessage(
+      "quakeStatus",
+      "Actualizado: "+
+      new Date().toLocaleTimeString("es-PA",{
+        timeZone:"America/Panama",
+        hour:"numeric",
+        minute:"2-digit"
+      })+" · Hora de Panamá",
+      true
+    );
+
+  }catch(error){
+    console.error(error);
+    showMessage(
+      "quakeStatus",
+      "No se pudieron actualizar los sismos. "+
+      "Consulta las fuentes oficiales."
+    );
+  }finally{
+    clearTimeout(timeout);
+    quakeLoading=false;
+    $("refreshQuakes").disabled=false;
+  }
 }
 
-$("refreshQuakes").addEventListener(
- "click",loadEarthquakes
-);
+$("refreshQuakes").addEventListener("click",loadEarthquakes);
 
 setInterval(()=>{
- if(!document.hidden){
-  loadEarthquakes();
- }
+  if(!document.hidden)loadEarthquakes();
 },5*60*1000);
 
-// FORMULARIO CIUDADANO
+/* FORMULARIO */
 
 function clearPreview(){
- if(previewUrl)URL.revokeObjectURL(previewUrl);
- previewUrl=null;
- $("photoPreview").hidden=true;
- $("photoPreview").removeAttribute("src");
+  if(previewURL)URL.revokeObjectURL(previewURL);
+  previewURL=null;
+  $("photoPreview").hidden=true;
+  $("photoPreview").removeAttribute("src");
 }
 
 function updateCategory(){
- const category=$("category").value;
- const documentFound=category==="Documentos encontrados";
- const earthquake=category==="Daños por sismo";
+  const category=$("category").value;
+  const documentFound=category==="Documentos encontrados";
+  const earthquake=category==="Daños por sismo";
 
- $("documentInstructions").hidden=!documentFound;
- $("quakeInstructions").hidden=!earthquake;
- $("photoSection").hidden=documentFound;
- $("photo").disabled=documentFound;
+  $("documentInstructions").hidden=!documentFound;
+  $("quakeInstructions").hidden=!earthquake;
+  $("photoSection").hidden=documentFound;
+  $("photo").disabled=documentFound;
 
- if(documentFound){
-  compressionJob++;
-  optimizedPhoto=null;
-  compressionPending=false;
-  $("photo").value="";
-  $("compressionStatus").textContent="";
-  clearPreview();
-  $("reportButton").disabled=false;
+  if(documentFound){
+    compressionJob++;
+    optimizedPhoto=null;
+    compressionPending=false;
+    $("photo").value="";
+    $("compressionStatus").textContent="";
+    clearPreview();
+    $("reportButton").disabled=false;
 
-  $("description").placeholder=
-   "Indica el tipo de documento y la zona general del hallazgo.";
- }else if(earthquake){
-  $("description").placeholder=
-   "Describe los daños visibles y la comunidad afectada.";
- }else{
-  $("description").placeholder=
-   "Describe lo que sucede sin incluir datos personales.";
- }
+    $("description").placeholder=
+      "Indica el tipo de documento y la zona general del hallazgo.";
+  }else if(earthquake){
+    $("description").placeholder=
+      "Describe los daños visibles y la comunidad afectada.";
+  }else{
+    $("description").placeholder=
+      "Cuéntanos qué está pasando sin incluir datos personales.";
+  }
 }
 
 $("category").addEventListener("change",updateCategory);
 
 $("documentReportLink").addEventListener("click",()=>{
- $("category").value="Documentos encontrados";
- updateCategory();
+  $("category").value="Documentos encontrados";
+  updateCategory();
 });
 
 $("quakeReportLink").addEventListener("click",()=>{
- $("category").value="Daños por sismo";
- updateCategory();
+  $("category").value="Daños por sismo";
+  updateCategory();
 });
 
-// COMPRESIÓN AUTOMÁTICA DE FOTOGRAFÍAS
+/* COMPRESIÓN DE FOTOGRAFÍAS */
 
-function photoSize(bytes){
- return bytes>=1024*1024
-  ?(bytes/(1024*1024)).toFixed(2)+" MB"
-  :Math.round(bytes/1024)+" KB";
+function formatSize(bytes){
+  return bytes>=1048576
+    ?(bytes/1048576).toFixed(2)+" MB"
+    :Math.round(bytes/1024)+" KB";
 }
 
-function canvasJpeg(canvas,quality){
- return new Promise((resolve,reject)=>{
-  canvas.toBlob(blob=>{
-   if(blob)resolve(blob);
-   else reject(new Error("No se pudo crear la imagen comprimida."));
-  },"image/jpeg",quality);
- });
+function canvasBlob(canvas,quality){
+  return new Promise((resolve,reject)=>{
+    canvas.toBlob(blob=>{
+      if(blob)resolve(blob);
+      else reject(new Error("No se pudo comprimir la fotografía."));
+    },"image/jpeg",quality);
+  });
 }
 
 async function compressPhoto(file){
- const url=URL.createObjectURL(file);
- let image;
+  const url=URL.createObjectURL(file);
+  let image;
 
- try{
-  image=await new Promise((resolve,reject)=>{
-   const img=new Image();
-   img.onload=()=>resolve(img);
-   img.onerror=()=>reject(
-    new Error("No se pudo leer la fotografía.")
-   );
-   img.src=url;
-  });
- }finally{
-  URL.revokeObjectURL(url);
- }
-
- const longest=Math.max(
-  image.naturalWidth,
-  image.naturalHeight
- );
-
- if(!longest){
-  throw new Error(
-   "La fotografía no tiene dimensiones válidas."
-  );
- }
-
- const scale=Math.min(1,1280/longest);
-
- const canvas=document.createElement("canvas");
- canvas.width=Math.max(
-  1,Math.round(image.naturalWidth*scale)
- );
- canvas.height=Math.max(
-  1,Math.round(image.naturalHeight*scale)
- );
-
- const context=canvas.getContext("2d");
-
- if(!context){
-  throw new Error(
-   "Este navegador no permite comprimir fotos."
-  );
- }
-
- // Fondo blanco para imágenes con transparencia.
- context.fillStyle="#ffffff";
- context.fillRect(0,0,canvas.width,canvas.height);
-
- context.drawImage(
-  image,0,0,canvas.width,canvas.height
- );
-
- // Se busca un tamaño cercano a 250 KB.
- let blob=await canvasJpeg(canvas,.76);
-
- for(const quality of [.68,.58,.48]){
-  if(blob.size<=250*1024)break;
-
-  const smaller=await canvasJpeg(canvas,quality);
-  if(smaller.size<blob.size)blob=smaller;
- }
-
- // No aumenta el tamaño de JPG pequeños.
- if(
-  file.type==="image/jpeg"&&
-  file.size<=blob.size&&
-  scale===1
- ){
-  return file;
- }
-
- return new File(
-  [blob],
-  "reporte-optimizado.jpg",
-  {
-   type:"image/jpeg",
-   lastModified:Date.now()
+  try{
+    image=await new Promise((resolve,reject)=>{
+      const img=new Image();
+      img.onload=()=>resolve(img);
+      img.onerror=()=>reject(
+        new Error("No se pudo leer la fotografía.")
+      );
+      img.src=url;
+    });
+  }finally{
+    URL.revokeObjectURL(url);
   }
- );
+
+  const longest=Math.max(
+    image.naturalWidth,
+    image.naturalHeight
+  );
+
+  if(!longest)throw new Error("Imagen no válida.");
+
+  const scale=Math.min(1,1280/longest);
+
+  const canvas=document.createElement("canvas");
+  canvas.width=Math.max(
+    1,Math.round(image.naturalWidth*scale)
+  );
+  canvas.height=Math.max(
+    1,Math.round(image.naturalHeight*scale)
+  );
+
+  const ctx=canvas.getContext("2d");
+
+  if(!ctx)throw new Error("No se pudo procesar la imagen.");
+
+  ctx.fillStyle="#ffffff";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(image,0,0,canvas.width,canvas.height);
+
+  let blob=await canvasBlob(canvas,.76);
+
+  for(const quality of [.68,.58,.48]){
+    if(blob.size<=250*1024)break;
+    const smaller=await canvasBlob(canvas,quality);
+    if(smaller.size<blob.size)blob=smaller;
+  }
+
+  if(
+    file.type==="image/jpeg"&&
+    file.size<=blob.size&&
+    scale===1
+  ){
+    return file;
+  }
+
+  return new File(
+    [blob],
+    "reporte-optimizado.jpg",
+    {
+      type:"image/jpeg",
+      lastModified:Date.now()
+    }
+  );
 }
 
 $("photo").addEventListener("change",async()=>{
- const job=++compressionJob;
-
- optimizedPhoto=null;
- compressionPending=false;
- clearPreview();
- $("compressionStatus").textContent="";
- clearReportAlert();
-
- const photo=$("photo").files[0];
- if(!photo)return;
-
- if(
-  !["image/jpeg","image/png","image/webp"].includes(photo.type)||
-  photo.size>5*1024*1024
- ){
-  showReportAlert(
-   "⚠️ La fotografía original debe ser JPG, PNG o WebP "+
-   "y pesar como máximo 5 MB."
-  );
-  $("photo").value="";
-  return;
- }
-
- compressionPending=true;
- $("reportButton").disabled=true;
-
- $("compressionStatus").textContent=
-  "⏳ Optimizando fotografía...";
-
- try{
-  const result=await compressPhoto(photo);
-
-  if(job!==compressionJob)return;
-
-  if(result.size>5*1024*1024){
-   throw new Error(
-    "La imagen optimizada supera los 5 MB."
-   );
-  }
-
-  optimizedPhoto=result;
-
-  previewUrl=URL.createObjectURL(result);
-  $("photoPreview").src=previewUrl;
-  $("photoPreview").hidden=false;
-
-  const saving=Math.max(
-   0,
-   Math.round((1-result.size/photo.size)*100)
-  );
-
-  $("compressionStatus").textContent=
-   "✅ Foto lista: "+
-   photoSize(photo.size)+
-   " → "+
-   photoSize(result.size)+
-   " (ahorro aproximado: "+saving+"%).";
-
- }catch(error){
-  if(job!==compressionJob)return;
-
-  optimizedPhoto=null;
-  $("photo").value="";
-
-  showReportAlert(
-   "⚠️ No se pudo optimizar esta fotografía: "+
-   error.message+
-   " Selecciona otra imagen."
-  );
-
-  $("compressionStatus").textContent="";
-
- }finally{
-  if(job===compressionJob){
-   compressionPending=false;
-   $("reportButton").disabled=false;
-  }
- }
-});
-
-["category","area","description","visibility"].forEach(id=>{
- $(id).addEventListener("input",()=>{
-  $(id).classList.remove("invalid");
- });
-});
-
-function validateCitizenForm(){
- const category=$("category");
- const area=$("area");
- const description=$("description");
-
- [category,area,description].forEach(
-  field=>field.classList.remove("invalid")
- );
-
- if(!category.value){
-  category.classList.add("invalid");
-  category.focus();
-  showReportAlert("⚠️ Selecciona una categoría.");
-  return false;
- }
-
- if(!area.value.trim()){
-  area.classList.add("invalid");
-  area.focus();
-  showReportAlert(
-   "⚠️ Escribe la comunidad o corregimiento."
-  );
-  return false;
- }
-
- if(area.value.trim().length>120){
-  area.classList.add("invalid");
-  area.focus();
-  showReportAlert(
-   "⚠️ El nombre de la comunidad es demasiado largo."
-  );
-  return false;
- }
-
- if(description.value.trim().length<10){
-  description.classList.add("invalid");
-  description.focus();
-  showReportAlert(
-   "⚠️ La descripción debe tener al menos 10 caracteres."
-  );
-  return false;
- }
-
- if(description.value.trim().length>1500){
-  description.classList.add("invalid");
-  description.focus();
-  showReportAlert(
-   "⚠️ La descripción no puede superar 1500 caracteres."
-  );
-  return false;
- }
-
- return true;
-}
-
-$("reportForm").addEventListener("submit",async event=>{
- event.preventDefault();
- clearReportAlert();
-
- if(compressionPending){
-  showReportAlert(
-   "⏳ Espera a que termine la compresión "+
-   "de la fotografía."
-  );
-  return;
- }
-
- if(!validateCitizenForm())return;
-
- const button=$("reportButton");
- const documentFound=
-  $("category").value==="Documentos encontrados";
-
- if(
-  !documentFound&&
-  $("photo").files.length&&
-  !optimizedPhoto
- ){
-  showReportAlert(
-   "⚠️ La fotografía todavía no está lista. "+
-   "Selecciona nuevamente la imagen."
-  );
-  return;
- }
-
- const photo=documentFound?null:optimizedPhoto;
-
- if(photo&&(
-  !["image/jpeg","image/png","image/webp"].includes(photo.type)||
-  photo.size>5*1024*1024
- )){
-  showReportAlert(
-   "⚠️ La fotografía no es válida."
-  );
-  return;
- }
-
- let token="";
-
- try{
-  if(
-   window.turnstile&&
-   typeof window.turnstile.getResponse==="function"
-  ){
-   token=window.turnstile.getResponse()||"";
-  }
- }catch(error){
-  console.warn(
-   "No se pudo consultar Turnstile:",error
-  );
- }
-
- if(!token){
-  token=document.querySelector(
-   'input[name="cf-turnstile-response"]'
-  )?.value||"";
- }
-
- if(!token){
-  showReportAlert(
-   "⚠️ Completa la verificación de seguridad "+
-   "de Cloudflare antes de enviar."
-  );
-  return;
- }
-
- const form=new FormData();
-
- form.append("category",$("category").value);
- form.append("area",$("area").value.trim());
- form.append(
-  "description",
-  $("description").value.trim()
- );
- form.append(
-  "visibility_requested",
-  $("visibility").value
- );
- form.append("turnstile_token",token);
-
- if(photo){
-  form.append("photo",photo);
- }
-
- button.disabled=true;
- button.textContent="⏳ ENVIANDO REPORTE...";
-
- showReportAlert(
-  "⏳ Estamos enviando tu reporte. "+
-  "Espera un momento..."
- );
-
- const controller=new AbortController();
- const timeout=setTimeout(
-  ()=>controller.abort(),
-  30000
- );
-
- try{
-  const response=await fetch(SEND_FUNCTION,{
-   method:"POST",
-   headers:{
-    apikey:SUPABASE_KEY
-   },
-   body:form,
-   signal:controller.signal
-  });
-
-  const raw=await response.text();
-  let result={};
-
-  try{
-   result=raw?JSON.parse(raw):{};
-  }catch{
-   result={error:raw.slice(0,300)};
-  }
-
-  if(!response.ok){
-   throw new Error(
-    "El servidor respondió con error "+
-    response.status+
-    (
-     result.error?": "+result.error:
-     result.message?": "+result.message:
-     ""
-    )
-   );
-  }
-
-  if(result.success===false){
-   throw new Error(
-    result.error||
-    result.message||
-    "El servidor no aceptó el reporte."
-   );
-  }
-
-  if(result.success!==true){
-   throw new Error(
-    "El servidor no confirmó que "+
-    "el reporte se haya guardado."
-   );
-  }
-
-  compressionJob++;
+  const job=++compressionJob;
   optimizedPhoto=null;
   compressionPending=false;
-
-  $("reportForm").reset();
   clearPreview();
-  $("compressionStatus").textContent="";
-  updateCategory();
+  clearAlert();
 
-  showReportAlert(
-   "✅ ¡Reporte enviado correctamente! "+
-   "Quedó pendiente de revisión.",
-   true
-  );
+  const file=$("photo").files[0];
+  if(!file)return;
 
-  if(!$("adminPanel").hidden){
-   await loadAdminReports();
+  if(
+    !["image/jpeg","image/png","image/webp"].includes(file.type)||
+    file.size>5*1024*1024
+  ){
+    alertReport(
+      "⚠️ Selecciona una imagen JPG, PNG o WebP de máximo 5 MB."
+    );
+    $("photo").value="";
+    return;
   }
 
- }catch(error){
-  console.error(
-   "Error enviando reporte:",error
-  );
+  compressionPending=true;
+  $("reportButton").disabled=true;
+  $("compressionStatus").textContent=
+    "⏳ Comprimiendo fotografía...";
 
-  let message=error.message||
-   "No se pudo completar el envío.";
+  try{
+    const result=await compressPhoto(file);
 
-  if(error.name==="AbortError"){
-   message=
-    "La conexión tardó demasiado. "+
-    "Comprueba si el reporte llegó "+
-    "antes de enviarlo nuevamente.";
-  }else if(error instanceof TypeError){
-   message=
-    "No se pudo conectar con el servidor. "+
-    "Comprueba tu conexión.";
+    if(job!==compressionJob)return;
+
+    if(result.size>5*1024*1024){
+      throw new Error("La fotografía supera los 5 MB.");
+    }
+
+    optimizedPhoto=result;
+    previewURL=URL.createObjectURL(result);
+    $("photoPreview").src=previewURL;
+    $("photoPreview").hidden=false;
+
+    const saving=Math.max(
+      0,Math.round((1-result.size/file.size)*100)
+    );
+
+    $("compressionStatus").textContent=
+      "✅ Foto optimizada: "+
+      formatSize(file.size)+" → "+
+      formatSize(result.size)+
+      " · Ahorro aproximado: "+saving+"%";
+
+  }catch(error){
+    if(job!==compressionJob)return;
+
+    optimizedPhoto=null;
+    $("photo").value="";
+    $("compressionStatus").textContent="";
+
+    alertReport(
+      "⚠️ No se pudo optimizar la fotografía: "+error.message
+    );
+  }finally{
+    if(job===compressionJob){
+      compressionPending=false;
+      $("reportButton").disabled=false;
+    }
   }
-
-  showReportAlert(
-   "❌ No se pudo confirmar el envío. "+
-   message
-  );
-
- }finally{
-  clearTimeout(timeout);
-
-  button.disabled=false;
-  button.textContent="📤 ENVIAR MI REPORTE";
-
-  if(window.turnstile){
-   try{
-    window.turnstile.reset();
-   }catch(error){}
-  }
- }
 });
 
-// ADMINISTRACIÓN
+/* ENVÍO A EDGE FUNCTION */
+
+$("reportForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  clearAlert();
+
+  const category=$("category").value;
+  const area=$("area").value.trim();
+  const description=$("description").value.trim();
+  const visibility=$("visibility").value;
+
+  if(!category){
+    alertReport("⚠️ Selecciona una categoría.");
+    $("category").focus();
+    return;
+  }
+
+  if(!area||area.length>120){
+    alertReport("⚠️ Escribe una comunidad válida.");
+    $("area").focus();
+    return;
+  }
+
+  if(description.length<10||description.length>1500){
+    alertReport(
+      "⚠️ La descripción debe tener entre 10 y 1500 caracteres."
+    );
+    $("description").focus();
+    return;
+  }
+
+  if(compressionPending){
+    alertReport("⏳ Espera a que termine la compresión.");
+    return;
+  }
+
+  const documentFound=category==="Documentos encontrados";
+
+  if(
+    !documentFound&&
+    $("photo").files.length&&
+    !optimizedPhoto
+  ){
+    alertReport("⚠️ La fotografía todavía no está lista.");
+    return;
+  }
+
+  let token="";
+
+  try{
+    if(window.turnstile?.getResponse){
+      token=window.turnstile.getResponse()||"";
+    }
+  }catch(error){}
+
+  if(!token){
+    token=document.querySelector(
+      'input[name="cf-turnstile-response"]'
+    )?.value||"";
+  }
+
+  if(!token){
+    alertReport(
+      "⚠️ Completa la verificación de seguridad de Cloudflare."
+    );
+    return;
+  }
+
+  const form=new FormData();
+  form.append("category",category);
+  form.append("area",area);
+  form.append("description",description);
+  form.append("visibility_requested",visibility);
+  form.append("turnstile_token",token);
+
+  if(!documentFound&&optimizedPhoto){
+    form.append("photo",optimizedPhoto);
+  }
+
+  const button=$("reportButton");
+  button.disabled=true;
+  button.textContent="⏳ ENVIANDO...";
+
+  alertReport("⏳ Estamos enviando tu reporte...");
+
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),30000);
+
+  try{
+    const response=await fetch(SEND_FUNCTION,{
+      method:"POST",
+      headers:{apikey:SUPABASE_KEY},
+      body:form,
+      signal:controller.signal
+    });
+
+    const raw=await response.text();
+    let result={};
+
+    try{
+      result=raw?JSON.parse(raw):{};
+    }catch{
+      result={error:raw.slice(0,300)};
+    }
+
+    if(!response.ok||result.success!==true){
+      throw new Error(
+        result.error||
+        result.message||
+        "El servidor no confirmó el envío."
+      );
+    }
+
+    compressionJob++;
+    optimizedPhoto=null;
+    compressionPending=false;
+
+    $("reportForm").reset();
+    clearPreview();
+    $("compressionStatus").textContent="";
+    updateCategory();
+
+    alertReport(
+      "✅ ¡Reporte enviado correctamente! "+
+      "Quedó pendiente de revisión.",
+      true
+    );
+
+    if(!$("adminPanel").hidden){
+      await loadAdminReports();
+    }
+
+  }catch(error){
+    console.error(error);
+
+    const message=error.name==="AbortError"
+      ?"La conexión tardó demasiado. Comprueba si llegó antes de volver a enviarlo."
+      :error.message;
+
+    alertReport("❌ No se pudo confirmar el envío. "+message);
+
+  }finally{
+    clearTimeout(timeout);
+    button.disabled=false;
+    button.textContent="📤 ENVIAR MI REPORTE →";
+
+    try{
+      window.turnstile?.reset();
+    }catch(error){}
+  }
+});
+
+/* ADMINISTRACIÓN */
 
 async function showAdminPanel(){
- if(recoveryMode)return;
+  if(recoveryMode)return;
 
- const {data:isAdmin,error}=
-  await db.rpc("is_app_admin");
+  const {data:isAdmin,error}=await db.rpc("is_app_admin");
 
- if(error||isAdmin!==true){
+  if(error||isAdmin!==true){
+    await db.auth.signOut();
+
+    $("adminPanel").hidden=true;
+    $("adminLogin").hidden=false;
+
+    showMessage(
+      "loginMessage",
+      "Esta cuenta no tiene permisos de administrador."
+    );
+    return;
+  }
+
+  $("adminLogin").hidden=true;
+  $("recoverySection").hidden=true;
+  $("adminPanel").hidden=false;
+
+  await loadAdminReports();
+}
+
+async function loadAdminReports(){
+  if($("adminPanel").hidden)return;
+
+  const box=$("adminReports");
+  box.replaceChildren();
+
+  showMessage("adminMessage","Cargando reportes...");
+
+  try{
+    const {data,error}=await db
+      .from("reports")
+      .select(
+        "id,category,area,description,status,"+
+        "visibility_requested,is_published,"+
+        "photo_path,created_at"
+      )
+      .order("created_at",{ascending:false})
+      .limit(100);
+
+    if(error)throw error;
+
+    showMessage(
+      "adminMessage",
+      "Reportes encontrados: "+data.length,
+      true
+    );
+
+    for(const report of data){
+      const card=element("article","","admin-report");
+
+      card.append(
+        element("h4",report.category+" · "+report.area),
+        element("p",report.description),
+        element("p","📅 "+dateText(report.created_at)),
+        element("p","Estado: "+statusText(report.status)),
+        element(
+          "p",
+          "Privacidad: "+
+          (
+            report.visibility_requested==="public"
+              ?"Solicitó publicación pública"
+              :"Privado"
+          )
+        ),
+        element(
+          "p",
+          "Publicado: "+(report.is_published?"Sí":"No")
+        )
+      );
+
+      if(isDocument(report)){
+        card.appendChild(element(
+          "p",
+          "⚠️ Verifica que no contenga datos personales.",
+          "hint"
+        ));
+      }
+
+      if(report.photo_path){
+        const view=element(
+          "button",
+          "📷 Ver fotografía",
+          "btn btn-soft"
+        );
+        view.type="button";
+
+        const photoBox=document.createElement("div");
+
+        view.onclick=async()=>{
+          view.disabled=true;
+          view.textContent="Cargando...";
+
+          const {data:photoData,error:photoError}=
+            await db.storage
+              .from(BUCKET)
+              .createSignedUrl(report.photo_path,60);
+
+          if(photoError||!photoData?.signedUrl){
+            view.textContent="No se pudo abrir la fotografía";
+            view.disabled=false;
+            return;
+          }
+
+          const image=document.createElement("img");
+          image.className="admin-photo";
+          image.alt="Fotografía privada del reporte";
+          image.src=photoData.signedUrl;
+
+          photoBox.replaceChildren(image);
+          view.textContent="Fotografía cargada";
+        };
+
+        card.append(view,photoBox);
+      }
+
+      const actions=element("div","","admin-actions");
+
+      actions.appendChild(
+        element("label","Cambiar estado","label")
+      );
+
+      const select=element("select","","field");
+
+      [
+        ["pending","Pendiente"],
+        ["reviewing","En revisión"],
+        ["referred","Remitido"],
+        ["resolved","Resuelto"],
+        ["rejected","Rechazado"]
+      ].forEach(([value,label])=>{
+        const option=element("option",label);
+        option.value=value;
+        select.appendChild(option);
+      });
+
+      select.value=report.status;
+
+      const save=element(
+        "button",
+        "Guardar estado",
+        "btn btn-green"
+      );
+      save.type="button";
+      save.disabled=true;
+
+      select.onchange=()=>{
+        save.disabled=select.value===report.status;
+      };
+
+      const message=element("p","","message");
+
+      save.onclick=async()=>{
+        save.disabled=true;
+
+        const changes={status:select.value};
+
+        if(select.value==="rejected"){
+          changes.is_published=false;
+        }
+
+        const {error}=await db
+          .from("reports")
+          .update(changes)
+          .eq("id",report.id);
+
+        if(error){
+          message.textContent="Error: "+error.message;
+          save.disabled=false;
+          return;
+        }
+
+        await loadAdminReports();
+        await loadPublicReports();
+      };
+
+      actions.append(select,save);
+
+      if(report.visibility_requested==="public"){
+        const publish=element(
+          "button",
+          report.is_published
+            ?"Retirar publicación"
+            :"✓ Aprobar publicación",
+          report.is_published
+            ?"btn btn-soft"
+            :"btn btn-green"
+        );
+
+        publish.type="button";
+
+        publish.onclick=async()=>{
+          const next=!report.is_published;
+
+          if(next){
+            if(report.status==="rejected"){
+              message.textContent=
+                "Primero cambia el estado rechazado.";
+              return;
+            }
+
+            if(!confirm(
+              "¿Revisaste que el reporte y sus fotografías "+
+              "no contengan información privada?"
+            )){
+              return;
+            }
+          }
+
+          publish.disabled=true;
+
+          const {error}=await db
+            .from("reports")
+            .update({is_published:next})
+            .eq("id",report.id);
+
+          if(error){
+            message.textContent="Error: "+error.message;
+            publish.disabled=false;
+            return;
+          }
+
+          await loadAdminReports();
+          await loadPublicReports();
+        };
+
+        actions.appendChild(publish);
+      }else{
+        actions.appendChild(element(
+          "p",
+          "🔒 Reporte privado: no se puede publicar.",
+          "hint"
+        ));
+      }
+
+      actions.appendChild(message);
+      card.appendChild(actions);
+      box.appendChild(card);
+    }
+
+  }catch(error){
+    console.error(error);
+    showMessage("adminMessage","Error: "+error.message);
+  }
+}
+
+$("refreshAdmin").addEventListener("click",loadAdminReports);
+
+$("loginForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+
+  $("loginButton").disabled=true;
+  showMessage("loginMessage","Verificando acceso...");
+
+  try{
+    const {error}=await db.auth.signInWithPassword({
+      email:$("adminEmail").value,
+      password:$("adminPassword").value
+    });
+
+    $("adminPassword").value="";
+
+    if(error)throw error;
+
+    await showAdminPanel();
+
+  }catch(error){
+    showMessage(
+      "loginMessage",
+      "No se pudo iniciar sesión: "+error.message
+    );
+  }finally{
+    $("loginButton").disabled=false;
+  }
+});
+
+$("logoutButton").addEventListener("click",async()=>{
   await db.auth.signOut();
 
   $("adminPanel").hidden=true;
   $("adminLogin").hidden=false;
+  $("adminReports").replaceChildren();
 
-  showMessage(
-   "loginMessage",
-   "Esta cuenta no tiene permisos "+
-   "de administrador."
-  );
-  return;
- }
+  showMessage("loginMessage","Sesión cerrada.");
+});
 
- $("adminLogin").hidden=true;
- $("adminPanel").hidden=false;
- $("recoverySection").hidden=true;
+/* RECUPERACIÓN DE CONTRASEÑA */
 
- await loadAdminReports();
-}
+$("forgotButton").addEventListener("click",async()=>{
+  const email=$("adminEmail").value.trim();
 
-async function loadAdminReports(){
- if($("adminPanel").hidden)return;
-
- const box=$("adminReports");
- box.replaceChildren();
-
- showMessage(
-  "adminMessage",
-  "Cargando reportes..."
- );
-
- try{
-  const {data,error}=await db
-   .from("reports")
-   .select(
-    "id,category,area,description,status,"+
-    "visibility_requested,is_published,"+
-    "photo_path,created_at"
-   )
-   .order("created_at",{ascending:false})
-   .limit(100);
-
-  if(error)throw error;
-
-  showMessage(
-   "adminMessage",
-   "Reportes encontrados: "+data.length,
-   true
-  );
-
-  for(const report of data){
-   const card=make(
-    "article","","admin-report"
-   );
-
-   card.append(
-    make(
-     "h4",
-     report.category+" · "+report.area
-    ),
-    make("p",report.description),
-    make(
-     "p",
-     "📅 "+formatDate(report.created_at)
-    ),
-    make(
-     "p",
-     "Estado: "+statusName(report.status)
-    ),
-    make(
-     "p",
-     "Tipo: "+
-     (
-      report.visibility_requested==="public"
-       ?"Solicitó publicación pública"
-       :"Privado"
-     )
-    ),
-    make(
-     "p",
-     "Publicación: "+
-     (
-      report.is_published
-       ?"Aprobada"
-       :"No aprobada"
-     )
-    )
-   );
-
-   if(isDocument(report)){
-    card.appendChild(make(
-     "p",
-     "⚠️ Comprueba que no haya datos personales.",
-     "hint"
-    ));
-   }
-
-   if(report.category==="Daños por sismo"){
-    card.appendChild(make(
-     "p",
-     "⚠️ Este reporte no envía "+
-     "una alerta a emergencias.",
-     "hint"
-    ));
-   }
-
-   if(report.photo_path){
-    const view=make(
-     "button",
-     "📷 Ver fotografía",
-     "btn btn-soft"
+  if(!email){
+    showMessage(
+      "loginMessage",
+      "Escribe primero tu correo electrónico."
     );
-
-    view.type="button";
-
-    const photoBox=
-     document.createElement("div");
-
-    view.onclick=async()=>{
-     view.disabled=true;
-     view.textContent="Cargando...";
-
-     const {
-      data:photoData,
-      error:photoError
-     }=await db.storage
-      .from(BUCKET)
-      .createSignedUrl(
-       report.photo_path,60
-      );
-
-     if(
-      photoError||
-      !photoData?.signedUrl
-     ){
-      view.textContent=
-       "No se pudo abrir la fotografía";
-      view.disabled=false;
-      return;
-     }
-
-     const image=
-      document.createElement("img");
-
-     image.className="admin-photo";
-     image.alt=
-      "Fotografía privada del reporte";
-     image.src=photoData.signedUrl;
-
-     photoBox.replaceChildren(image);
-     view.textContent="Fotografía cargada";
-    };
-
-    card.append(view,photoBox);
-   }
-
-   const actions=make(
-    "div","","admin-actions"
-   );
-
-   actions.appendChild(
-    make(
-     "label",
-     "Cambiar estado",
-     "label"
-    )
-   );
-
-   const select=make(
-    "select","","field"
-   );
-
-   const states=[
-    ["pending","Pendiente"],
-    ["reviewing","En revisión"],
-    ["referred","Remitido"],
-    ["resolved","Resuelto"],
-    ["rejected","Rechazado"]
-   ];
-
-   states.forEach(([value,label])=>{
-    const option=make(
-     "option",label
-    );
-
-    option.value=value;
-    select.appendChild(option);
-   });
-
-   select.value=report.status;
-
-   const save=make(
-    "button",
-    "Guardar estado",
-    "btn btn-green"
-   );
-
-   save.type="button";
-   save.disabled=true;
-
-   select.onchange=()=>{
-    save.disabled=
-     select.value===report.status;
-   };
-
-   const message=make(
-    "p","","message"
-   );
-
-   save.onclick=async()=>{
-    save.disabled=true;
-
-    const changes={
-     status:select.value
-    };
-
-    if(select.value==="rejected"){
-     changes.is_published=false;
-    }
-
-    const {error}=await db
-     .from("reports")
-     .update(changes)
-     .eq("id",report.id);
-
-    if(error){
-     message.textContent=
-      "Error: "+error.message;
-     save.disabled=false;
-     return;
-    }
-
-    await loadAdminReports();
-    await loadPublicReports();
-   };
-
-   actions.append(select,save);
-
-   if(
-    report.visibility_requested==="public"
-   ){
-    const publish=make(
-     "button",
-     report.is_published
-      ?"Retirar publicación"
-      :"✓ Aprobar publicación",
-     report.is_published
-      ?"btn btn-soft"
-      :"btn btn-green"
-    );
-
-    publish.type="button";
-
-    publish.onclick=async()=>{
-     const next=!report.is_published;
-
-     if(next){
-      if(report.status==="rejected"){
-       message.textContent=
-        "Primero cambia el estado rechazado.";
-       return;
-      }
-
-      if(!confirm(
-       "¿Revisaste el reporte y sus fotografías "+
-       "para confirmar que no contienen "+
-       "información privada?"
-      )){
-       return;
-      }
-     }
-
-     publish.disabled=true;
-
-     const {error}=await db
-      .from("reports")
-      .update({
-       is_published:next
-      })
-      .eq("id",report.id);
-
-     if(error){
-      message.textContent=
-       "Error: "+error.message;
-      publish.disabled=false;
-      return;
-     }
-
-     await loadAdminReports();
-     await loadPublicReports();
-    };
-
-    actions.appendChild(publish);
-
-   }else{
-    actions.appendChild(make(
-     "p",
-     "🔒 Reporte privado: "+
-     "no se puede publicar.",
-     "hint"
-    ));
-   }
-
-   actions.appendChild(message);
-   card.appendChild(actions);
-   box.appendChild(card);
+    return;
   }
 
- }catch(error){
-  console.error(error);
-
-  showMessage(
-   "adminMessage",
-   "Error: "+error.message
-  );
- }
-}
-
-$("refreshAdmin").onclick=
- loadAdminReports;
-
-// INICIAR SESIÓN
-
-$("loginForm").addEventListener(
- "submit",
- async event=>{
-  event.preventDefault();
-
-  $("loginButton").disabled=true;
-
-  showMessage(
-   "loginMessage",
-   "Verificando acceso..."
+  const {error}=await db.auth.resetPasswordForEmail(
+    email,
+    {
+      redirectTo:
+        "https://aguadulcebueno.github.io/aguadulce-reporta/"
+    }
   );
 
-  try{
-   const {error}=
-    await db.auth.signInWithPassword({
-     email:$("adminEmail").value,
-     password:$("adminPassword").value
-    });
-
-   $("adminPassword").value="";
-
-   if(error)throw error;
-
-   await showAdminPanel();
-
-  }catch(error){
-   showMessage(
+  showMessage(
     "loginMessage",
-    "No se pudo iniciar sesión: "+
-    error.message
-   );
-
-  }finally{
-   $("loginButton").disabled=false;
-  }
- }
-);
-
-$("logoutButton").onclick=async()=>{
- await db.auth.signOut();
-
- $("adminPanel").hidden=true;
- $("adminLogin").hidden=false;
-
- $("adminReports").replaceChildren();
-
- showMessage(
-  "loginMessage",
-  "Sesión cerrada."
- );
-};
-
-// RECUPERAR CONTRASEÑA
-
-$("forgotButton").onclick=async()=>{
- const email=$("adminEmail").value.trim();
-
- if(!email){
-  showMessage(
-   "loginMessage",
-   "Escribe primero tu correo."
+    error
+      ?"Error: "+error.message
+      :"Si el correo está registrado, recibirás un enlace."
   );
-  return;
- }
-
- const {error}=
-  await db.auth.resetPasswordForEmail(
-   email,{
-    redirectTo:
-     "https://aguadulcebueno.github.io/aguadulce-reporta/"
-   }
-  );
-
- showMessage(
-  "loginMessage",
-  error
-   ?"Error: "+error.message
-   :"Si el correo está registrado, "+
-    "recibirás un enlace."
- );
-};
+});
 
 function showRecovery(){
- recoveryMode=true;
-
- $("adminLogin").hidden=true;
- $("adminPanel").hidden=true;
- $("recoverySection").hidden=false;
+  recoveryMode=true;
+  $("adminLogin").hidden=true;
+  $("adminPanel").hidden=true;
+  $("recoverySection").hidden=false;
 }
 
-if(recoveryMode){
- showRecovery();
-}
+if(recoveryMode)showRecovery();
 
-db.auth.onAuthStateChange(
- (event,session)=>{
+db.auth.onAuthStateChange((event,session)=>{
   if(event==="PASSWORD_RECOVERY"){
-   showRecovery();
-   recoveryReady=true;
+    showRecovery();
+    recoveryReady=true;
 
-   showMessage(
-    "recoveryMessage",
-    "Enlace verificado. "+
-    "Escribe tu nueva contraseña."
-   );
+    showMessage(
+      "recoveryMessage",
+      "Enlace verificado. Escribe tu nueva contraseña."
+    );
   }
 
-  if(
-   recoveryMode&&
-   event==="SIGNED_IN"&&
-   session
-  ){
-   recoveryReady=true;
+  if(recoveryMode&&event==="SIGNED_IN"&&session){
+    recoveryReady=true;
   }
- }
-);
+});
 
-$("recoveryForm").addEventListener(
- "submit",
- async event=>{
+$("recoveryForm").addEventListener("submit",async event=>{
   event.preventDefault();
 
-  const password=
-   $("newPassword").value;
+  const password=$("newPassword").value;
 
-  if(
-   password!==$("confirmPassword").value
-  ){
-   showMessage(
-    "recoveryMessage",
-    "Las contraseñas no coinciden."
-   );
-   return;
+  if(password!==$("confirmPassword").value){
+    showMessage(
+      "recoveryMessage",
+      "Las contraseñas no coinciden."
+    );
+    return;
   }
 
   if(!recoveryReady){
-   showMessage(
-    "recoveryMessage",
-    "El enlace aún no se ha verificado."
-   );
-   return;
+    showMessage(
+      "recoveryMessage",
+      "El enlace todavía no se ha verificado."
+    );
+    return;
   }
 
-  const {error}=
-   await db.auth.updateUser({
-    password
-   });
+  const {error}=await db.auth.updateUser({password});
 
   if(error){
-   showMessage(
-    "recoveryMessage",
-    "Error: "+error.message
-   );
-   return;
+    showMessage(
+      "recoveryMessage",
+      "Error: "+error.message
+    );
+    return;
   }
 
   await db.auth.signOut();
@@ -2138,60 +2787,51 @@ $("recoveryForm").addEventListener(
   recoveryMode=false;
   recoveryReady=false;
 
-  history.replaceState(
-   null,"",location.pathname
-  );
+  history.replaceState(null,"",location.pathname);
 
   $("recoverySection").hidden=true;
   $("adminLogin").hidden=false;
 
   showMessage(
-   "loginMessage",
-   "Contraseña actualizada. "+
-   "Inicia sesión.",
-   true
+    "loginMessage",
+    "Contraseña actualizada. Inicia sesión.",
+    true
   );
- }
-);
+});
 
-// INICIAR PÁGINA
+/* INICIALIZAR */
 
 async function initialize(){
- $("year").textContent=
-  new Date().getFullYear();
+  $("year").textContent=new Date().getFullYear();
 
- updateCategory();
+  updateCategory();
+  loadEarthquakes();
+  await loadPublicReports();
 
- loadEarthquakes();
- await loadPublicReports();
+  if(recoveryMode){
+    const {data}=await db.auth.getSession();
 
- if(recoveryMode){
-  const {data}=
-   await db.auth.getSession();
-
-  if(data.session){
-   recoveryReady=true;
-
-   showMessage(
-    "recoveryMessage",
-    "Escribe tu nueva contraseña."
-   );
+    if(data.session){
+      recoveryReady=true;
+      showMessage(
+        "recoveryMessage",
+        "Escribe tu nueva contraseña."
+      );
+    }
+    return;
   }
 
-  return;
- }
+  const {data,error}=await db.auth.getUser();
 
- const {data,error}=
-  await db.auth.getUser();
-
- if(!error&&data.user){
-  await showAdminPanel();
- }
+  if(!error&&data.user){
+    await showAdminPanel();
+  }
 }
 
 initialize();
 </script>
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 </body>
 </html>
