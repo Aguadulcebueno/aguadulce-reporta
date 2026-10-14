@@ -1590,6 +1590,14 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
 .search-suggestion strong{font-size:13px;line-height:1.35;overflow-wrap:anywhere}
 .search-suggestion small{font-size:11px;opacity:.7}
 
+
+.document-redactor{margin-top:14px;padding:15px;border:1px solid rgba(50,185,129,.4);border-radius:16px;background:rgba(19,58,48,.12)}
+.document-redactor[hidden]{display:none!important}
+.document-redactor canvas{display:block;width:100%;max-width:420px;height:auto;touch-action:none;border-radius:10px;border:2px solid #2baf83;cursor:crosshair;margin:12px auto}
+.redactor-actions{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.redactor-actions button{font-size:.8rem;padding:9px 12px}
+.redactor-confirm{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;line-height:1.5}
+.redactor-confirm input{margin-top:4px;flex:none}
 </style>
 </head>
 
@@ -1847,8 +1855,9 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
         <div id="documentExtra" class="extra-fields" hidden>
           <h4>🪪 Aviso de documento encontrado</h4>
           <p>
-            No incluyas nombre completo, número de cédula,
-            fotografía del documento ni otros datos personales.
+            Puedes mostrar la fotografía y el nombre si es necesario para identificar al propietario.
+            Tacha antes de enviar el número de documento, firma, dirección, fecha de nacimiento,
+            códigos QR y cualquier otro dato sensible. El nombre y el rostro también son datos personales: publica solo lo indispensable.
           </p>
         </div>
 
@@ -1895,6 +1904,17 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
 
           <img id="photoPreview" class="preview"
             alt="Vista previa" hidden>
+          <div id="documentRedactor" class="document-redactor" hidden>
+            <strong>🔒 Censurar datos de la fotografía</strong>
+            <p class="hint">Desliza el dedo sobre cada dato que quieras ocultar. Las franjas negras se guardan en la imagen final, no son una capa temporal.</p>
+            <canvas id="documentCanvas" aria-label="Editor para tachar datos personales"></canvas>
+            <div class="redactor-actions">
+              <button type="button" class="btn btn-secondary" id="undoRedaction">↶ Deshacer última franja</button>
+              <button type="button" class="btn btn-secondary" id="resetRedaction">Borrar franjas</button>
+            </div>
+            <label class="redactor-confirm"><input type="checkbox" id="documentPrivacyCheck"> Revisé la imagen y oculté números, firma, dirección, códigos y otros datos sensibles. Entiendo que el nombre y la foto también pueden identificar a alguien.</label>
+            <p id="redactionStatus" class="hint" role="status"></p>
+          </div>
         </div>
 
         <label class="label" for="visibility">
@@ -2285,7 +2305,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
     <h2 class="section-title">🪪 Documentos encontrados.</h2>
     <p class="section-description">
       Ayudemos a que los documentos regresen a sus propietarios.
-      No publiques fotografías de documentos ni datos personales.
+      Si publicas una foto, oculta los números, firmas, códigos y demás datos sensibles. Conserva solo lo imprescindible para identificar el documento.
     </p>
 
     <div class="special-feed" id="documentsList">
@@ -2605,6 +2625,9 @@ let optimizedPhoto=null;
 let previewURL=null;
 let compressionPending=false;
 let compressionJob=0;
+let redactionBase=null;
+let redactionRects=[];
+let redactionStart=null;
 
 let recoveryMode=
   new URLSearchParams(location.hash.slice(1))
@@ -3499,10 +3522,14 @@ function updateCategory(){
   $("documentExtra").hidden=!documents;
   $("quakeExtra").hidden=!earthquake;
 
-  $("photoSection").hidden=documents;
-  $("photo").disabled=documents;
+  $("photoSection").hidden=false;
+  $("photo").disabled=false;
+  $("documentRedactor").hidden=!documents || !optimizedPhoto;
+  if(!documents)$("documentPrivacyCheck").checked=false;
 
-  $("photoLabel").textContent=acopio
+  $("photoLabel").textContent=documents
+    ?"FOTO DEL DOCUMENTO (OPCIONAL · CENSURA DATOS)"
+    :acopio
     ?"AFICHE DEL CENTRO DE ACOPIO"
     :pets
       ?"FOTOGRAFÍA DE LA MASCOTA"
@@ -3578,6 +3605,10 @@ function clearPreview(){
   previewURL=null;
   $("photoPreview").hidden=true;
   $("photoPreview").removeAttribute("src");
+  $("documentRedactor").hidden=true;
+  $("documentPrivacyCheck").checked=false;
+  redactionBase=null;
+  redactionRects=[];
 }
 
 function formatSize(bytes){
@@ -3690,6 +3721,67 @@ async function compressPhoto(file){
   );
 }
 
+/* Editor de censura: las franjas se incorporan a los píxeles antes de subir. */
+const redactCanvas=$("documentCanvas");
+const redactCtx=redactCanvas.getContext("2d");
+function drawRedactions(extra){
+  if(!redactionBase)return;
+  redactCtx.drawImage(redactionBase,0,0,redactCanvas.width,redactCanvas.height);
+  redactCtx.fillStyle="#101010";
+  for(const r of [...redactionRects,...(extra?[extra]:[])]){
+    redactCtx.fillRect(r.x,r.y,r.w,r.h);
+  }
+  $("redactionStatus").textContent=redactionRects.length+" zona(s) censurada(s). Revisa toda la fotografía antes de enviar.";
+}
+function canvasPoint(event){
+  const rect=redactCanvas.getBoundingClientRect();
+  return {x:Math.max(0,Math.min(redactCanvas.width,(event.clientX-rect.left)*redactCanvas.width/rect.width)),y:Math.max(0,Math.min(redactCanvas.height,(event.clientY-rect.top)*redactCanvas.height/rect.height))};
+}
+function rectangle(a,b){return {x:Math.min(a.x,b.x),y:Math.min(a.y,b.y),w:Math.abs(a.x-b.x),h:Math.abs(a.y-b.y)};}
+redactCanvas.addEventListener("pointerdown",event=>{
+  if(!redactionBase)return;
+  redactionStart=canvasPoint(event);
+  redactCanvas.setPointerCapture(event.pointerId);
+});
+redactCanvas.addEventListener("pointermove",event=>{
+  if(redactionStart)drawRedactions(rectangle(redactionStart,canvasPoint(event)));
+});
+redactCanvas.addEventListener("pointerup",async event=>{
+  if(!redactionStart)return;
+  const r=rectangle(redactionStart,canvasPoint(event));
+  redactionStart=null;
+  if(r.w>4&&r.h>4)redactionRects.push(r);
+  drawRedactions();
+  await saveRedactedPhoto();
+});
+async function saveRedactedPhoto(){
+  if(!redactionBase)return;
+  const blob=await canvasBlob(redactCanvas,.9);
+  optimizedPhoto=new File([blob],"documento-censurado.jpg",{type:"image/jpeg"});
+  if(previewURL)URL.revokeObjectURL(previewURL);
+  previewURL=URL.createObjectURL(optimizedPhoto);
+  $("photoPreview").src=previewURL;
+}
+$("undoRedaction").addEventListener("click",async()=>{
+  redactionRects.pop();drawRedactions();await saveRedactedPhoto();
+});
+$("resetRedaction").addEventListener("click",async()=>{
+  redactionRects=[];drawRedactions();await saveRedactedPhoto();
+});
+async function setupDocumentRedactor(file){
+  const img=new Image();
+  const url=URL.createObjectURL(file);
+  try{
+    await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=url;});
+    redactCanvas.width=img.naturalWidth;
+    redactCanvas.height=img.naturalHeight;
+    redactionBase=img;
+    redactionRects=[];
+    drawRedactions();
+    $("documentRedactor").hidden=false;
+  }finally{URL.revokeObjectURL(url);}
+}
+
 $("photo").addEventListener(
   "change",async()=>{
     const job=++compressionJob;
@@ -3737,6 +3829,9 @@ $("photo").addEventListener(
       previewURL=URL.createObjectURL(result);
       $("photoPreview").src=previewURL;
       $("photoPreview").hidden=false;
+      if($("category").value===DOCUMENTS){
+        await setupDocumentRedactor(result);
+      }
 
       const saving=Math.max(
         0,
@@ -3865,13 +3960,17 @@ $("reportForm").addEventListener(
     }
 
     if(
-      category!==DOCUMENTS &&
       $("photo").files.length &&
       !optimizedPhoto
     ){
       reportAlert(
         "⚠️ La fotografía todavía no está lista."
       );
+      return;
+    }
+
+    if(category===DOCUMENTS && optimizedPhoto && !$("documentPrivacyCheck").checked){
+      reportAlert("⚠️ Revisa la foto, tacha los datos sensibles y marca la confirmación de privacidad.");
       return;
     }
 
@@ -3916,7 +4015,6 @@ $("reportForm").addEventListener(
     form.append("turnstile_token",token);
 
     if(
-      category!==DOCUMENTS &&
       optimizedPhoto
     ){
       form.append("photo",optimizedPhoto);
