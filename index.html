@@ -1499,10 +1499,92 @@ body{background:linear-gradient(180deg,#f2f7f2 0%,#f8faf7 44%,#eef6ee 100%)}
 @media(max-width:370px){.top-social-label{display:none}.top-social-button{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.hero-follow,.hero-follow-dot,#redes.social-section:before{animation:none!important}.top-social-button,.hero-follow-icon,#redes .social-link{transition:none!important}}
 
+
+/* =========================================================
+   AGUADULCE REPORTA · SIGNATURE EDITION
+   Visual refinements only; existing publishing logic intact.
+   ========================================================= */
+:root{--premium-glow:#c8f775;--premium-ink:#061c16;--premium-ring:rgba(190,244,123,.28)}
+html{scroll-padding-top:22px}
+body{background:linear-gradient(180deg,#f4f8f3 0%,#fbfcf9 45%,#f2f7f0 100%)}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.12' filter='url(%23n)'/%3E%3C/svg%3E")}
+#arScrollProgress{position:fixed;left:0;top:0;height:3px;width:0;z-index:9999;background:linear-gradient(90deg,#8ae3a0,#d7f568,#f7ffb7);box-shadow:0 0 18px #d7f56888;pointer-events:none;transition:width .12s linear}
+.header{position:relative;z-index:30;background:rgba(6,29,21,.98);box-shadow:0 15px 45px rgba(3,21,13,.12)}
+.brand img{box-shadow:0 0 0 5px rgba(215,245,104,.06),0 9px 24px #0003}
+.nav a{position:relative;transition:color .25s ease}
+.nav a::after{content:"";position:absolute;bottom:-9px;left:0;width:100%;height:2px;border-radius:4px;background:var(--lime);transform:scaleX(0);transform-origin:left;transition:transform .28s ease}
+.nav a:hover::after,.nav a.ar-active::after{transform:scaleX(1)}
+.nav a.ar-active{color:var(--lime)}
+.hero{isolation:isolate;background:radial-gradient(ellipse at 78% 10%,#235f43 0%,transparent 47%),radial-gradient(ellipse at 10% 100%,#164f39 0%,transparent 55%),linear-gradient(128deg,#041b14,#103727 72%,#071f19)}
+.hero::after{content:"";position:absolute;z-index:-1;width:min(54vw,640px);aspect-ratio:1;right:-13%;top:5%;border-radius:50%;background:radial-gradient(circle,#a5ed7750 0%,#69c78d12 36%,transparent 68%);filter:blur(10px);animation:arAmbient 11s ease-in-out infinite alternate;pointer-events:none}
+.hero::before{animation:arOrbit 22s ease-in-out infinite alternate;pointer-events:none}
+.hero-inner{padding-top:clamp(65px,7vw,105px);padding-bottom:clamp(85px,9vw,130px)}
+.hero h1{letter-spacing:-.055em;text-wrap:balance;text-shadow:0 8px 42px #0002}
+.hero h1 span{background:linear-gradient(110deg,#d7f568,#f4ffad 46%,#a7f1b3);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-tag{backdrop-filter:blur(8px);background:#ffffff0a;box-shadow:inset 0 1px #ffffff18}
+.hero-card{position:relative;overflow:hidden;border:1px solid #ffffffd9;box-shadow:0 35px 95px #0006,0 0 0 8px #ffffff0a;transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.hero-card::before{content:"";position:absolute;inset:0 0 auto;height:5px;background:linear-gradient(90deg,#247d55,#d7f568,#8cebb1)}
+.hero-card:hover{transform:rotate(0deg) translateY(-7px);box-shadow:0 45px 100px #0007}
+.hero-card:hover>*{transform:rotate(0deg)}
+.hero-card>*{transition:transform .5s ease}
+.btn{position:relative;isolation:isolate;overflow:hidden;min-height:44px;transition:transform .25s ease,box-shadow .25s ease,background .25s ease}
+.btn::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 25%,#ffffff50 50%,transparent 75%);transform:translateX(-160%);transition:transform .65s ease;z-index:-1}
+.btn:hover::before{transform:translateX(160%)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px #071f1926}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn-lime{box-shadow:0 7px 25px #d7f56829}
+.metric,.card,.category-tile,.report-card,.sidebar-card{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+.metric:hover,.category-tile:hover,.report-card:hover,.sidebar-card:hover{transform:translateY(-5px);border-color:#b6d8b7;box-shadow:0 22px 50px #0a2d1d1c}
+.metric{background:linear-gradient(155deg,#fff,#f9fdf8);border-top:1px solid #fff}
+.metric-icon{box-shadow:inset 0 0 0 1px #dcebdc}
+.section{padding-top:clamp(42px,5.3vw,68px);padding-bottom:clamp(42px,5.3vw,68px)}
+.section-title{text-wrap:balance;letter-spacing:-.04em}
+.section-description{line-height:1.65}
+.reports-section{background:linear-gradient(150deg,#edf5ed,#f6f9f3 60%,#eaf2e9)}
+.report-card{box-shadow:0 14px 35px #102c2010}
+.report-photo-wrap{aspect-ratio:4/5;height:auto;max-height:440px}
+.report-photo-wrap img{object-fit:contain;background:#e9efe8}
+.report-body{padding:clamp(16px,2vw,22px)}
+.report-body h3{letter-spacing:-.025em}
+.social-section{position:relative;overflow:hidden}
+.social-section::before{content:"";position:absolute;width:320px;height:320px;left:-170px;top:-150px;border-radius:50%;background:#d7f56817;filter:blur(45px);pointer-events:none}
+.social-link{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease,filter .35s ease}
+.social-link:hover{transform:translateY(-5px) scale(1.015);filter:brightness(1.08);box-shadow:0 24px 50px #0003}
+.hero-follow-icon,.top-social-button{transition:transform .25s ease,box-shadow .25s ease}
+.hero-follow-icon:hover,.top-social-button:hover{transform:translateY(-3px) scale(1.06)}
+.field{transition:border-color .2s,box-shadow .2s,background .2s}
+.field:focus{background:white;box-shadow:0 0 0 4px var(--premium-ring)}
+:where(a,button,input,textarea,select):focus-visible{outline:3px solid #a6e76b;outline-offset:3px}
+@keyframes arAmbient{from{transform:translate3d(0,0,0) scale(.9);opacity:.55}to{transform:translate3d(-45px,50px,0) scale(1.17);opacity:1}}
+@keyframes arOrbit{from{transform:translate(0,0) rotate(0deg)}to{transform:translate(-24px,24px) rotate(12deg)}}
+@media(max-width:760px){
+ .container{width:min(100% - 28px,1180px)}
+ .hero-inner{padding-top:50px;padding-bottom:70px;gap:24px}
+ .hero h1{font-size:clamp(38px,10.3vw,58px);letter-spacing:-.05em;line-height:1.04}
+ .hero p{font-size:13px;line-height:1.65}
+ .hero-card{transform:none;border-radius:22px;padding:22px}
+ .hero-card>*{transform:none}
+ .hero-card h3{font-size:24px}
+ .hero-buttons{gap:9px}
+ .hero-buttons .btn{flex:1 1 auto;padding:12px 14px}
+ .metrics{gap:8px;margin-top:-26px}
+ .metric{padding:14px 10px;border-radius:15px;gap:8px}
+ .metric strong{font-size:clamp(21px,6vw,30px)}
+ .metric small{font-size:9px;line-height:1.25}
+ .metric-icon{width:36px;height:36px;font-size:18px;flex-shrink:0}
+ .section{padding-top:44px;padding-bottom:44px}
+ .section-title{font-size:clamp(29px,8vw,38px)}
+ .report-photo-wrap{max-height:none}
+ .social-link:hover,.hero-card:hover,.metric:hover,.category-tile:hover,.report-card:hover{transform:none}
+}
+@media(max-width:390px){.metric{flex-direction:column;align-items:flex-start}.metric-icon{width:32px;height:32px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
 </style>
 </head>
 
 <body>
+<div id="arScrollProgress" aria-hidden="true"></div>
 
 <div class="topbar">
   <div class="container topbar-inner">
@@ -4526,5 +4608,27 @@ initialize();
 })();
 </script>
 
+<script>
+/* Signature edition: passive scroll feedback, no changes to form or Supabase. */
+(function(){
+  const progress=document.getElementById('arScrollProgress');
+  let scheduled=false;
+  function update(){
+    scheduled=false;
+    const max=document.documentElement.scrollHeight-window.innerHeight;
+    if(progress)progress.style.width=(max>0?Math.min(100,Math.max(0,window.scrollY/max*100)):0)+'%';
+  }
+  function queue(){if(!scheduled){scheduled=true;requestAnimationFrame(update)}}
+  addEventListener('scroll',queue,{passive:true});addEventListener('resize',queue,{passive:true});update();
+  if('IntersectionObserver' in window){
+    const nav=document.querySelectorAll('.nav a[href^="#"]');
+    const observed=[...nav].map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{if(!entry.isIntersecting)return;nav.forEach(a=>a.classList.toggle('ar-active',a.getAttribute('href')==='#'+entry.target.id))});
+    },{rootMargin:'-20% 0px -65% 0px',threshold:0});
+    observed.forEach(el=>observer.observe(el));
+  }
+})();
+</script>
 </body>
 </html>
