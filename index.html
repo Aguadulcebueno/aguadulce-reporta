@@ -1292,6 +1292,18 @@ body{line-height:1.55}
  .btn,.category-tile,.report-card,.special-card,.location-card,.sidebar-card,.social-link,.metric,.emergency-card{transition:none!important}
 }
 
+
+/* Acceso inmediato a los reportes: prioridad editorial */
+.report-quickbar{background:#e8f2e8;border-bottom:1px solid #d5e5d7}
+.report-quickbar-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-top:17px;padding-bottom:17px}
+.report-quickbar-inner>div{flex:1 1 260px}
+.report-quickbar-inner strong{display:block;font:800 19px "Outfit",sans-serif;color:var(--dark)}
+.report-quickbar-inner span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.report-quickbar-inner .btn{min-height:44px}
+#enviar{scroll-margin-top:14px}
+#enviar .form-card{border:2px solid #d7e8d9}
+@media(max-width:600px){.report-quickbar-inner{gap:9px}.report-quickbar-inner>div{flex-basis:100%}.report-quickbar-inner .btn{flex:1 1 130px;font-size:11px;padding:12px 8px}#enviar{padding-top:37px;padding-bottom:43px}}
+
 </style>
 </head>
 
@@ -1365,7 +1377,7 @@ body{line-height:1.55}
       <div class="hero-buttons">
         <a href="#enviar" class="btn btn-lime">＋ ENVIAR REPORTE</a>
         <a href="#reportes" class="btn btn-outline">EXPLORAR REPORTES</a>
-        <a href="#acopios" class="btn btn-outline">📢 SUBIR AFICHE</a>
+        <button type="button" class="btn btn-outline" onclick="prepareReport('Centros de acopio')">📢 SUBIR AFICHE</button>
       </div>
 
       <div class="hero-points">
@@ -1416,6 +1428,227 @@ body{line-height:1.55}
     </div>
   </div>
 </div>
+
+<!-- ACCESO DIRECTO AL FORMULARIO -->
+<div class="report-quickbar" aria-label="Acciones principales de Aguadulce Reporta">
+  <div class="container report-quickbar-inner">
+    <div><strong>¿Qué está pasando en tu comunidad?</strong><span>Cuéntanoslo aquí. No necesitas registrarte.</span></div>
+    <a href="#enviar" class="btn btn-lime">＋ HACER UN REPORTE</a>
+    <button type="button" class="btn btn-soft" onclick="prepareReport('Centros de acopio')">📢 SUBIR UN AFICHE</button>
+  </div>
+</div>
+
+<!-- FORMULARIO -->
+
+<section class="section form-section" id="enviar">
+  <div class="container form-layout">
+
+    <div class="form-intro">
+      <div class="section-label">TU VOZ IMPORTA</div>
+      <h2>El cambio empieza cuando <span>alguien habla.</span></h2>
+
+      <p>
+        Publica un reporte comunitario, un aviso de mascota
+        o el afiche de un centro de acopio.
+        No necesitas crear una cuenta.
+      </p>
+
+      <div class="step">
+        <div class="step-number">01</div>
+        <div>
+          <strong>Selecciona el tipo de aviso</strong>
+          <p>Elige la categoría que corresponda.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">02</div>
+        <div>
+          <strong>Agrega los detalles</strong>
+          <p>Describe la situación y la comunidad.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">03</div>
+        <div>
+          <strong>Sube una foto o afiche</strong>
+          <p>Se optimizará automáticamente antes de enviarse.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">04</div>
+        <div>
+          <strong>Revisión antes de publicar</strong>
+          <p>Administración revisará el aviso solicitado.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3>📨 Nueva publicación</h3>
+      <p>Completa los campos y evita compartir datos privados.</p>
+
+      <form id="reportForm" novalidate>
+
+        <label class="label" for="category">TIPO DE REPORTE</label>
+        <select class="field" id="category" required>
+          <option value="">Selecciona una categoría</option>
+          <option value="Calles y aceras">Calles y aceras</option>
+          <option value="Basura y limpieza">Basura y limpieza</option>
+          <option value="Agua y alcantarillado">Agua y alcantarillado</option>
+          <option value="Alumbrado público">Alumbrado público</option>
+          <option value="Mascotas perdidas y encontradas">Mascotas perdidas y encontradas</option>
+          <option value="Otros problemas comunitarios">Otros problemas comunitarios</option>
+          <option value="Daños por sismo">Daños por sismo</option>
+          <option value="Documentos encontrados">Documentos encontrados</option>
+          <option value="Centros de acopio">Centros de acopio</option>
+        </select>
+
+        <div id="petsExtra" class="extra-fields" hidden>
+          <h4>🐾 Aviso de mascota</h4>
+          <p>Indica si está perdida o fue encontrada.</p>
+
+          <label class="label" for="petType">TIPO DE AVISO</label>
+          <select id="petType" class="field">
+            <option value="Mascota perdida">Mascota perdida</option>
+            <option value="Mascota encontrada">Mascota encontrada</option>
+          </select>
+
+          <p>
+            Incluye características, fecha y zona general.
+            Puedes adjuntar una fotografía de la mascota.
+          </p>
+        </div>
+
+        <div id="acopioExtra" class="extra-fields" hidden>
+          <h4>📦 Datos del centro de acopio</h4>
+
+          <label class="label" for="acopioOrganizer">
+            ORGANIZADOR O INSTITUCIÓN
+          </label>
+          <input class="field" id="acopioOrganizer"
+            maxlength="120"
+            placeholder="Ej.: Comité comunitario">
+
+          <label class="label" for="acopioDate">
+            FECHA DE LA JORNADA
+          </label>
+          <input class="field" id="acopioDate" type="date">
+
+          <label class="label" for="acopioHours">
+            HORARIO
+          </label>
+          <input class="field" id="acopioHours"
+            maxlength="100"
+            placeholder="Ej.: 8:00 a. m. a 4:00 p. m.">
+
+          <label class="label" for="acopioItems">
+            DONACIONES QUE RECIBEN
+          </label>
+          <textarea class="field" id="acopioItems"
+            maxlength="500"
+            style="min-height:90px"
+            placeholder="Ej.: agua, alimentos, ropa..."></textarea>
+
+          <p>
+            Adjunta el afiche oficial de tu jornada.
+            El anuncio debe contener información real
+            y verificable.
+          </p>
+        </div>
+
+        <div id="documentExtra" class="extra-fields" hidden>
+          <h4>🪪 Aviso de documento encontrado</h4>
+          <p>
+            No incluyas nombre completo, número de cédula,
+            fotografía del documento ni otros datos personales.
+          </p>
+        </div>
+
+        <div id="quakeExtra" class="extra-fields" hidden>
+          <h4>🏠 Daños por sismo</h4>
+          <p>
+            Describe solo daños visibles desde un lugar seguro.
+            Ante una emergencia llama al 911.
+          </p>
+        </div>
+
+        <label class="label" for="area" id="areaLabel">
+          COMUNIDAD O CORREGIMIENTO
+        </label>
+        <input class="field" id="area" maxlength="120"
+          placeholder="Ej.: El Roble, Pocrí, Barrios Unidos..."
+          required>
+
+        <label class="label" for="description">
+          DESCRIPCIÓN
+        </label>
+        <textarea class="field" id="description"
+          minlength="10" maxlength="1500"
+          placeholder="Cuéntanos qué está pasando..."
+          required></textarea>
+
+        <div id="photoSection">
+          <label class="label" for="photo" id="photoLabel">
+            FOTOGRAFÍA (OPCIONAL)
+          </label>
+
+          <input class="field" id="photo"
+            type="file"
+            accept="image/jpeg,image/png,image/webp">
+
+          <p class="hint">
+            JPG, PNG o WebP. Máximo 5 MB.
+            La imagen se comprime automáticamente.
+          </p>
+
+          <p class="compression-status"
+            id="compressionStatus"
+            role="status"></p>
+
+          <img id="photoPreview" class="preview"
+            alt="Vista previa" hidden>
+        </div>
+
+        <label class="label" for="visibility">
+          PRIVACIDAD DEL REPORTE
+        </label>
+
+        <select class="field" id="visibility">
+          <option value="private">
+            Privado: solo administración
+          </option>
+          <option value="public">
+            Solicitar publicación pública
+          </option>
+        </select>
+
+        <p class="hint">
+          Los reportes se revisan antes de publicarse.
+        </p>
+
+        <div style="margin-top:22px">
+          <div class="cf-turnstile"
+            data-sitekey="0x4AAAAAAFWBvw2cZEIy5XVD"
+            data-theme="light"></div>
+        </div>
+
+        <button type="submit" id="reportButton"
+          class="btn btn-green"
+          style="width:100%;margin-top:19px;padding:17px">
+          📤 ENVIAR MI REPORTE →
+        </button>
+
+        <div class="alert" id="reportAlert"
+          role="alert" aria-live="polite" hidden></div>
+
+      </form>
+    </div>
+  </div>
+</section>
+
 
 <section class="section reports-section" id="reportes">
   <div class="container">
@@ -1775,217 +2008,6 @@ body{line-height:1.55}
       onclick="prepareReport('Documentos encontrados')">
       REPORTAR DOCUMENTO ENCONTRADO →
     </button>
-  </div>
-</section>
-
-<!-- FORMULARIO -->
-
-<section class="section form-section" id="enviar">
-  <div class="container form-layout">
-
-    <div class="form-intro">
-      <div class="section-label">TU VOZ IMPORTA</div>
-      <h2>El cambio empieza cuando <span>alguien habla.</span></h2>
-
-      <p>
-        Publica un reporte comunitario, un aviso de mascota
-        o el afiche de un centro de acopio.
-        No necesitas crear una cuenta.
-      </p>
-
-      <div class="step">
-        <div class="step-number">01</div>
-        <div>
-          <strong>Selecciona el tipo de aviso</strong>
-          <p>Elige la categoría que corresponda.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-number">02</div>
-        <div>
-          <strong>Agrega los detalles</strong>
-          <p>Describe la situación y la comunidad.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-number">03</div>
-        <div>
-          <strong>Sube una foto o afiche</strong>
-          <p>Se optimizará automáticamente antes de enviarse.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-number">04</div>
-        <div>
-          <strong>Revisión antes de publicar</strong>
-          <p>Administración revisará el aviso solicitado.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-card">
-      <h3>📨 Nueva publicación</h3>
-      <p>Completa los campos y evita compartir datos privados.</p>
-
-      <form id="reportForm" novalidate>
-
-        <label class="label" for="category">TIPO DE REPORTE</label>
-        <select class="field" id="category" required>
-          <option value="">Selecciona una categoría</option>
-          <option value="Calles y aceras">Calles y aceras</option>
-          <option value="Basura y limpieza">Basura y limpieza</option>
-          <option value="Agua y alcantarillado">Agua y alcantarillado</option>
-          <option value="Alumbrado público">Alumbrado público</option>
-          <option value="Mascotas perdidas y encontradas">Mascotas perdidas y encontradas</option>
-          <option value="Otros problemas comunitarios">Otros problemas comunitarios</option>
-          <option value="Daños por sismo">Daños por sismo</option>
-          <option value="Documentos encontrados">Documentos encontrados</option>
-          <option value="Centros de acopio">Centros de acopio</option>
-        </select>
-
-        <div id="petsExtra" class="extra-fields" hidden>
-          <h4>🐾 Aviso de mascota</h4>
-          <p>Indica si está perdida o fue encontrada.</p>
-
-          <label class="label" for="petType">TIPO DE AVISO</label>
-          <select id="petType" class="field">
-            <option value="Mascota perdida">Mascota perdida</option>
-            <option value="Mascota encontrada">Mascota encontrada</option>
-          </select>
-
-          <p>
-            Incluye características, fecha y zona general.
-            Puedes adjuntar una fotografía de la mascota.
-          </p>
-        </div>
-
-        <div id="acopioExtra" class="extra-fields" hidden>
-          <h4>📦 Datos del centro de acopio</h4>
-
-          <label class="label" for="acopioOrganizer">
-            ORGANIZADOR O INSTITUCIÓN
-          </label>
-          <input class="field" id="acopioOrganizer"
-            maxlength="120"
-            placeholder="Ej.: Comité comunitario">
-
-          <label class="label" for="acopioDate">
-            FECHA DE LA JORNADA
-          </label>
-          <input class="field" id="acopioDate" type="date">
-
-          <label class="label" for="acopioHours">
-            HORARIO
-          </label>
-          <input class="field" id="acopioHours"
-            maxlength="100"
-            placeholder="Ej.: 8:00 a. m. a 4:00 p. m.">
-
-          <label class="label" for="acopioItems">
-            DONACIONES QUE RECIBEN
-          </label>
-          <textarea class="field" id="acopioItems"
-            maxlength="500"
-            style="min-height:90px"
-            placeholder="Ej.: agua, alimentos, ropa..."></textarea>
-
-          <p>
-            Adjunta el afiche oficial de tu jornada.
-            El anuncio debe contener información real
-            y verificable.
-          </p>
-        </div>
-
-        <div id="documentExtra" class="extra-fields" hidden>
-          <h4>🪪 Aviso de documento encontrado</h4>
-          <p>
-            No incluyas nombre completo, número de cédula,
-            fotografía del documento ni otros datos personales.
-          </p>
-        </div>
-
-        <div id="quakeExtra" class="extra-fields" hidden>
-          <h4>🏠 Daños por sismo</h4>
-          <p>
-            Describe solo daños visibles desde un lugar seguro.
-            Ante una emergencia llama al 911.
-          </p>
-        </div>
-
-        <label class="label" for="area" id="areaLabel">
-          COMUNIDAD O CORREGIMIENTO
-        </label>
-        <input class="field" id="area" maxlength="120"
-          placeholder="Ej.: El Roble, Pocrí, Barrios Unidos..."
-          required>
-
-        <label class="label" for="description">
-          DESCRIPCIÓN
-        </label>
-        <textarea class="field" id="description"
-          minlength="10" maxlength="1500"
-          placeholder="Cuéntanos qué está pasando..."
-          required></textarea>
-
-        <div id="photoSection">
-          <label class="label" for="photo" id="photoLabel">
-            FOTOGRAFÍA (OPCIONAL)
-          </label>
-
-          <input class="field" id="photo"
-            type="file"
-            accept="image/jpeg,image/png,image/webp">
-
-          <p class="hint">
-            JPG, PNG o WebP. Máximo 5 MB.
-            La imagen se comprime automáticamente.
-          </p>
-
-          <p class="compression-status"
-            id="compressionStatus"
-            role="status"></p>
-
-          <img id="photoPreview" class="preview"
-            alt="Vista previa" hidden>
-        </div>
-
-        <label class="label" for="visibility">
-          PRIVACIDAD DEL REPORTE
-        </label>
-
-        <select class="field" id="visibility">
-          <option value="private">
-            Privado: solo administración
-          </option>
-          <option value="public">
-            Solicitar publicación pública
-          </option>
-        </select>
-
-        <p class="hint">
-          Los reportes se revisan antes de publicarse.
-        </p>
-
-        <div style="margin-top:22px">
-          <div class="cf-turnstile"
-            data-sitekey="0x4AAAAAAFWBvw2cZEIy5XVD"
-            data-theme="light"></div>
-        </div>
-
-        <button type="submit" id="reportButton"
-          class="btn btn-green"
-          style="width:100%;margin-top:19px;padding:17px">
-          📤 ENVIAR MI REPORTE →
-        </button>
-
-        <div class="alert" id="reportAlert"
-          role="alert" aria-live="polite" hidden></div>
-
-      </form>
-    </div>
   </div>
 </section>
 
