@@ -1246,6 +1246,18 @@ body{line-height:1.55}
  .mobile-dock .dock-primary{background:#d7f568;color:#071f19}
 }
 
+/* Ajustes de navegación y espacio: priorizar los reportes */
+.section{padding-top:42px;padding-bottom:42px}
+.hero-inner{padding-top:52px;padding-bottom:72px}
+.section-title{margin-top:9px;margin-bottom:9px}
+.section-description{margin-top:6px;margin-bottom:14px}
+.category-grid,.special-grid,.special-feed{margin-top:18px}
+.category-tile{padding:16px}
+.category-tile strong{margin-top:8px}
+.category-tile .name{margin-top:2px}
+#filterHelp{margin:0 0 12px}
+.reports-toolbar{margin-bottom:8px}
+@media(max-width:600px){.section{padding-top:35px;padding-bottom:35px}.hero-inner{padding-top:38px;padding-bottom:62px}}
 </style>
 </head>
 
@@ -1275,6 +1287,8 @@ body{line-height:1.55}
       <a href="#inicio">Inicio</a>
       <a href="#reportes">Reportes</a>
       <a href="#mascotas">Mascotas</a>
+      <a href="#documentos">Documentos</a>
+      <a href="#enviar">Publicar</a>
       <a href="#acopios">Acopios</a>
       <a href="#donaciones">Donaciones</a>
       <a href="#emergencias">Emergencias</a>
@@ -1317,6 +1331,7 @@ body{line-height:1.55}
       <div class="hero-buttons">
         <a href="#enviar" class="btn btn-lime">＋ ENVIAR REPORTE</a>
         <a href="#reportes" class="btn btn-outline">EXPLORAR REPORTES</a>
+        <a href="#acopios" class="btn btn-outline">📢 SUBIR AFICHE</a>
       </div>
 
       <div class="hero-points">
@@ -1391,12 +1406,14 @@ body{line-height:1.55}
             <option value="">Todas las categorías</option>
           </select>
 
+          <button id="clearFilters" class="btn btn-soft" type="button">Limpiar filtros</button>
           <button id="refreshPublic" class="btn btn-soft" type="button">
             ↻ Actualizar
           </button>
         </div>
 
         <p class="message" id="publicMessage" role="status"></p>
+        <p class="hint" id="filterHelp">Busca por palabra o elige una categoría para encontrar reportes publicados.</p>
 
         <div class="report-grid" id="publicReports" aria-live="polite">
           <div class="empty">Cargando reportes...</div>
@@ -2476,7 +2493,7 @@ function renderCategories(){
       el("div",ICONS[category]||"📌","emoji"),
       el("strong",counts[category]||0),
       el("span",category,"name"),
-      el("small","Explorar publicaciones ↗")
+      el("small",counts[category]?"Ver publicaciones ↗":"Publicar en esta categoría ↗")
     );
 
     button.onclick=()=>{
@@ -2496,7 +2513,10 @@ function renderCategories(){
       }
 
       const filter=$("categoryFilter");
-
+      if(!Array.from(filter.options).some(option=>option.value===category)){
+        prepareReport(category);
+        return;
+      }
       filter.value=category;
       $("searchReports").value="";
       renderReports();
@@ -2687,7 +2707,7 @@ function renderReports(){
   renderCardList(
     "publicReports",
     reports,
-    "No encontramos reportes con esos filtros."
+    "No hay reportes que coincidan. Prueba otra búsqueda o publica el primero en «Enviar reporte»."
   );
 }
 
@@ -2813,6 +2833,10 @@ async function loadPublicReports(){
 
     filter.value=categories.includes(previous)
       ?previous:"";
+    filter.disabled=categories.length===0;
+    $("searchReports").disabled=regular.length===0;
+    $("searchReports").placeholder=regular.length?"🔎 Buscar comunidad o situación...":"Aún no hay reportes para buscar";
+    $("filterHelp").textContent=regular.length?"Los filtros buscan dentro de los reportes públicos disponibles.":"Todavía no hay reportes ciudadanos publicados. Puedes enviar el primero usando «Enviar reporte».";
 
     renderCategories();
     renderReports();
@@ -2851,6 +2875,12 @@ $("searchReports").addEventListener(
 $("categoryFilter").addEventListener(
   "change",renderReports
 );
+
+$("clearFilters").addEventListener("click",()=>{
+  $("searchReports").value="";
+  $("categoryFilter").value="";
+  renderReports();
+});
 
 $("refreshPublic").addEventListener(
   "click",loadPublicReports
