@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <link rel="icon" type="image/png" href="logo.png?v=2">
+  <link rel="apple-touch-icon" href="logo.png?v=2">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_PA">
@@ -1244,42 +1246,6 @@ body{line-height:1.55}
  .mobile-dock .dock-primary{background:#d7f568;color:#071f19}
 }
 
-
-/* NOTICIAS DE INSTAGRAM */
-.news-section{background:#f8faf6}
-.news-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
-.news-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:28px}
-.news-card{background:white;border:1px solid var(--border);border-radius:19px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;min-width:0}
-.news-image{display:block;position:relative;aspect-ratio:4/3;background:#e8efe9;overflow:hidden}
-.news-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}
-.news-image:hover img{transform:scale(1.035)}
-.news-type{position:absolute;right:11px;top:11px;background:#071f19e8;color:#fff;border-radius:30px;padding:7px 11px;font-size:11px;font-weight:800}
-.news-content{padding:20px;display:flex;flex:1;flex-direction:column;gap:12px}
-.news-date{font-size:11px;color:var(--muted);font-weight:800}
-.news-content h3{font-size:19px;line-height:1.4;margin:0;overflow-wrap:anywhere}
-.news-content p{font-size:13px;color:var(--muted);line-height:1.65;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
-.news-content a.news-link{margin-top:auto;color:var(--green);font-weight:900;font-size:12px}
-.news-more{display:flex;justify-content:center;margin-top:25px}
-@media(max-width:850px){.news-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){.news-grid{grid-template-columns:1fr}.news-heading .btn{width:100%}}
-
-
-/* Instagram compacto: prioridad para los reportes ciudadanos */
-.news-section{padding:35px 0 45px;background:#f8faf6;border-top:1px solid var(--border)}
-.news-section .section-title{font-size:clamp(23px,2.8vw,31px);letter-spacing:-.6px;margin:8px 0}
-.news-section .section-description{font-size:12px;margin:0}
-.news-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:11px;margin-top:19px}
-.news-card{border-radius:12px;box-shadow:none}
-.news-image{aspect-ratio:1/1}
-.news-type{font-size:9px;padding:5px 7px;top:7px;right:7px}
-.news-content{padding:11px;gap:7px}
-.news-content h3{font-size:12px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.news-content p{display:none}
-.news-content a.news-link{font-size:10px}
-.news-date{font-size:10px}
-@media(max-width:850px){.news-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:600px){.news-section{padding:30px 0 35px}.news-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding-bottom:8px}.news-card{flex:0 0 165px;scroll-snap-align:start}.news-heading .btn{width:auto}.news-content{padding:10px}}
-
 </style>
 </head>
 
@@ -1307,7 +1273,6 @@ body{line-height:1.55}
 
     <nav class="nav">
       <a href="#inicio">Inicio</a>
-      <a href="#noticias">Noticias</a>
       <a href="#reportes">Reportes</a>
       <a href="#mascotas">Mascotas</a>
       <a href="#acopios">Acopios</a>
@@ -1321,7 +1286,6 @@ body{line-height:1.55}
 
 <nav class="mobile-nav">
   <div class="container mobile-nav-inner">
-    <a href="#noticias">NOTICIAS</a>
     <a href="#reportes">REPORTES</a>
     <a href="#mascotas">MASCOTAS</a>
     <a href="#acopios">ACOPIOS</a>
@@ -1335,7 +1299,7 @@ body{line-height:1.55}
 
 <nav class="mobile-dock" aria-label="Navegación rápida">
   <a href="#inicio" aria-label="Ir al inicio"><span aria-hidden="true">⌂</span><small>Inicio</small></a>
-  <a href="#noticias" aria-label="Ver noticias"><span aria-hidden="true">▤</span><small>Noticias</small></a>
+  <a href="#reportes" aria-label="Ver reportes"><span aria-hidden="true">▤</span><small>Reportes</small></a>
   <a href="#enviar" class="dock-primary" aria-label="Enviar reporte"><span aria-hidden="true">＋</span><small>Reportar</small></a>
 </nav>
 
@@ -1403,7 +1367,6 @@ body{line-height:1.55}
     </div>
   </div>
 </div>
-
 
 <section class="section reports-section" id="reportes">
   <div class="container">
@@ -1491,24 +1454,6 @@ body{line-height:1.55}
 
       </aside>
     </div>
-  </div>
-</section>
-
-<!-- NOTICIAS DE AGUADULCE MALO & BUENO -->
-<section class="section news-section" id="noticias" aria-labelledby="newsTitle">
-  <div class="container">
-    <div class="news-heading">
-      <div>
-        <div class="section-label">DESDE @AGUADULCEBUENO</div>
-        <h2 class="section-title" id="newsTitle">También en Instagram.</h2>
-        <p class="section-description">Las últimas 5 publicaciones de @aguadulcebueno. Para ver más, visita nuestro Instagram.</p>
-      </div>
-      <a class="btn btn-soft" href="https://www.instagram.com/aguadulcebueno/" target="_blank" rel="noopener noreferrer">Ver Instagram ↗</a>
-    </div>
-    <div id="newsGrid" class="news-grid" aria-live="polite">
-      <div class="empty">Cargando noticias...</div>
-    </div>
-    <p id="newsMessage" class="message" role="status"></p>
   </div>
 </section>
 
@@ -3519,7 +3464,7 @@ $("reportForm").addEventListener(
 
     const button=$("reportButton");
 
-  
+    button.disabled=true;
     button.textContent="⏳ ENVIANDO...";
 
     reportAlert(
@@ -3605,7 +3550,7 @@ $("reportForm").addEventListener(
     }finally{
       clearTimeout(timeout);
 
-  
+      button.disabled=false;
       button.textContent=
         "📤 ENVIAR MI REPORTE →";
 
@@ -4134,111 +4079,6 @@ $("recoveryForm").addEventListener(
   }
 );
 
-
-/* NOTICIAS: lectura pública de la tabla instagram_noticias */
-const NEWS_PAGE_SIZE=5;
-let newsOffset=0;
-let newsLoading=false;
-let newsFinished=false;
-
-function newsSafeUrl(value){
-  try{
-    const u=new URL(value);
-    return u.protocol==="https:"?u.href:null;
-  }catch(_){return null;}
-}
-function newsCaption(value){
-  return String(value||"Publicación de Aguadulce Malo & Bueno").trim();
-}
-function makeNewsCard(item){
-  const article=document.createElement("article");
-  article.className="news-card";
-  const link=newsSafeUrl(item.permalink);
-  const photo=newsSafeUrl(item.thumbnail_url)||newsSafeUrl(item.media_url);
-  if(photo){
-    const a=document.createElement(link?"a":"div");
-    a.className="news-image";
-    if(link){a.href=link;a.target="_blank";a.rel="noopener noreferrer";}
-    const img=document.createElement("img");
-    img.src=photo;
-    img.alt=newsCaption(item.caption).slice(0,110);
-    img.loading="lazy";
-    img.referrerPolicy="no-referrer";
-    img.onerror=()=>{img.onerror=null;img.style.display="none";a.style.background="#e6f0e6";};
-    a.appendChild(img);
-    const tag=document.createElement("span");
-    tag.className="news-type";
-    tag.textContent=item.media_type==="VIDEO"?"▶ Reel / video":item.media_type==="CAROUSEL_ALBUM"?"▣ Galería":"📷 Foto";
-    a.appendChild(tag);
-    article.appendChild(a);
-  }
-  const content=document.createElement("div");
-  content.className="news-content";
-  const date=document.createElement("time");
-  date.className="news-date";
-  if(item.published_at){
-    const d=new Date(item.published_at);
-    if(!Number.isNaN(d.getTime())){
-      date.dateTime=d.toISOString();
-      date.textContent=new Intl.DateTimeFormat("es-PA",{day:"numeric",month:"long",year:"numeric",timeZone:"America/Panama"}).format(d);
-    }
-  }
-  content.appendChild(date);
-  const title=document.createElement("h3");
-  const caption=newsCaption(item.caption);
-  title.textContent=caption.length>115?caption.slice(0,112)+"…":caption;
-  content.appendChild(title);
-  if(caption.length>115){
-    const p=document.createElement("p");
-    p.textContent=caption.slice(115,285)+(caption.length>285?"…":"");
-    content.appendChild(p);
-  }
-  if(link){
-    const more=document.createElement("a");
-    more.className="news-link";
-    more.href=link;
-    more.target="_blank";
-    more.rel="noopener noreferrer";
-    more.textContent="Ver publicación en Instagram ↗";
-    content.appendChild(more);
-  }
-  article.appendChild(content);
-  return article;
-}
-async function loadInstagramNews(){
-  if(newsLoading||newsFinished)return;
-  const grid=$("newsGrid");
-  const message=$("newsMessage");
-  const button=null;
-  if(!grid)return;
-  newsLoading=true;
-
-  message.textContent="";
-  try{
-    if(!publicDb)throw new Error("No se pudo conectar con Supabase.");
-    const {data,error}=await publicDb.from("instagram_noticias")
-      .select("id,caption,media_type,media_url,thumbnail_url,permalink,published_at")
-      .order("published_at",{ascending:false})
-      .range(newsOffset,newsOffset+NEWS_PAGE_SIZE-1);
-    if(error)throw error;
-    if(newsOffset===0)grid.replaceChildren();
-    for(const item of data||[])grid.appendChild(makeNewsCard(item));
-    newsOffset+=(data||[]).length;
-    newsFinished=true;
-
-    if(newsOffset===0)grid.innerHTML='<div class="empty">Todavía no hay noticias disponibles.</div>';
-  }catch(error){
-    console.error("Noticias de Instagram:",error);
-    if(newsOffset===0)grid.innerHTML='<div class="empty">No pudimos cargar las noticias por ahora.</div>';
-    message.textContent="Comprueba que la tabla instagram_noticias permita lectura pública (SELECT) mediante RLS.";
-
-  }finally{
-    newsLoading=false;
-
-  }
-}
-
-
 /* INICIALIZACIÓN SEGURA */
 
 async function initialize(){
@@ -4252,7 +4092,6 @@ async function initialize(){
     si falla USGS, la página continúa.
   */
   loadEarthquakes();
-  loadInstagramNews();
 
   /*
     Los reportes se cargan aunque
