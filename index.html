@@ -1057,6 +1057,14 @@ textarea.field{min-height:145px;resize:vertical}
   font-size:12px;
 }
 
+
+/* Enlaces individuales para cada publicación */
+.share-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.share-action{border:1px solid #cde5d1;background:#eaf6e9;color:#14583e;border-radius:10px;padding:10px 12px;font-size:11px;font-weight:900;cursor:pointer}
+.share-action:hover{background:#d7f568}
+.report-card:target,.special-card:target,.linked-report{outline:3px solid #91bf43;outline-offset:3px;scroll-margin-top:30px}
+.share-notice{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#071f19;color:#fff;padding:13px 18px;border-radius:12px;z-index:999999;font-size:12px;box-shadow:0 8px 35px #0005}
+
 /* RESPONSIVE */
 
 @media(max-width:1100px){
@@ -2370,10 +2378,75 @@ function renderCategories(){
   });
 }
 
+
+/* COMPARTIR: integración directa con las tarjetas originales */
+function reportLink(report){
+  const url=new URL(location.pathname,location.origin);
+  url.searchParams.set("reporte",report.id);
+  return url.href;
+}
+function shareToast(message){
+  const old=document.querySelector(".share-notice");
+  if(old)old.remove();
+  const toast=el("div",message,"share-notice");
+  toast.setAttribute("role","status");
+  document.body.appendChild(toast);
+  setTimeout(()=>toast.remove(),3000);
+}
+async function copyReportLink(report){
+  const url=reportLink(report);
+  try{
+    await navigator.clipboard.writeText(url);
+    shareToast("✓ Enlace copiado");
+  }catch(error){
+    window.prompt("Copia este enlace:",url);
+  }
+}
+function makeShareActions(report){
+  const actions=el("div","","share-actions");
+  const title="Aguadulce Reporta: "+report.area;
+  const url=reportLink(report);
+  const share=el("button","↗ Compartir","share-action");
+  share.type="button";
+  share.addEventListener("click",async()=>{
+    if(navigator.share){
+      try{
+        await navigator.share({title,text:report.category+" · "+report.area,url});
+        return;
+      }catch(error){if(error.name==="AbortError")return;}
+    }
+    window.open("https://api.whatsapp.com/send?text="+
+      encodeURIComponent(title+"\n"+url),"_blank","noopener,noreferrer");
+  });
+  const copy=el("button","🔗 Copiar enlace","share-action");
+  copy.type="button";
+  copy.addEventListener("click",()=>copyReportLink(report));
+  const whatsapp=el("a","WhatsApp","share-action");
+  whatsapp.href="https://api.whatsapp.com/send?text="+
+    encodeURIComponent(title+"\n"+url);
+  whatsapp.target="_blank";
+  whatsapp.rel="noopener noreferrer";
+  actions.append(share,copy,whatsapp);
+  return actions;
+}
+function revealLinkedReport(){
+  const id=new URLSearchParams(location.search).get("reporte");
+  if(!id)return;
+  const card=document.getElementById("reporte-"+id);
+  if(!card){
+    showMessage("publicMessage","No se encontró esta publicación pública.");
+    return;
+  }
+  card.classList.add("linked-report");
+  setTimeout(()=>card.scrollIntoView({behavior:"smooth",block:"center"}),250);
+}
+
 /* TARJETAS */
 
 function buildReportCard(report){
   const card=el("article","","report-card");
+  card.id="reporte-"+report.id;
+  card.dataset.reportId=report.id;
 
   /*
     La imagen se consulta desde la función
@@ -2437,6 +2510,7 @@ function buildReportCard(report){
   );
 
   body.appendChild(bottom);
+  body.appendChild(makeShareActions(report));
   card.appendChild(body);
 
   return card;
@@ -2516,6 +2590,8 @@ function renderSpecialSections(){
 
   documents.forEach(report=>{
     const card=el("article","","special-card");
+    card.id="reporte-"+report.id;
+    card.dataset.reportId=report.id;
 
     card.append(
       el("div","🪪","special-icon"),
@@ -2528,6 +2604,7 @@ function renderSpecialSections(){
       )
     );
 
+    card.appendChild(makeShareActions(report));
     box.appendChild(card);
   });
 }
@@ -2557,6 +2634,18 @@ async function loadPublicReports(){
     if(error)throw error;
 
     publicReports=data||[];
+
+    // Un enlace antiguo también abre el reporte si sigue publicado.
+    const linkedId=new URLSearchParams(location.search).get("reporte");
+    if(linkedId && /^[0-9a-f]{8}-[0-9a-f-]{27,}$/i.test(linkedId) &&
+       !publicReports.some(report=>report.id===linkedId)){
+      const {data:linked,error:linkedError}=await publicDb
+        .from("reports")
+        .select("id,category,area,description,status,created_at")
+        .eq("id",linkedId)
+        .maybeSingle();
+      if(!linkedError && linked)publicReports.unshift(linked);
+    }
 
     const regular=publicReports.filter(
       report=>!isSpecial(report)
@@ -2598,6 +2687,7 @@ async function loadPublicReports(){
     renderCategories();
     renderReports();
     renderSpecialSections();
+    revealLinkedReport();
 
     showMessage(
       "publicMessage",
