@@ -5,110 +5,120 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#102e27">
-<meta name="description" content="Aguadulce Reporta: reportes ciudadanos, daños por sismo, documentos encontrados y teléfonos de emergencia.">
-<title>Aguadulce Reporta | Nuestra comunidad</title>
+<meta name="description" content="Aguadulce Reporta: reportes ciudadanos, daños por sismo, documentos encontrados, emergencias y solidaridad comunitaria.">
+<title>Aguadulce Reporta | La voz de nuestra comunidad</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap');
-:root{
---dark:#102e27;--green:#17503a;--lime:#d5f05a;
---bg:#f5f7f2;--line:#e1e9e1;--muted:#64786b;
---shadow:0 10px 30px #102e2712;
-}
+:root{--dark:#102e27;--green:#17503a;--lime:#d5f05a;--bg:#f5f7f2;--line:#dfe8df;--muted:#627669}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:#1b3328;font-family:"DM Sans",Arial,sans-serif}
-button,input,select,textarea{font:inherit}
+body{margin:0;background:var(--bg);color:#193227;font-family:"DM Sans",Arial,sans-serif}
 a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 button:disabled{opacity:.55;cursor:not-allowed}
 [hidden]{display:none!important}
-.wrap{max-width:1170px;margin:auto;padding:0 18px}
+.wrap{max-width:1160px;margin:auto;padding:0 18px}
 .top{background:#08231c;color:#cde1d2;font-size:11px}
-.top .wrap{display:flex;justify-content:space-between;gap:12px;align-items:center;min-height:35px}
-.top a{margin-left:13px}
+.top .wrap{display:flex;justify-content:space-between;gap:10px;padding-top:10px;padding-bottom:10px}
+.top a{margin-left:12px}
 header{background:var(--dark);color:white}
-.header-row{display:flex;align-items:center;justify-content:space-between;gap:15px;min-height:112px}
+.header-row{min-height:110px;display:flex;align-items:center;justify-content:space-between;gap:15px}
 .brand{display:flex;align-items:center;gap:14px}
-.logo-frame{width:95px;height:95px;flex-shrink:0;background:white;border:3px solid var(--lime);padding:6px;border-radius:18px;display:grid;place-items:center;overflow:hidden}
-.logo-frame img{width:100%;height:100%;object-fit:contain}
-.logo-fallback{font-size:12px;font-weight:900;color:var(--dark);text-align:center}
+.logo-box{width:94px;height:94px;flex-shrink:0;background:white;border:3px solid var(--lime);border-radius:18px;padding:6px;display:grid;place-items:center}
+.logo-box img{width:100%;height:100%;object-fit:contain}
+.logo-fallback{font-size:11px;font-weight:900;color:var(--dark);text-align:center}
 .brand-name{font:900 clamp(24px,4vw,41px)/.98 Outfit;letter-spacing:-1px}
 .brand-name span{color:var(--lime)}
-.brand-caption{font-size:10px;color:#c6dccd;letter-spacing:1.5px;margin-top:8px}
+.brand-caption{font-size:10px;color:#c6dccd;letter-spacing:1.4px;margin-top:8px}
 nav{background:#09271e;color:white}
-.navlinks{display:flex;gap:25px;overflow-x:auto;scrollbar-width:none}
+.navlinks{display:flex;gap:23px;overflow-x:auto;scrollbar-width:none}
 .navlinks a{font-size:11px;font-weight:900;white-space:nowrap;padding:17px 0;border-bottom:3px solid transparent}
 .navlinks a:hover{border-color:var(--lime)}
-.btn{border:0;border-radius:11px;padding:13px 18px;font-weight:900;font-size:12px;display:inline-flex;justify-content:center;align-items:center;gap:8px}
+.btn{border:0;border-radius:11px;padding:13px 17px;font-size:12px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-align:center}
 .btn-lime{background:var(--lime);color:var(--dark)}
 .btn-green{background:var(--green);color:white}
 .btn-soft{background:#e5f0e7;color:var(--green)}
-.btn-outline{border:1px solid #ffffff60;background:#ffffff10;color:white}
-.hero{background:radial-gradient(circle at 85% 30%,#246648 0%,#123d2d 45%,#102e27 85%);color:white}
-.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:45px;padding-top:60px;padding-bottom:75px}
+.btn-outline{background:#ffffff10;border:1px solid #ffffff55;color:white}
+.hero{background:radial-gradient(circle at 85% 30%,#246648,#123d2d 48%,#102e27 85%);color:white}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:45px;padding-top:55px;padding-bottom:80px}
 .kicker{font-size:11px;font-weight:900;letter-spacing:2px;color:var(--lime)}
-.hero h1{font:900 clamp(40px,6vw,70px)/1.04 Outfit;letter-spacing:-2px;margin:18px 0}
+.hero h1{font:900 clamp(42px,6vw,70px)/1.04 Outfit;letter-spacing:-2px;margin:19px 0}
 .hero h1 span{color:var(--lime)}
 .hero p{font-size:15px;line-height:1.8;color:#c6dacb}
-.hero-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
 .hero-logo{background:white;border-radius:23px;padding:20px;box-shadow:0 20px 55px #0003;transform:rotate(2deg)}
 .hero-logo img{width:100%;display:block}
-.emergency-alert{background:#fff3dd;border-bottom:1px solid #e9c999}
-.alert-inner{padding-top:15px;padding-bottom:15px;display:flex;justify-content:space-between;align-items:center;gap:18px}
-.alert-inner strong{color:#8a440a}
-.alert-inner p{font-size:12px;line-height:1.6;margin:5px 0 0}
+.alert{background:#fff0d9;border-bottom:1px solid #e9c999}
+.alert-inner{padding-top:16px;padding-bottom:16px;display:flex;justify-content:space-between;align-items:center;gap:18px}
+.alert strong{color:#864409}
+.alert p{font-size:12px;line-height:1.6;margin:5px 0 0}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:-28px;position:relative}
-.stat{background:white;padding:21px;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
-.stat strong{display:block;font:900 30px Outfit;color:var(--green)}
+.stat{background:white;padding:22px;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 28px #102e2712}
+.stat strong{display:block;font:900 31px Outfit;color:var(--green)}
 .stat span{font-size:10px;font-weight:900;color:var(--muted)}
-.section{padding:60px 0 0}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:23px}
-.section-kicker{font-size:11px;color:#267a50;letter-spacing:1.5px;font-weight:900}
-.section h2,.section-title{font:900 clamp(28px,4vw,39px) Outfit;letter-spacing:-1px;margin:8px 0}
+.section{padding:60px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:22px}
+.eyebrow{font-size:11px;color:#267a50;letter-spacing:1.5px;font-weight:900}
+.section h2,.section-title{font:900 clamp(29px,4vw,40px) Outfit;letter-spacing:-1px;margin:8px 0}
 .section-desc{font-size:13px;color:var(--muted);line-height:1.7}
-.filters{display:flex;gap:10px;background:white;padding:14px;border:1px solid var(--line);border-radius:14px;margin-bottom:23px}
-.field{width:100%;border:1px solid #d7e4d9;background:#fbfcfa;border-radius:10px;padding:13px;outline:none;color:#1b3328}
+.counter-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-top:22px}
+.counter{background:white;border:1px solid var(--line);border-radius:15px;padding:19px;text-align:left;cursor:pointer;transition:transform .2s,border-color .2s}
+.counter:hover{transform:translateY(-3px);border-color:#6ba986}
+.counter strong{display:block;font:900 29px Outfit;color:var(--green);margin:7px 0}
+.counter span{font-size:12px;font-weight:800;overflow-wrap:anywhere}
+.counter small{font-size:10px;color:var(--muted);display:block;margin-top:5px}
+.filters{display:flex;gap:10px;background:white;padding:14px;border:1px solid var(--line);border-radius:14px;margin:20px 0}
+.field{width:100%;border:1px solid #d7e4d9;background:#fbfcfa;border-radius:10px;padding:13px;outline:none;color:#193227}
 .field:focus{border-color:#318a61}
 .filters input{flex:1;min-width:0}
 .filters select{max-width:240px}
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.report-card{background:white;border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.report-card{background:white;border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 8px 28px #102e2710;display:flex;flex-direction:column}
 .report-photo-box{height:210px;background:#e6eee7}
 .report-photo{width:100%;height:100%;object-fit:cover;display:block}
 .report-body{padding:20px;display:flex;flex-direction:column;flex:1;min-width:0}
-.report-category{font-size:10px;color:#257c54;font-weight:900;text-transform:uppercase;letter-spacing:1px}
+.report-category{font-size:10px;color:#267e55;font-weight:900;text-transform:uppercase;letter-spacing:1px}
 .report-body h3{font:800 22px Outfit;margin:11px 0;overflow-wrap:anywhere}
 .report-body p{font-size:13px;line-height:1.7;color:#526759;white-space:pre-wrap;overflow-wrap:anywhere;flex:1}
 .report-footer{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:13px;margin-top:15px;font-size:11px;color:var(--muted)}
 .pill{background:#e5f1e6;color:#206747;padding:6px 9px;border-radius:30px;font-weight:900}
-.empty{grid-column:1/-1;background:white;padding:40px 20px;text-align:center;border:1px dashed #c9daca;border-radius:15px;color:var(--muted)}
-.quake-section{background:#fff3e5;margin-top:60px;padding:55px 0;border-top:1px solid #f0dac3;border-bottom:1px solid #f0dac3}
-.quake-banner{background:#76391f;color:white;border-radius:20px;padding:32px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.quake-banner h2{font:900 34px Outfit;margin:0 0 10px}
-.quake-banner p{font-size:13px;line-height:1.7;margin:0;color:#f5d7c6}
-.quake-tips{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
-.tip{background:white;border-radius:13px;padding:19px;border:1px solid #f0dfce}
-.tip strong{display:block;font-size:14px;margin-bottom:7px}
-.tip p{font-size:12px;color:#675c51;line-height:1.7;margin:0}
-.emergency-section{padding:60px 0}
-.emergency-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
-.emergency-card{background:white;border:1px solid var(--line);border-radius:16px;padding:23px;box-shadow:var(--shadow)}
-.emergency-card .emoji{font-size:28px}
+.empty{grid-column:1/-1;background:white;padding:35px 20px;text-align:center;border:1px dashed #c9daca;border-radius:15px;color:var(--muted)}
+.banner{border-radius:21px;padding:30px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.banner h2{font:900 33px Outfit;margin:0 0 10px}
+.banner p{font-size:13px;line-height:1.7;margin:0}
+.quake{background:#fff3e5}
+.quake .banner{background:#773c25;color:white}
+.quake .banner p{color:#f5dacd}
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.tip{background:white;border:1px solid #e8e2d7;border-radius:13px;padding:20px}
+.tip strong{display:block;font-size:14px;margin-bottom:8px}
+.tip p{font-size:12px;line-height:1.7;color:#665e54;margin:0}
+.donation{background:#eaf2df}
+.donation .banner{background:#214b35;color:white}
+.donation .banner p{color:#d2e5d4}
+.donation-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:20px}
+.donation-item{background:white;border:1px solid #d6e4d2;border-radius:14px;padding:20px}
+.donation-item strong{display:block;margin:8px 0;font-size:14px}
+.donation-item p{font-size:12px;line-height:1.6;color:var(--muted);margin:0}
+.donation-status{background:#fff9e9;border:1px solid #ead8a3;border-radius:13px;padding:18px;margin-top:19px;font-size:13px;line-height:1.8}
+.emergency-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.emergency-card{background:white;border:1px solid var(--line);border-radius:16px;padding:23px}
 .emergency-card h3{font:800 20px Outfit;margin:12px 0 7px}
-.emergency-card .number{font:900 33px Outfit;color:var(--green);margin:10px 0}
+.emergency-card .number{font:900 31px Outfit;color:var(--green);margin:10px 0}
 .emergency-card p{font-size:12px;color:var(--muted);line-height:1.6}
 .emergency-card .btn{width:100%;margin-top:12px}
 .emergency-card.primary{background:var(--dark);color:white}
 .emergency-card.primary .number{color:var(--lime)}
 .emergency-card.primary p{color:#c4d9ca}
-.documents-section{background:#e8efe6;padding:55px 0}
+.documents{background:#e8efe6}
 .document-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
 .document-card{background:white;border:1px solid #d5e4d7;border-radius:16px;padding:23px;overflow-wrap:anywhere}
 .document-card h3{font:800 21px Outfit;margin:12px 0}
 .document-card p{font-size:13px;line-height:1.7;color:#52675b;white-space:pre-wrap}
 .document-card small{display:block;margin-top:15px;border-top:1px solid var(--line);padding-top:12px;color:var(--muted)}
 .notice{font-size:12px;color:#526659;line-height:1.8;margin-top:20px}
-.form-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:start;padding:70px 0}
+.form-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:start}
 .form-intro h2{font:900 42px/1.1 Outfit;letter-spacing:-1px}
 .form-intro h2 span{color:#287f55}
 .form-intro p{font-size:14px;color:var(--muted);line-height:1.8}
@@ -116,7 +126,7 @@ nav{background:#09271e;color:white}
 .step-num{width:36px;height:36px;flex-shrink:0;display:grid;place-items:center;background:#e0eddf;border-radius:10px;font-weight:900;color:var(--green)}
 .step strong{font-size:13px}
 .step p{font-size:12px;margin:5px 0}
-.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:var(--shadow)}
+.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:0 8px 28px #102e2710}
 .panel h3{font:900 26px Outfit;margin:0 0 8px}
 .panel>p{font-size:13px;color:var(--muted);line-height:1.7}
 .label{display:block;font-size:12px;font-weight:900;margin:17px 0 8px}
@@ -126,7 +136,6 @@ textarea.field{min-height:125px;resize:vertical}
 .preview{max-width:100%;max-height:240px;border-radius:11px;margin-top:12px}
 .message{font-size:13px;line-height:1.6;margin-top:14px;overflow-wrap:anywhere}
 .message:empty{display:none}
-.admin-section{padding-bottom:70px}
 .admin-panel{max-width:800px;margin:auto}
 .admin-report{background:#fafcf9;border:1px solid var(--line);border-radius:14px;padding:19px;margin-top:16px;overflow-wrap:anywhere}
 .admin-report h4{margin:0 0 10px;font-size:17px}
@@ -135,26 +144,27 @@ textarea.field{min-height:125px;resize:vertical}
 .admin-actions{background:white;border:1px solid var(--line);border-radius:11px;padding:13px;margin-top:12px}
 .admin-top{display:flex;gap:10px}
 .admin-top .btn{flex:1}
-.social-section{background:var(--dark);color:white;padding:55px 0}
-.social-section h2{font:900 36px Outfit;margin:10px 0}
-.social-section p{color:#c5d9cb;font-size:13px;line-height:1.7}
+.social{background:var(--dark);color:white}
+.social h2{font:900 36px Outfit;margin:10px 0}
+.social p{color:#c5d9cb;font-size:13px;line-height:1.7}
 .social-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
 .social-card{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid #ffffff35;border-radius:16px;padding:23px;background:#ffffff0b}
 .social-card strong{font:800 21px Outfit}
 .social-card small{display:block;color:#bcd1c3;margin-top:7px}
-.footer{background:#08241c;color:#b9d0c0;padding:32px 0}
+footer{background:#08241c;color:#b9d0c0;padding:32px 0}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.footer strong{font:900 22px Outfit;color:white}
-.footer p{font-size:12px;line-height:1.7}
+footer strong{font:900 22px Outfit;color:white}
+footer p{font-size:12px;line-height:1.7}
 @media(max-width:950px){
 .hero-grid{grid-template-columns:1fr .7fr}
-.cards,.document-grid,.emergency-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cards,.document-grid,.emergency-grid,.counter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.donation-grid{grid-template-columns:repeat(2,1fr)}
 .form-layout{grid-template-columns:1fr}
 }
 @media(max-width:650px){
 .wrap{padding:0 15px}
-.header-row{min-height:91px}
-.logo-frame{width:68px;height:68px;border-radius:12px;padding:4px}
+.header-row{min-height:90px}
+.logo-box{width:68px;height:68px;border-radius:12px;padding:4px}
 .brand{gap:9px}
 .brand-name{font-size:24px}
 .brand-caption{font-size:8px}
@@ -162,18 +172,19 @@ textarea.field{min-height:125px;resize:vertical}
 .hero-grid{grid-template-columns:1fr;gap:25px;padding:48px 0 65px}
 .hero h1{font-size:45px}
 .hero-logo{max-width:270px;margin:auto;padding:12px}
-.alert-inner{flex-direction:column;align-items:start}
+.alert-inner,.banner{flex-direction:column;align-items:start}
 .stats{gap:7px}
 .stat{padding:14px 9px}
 .stat strong{font-size:23px}
 .stat span{font-size:9px}
-.section{padding-top:45px}
+.section{padding:45px 0}
 .filters{flex-direction:column}
 .filters select{max-width:none}
-.cards,.document-grid,.emergency-grid,.quake-tips,.social-grid{grid-template-columns:1fr}
-.quake-section,.documents-section{padding:43px 0;margin-top:45px}
-.quake-banner{flex-direction:column;align-items:start;padding:24px}
-.form-layout{padding:48px 0}
+.cards,.document-grid,.emergency-grid,.tips,.social-grid{grid-template-columns:1fr}
+.counter-grid,.donation-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.counter{padding:14px}
+.counter strong{font-size:25px}
+.banner{padding:24px}
 .panel{padding:21px}
 }
 </style>
@@ -193,7 +204,7 @@ textarea.field{min-height:125px;resize:vertical}
 <header>
 <div class="wrap header-row">
 <a class="brand" href="#inicio">
-<div class="logo-frame">
+<div class="logo-box">
 <img src="logo.png" class="site-logo" alt="Logo original Aguadulce Malo y Bueno">
 <div class="logo-fallback" hidden>AGUADULCE<br>MALO & BUENO</div>
 </div>
@@ -209,17 +220,18 @@ textarea.field{min-height:125px;resize:vertical}
 <nav>
 <div class="wrap navlinks">
 <a href="#inicio">INICIO</a>
+<a href="#categorias">CONTADORES</a>
 <a href="#reportes">REPORTES</a>
-<a href="#sismos">DAÑOS POR SISMO</a>
+<a href="#sismos">SISMOS</a>
+<a href="#acopio">CENTRO DE ACOPIO</a>
 <a href="#emergencias">EMERGENCIAS</a>
 <a href="#documentos">DOCUMENTOS</a>
 <a href="#enviar">ENVIAR REPORTE</a>
-<a href="#redes">REDES SOCIALES</a>
 <a href="#administracion">ADMINISTRACIÓN</a>
 </div>
 </nav>
 
-<div class="emergency-alert">
+<div class="alert">
 <div class="wrap alert-inner">
 <div>
 <strong>⚠️ ¿Necesitas ayuda inmediata?</strong>
@@ -237,12 +249,12 @@ textarea.field{min-height:125px;resize:vertical}
 <p>
 Reporta situaciones de tu comunidad, daños en viviendas,
 documentos encontrados y problemas que necesitan atención.
-Un espacio para informar y ayudarnos entre vecinos.
+También encuentra información para ayudar a quienes lo necesitan.
 </p>
 <div class="hero-buttons">
-<a class="btn btn-lime" href="#enviar">📢 ENVIAR REPORTE</a>
-<a class="btn btn-outline" href="#sismos">🏠 DAÑOS POR SISMO</a>
-<a class="btn btn-outline" href="#emergencias">🚨 EMERGENCIAS</a>
+<a href="#enviar" class="btn btn-lime">📢 ENVIAR REPORTE</a>
+<a href="#acopio" class="btn btn-outline">❤️ CENTRO DE ACOPIO</a>
+<a href="#emergencias" class="btn btn-outline">🚨 EMERGENCIAS</a>
 </div>
 </div>
 <div class="hero-logo" id="heroLogo">
@@ -255,15 +267,40 @@ Un espacio para informar y ayudarnos entre vecinos.
 
 <div class="wrap">
 <div class="stats">
-<div class="stat"><strong id="statReports">—</strong><span>REPORTES RECIENTES</span></div>
-<div class="stat"><strong id="statAreas">—</strong><span>COMUNIDADES</span></div>
-<div class="stat"><strong id="statDocuments">—</strong><span>DOCUMENTOS ENCONTRADOS</span></div>
+<div class="stat">
+<strong id="statReports">—</strong>
+<span>REPORTES PÚBLICOS</span>
 </div>
+<div class="stat">
+<strong id="statAreas">—</strong>
+<span>COMUNIDADES</span>
+</div>
+<div class="stat">
+<strong id="statDocuments">—</strong>
+<span>DOCUMENTOS ENCONTRADOS</span>
+</div>
+</div>
+
+<section class="section" id="categorias">
+<div class="eyebrow">ESTADÍSTICAS COMUNITARIAS</div>
+<h2>📊 Reportes por categoría</h2>
+<p class="section-desc">
+Cada contador muestra los reportes aprobados para publicación.
+Toca una categoría para ver sus reportes.
+</p>
+<div class="counter-grid" id="categoryCounters">
+<div class="empty">Cargando contadores...</div>
+</div>
+<p class="notice">
+Los contadores se actualizan al cargar la página o pulsar «Actualizar».
+No incluyen reportes privados ni pendientes de aprobación.
+</p>
+</section>
 
 <section class="section" id="reportes">
 <div class="section-head">
 <div>
-<div class="section-kicker">ACTUALIDAD COMUNITARIA</div>
+<div class="eyebrow">ACTUALIDAD COMUNITARIA</div>
 <h2>Lo que pasa en Aguadulce</h2>
 <p class="section-desc">Reportes revisados y aprobados para publicación.</p>
 </div>
@@ -277,152 +314,197 @@ Un espacio para informar y ayudarnos entre vecinos.
 </select>
 </div>
 
-<p id="publicMessage" class="message" role="status"></p>
+<p class="message" id="publicMessage" role="status"></p>
 <div class="cards" id="publicReports"></div>
 </section>
 </div>
 
-<section class="quake-section" id="sismos">
+<section class="section quake" id="sismos">
 <div class="wrap">
-<div class="quake-banner">
+<div class="banner">
 <div>
 <h2>🏠 Reporta daños por sismo</h2>
 <p>
-¿Tu vivienda o comunidad presenta daños? Puedes documentarlos
-con una descripción y fotografía, siempre que sea seguro hacerlo.
+¿Tu vivienda, negocio o comunidad presenta daños?
+Puedes informar sobre ellos sin exponerte a riesgos.
 </p>
 </div>
 <a href="#enviar" class="btn btn-lime" id="quakeReportLink">REPORTAR DAÑOS →</a>
 </div>
 
-<div class="quake-tips">
+<div class="tips">
 <div class="tip">
 <strong>🧱 Grietas y paredes</strong>
-<p>Informa si observaste grietas o desprendimientos. No entres a estructuras que parezcan inestables.</p>
+<p>Describe daños visibles. No ingreses a estructuras que parezcan inestables.</p>
 </div>
 <div class="tip">
 <strong>🏚️ Techos y estructuras</strong>
-<p>Describe daños visibles sin exponerte a objetos que puedan caer.</p>
+<p>Reporta afectaciones sin acercarte a elementos que puedan caer.</p>
 </div>
 <div class="tip">
-<strong>📞 Atención de emergencias</strong>
-<p>Si hay riesgo inmediato, aléjate de la zona y llama al 911 antes de enviar un reporte.</p>
+<strong>📞 Emergencias</strong>
+<p>Si existe peligro inmediato, aléjate y llama al 911.</p>
 </div>
 </div>
+
 <p class="notice">
-Los reportes ciudadanos no constituyen una evaluación estructural
+Los reportes no sustituyen una evaluación estructural
 ni se envían automáticamente a SINAPROC.
 </p>
 </div>
 </section>
 
-<section class="emergency-section" id="emergencias">
+<section class="section donation" id="acopio">
 <div class="wrap">
-<div class="section-kicker">DIRECTORIO DE AYUDA</div>
-<h2 class="section-title">🚨 Emergencias y autoridades</h2>
-<p class="section-desc">
-Teléfonos de atención en Panamá. Toca «Llamar» desde tu celular
-para abrir la aplicación telefónica.
+<div class="banner">
+<div>
+<div class="kicker">SOLIDARIDAD AGUADULCEÑA</div>
+<h2>❤️ Centro de acopio en Aguadulce</h2>
+<p>
+¿Quieres ayudar a familias afectadas?
+Consulta qué se necesita y espera la confirmación
+de un punto de recepción antes de trasladar donaciones.
 </p>
+</div>
+<a href="#informacionAcopio" class="btn btn-lime">QUIERO DONAR →</a>
+</div>
+
+<div id="informacionAcopio">
+<div class="donation-grid">
+<div class="donation-item">
+<div style="font-size:26px">💧</div>
+<strong>Agua potable</strong>
+<p>Botellas cerradas y en buen estado, si son solicitadas.</p>
+</div>
+<div class="donation-item">
+<div style="font-size:26px">🥫</div>
+<strong>Alimentos</strong>
+<p>Productos no perecederos, sellados y vigentes.</p>
+</div>
+<div class="donation-item">
+<div style="font-size:26px">🧼</div>
+<strong>Higiene personal</strong>
+<p>Artículos nuevos y cerrados, según las necesidades.</p>
+</div>
+<div class="donation-item">
+<div style="font-size:26px">👕</div>
+<strong>Ropa y otros artículos</strong>
+<p>Solo cuando la organización receptora confirme que los necesita.</p>
+</div>
+</div>
+
+<div class="donation-status">
+<strong>📍 Estado del punto de recepción: pendiente de confirmación.</strong>
+Actualmente no tenemos una dirección, horario ni institución
+receptora verificados para un centro de acopio en Aguadulce.
+Esta sección es informativa: no indica que exista un centro
+habilitado ni que ya se estén recibiendo donaciones.
+</div>
+
+<p class="notice">
+Antes de llevar artículos, confirma con la entidad organizadora
+qué productos necesita, dónde recibirlos y en qué horario.
+No entregues dinero ni donaciones a personas no verificadas.
+</p>
+</div>
+</div>
+</section>
+
+<section class="section" id="emergencias">
+<div class="wrap">
+<div class="eyebrow">DIRECTORIO DE AYUDA</div>
+<h2 class="section-title">🚨 Emergencias y autoridades</h2>
+<p class="section-desc">Toca «Llamar» desde tu celular para abrir la aplicación telefónica.</p>
 
 <div class="emergency-grid">
-
 <div class="emergency-card primary">
-<div class="emoji">🚑</div>
+<div style="font-size:28px">🚑</div>
 <h3>Emergencias / SUME</h3>
 <div class="number">911</div>
 <p>Atención y coordinación de emergencias.</p>
-<a class="btn btn-lime" href="tel:911">📞 LLAMAR 911</a>
+<a href="tel:911" class="btn btn-lime">📞 LLAMAR 911</a>
 </div>
 
 <div class="emergency-card">
-<div class="emoji">🚒</div>
+<div style="font-size:28px">🚒</div>
 <h3>Bomberos de Panamá</h3>
 <div class="number">103</div>
 <p>Incendios y emergencias que requieren bomberos.</p>
-<a class="btn btn-green" href="tel:103">📞 LLAMAR 103</a>
+<a href="tel:103" class="btn btn-green">📞 LLAMAR 103</a>
 </div>
 
 <div class="emergency-card">
-<div class="emoji">👮</div>
+<div style="font-size:28px">👮</div>
 <h3>Policía Nacional</h3>
 <div class="number">104</div>
 <p>Atención policial y situaciones de seguridad.</p>
-<a class="btn btn-green" href="tel:104">📞 LLAMAR 104</a>
+<a href="tel:104" class="btn btn-green">📞 LLAMAR 104</a>
 </div>
 
 <div class="emergency-card">
-<div class="emoji">⛑️</div>
+<div style="font-size:28px">⛑️</div>
 <h3>SINAPROC</h3>
 <div class="number">520-4426</div>
-<p>Línea de atención de Protección Civil.</p>
-<a class="btn btn-green" href="tel:+5075204426">📞 LLAMAR</a>
+<p>Protección Civil.</p>
+<a href="tel:+5075204426" class="btn btn-green">📞 LLAMAR</a>
 </div>
 
 <div class="emergency-card">
-<div class="emoji">📍</div>
+<div style="font-size:28px">📍</div>
 <h3>SINAPROC Coclé</h3>
 <div class="number">524-3365</div>
-<p>Contacto regional de Protección Civil en Coclé.</p>
-<a class="btn btn-green" href="tel:+5075243365">📞 LLAMAR</a>
+<p>Contacto regional de Protección Civil.</p>
+<a href="tel:+5075243365" class="btn btn-green">📞 LLAMAR</a>
 </div>
 
 <div class="emergency-card">
-<div class="emoji">ℹ️</div>
+<div style="font-size:28px">ℹ️</div>
 <h3>Información oficial</h3>
-<p>
-Consulta comunicados, alertas y recomendaciones directamente
-con Protección Civil.
-</p>
-<a class="btn btn-soft"
-href="https://www.sinaproc.gob.pa/"
-target="_blank" rel="noopener noreferrer">VER SINAPROC ↗</a>
+<p>Consulta las alertas y recomendaciones de SINAPROC.</p>
+<a href="https://www.sinaproc.gob.pa/" target="_blank" rel="noopener noreferrer" class="btn btn-soft">VER SINAPROC ↗</a>
+</div>
 </div>
 
-</div>
 <p class="notice">
-Los números se muestran como referencia. Para peligro inmediato,
-utiliza el 911. Aguadulce Reporta es una iniciativa comunitaria,
-no un servicio oficial de emergencias.
+Aguadulce Reporta es una iniciativa comunitaria y no un servicio oficial de emergencias.
 </p>
 </div>
 </section>
 
-<section class="documents-section" id="documentos">
+<section class="section documents" id="documentos">
 <div class="wrap">
 <div class="section-head">
 <div>
-<div class="section-kicker">SERVICIO A LA COMUNIDAD</div>
-<h2 class="section-title">🪪 Documentos encontrados</h2>
+<div class="eyebrow">SERVICIO A LA COMUNIDAD</div>
+<h2>🪪 Documentos encontrados</h2>
 <p class="section-desc">Ayudemos a que los documentos regresen a sus propietarios.</p>
 </div>
-<a class="btn btn-green" href="#enviar" id="documentReportLink">REPORTAR HALLAZGO</a>
+<a href="#enviar" class="btn btn-green" id="documentReportLink">REPORTAR HALLAZGO</a>
 </div>
 
 <div class="document-grid" id="documentsList"></div>
 <p class="notice">
 🔒 No publiques nombres completos, números de identificación
-ni fotografías de documentos. La entrega debe coordinarse
-por un canal seguro y verificando la titularidad.
+ni fotografías de documentos. Coordina las entregas de forma segura.
 </p>
 </div>
 </section>
 
-<div class="wrap">
-<section class="form-layout" id="enviar">
+<section class="section" id="enviar">
+<div class="wrap form-layout">
 
 <div class="form-intro">
-<div class="section-kicker">PARTICIPACIÓN COMUNITARIA</div>
+<div class="eyebrow">PARTICIPACIÓN COMUNITARIA</div>
 <h2>Tu comunidad tiene una historia. <span>Ayúdanos a contarla.</span></h2>
 <p>
-Puedes reportar problemas comunitarios, daños por sismo
+Reporta problemas comunitarios, daños por sismo
 o documentos encontrados. Todos los reportes quedan
 pendientes de revisión.
 </p>
 
 <div class="step">
 <div class="step-num">01</div>
-<div><strong>Selecciona una categoría</strong><p>Elige el tipo de reporte que deseas enviar.</p></div>
+<div><strong>Selecciona una categoría</strong><p>Elige el tipo de reporte.</p></div>
 </div>
 <div class="step">
 <div class="step-num">02</div>
@@ -455,42 +537,32 @@ pendientes de revisión.
 
 <div id="quakeInstructions" hidden>
 <p class="hint">
-<strong>Daños por sismo:</strong> explica qué tipo de daño observaste
-y en qué comunidad ocurrió. Puedes indicar si afecta una vivienda,
-negocio o área pública. No incluyas nombres de residentes
-ni direcciones particulares. No ingreses a lugares peligrosos
-para tomar fotografías.
-</p>
-<p class="hint">
-<strong>¿Existe peligro inmediato?</strong>
-Llama al <a href="tel:911"><strong>911</strong></a>.
-Este formulario no envía avisos a las autoridades.
+<strong>Daños por sismo:</strong>
+explica el tipo de daño y la comunidad. No compartas
+direcciones particulares ni nombres de residentes.
+No ingreses a lugares peligrosos para tomar fotos.
+Si existe peligro inmediato, llama al 911.
 </p>
 </div>
 
 <div id="documentInstructions" hidden>
 <p class="hint">
 <strong>Documento encontrado:</strong>
-indica solamente el tipo de documento y el sector general
-del hallazgo. No escribas nombres completos,
-números de identificación ni otros datos privados.
-No adjuntes fotografías del documento.
+indica solo el tipo de documento y la zona general
+del hallazgo. No compartas nombres ni números de identificación.
 </p>
 </div>
 
 <label class="label" for="area">COMUNIDAD O CORREGIMIENTO</label>
-<input class="field" id="area" maxlength="120"
-placeholder="Ej.: El Roble, Pocrí, Barrios Unidos..." required>
+<input class="field" id="area" maxlength="120" placeholder="Ej.: El Roble, Pocrí, Barrios Unidos..." required>
 
 <label class="label" for="description">DESCRIPCIÓN</label>
-<textarea class="field" id="description" minlength="10"
-maxlength="1500" placeholder="Describe lo que sucede..." required></textarea>
+<textarea class="field" id="description" minlength="10" maxlength="1500" placeholder="Describe lo que sucede..." required></textarea>
 
 <div id="photoSection">
 <label class="label" for="photo">FOTOGRAFÍA (OPCIONAL)</label>
-<input class="field" id="photo" type="file"
-accept="image/jpeg,image/png,image/webp">
-<p class="hint">JPG, PNG o WebP. Una fotografía de máximo 5 MB.</p>
+<input class="field" id="photo" type="file" accept="image/jpeg,image/png,image/webp">
+<p class="hint">JPG, PNG o WebP. Máximo 5 MB.</p>
 <img class="preview" id="photoPreview" alt="Vista previa" hidden>
 </div>
 
@@ -501,9 +573,8 @@ accept="image/jpeg,image/png,image/webp">
 </select>
 
 <p class="hint">
-Evita compartir información personal, imágenes sensibles
-o acusaciones sin verificar. Los reportes son revisados
-antes de publicarse.
+Evita compartir información personal o imágenes sensibles.
+Los reportes requieren revisión antes de publicarse.
 </p>
 
 <div style="margin-top:20px">
@@ -512,30 +583,37 @@ data-sitekey="0x4AAAAAAFWBvw2cZEIy5XVD"
 data-theme="light"></div>
 </div>
 
-<button type="submit" class="btn btn-green" id="reportButton">
+<button type="submit" class="btn btn-green" id="reportButton" style="width:100%;margin-top:16px">
 📤 ENVIAR MI REPORTE
 </button>
-<p class="message" id="reportMessage" role="status"></p>
 
+<p class="message" id="reportMessage" role="status"></p>
 </form>
+</div>
+
 </div>
 </section>
 
-<section class="admin-section" id="administracion">
+<section class="section" id="administracion" style="padding-top:0">
+<div class="wrap">
 <div class="panel admin-panel">
 
 <div id="adminLogin">
-<div class="section-kicker">ACCESO RESTRINGIDO</div>
+<div class="eyebrow">ACCESO RESTRINGIDO</div>
 <h3>🔐 Administración</h3>
 <p>Acceso exclusivo para revisar y administrar reportes.</p>
+
 <form id="loginForm">
 <label class="label" for="adminEmail">CORREO ELECTRÓNICO</label>
 <input class="field" type="email" id="adminEmail" autocomplete="username" required>
+
 <label class="label" for="adminPassword">CONTRASEÑA</label>
 <input class="field" type="password" id="adminPassword" autocomplete="current-password" required>
-<button type="submit" class="btn btn-green" id="loginButton">INICIAR SESIÓN</button>
+
+<button type="submit" class="btn btn-green" id="loginButton" style="width:100%;margin-top:16px">INICIAR SESIÓN</button>
 </form>
-<button type="button" class="btn btn-soft" id="forgotButton">Olvidé mi contraseña</button>
+
+<button type="button" class="btn btn-soft" id="forgotButton" style="margin-top:12px">Olvidé mi contraseña</button>
 <p class="message" id="loginMessage" role="status"></p>
 </div>
 
@@ -546,42 +624,44 @@ data-theme="light"></div>
 <input class="field" id="newPassword" type="password" minlength="8" required>
 <label class="label" for="confirmPassword">CONFIRMAR CONTRASEÑA</label>
 <input class="field" id="confirmPassword" type="password" minlength="8" required>
-<button class="btn btn-green" type="submit">GUARDAR CONTRASEÑA</button>
+<button class="btn btn-green" type="submit" style="margin-top:15px">GUARDAR CONTRASEÑA</button>
 </form>
 <p class="message" id="recoveryMessage"></p>
 </div>
 
 <div id="adminPanel" hidden>
-<div class="section-kicker">CENTRO DE CONTROL</div>
+<div class="eyebrow">CENTRO DE CONTROL</div>
 <h3>📋 Panel de reportes</h3>
 <p>Revisa fotografías, cambia estados y aprueba publicaciones.</p>
+
 <div class="admin-top">
 <button class="btn btn-green" type="button" id="refreshAdmin">↻ Actualizar</button>
 <button class="btn btn-soft" type="button" id="logoutButton">Salir</button>
 </div>
+
 <p class="message" id="adminMessage" role="status"></p>
 <div id="adminReports"></div>
 </div>
 
 </div>
-</section>
 </div>
+</section>
+
 </main>
 
-<section class="social-section" id="redes">
+<section class="section social" id="redes">
 <div class="wrap">
-<div class="section-kicker" style="color:#d5f05a">NUESTRAS REDES SOCIALES</div>
+<div class="kicker">NUESTRAS REDES SOCIALES</div>
 <h2>Sigue a Aguadulce Malo & Bueno</h2>
 <p>Información y contenido de nuestra comunidad.</p>
 
 <div class="social-grid">
-<a class="social-card" href="https://www.instagram.com/aguadulcebueno/"
-target="_blank" rel="noopener noreferrer">
+<a class="social-card" href="https://www.instagram.com/aguadulcebueno/" target="_blank" rel="noopener noreferrer">
 <div><strong>📸 Instagram</strong><small>@aguadulcebueno</small></div>
 <strong>↗</strong>
 </a>
-<a class="social-card" href="https://www.tiktok.com/@aguadulcemalo"
-target="_blank" rel="noopener noreferrer">
+
+<a class="social-card" href="https://www.tiktok.com/@aguadulcemalo" target="_blank" rel="noopener noreferrer">
 <div><strong>🎵 TikTok</strong><small>@aguadulcemalo</small></div>
 <strong>↗</strong>
 </a>
@@ -589,7 +669,7 @@ target="_blank" rel="noopener noreferrer">
 </div>
 </section>
 
-<footer class="footer">
+<footer>
 <div class="wrap footer-inner">
 <div>
 <strong>AGUADULCE REPORTA.</strong>
@@ -611,20 +691,51 @@ const SUPABASE_KEY="sb_publishable_toBA9zteOxIM1WivpdjwFQ_xUXsqfpf";
 const BUCKET="Foto de reportes";
 const SEND_FUNCTION=SUPABASE_URL+"/functions/v1/enviar-reporte";
 const PHOTO_FUNCTION=SUPABASE_URL+"/functions/v1/foto-publica";
+
 const $=id=>document.getElementById(id);
 
-const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{
- auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
-});
-
-const publicDb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{
- auth:{
-  persistSession:false,
-  autoRefreshToken:false,
-  detectSessionInUrl:false,
-  storageKey:"aguadulce-public-reader"
+const db=window.supabase.createClient(
+ SUPABASE_URL,SUPABASE_KEY,{
+  auth:{
+   persistSession:true,
+   autoRefreshToken:true,
+   detectSessionInUrl:true
+  }
  }
-});
+);
+
+const publicDb=window.supabase.createClient(
+ SUPABASE_URL,SUPABASE_KEY,{
+  auth:{
+   persistSession:false,
+   autoRefreshToken:false,
+   detectSessionInUrl:false,
+   storageKey:"aguadulce-public-reader"
+  }
+ }
+);
+
+const CATEGORY_LIST=[
+ "Calles y aceras",
+ "Basura y limpieza",
+ "Agua y alcantarillado",
+ "Alumbrado público",
+ "Protección animal",
+ "Otros problemas comunitarios",
+ "Daños por sismo",
+ "Documentos encontrados"
+];
+
+const CATEGORY_ICONS={
+ "Calles y aceras":"🛣️",
+ "Basura y limpieza":"🗑️",
+ "Agua y alcantarillado":"💧",
+ "Alumbrado público":"💡",
+ "Protección animal":"🐾",
+ "Otros problemas comunitarios":"📢",
+ "Daños por sismo":"🏠",
+ "Documentos encontrados":"🪪"
+};
 
 let publicReportsData=[];
 let previewUrl=null;
@@ -635,9 +746,11 @@ let recoveryMode=
 
 let recoveryReady=false;
 
+// LOGO ORIGINAL
+
 document.querySelectorAll(".site-logo").forEach(img=>{
  img.addEventListener("error",()=>{
-  if(img.closest(".logo-frame")){
+  if(img.closest(".logo-box")){
    img.hidden=true;
    document.querySelector(".logo-fallback").hidden=false;
   }else{
@@ -656,7 +769,7 @@ function make(tag,text="",className=""){
 function showMessage(id,text,success=false){
  const el=$(id);
  el.textContent=text;
- el.style.color=success?"#197c4a":"#64786b";
+ el.style.color=success?"#197c4a":"#627669";
 }
 
 function statusName(value){
@@ -674,46 +787,113 @@ function formatDate(value){
  const d=new Date(value);
  return isNaN(d.getTime())?"Sin fecha":
  d.toLocaleDateString("es-PA",{
-  day:"numeric",month:"short",year:"numeric"
+  day:"numeric",
+  month:"short",
+  year:"numeric"
  });
 }
 
-function isDocument(r){
- return r.category==="Documentos encontrados";
+function isDocument(report){
+ return report.category==="Documentos encontrados";
+}
+
+// CONTADORES POR CATEGORÍA
+
+function renderCategoryCounters(){
+ const box=$("categoryCounters");
+ box.replaceChildren();
+
+ const counts={};
+
+ CATEGORY_LIST.forEach(category=>{
+  counts[category]=0;
+ });
+
+ publicReportsData.forEach(report=>{
+  const category=report.category||"Sin categoría";
+  counts[category]=(counts[category]||0)+1;
+ });
+
+ const allCategories=[
+  ...CATEGORY_LIST,
+  ...Object.keys(counts).filter(
+   category=>!CATEGORY_LIST.includes(category)
+  ).sort()
+ ];
+
+ allCategories.forEach(category=>{
+  const count=counts[category]||0;
+
+  const card=make("button","","counter");
+  card.type="button";
+  card.title="Ver reportes de "+category;
+
+  card.append(
+   make("div",CATEGORY_ICONS[category]||"📌"),
+   make("strong",count),
+   make("span",category),
+   make("small","Ver reportes →")
+  );
+
+  card.onclick=()=>{
+   if(isDocument({category})){
+    location.hash="#documentos";
+    return;
+   }
+
+   const filter=$("categoryFilter");
+
+   if([...filter.options].some(o=>o.value===category)){
+    filter.value=category;
+   }else{
+    filter.value="";
+   }
+
+   $("searchReports").value="";
+   renderReports();
+   location.hash="#reportes";
+  };
+
+  box.appendChild(card);
+ });
 }
 
 // REPORTES PÚBLICOS
 
-function buildReportCard(r){
+function buildReportCard(report){
  const card=make("article","","report-card");
 
  const imageBox=make("div","","report-photo-box");
  const image=document.createElement("img");
+
  image.className="report-photo";
- image.alt="Fotografía del reporte en "+r.area;
+ image.alt="Fotografía del reporte en "+report.area;
  image.loading="lazy";
  image.referrerPolicy="no-referrer";
  image.onerror=()=>imageBox.remove();
- image.src=PHOTO_FUNCTION+"?id="+encodeURIComponent(r.id);
+ image.src=PHOTO_FUNCTION+"?id="+encodeURIComponent(report.id);
 
  imageBox.appendChild(image);
  card.appendChild(imageBox);
 
  const body=make("div","","report-body");
+
  body.append(
-  make("div",r.category,"report-category"),
-  make("h3",r.area),
-  make("p",r.description)
+  make("div",report.category,"report-category"),
+  make("h3",report.area),
+  make("p",report.description)
  );
 
  const footer=make("div","","report-footer");
+
  footer.append(
-  make("span","📅 "+formatDate(r.created_at)),
-  make("span",statusName(r.status),"pill")
+  make("span","📅 "+formatDate(report.created_at)),
+  make("span",statusName(report.status),"pill")
  );
 
  body.appendChild(footer);
  card.appendChild(body);
+
  return card;
 }
 
@@ -721,26 +901,38 @@ function renderReports(){
  const box=$("publicReports");
  box.replaceChildren();
 
- const search=$("searchReports").value.trim().toLocaleLowerCase("es");
+ const search=$("searchReports").value
+  .trim().toLocaleLowerCase("es");
+
  const category=$("categoryFilter").value;
 
- const items=publicReportsData.filter(r=>{
-  if(isDocument(r))return false;
-  const text=[r.category,r.area,r.description]
-   .join(" ").toLocaleLowerCase("es");
+ const items=publicReportsData.filter(report=>{
+  if(isDocument(report))return false;
+
+  const text=[
+   report.category,
+   report.area,
+   report.description
+  ].join(" ").toLocaleLowerCase("es");
 
   return (!search||text.includes(search))&&
-   (!category||r.category===category);
+   (!category||report.category===category);
  });
 
  if(!items.length){
   box.appendChild(make("div",
-   "No hay reportes que coincidan con tu búsqueda.","empty"));
+   "No hay reportes que coincidan con esta búsqueda.",
+   "empty"
+  ));
   return;
  }
 
- items.forEach(r=>box.appendChild(buildReportCard(r)));
+ items.forEach(report=>{
+  box.appendChild(buildReportCard(report));
+ });
 }
+
+// DOCUMENTOS
 
 function renderDocuments(){
  const box=$("documentsList");
@@ -751,22 +943,29 @@ function renderDocuments(){
  if(!items.length){
   box.appendChild(make("div",
    "Todavía no hay avisos de documentos encontrados aprobados.",
-   "empty"));
+   "empty"
+  ));
   return;
  }
 
- items.forEach(r=>{
+ items.forEach(report=>{
   const card=make("article","","document-card");
+
   card.append(
    make("div","🪪"),
-   make("h3",r.area),
-   make("p",r.description),
-   make("small","📅 "+formatDate(r.created_at)+
-    " · "+statusName(r.status))
+   make("h3",report.area),
+   make("p",report.description),
+   make("small",
+    "📅 "+formatDate(report.created_at)+
+    " · "+statusName(report.status)
+   )
   );
+
   box.appendChild(card);
  });
 }
+
+// CARGAR REPORTES APROBADOS
 
 async function loadPublicReports(){
  showMessage("publicMessage","Cargando reportes...");
@@ -782,16 +981,21 @@ async function loadPublicReports(){
 
   publicReportsData=data||[];
 
-  const reports=publicReportsData.filter(r=>!isDocument(r));
-  const docs=publicReportsData.filter(isDocument);
+  const reports=publicReportsData.filter(
+   report=>!isDocument(report)
+  );
+
+  const documents=publicReportsData.filter(isDocument);
 
   $("statReports").textContent=reports.length;
   $("statAreas").textContent=
-   new Set(reports.map(r=>r.area)).size;
-  $("statDocuments").textContent=docs.length;
+   new Set(reports.map(report=>report.area)).size;
+  $("statDocuments").textContent=documents.length;
 
   const categories=[
-   ...new Set(reports.map(r=>r.category).filter(Boolean))
+   ...new Set(
+    reports.map(report=>report.category).filter(Boolean)
+   )
   ].sort();
 
   const previous=$("categoryFilter").value;
@@ -810,16 +1014,21 @@ async function loadPublicReports(){
   $("categoryFilter").value=
    categories.includes(previous)?previous:"";
 
-  showMessage("publicMessage",
-   reports.length+" reportes públicos recientes disponibles.",true);
-
+  renderCategoryCounters();
   renderReports();
   renderDocuments();
 
+  showMessage("publicMessage",
+   reports.length+" reportes públicos recientes disponibles.",
+   true
+  );
+
  }catch(error){
   console.error(error);
+
   showMessage("publicMessage",
-   "No se pudieron cargar los reportes.");
+   "No se pudieron cargar los reportes."
+  );
  }
 }
 
@@ -831,6 +1040,7 @@ $("refreshPublic").addEventListener("click",loadPublicReports);
 
 function clearPreview(){
  if(previewUrl)URL.revokeObjectURL(previewUrl);
+
  previewUrl=null;
  $("photoPreview").hidden=true;
  $("photoPreview").removeAttribute("src");
@@ -838,25 +1048,26 @@ function clearPreview(){
 
 function updateCategory(){
  const category=$("category").value;
- const doc=category==="Documentos encontrados";
- const quake=category==="Daños por sismo";
+ const documentFound=category==="Documentos encontrados";
+ const earthquake=category==="Daños por sismo";
 
- $("documentInstructions").hidden=!doc;
- $("quakeInstructions").hidden=!quake;
- $("photoSection").hidden=doc;
- $("photo").disabled=doc;
+ $("documentInstructions").hidden=!documentFound;
+ $("quakeInstructions").hidden=!earthquake;
+ $("photoSection").hidden=documentFound;
+ $("photo").disabled=documentFound;
 
- if(doc){
+ if(documentFound){
   $("photo").value="";
   clearPreview();
+
   $("description").placeholder=
-   "Indica el tipo de documento y la zona general del hallazgo, sin datos personales.";
- }else if(quake){
+   "Indica el tipo de documento y la zona general del hallazgo.";
+ }else if(earthquake){
   $("description").placeholder=
-   "Ej.: Se observaron grietas en una pared de una vivienda del sector...";
+   "Describe los daños visibles y la comunidad afectada.";
  }else{
   $("description").placeholder=
-   "Describe lo que sucede sin incluir datos personales...";
+   "Describe lo que sucede sin incluir datos personales.";
  }
 }
 
@@ -874,13 +1085,18 @@ $("quakeReportLink").addEventListener("click",()=>{
 
 $("photo").addEventListener("change",()=>{
  clearPreview();
+
  const photo=$("photo").files[0];
  if(!photo)return;
 
- if(!["image/jpeg","image/png","image/webp"].includes(photo.type)||
- photo.size>5*1024*1024){
+ if(
+  !["image/jpeg","image/png","image/webp"].includes(photo.type)||
+  photo.size>5*1024*1024
+ ){
   showMessage("reportMessage",
-   "Solo JPG, PNG o WebP, máximo 5 MB.");
+   "Solo JPG, PNG o WebP, máximo 5 MB."
+  );
+
   $("photo").value="";
   return;
  }
@@ -894,8 +1110,10 @@ $("reportForm").addEventListener("submit",async event=>{
  event.preventDefault();
 
  const button=$("reportButton");
- const doc=$("category").value==="Documentos encontrados";
- const photo=doc?null:$("photo").files[0];
+ const documentFound=
+  $("category").value==="Documentos encontrados";
+
+ const photo=documentFound?null:$("photo").files[0];
 
  if(photo&&(
   !["image/jpeg","image/png","image/webp"].includes(photo.type)||
@@ -911,16 +1129,19 @@ $("reportForm").addEventListener("submit",async event=>{
 
  if(!token){
   showMessage("reportMessage",
-   "Completa la verificación de seguridad.");
+   "Completa la verificación de seguridad."
+  );
   return;
  }
 
  const form=new FormData();
+
  form.append("category",$("category").value);
  form.append("area",$("area").value.trim());
  form.append("description",$("description").value.trim());
  form.append("visibility_requested",$("visibility").value);
  form.append("turnstile_token",token);
+
  if(photo)form.append("photo",photo);
 
  button.disabled=true;
@@ -944,14 +1165,21 @@ $("reportForm").addEventListener("submit",async event=>{
   updateCategory();
 
   showMessage("reportMessage",
-   "✅ Reporte recibido. Quedará pendiente de revisión.",true);
+   "✅ Reporte recibido. Quedará pendiente de revisión.",
+   true
+  );
 
-  if(!$("adminPanel").hidden)await loadAdminReports();
+  if(!$("adminPanel").hidden){
+   await loadAdminReports();
+  }
 
  }catch(error){
   console.error(error);
+
   showMessage("reportMessage",
-   error.message||"Error al enviar el reporte.");
+   error.message||"Error al enviar el reporte."
+  );
+
  }finally{
   button.disabled=false;
   if(window.turnstile)window.turnstile.reset();
@@ -967,16 +1195,21 @@ async function showAdminPanel(){
 
  if(error||isAdmin!==true){
   await db.auth.signOut();
+
   $("adminPanel").hidden=true;
   $("adminLogin").hidden=false;
+
   showMessage("loginMessage",
-   "Esta cuenta no tiene permisos de administrador.");
+   "Esta cuenta no tiene permisos de administrador."
+  );
+
   return;
  }
 
  $("adminLogin").hidden=true;
  $("adminPanel").hidden=false;
  $("recoverySection").hidden=true;
+
  await loadAdminReports();
 }
 
@@ -985,6 +1218,7 @@ async function loadAdminReports(){
 
  const box=$("adminReports");
  box.replaceChildren();
+
  showMessage("adminMessage","Cargando reportes...");
 
  try{
@@ -999,41 +1233,50 @@ async function loadAdminReports(){
   if(error)throw error;
 
   showMessage("adminMessage",
-   "Reportes encontrados: "+data.length,true);
+   "Reportes encontrados: "+data.length,
+   true
+  );
 
-  for(const r of data){
+  for(const report of data){
    const card=make("article","","admin-report");
 
    card.append(
-    make("h4",r.category+" · "+r.area),
-    make("p",r.description),
-    make("p","📅 "+formatDate(r.created_at)),
-    make("p","Estado: "+statusName(r.status)),
+    make("h4",report.category+" · "+report.area),
+    make("p",report.description),
+    make("p","📅 "+formatDate(report.created_at)),
+    make("p","Estado: "+statusName(report.status)),
     make("p","Tipo: "+(
-     r.visibility_requested==="public"
-      ?"Solicitó publicación pública":"Privado"
+     report.visibility_requested==="public"
+      ?"Solicitó publicación pública"
+      :"Privado"
     )),
     make("p","Publicación: "+(
-     r.is_published?"Aprobada":"No aprobada"
+     report.is_published?"Aprobada":"No aprobada"
     ))
    );
 
-   if(isDocument(r)){
+   if(isDocument(report)){
     card.appendChild(make("p",
      "⚠️ Comprueba que no haya datos personales.",
-     "hint"));
+     "hint"
+    ));
    }
 
-   if(r.category==="Daños por sismo"){
+   if(report.category==="Daños por sismo"){
     card.appendChild(make("p",
-     "⚠️ Si hay riesgo inmediato, debe comunicarse directamente al 911. "+
-     "Este reporte no es una solicitud oficial de asistencia.",
-     "hint"));
+     "⚠️ Este reporte no envía una alerta a emergencias.",
+     "hint"
+    ));
    }
 
-   if(r.photo_path){
-    const view=make("button","📷 Ver fotografía","btn btn-soft");
+   if(report.photo_path){
+    const view=make("button",
+     "📷 Ver fotografía",
+     "btn btn-soft"
+    );
+
     view.type="button";
+
     const photoBox=document.createElement("div");
 
     view.onclick=async()=>{
@@ -1042,7 +1285,7 @@ async function loadAdminReports(){
 
      const {data:photoData,error:photoError}=
       await db.storage.from(BUCKET)
-       .createSignedUrl(r.photo_path,60);
+       .createSignedUrl(report.photo_path,60);
 
      if(photoError||!photoData?.signedUrl){
       view.textContent="No se pudo abrir la fotografía";
@@ -1050,11 +1293,12 @@ async function loadAdminReports(){
       return;
      }
 
-     const img=document.createElement("img");
-     img.className="admin-photo";
-     img.alt="Fotografía privada del reporte";
-     img.src=photoData.signedUrl;
-     photoBox.replaceChildren(img);
+     const image=document.createElement("img");
+     image.className="admin-photo";
+     image.alt="Fotografía privada del reporte";
+     image.src=photoData.signedUrl;
+
+     photoBox.replaceChildren(image);
      view.textContent="Fotografía cargada";
     };
 
@@ -1062,9 +1306,13 @@ async function loadAdminReports(){
    }
 
    const actions=make("div","","admin-actions");
-   actions.appendChild(make("label","Cambiar estado","label"));
+   actions.appendChild(make("label",
+    "Cambiar estado",
+    "label"
+   ));
 
    const select=make("select","","field");
+
    const states=[
     ["pending","Pendiente"],
     ["reviewing","En revisión"],
@@ -1079,13 +1327,18 @@ async function loadAdminReports(){
     select.appendChild(option);
    });
 
-   select.value=r.status;
+   select.value=report.status;
 
-   const save=make("button","Guardar estado","btn btn-green");
+   const save=make("button",
+    "Guardar estado",
+    "btn btn-green"
+   );
+
    save.type="button";
    save.disabled=true;
+
    select.onchange=()=>{
-    save.disabled=select.value===r.status;
+    save.disabled=select.value===report.status;
    };
 
    const message=make("p","","message");
@@ -1094,12 +1347,14 @@ async function loadAdminReports(){
     save.disabled=true;
 
     const changes={status:select.value};
+
     if(select.value==="rejected"){
      changes.is_published=false;
     }
 
     const {error}=await db.from("reports")
-     .update(changes).eq("id",r.id);
+     .update(changes)
+     .eq("id",report.id);
 
     if(error){
      message.textContent="Error: "+error.message;
@@ -1113,34 +1368,42 @@ async function loadAdminReports(){
 
    actions.append(select,save);
 
-   if(r.visibility_requested==="public"){
-    const publish=make("button",
-     r.is_published?"Retirar publicación":"✓ Aprobar publicación",
-     r.is_published?"btn btn-soft":"btn btn-green"
+   if(report.visibility_requested==="public"){
+    const publish=make(
+     "button",
+     report.is_published
+      ?"Retirar publicación"
+      :"✓ Aprobar publicación",
+     report.is_published
+      ?"btn btn-soft"
+      :"btn btn-green"
     );
 
     publish.type="button";
 
     publish.onclick=async()=>{
-     const next=!r.is_published;
+     const next=!report.is_published;
 
      if(next){
-      if(r.status==="rejected"){
-       message.textContent="Primero cambia el estado rechazado.";
+      if(report.status==="rejected"){
+       message.textContent=
+        "Primero cambia el estado rechazado.";
        return;
       }
 
       if(!confirm(
-       "¿Revisaste el reporte y sus fotografías para confirmar "+
-       "que no contienen información privada o sensible?"
-      ))return;
+       "¿Revisaste el reporte y sus fotografías para "+
+       "confirmar que no contienen información privada?"
+      )){
+       return;
+      }
      }
 
      publish.disabled=true;
 
      const {error}=await db.from("reports")
       .update({is_published:next})
-      .eq("id",r.id);
+      .eq("id",report.id);
 
      if(error){
       message.textContent="Error: "+error.message;
@@ -1153,9 +1416,12 @@ async function loadAdminReports(){
     };
 
     actions.appendChild(publish);
+
    }else{
     actions.appendChild(make("p",
-     "🔒 Reporte privado: no se puede publicar.","hint"));
+     "🔒 Reporte privado: no se puede publicar.",
+     "hint"
+    ));
    }
 
    actions.appendChild(message);
@@ -1171,10 +1437,11 @@ async function loadAdminReports(){
 
 $("refreshAdmin").onclick=loadAdminReports;
 
-// SESIÓN ADMINISTRATIVA
+// INICIAR SESIÓN
 
 $("loginForm").addEventListener("submit",async event=>{
  event.preventDefault();
+
  $("loginButton").disabled=true;
  showMessage("loginMessage","Verificando acceso...");
 
@@ -1185,12 +1452,16 @@ $("loginForm").addEventListener("submit",async event=>{
   });
 
   $("adminPassword").value="";
+
   if(error)throw error;
+
   await showAdminPanel();
 
  }catch(error){
   showMessage("loginMessage",
-   "No se pudo iniciar sesión: "+error.message);
+   "No se pudo iniciar sesión: "+error.message
+  );
+
  }finally{
   $("loginButton").disabled=false;
  }
@@ -1198,13 +1469,15 @@ $("loginForm").addEventListener("submit",async event=>{
 
 $("logoutButton").onclick=async()=>{
  await db.auth.signOut();
+
  $("adminPanel").hidden=true;
  $("adminLogin").hidden=false;
  $("adminReports").replaceChildren();
+
  showMessage("loginMessage","Sesión cerrada.");
 };
 
-// RECUPERAR CONTRASEÑA
+// RECUPERACIÓN DE CONTRASEÑA
 
 $("forgotButton").onclick=async()=>{
  const email=$("adminEmail").value.trim();
@@ -1215,16 +1488,19 @@ $("forgotButton").onclick=async()=>{
  }
 
  const {error}=await db.auth.resetPasswordForEmail(email,{
-  redirectTo:"https://aguadulcebueno.github.io/aguadulce-reporta/"
+  redirectTo:
+   "https://aguadulcebueno.github.io/aguadulce-reporta/"
  });
 
  showMessage("loginMessage",error
   ?"Error: "+error.message
-  :"Si el correo está registrado, recibirás un enlace.");
+  :"Si el correo está registrado, recibirás un enlace."
+ );
 };
 
 function showRecovery(){
  recoveryMode=true;
+
  $("adminLogin").hidden=true;
  $("adminPanel").hidden=true;
  $("recoverySection").hidden=false;
@@ -1236,8 +1512,10 @@ db.auth.onAuthStateChange((event,session)=>{
  if(event==="PASSWORD_RECOVERY"){
   showRecovery();
   recoveryReady=true;
+
   showMessage("recoveryMessage",
-   "Enlace verificado. Escribe tu nueva contraseña.");
+   "Enlace verificado. Escribe tu nueva contraseña."
+  );
  }
 
  if(recoveryMode&&event==="SIGNED_IN"&&session){
@@ -1252,36 +1530,44 @@ $("recoveryForm").addEventListener("submit",async event=>{
 
  if(password!==$("confirmPassword").value){
   showMessage("recoveryMessage",
-   "Las contraseñas no coinciden.");
+   "Las contraseñas no coinciden."
+  );
   return;
  }
 
  if(!recoveryReady){
   showMessage("recoveryMessage",
-   "El enlace aún no se ha verificado.");
+   "El enlace aún no se ha verificado."
+  );
   return;
  }
 
  const {error}=await db.auth.updateUser({password});
 
  if(error){
-  showMessage("recoveryMessage","Error: "+error.message);
+  showMessage("recoveryMessage",
+   "Error: "+error.message
+  );
   return;
  }
 
  await db.auth.signOut();
+
  recoveryMode=false;
  recoveryReady=false;
 
  history.replaceState(null,"",location.pathname);
+
  $("recoverySection").hidden=true;
  $("adminLogin").hidden=false;
 
  showMessage("loginMessage",
-  "Contraseña actualizada. Inicia sesión.",true);
+  "Contraseña actualizada. Inicia sesión.",
+  true
+ );
 });
 
-// INICIAR
+// INICIALIZACIÓN
 
 async function initialize(){
  $("year").textContent=new Date().getFullYear();
@@ -1294,9 +1580,12 @@ async function initialize(){
 
   if(data.session){
    recoveryReady=true;
+
    showMessage("recoveryMessage",
-    "Escribe tu nueva contraseña.");
+    "Escribe tu nueva contraseña."
+   );
   }
+
   return;
  }
 
@@ -1311,5 +1600,6 @@ initialize();
 </script>
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 </body>
 </html>
