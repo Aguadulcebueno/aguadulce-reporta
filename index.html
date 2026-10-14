@@ -1580,6 +1580,16 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
 @media(max-width:390px){.metric{flex-direction:column;align-items:flex-start}.metric-icon{width:32px;height:32px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 
+
+/* Buscador de publicaciones: sugerencias visibles y accesibles */
+.search-suggestions{border:1px solid rgba(68,160,110,.24);border-radius:17px;background:var(--card,#fff);box-shadow:0 18px 42px #071c1520;margin:8px 0 15px;overflow:hidden;max-height:365px;overflow-y:auto}
+.search-suggestions[hidden]{display:none!important}
+.search-suggestion-heading{padding:11px 15px;font-size:12px;font-weight:800;letter-spacing:.3px;opacity:.75;background:rgba(66,154,110,.07)}
+.search-suggestion{display:flex;flex-direction:column;gap:4px;width:100%;padding:12px 15px;text-align:left;background:transparent;color:inherit;border:0;border-top:1px solid rgba(100,150,120,.12);cursor:pointer;transition:background .2s}
+.search-suggestion:hover,.search-suggestion:focus-visible{background:rgba(87,191,117,.13);outline-offset:-2px}
+.search-suggestion strong{font-size:13px;line-height:1.35;overflow-wrap:anywhere}
+.search-suggestion small{font-size:11px;opacity:.7}
+
 </style>
 </head>
 
@@ -1696,22 +1706,6 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
   </div>
 </section>
 
-<!-- REDES DESTACADAS -->
-<section class="social-section" id="redes" aria-labelledby="socialTitle">
-  <div class="container">
-    <div class="section-label" style="color:var(--lime)">SÍGUENOS EN NUESTRAS REDES</div>
-    <h2 id="socialTitle">Aguadulce, siempre conectado.</h2>
-    <p class="social-subtitle">Síguenos para enterarte de lo que pasa en nuestra comunidad y compartir información útil.</p>
-    <div class="social-grid">
-      <a class="social-link" href="https://www.instagram.com/aguadulcebueno/" target="_blank" rel="noopener noreferrer" aria-label="Seguir a Aguadulce Bueno en Instagram">
-        <span class="social-brand"><span class="social-brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.5-3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><span><strong>Instagram</strong><small>@aguadulcebueno · Seguir</small></span></span><span class="social-arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="social-link" href="https://www.tiktok.com/@aguadulcemalo" target="_blank" rel="noopener noreferrer" aria-label="Seguir a Aguadulce Malo en TikTok">
-        <span class="social-brand"><span class="social-brand-icon tiktok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16.7 2c.3 2.5 1.7 4 4.3 4.2v3.5a9 9 0 0 1-4.3-1.1v6.4c0 4.3-3 7-7.1 7a7 7 0 0 1 0-14h.6v3.8a3.2 3.2 0 1 0 2.7 3.2V2h3.8z"/></svg></span><span><strong>TikTok</strong><small>@aguadulcemalo · Seguir</small></span></span><span class="social-arrow" aria-hidden="true">↗</span>
-      </a>
-    </div>
-  </div>
-</section>
 
 
 <div class="container">
@@ -1956,6 +1950,9 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
           <input
             id="searchReports"
             class="field"
+            autocomplete="off"
+            aria-controls="searchSuggestions"
+            aria-expanded="false"
             placeholder="🔎 Buscar comunidad o situación..."
             aria-label="Buscar reportes"
           >
@@ -1970,6 +1967,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
           </button>
         </div>
 
+        <div id="searchSuggestions" class="search-suggestions" role="listbox" aria-label="Publicaciones encontradas" hidden></div>
         <p class="message" id="publicMessage" role="status"></p>
         <p class="hint" id="filterHelp">Busca por palabra o categoría.</p>
 
@@ -2493,6 +2491,24 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
   </form>
  </div>
 </section>
+
+<!-- REDES DESTACADAS -->
+<section class="social-section" id="redes" aria-labelledby="socialTitle">
+  <div class="container">
+    <div class="section-label" style="color:var(--lime)">SÍGUENOS EN NUESTRAS REDES</div>
+    <h2 id="socialTitle">Aguadulce, siempre conectado.</h2>
+    <p class="social-subtitle">Síguenos para enterarte de lo que pasa en nuestra comunidad y compartir información útil.</p>
+    <div class="social-grid">
+      <a class="social-link" href="https://www.instagram.com/aguadulcebueno/" target="_blank" rel="noopener noreferrer" aria-label="Seguir a Aguadulce Bueno en Instagram">
+        <span class="social-brand"><span class="social-brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.5-3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><span><strong>Instagram</strong><small>@aguadulcebueno · Seguir</small></span></span><span class="social-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="social-link" href="https://www.tiktok.com/@aguadulcemalo" target="_blank" rel="noopener noreferrer" aria-label="Seguir a Aguadulce Malo en TikTok">
+        <span class="social-brand"><span class="social-brand-icon tiktok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16.7 2c.3 2.5 1.7 4 4.3 4.2v3.5a9 9 0 0 1-4.3-1.1v6.4c0 4.3-3 7-7.1 7a7 7 0 0 1 0-14h.6v3.8a3.2 3.2 0 1 0 2.7 3.2V2h3.8z"/></svg></span><span><strong>TikTok</strong><small>@aguadulcemalo · Seguir</small></span></span><span class="social-arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 
 <footer class="footer">
   <div class="container footer-inner">
@@ -3059,33 +3075,65 @@ function renderCardList(id,reports,emptyMessage){
   });
 }
 
-function renderReports(){
-  const query=$("searchReports").value
-    .trim()
-    .toLocaleLowerCase("es");
-
+function normalizeSearch(value){
+  return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("es").trim();
+}
+function reportSearchText(report){
+  return normalizeSearch([report.category,report.area,report.description].join(" "));
+}
+function matchingReports(){
+  const query=normalizeSearch($("searchReports").value);
   const category=$("categoryFilter").value;
-
-  const reports=publicReports.filter(report=>{
-    if(isSpecial(report))return false;
-
-    const text=[
-      report.category,
-      report.area,
-      report.description
-    ].join(" ").toLocaleLowerCase("es");
-
-    return (
-      (!query||text.includes(query)) &&
-      (!category||report.category===category)
-    );
+  const words=query.split(/\s+/).filter(Boolean);
+  return publicReports.filter(report=>{
+    const text=reportSearchText(report);
+    return (!category||report.category===category) && words.every(word=>text.includes(word));
   });
-
-  renderCardList(
-    "publicReports",
-    reports,
-    "No hay reportes que coincidan. Prueba otra búsqueda o publica el primero en «Enviar reporte»."
-  );
+}
+function reportSection(report){
+  if(isPet(report))return "mascotas";
+  if(isAcopio(report))return "acopios";
+  if(isDocument(report))return "documentos";
+  return "reportes";
+}
+function showSearchSuggestions(){
+  const box=$("searchSuggestions");
+  const query=normalizeSearch($("searchReports").value);
+  box.replaceChildren();
+  if(!query){box.hidden=true;$("searchReports").setAttribute("aria-expanded","false");return;}
+  const matches=matchingReports().slice(0,8);
+  const heading=el("div",matches.length?"Publicaciones encontradas":"Sin coincidencias. Prueba otra palabra.","search-suggestion-heading");
+  box.appendChild(heading);
+  matches.forEach(report=>{
+    const item=el("button","","search-suggestion");
+    item.type="button";
+    const title=(report.description||report.area||report.category||"Publicación").trim().split("\n")[0].slice(0,105);
+    item.appendChild(el("strong",title));
+    item.appendChild(el("small",[report.category,report.area].filter(Boolean).join(" · ")));
+    item.addEventListener("click",()=>{
+      $("searchReports").value="";
+      $("categoryFilter").value="";
+      renderReports();
+      box.hidden=true;
+      $("searchReports").setAttribute("aria-expanded","false");
+      const target=document.getElementById("reporte-"+report.id);
+      if(target){target.classList.add("linked-report");target.scrollIntoView({behavior:"smooth",block:"center"});}
+      else document.getElementById(reportSection(report))?.scrollIntoView({behavior:"smooth"});
+    });
+    box.appendChild(item);
+  });
+  box.hidden=false;
+  $("searchReports").setAttribute("aria-expanded","true");
+}
+function renderReports(){
+  const matches=matchingReports();
+  renderCardList("publicReports",matches.filter(report=>!isSpecial(report)),
+    "No hay reportes de esta categoría. Prueba otra palabra o elige una sugerencia.");
+  showSearchSuggestions();
+  const query=normalizeSearch($("searchReports").value);
+  if(query){
+    $("filterHelp").textContent=matches.length+" publicación(es) encontrada(s), incluyendo mascotas, documentos y acopios. Selecciona una sugerencia para abrirla.";
+  }
 }
 
 function renderSpecialSections(){
@@ -3156,7 +3204,7 @@ async function loadPublicReports(){
         "id,category,area,description,status,created_at"
       )
       .order("created_at",{ascending:false})
-      .limit(100);
+      .limit(500);
 
     if(error)throw error;
 
@@ -3198,7 +3246,7 @@ async function loadPublicReports(){
 
     const categories=[
       ...new Set(
-        regular.map(report=>report.category)
+        publicReports.map(report=>report.category)
       )
     ].filter(Boolean).sort();
 
@@ -3211,9 +3259,9 @@ async function loadPublicReports(){
     filter.value=categories.includes(previous)
       ?previous:"";
     filter.disabled=categories.length===0;
-    $("searchReports").disabled=regular.length===0;
-    $("searchReports").placeholder=regular.length?"🔎 Buscar comunidad o situación...":"Aún no hay reportes para buscar";
-    $("filterHelp").textContent=regular.length?"Los filtros buscan dentro de los reportes públicos disponibles.":"Todavía no hay reportes ciudadanos publicados. Puedes enviar el primero usando «Enviar reporte».";
+    $("searchReports").disabled=publicReports.length===0;
+    $("searchReports").placeholder=publicReports.length?"🔎 Buscar nombre, título, lugar o palabra...":"Aún no hay publicaciones para buscar";
+    $("filterHelp").textContent=publicReports.length?"Busca por palabras del contenido, categoría o lugar. También encontrarás mascotas, documentos y centros de acopio.":"Todavía no hay publicaciones disponibles. Puedes enviar la primera usando «Enviar reporte».";
 
     renderCategories();
     renderReports();
@@ -3257,6 +3305,11 @@ $("clearFilters").addEventListener("click",()=>{
   $("searchReports").value="";
   $("categoryFilter").value="";
   renderReports();
+});
+
+$("searchReports").addEventListener("keydown",event=>{
+  if(event.key==="Escape"){$("searchSuggestions").hidden=true;}
+  if(event.key==="Enter"){const first=$("searchSuggestions").querySelector("button");if(first){event.preventDefault();first.click();}}
 });
 
 $("refreshPublic").addEventListener(
