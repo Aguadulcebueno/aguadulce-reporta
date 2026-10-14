@@ -1369,6 +1369,20 @@ body{background:linear-gradient(180deg,#f2f7f2 0%,#f8faf7 44%,#eef6ee 100%)}
 .report-guide-steps small{display:block;font-size:11px;color:var(--muted);line-height:1.5;margin-top:3px}
 @media(max-width:600px){.metric-link::after{font-size:14px}.report-guide-steps{grid-template-columns:1fr}}
 
+
+/* Botones de compartir con iconos identificables */
+.share-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.share-action{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:9px 12px;border-radius:11px;border:1px solid #dbe7df;background:#f7faf7;color:#1b4733;font-size:12px;font-weight:800;text-decoration:none;transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
+.share-action svg{width:18px;height:18px;flex:none}
+.share-action:hover{transform:translateY(-2px);box-shadow:0 5px 14px #092b1818}
+.share-whatsapp{color:#126c3c;background:#eaf8ef;border-color:#c9ebd4}
+.share-instagram{color:#a33273;background:#fff0f8;border-color:#f3d4e5}
+.share-facebook{color:#1c58a6;background:#eef4ff;border-color:#d4e2ff}
+.share-mail{color:#ad4235;background:#fff4ef;border-color:#f5ddd6}
+.share-copy{color:#375b68;background:#eef6f8}
+@media(max-width:600px){.share-action{flex:1 1 auto;font-size:11px;padding:10px 9px}.share-action svg{width:19px;height:19px}}
+@media(prefers-reduced-motion:reduce){.share-action{transition:none}}
+
 </style>
 </head>
 
@@ -2662,33 +2676,70 @@ async function copyReportLink(report){
     window.prompt("Copia este enlace:",url);
   }
 }
+function shareIcon(kind){
+  const paths={
+    share:'<path d="M18 8a3 3 0 1 0-2.8-4"/><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.1M8.7 13.3l6.6 4.1"/>',
+    copy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',
+    mail:'<rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 6 9 7 9-7"/>',
+    instagram:'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>',
+    whatsapp:'<path d="M21 11.5a9 9 0 0 1-13.2 8L3 21l1.5-4.7A9 9 0 1 1 21 11.5Z"/><path d="M8.5 8.5c.3 3.1 2.8 5.7 6 6.3l1.3-1.3 1.5.9c-.3 1.4-1.5 2.3-2.9 2.1-4.2-.7-7.5-4-8-8.1-.1-1.3.8-2.5 2-2.8l.9 1.6-.8 1.3Z"/>',
+    facebook:'<path d="M15 21v-8h3l.5-4H15V7c0-1.1.4-2 2-2h2V2.2A18 18 0 0 0 16.5 2C13.6 2 12 3.7 12 6.8V9H9v4h3v8"/>'
+  };
+  return '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+paths[kind]+'</svg>';
+}
+function shareButton(kind,label){
+  const b=document.createElement('button');
+  b.type='button';
+  b.className='share-action share-'+kind;
+  b.innerHTML=shareIcon(kind)+'<span>'+label+'</span>';
+  b.setAttribute('aria-label',label+' este reporte');
+  return b;
+}
 function makeShareActions(report){
-  const actions=el("div","","share-actions");
-  const title="Aguadulce Reporta: "+report.area;
+  const actions=el('div','','share-actions');
+  actions.setAttribute('aria-label','Opciones para compartir el reporte');
+  const title='Aguadulce Reporta: '+(report.area||'Reporte comunitario');
   const url=reportLink(report);
-  const share=el("button","↗ Compartir","share-action");
-  share.type="button";
-  share.addEventListener("click",async()=>{
+  const text=title+'\n'+url;
+  const share=shareButton('share','Compartir');
+  share.addEventListener('click',async()=>{
     if(navigator.share){
-      try{
-        await navigator.share({title,text:report.category+" · "+report.area,url});
-        return;
-      }catch(error){if(error.name==="AbortError")return;}
+      try{await navigator.share({title,text:report.category+' · '+(report.area||''),url});return;}
+      catch(error){if(error.name==='AbortError')return;}
     }
-    window.open("https://api.whatsapp.com/send?text="+
-      encodeURIComponent(title+"\n"+url),"_blank","noopener,noreferrer");
+    await copyReportLink(report);
   });
-  const copy=el("button","🔗 Copiar enlace","share-action");
-  copy.type="button";
-  copy.addEventListener("click",()=>copyReportLink(report));
-  const whatsapp=el("a","WhatsApp","share-action");
-  whatsapp.href="https://api.whatsapp.com/send?text="+
-    encodeURIComponent(title+"\n"+url);
-  whatsapp.target="_blank";
-  whatsapp.rel="noopener noreferrer";
-  actions.append(share,copy,whatsapp);
+  const whatsapp=document.createElement('a');
+  whatsapp.className='share-action share-whatsapp';
+  whatsapp.href='https://api.whatsapp.com/send?text='+encodeURIComponent(text);
+  whatsapp.target='_blank';
+  whatsapp.rel='noopener noreferrer';
+  whatsapp.innerHTML=shareIcon('whatsapp')+'<span>WhatsApp</span>';
+  whatsapp.setAttribute('aria-label','Compartir reporte por WhatsApp');
+  const email=document.createElement('a');
+  email.className='share-action share-mail';
+  email.href='mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(text);
+  email.innerHTML=shareIcon('mail')+'<span>Correo</span>';
+  email.setAttribute('aria-label','Compartir reporte por correo electrónico');
+  const facebook=document.createElement('a');
+  facebook.className='share-action share-facebook';
+  facebook.href='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url);
+  facebook.target='_blank';
+  facebook.rel='noopener noreferrer';
+  facebook.innerHTML=shareIcon('facebook')+'<span>Facebook</span>';
+  facebook.setAttribute('aria-label','Compartir reporte en Facebook');
+  const instagram=shareButton('instagram','Instagram');
+  instagram.title='Copia el enlace para pegarlo en Instagram';
+  instagram.addEventListener('click',async()=>{
+    await copyReportLink(report);
+    shareToast('Enlace copiado. Pégalo en Instagram.');
+  });
+  const copy=shareButton('copy','Copiar enlace');
+  copy.addEventListener('click',()=>copyReportLink(report));
+  actions.append(share,whatsapp,instagram,facebook,email,copy);
   return actions;
 }
+
 function revealLinkedReport(){
   const id=new URLSearchParams(location.search).get("reporte");
   if(!id)return;
