@@ -3060,7 +3060,6 @@ $("refreshQuakes").addEventListener(
 setInterval(()=>{
   if(!document.hidden){
     loadEarthquakes();
-  loadInstagramNews();
   }
 },5*60*1000);
 
@@ -4237,6 +4236,7 @@ async function initialize(){
     si falla USGS, la página continúa.
   */
   loadEarthquakes();
+  loadInstagramNews();
 
   /*
     Los reportes se cargan aunque
