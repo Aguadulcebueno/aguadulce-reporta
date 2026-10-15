@@ -1942,12 +1942,22 @@ html{scroll-padding-top:92px}
           </p>
         </div>
 
-        <label class="label" for="area" id="areaLabel">
-          COMUNIDAD O CORREGIMIENTO
-        </label>
-        <input class="field" id="area" maxlength="120"
-          placeholder="Ej.: El Roble, Pocrí, Barrios Unidos..."
-          required>
+        <label class="label" for="corregimiento">CORREGIMIENTO DE AGUADULCE</label>
+        <select class="field" id="corregimiento" required aria-describedby="areaAutocompleteHelp">
+          <option value="">Selecciona un corregimiento...</option>
+          <option value="Aguadulce (cabecera)">Aguadulce (cabecera)</option>
+          <option value="Barrios Unidos">Barrios Unidos</option>
+          <option value="El Cristo">El Cristo</option>
+          <option value="El Hato de San Juan de Dios">El Hato de San Juan de Dios</option>
+          <option value="El Roble">El Roble</option>
+          <option value="Pocrí">Pocrí</option>
+          <option value="Pueblos Unidos">Pueblos Unidos</option>
+          <option value="Virgen del Carmen">Virgen del Carmen</option>
+        </select>
+        <label class="label" for="area" id="areaLabel">COMUNIDAD, BARRIADA O SECTOR (OPCIONAL)</label>
+        <input class="field" id="area" maxlength="85" list="comunidadesAguadulce" autocomplete="off" placeholder="Primero selecciona un corregimiento..." aria-describedby="areaAutocompleteHelp">
+        <datalist id="comunidadesAguadulce"></datalist>
+        <p class="hint" id="areaAutocompleteHelp">Selecciona un corregimiento y empieza a escribir la comunidad. Verás sugerencias de esa zona, pero también puedes escribir otro sector o una referencia.</p>
 
         <label class="label" for="description">
           DESCRIPCIÓN
@@ -1991,21 +2001,9 @@ html{scroll-padding-top:92px}
           </div>
         </div>
 
-        <label class="label" for="visibility">
-          PRIVACIDAD DEL REPORTE
-        </label>
-
-        <select class="field" id="visibility">
-          <option value="private">
-            Privado: solo administración
-          </option>
-          <option value="public">
-            Solicitar publicación pública
-          </option>
-        </select>
-
-        <p class="hint">
-          Los reportes se revisan antes de publicarse.
+        <input type="hidden" id="visibility" value="public">
+        <p class="hint" id="visibilityHint" aria-live="polite">
+          🌐 Todas las publicaciones se solicitan como públicas. Primero pasarán por revisión y aprobación de administración.
         </p>
 
         <div style="margin-top:22px">
@@ -3622,16 +3620,16 @@ function updateCategory(){
       :"FOTOGRAFÍA (OPCIONAL)";
 
   $("areaLabel").textContent=acopio
-    ?"UBICACIÓN DEL CENTRO DE ACOPIO"
+    ?"SECTOR O REFERENCIA DEL CENTRO DE ACOPIO (OPCIONAL)"
     :pets
-      ?"COMUNIDAD DONDE SE PERDIÓ O ENCONTRÓ"
-      :"COMUNIDAD O CORREGIMIENTO";
+      ?"COMUNIDAD DONDE SE PERDIÓ O ENCONTRÓ (OPCIONAL)"
+      :"COMUNIDAD, BARRIADA O SECTOR (OPCIONAL)";
 
   $("area").placeholder=acopio
-    ?"Ej.: Casa comunal de El Roble, Aguadulce"
+    ?"Ej.: Casa comunal, calle principal..."
     :pets
-      ?"Ej.: Pocrí, Aguadulce"
-      :"Ej.: El Roble, Pocrí, Barrios Unidos...";
+      ?"Ej.: cerca de la escuela, barriada..."
+      :"Escribe la comunidad o sector...";
 
   $("description").placeholder=acopio
     ?"Información adicional sobre la colecta..."
@@ -3653,9 +3651,9 @@ function updateCategory(){
     $("reportButton").disabled=false;
   }
 
-  if(pets||acopio){
-    $("visibility").value="public";
-  }
+  // Todas las categorías solicitan publicación pública, siempre sujetas a moderación.
+  $("visibility").value="public";
+  $("visibilityHint").textContent="🌐 Todas las publicaciones se solicitan como públicas. Primero pasarán por revisión y aprobación de administración.";
 }
 
 $("category").addEventListener(
@@ -3953,6 +3951,123 @@ $("photo").addEventListener(
   }
 );
 
+
+/* Lugares poblados: Cuadro 27, Plan Estratégico Distrital de Aguadulce,
+   Gaceta Oficial de Panamá, 14 de mayo de 2026. Sugerencias editables. */
+const AGUADULCE_COMUNIDADES = {
+  "Aguadulce (cabecera)": [
+    "Aguadulce",
+    "Cerro El Vigía",
+    "Finca La Fe",
+    "Finca La Polonia",
+    "Los Pinos",
+    "Vía al Puerto"
+  ],
+  "Barrios Unidos": [
+    "Barrios Unidos",
+    "Bella Vista",
+    "El Gallo",
+    "El Salado",
+    "La Caleta",
+    "Los Indios o Punta Piedra"
+  ],
+  "El Cristo": [
+    "Barriada Pueblo Nuevo",
+    "Barriada San Pedro",
+    "Barriada Santa Marta",
+    "El Calixto o Los Juárez",
+    "El Cristo",
+    "El Estero de San José",
+    "El Higo",
+    "El Naranjal",
+    "El Olivo",
+    "El Picacho",
+    "Juan Bran",
+    "La Negrita",
+    "La Poza",
+    "Las Mineras",
+    "Los Lagos",
+    "Quebrada de Hato",
+    "Tranquilla"
+  ],
+  "El Hato de San Juan de Dios": [
+    "Cerro Gordo",
+    "El Barrero",
+    "El Hato de San Juan de Dios",
+    "El Mono",
+    "El Pinzón",
+    "La Loma de Los González",
+    "La Tinaja",
+    "Las Mieles",
+    "Los Callejones",
+    "Los Rincones",
+    "Los Volcanes"
+  ],
+  "El Roble": [
+    "Chilibre",
+    "El Guayabo",
+    "El Hato",
+    "El Naranjal",
+    "El Roble",
+    "La Loma",
+    "Llano Bonito",
+    "Membrillal",
+    "Residencial Don Bosco"
+  ],
+  "Pocrí": [
+    "Pocrí"
+  ],
+  "Pueblos Unidos": [
+    "Altamira",
+    "Cotava Abajo",
+    "Cotava Arriba",
+    "El Barrero",
+    "El Estero de San José",
+    "El Jagüito",
+    "Finca Cocobo",
+    "Finca La Panela",
+    "Hato de San Antonio",
+    "Ingenio Santa Rosa",
+    "La Chapa",
+    "La Cruz",
+    "La Lucía",
+    "Llano Santo",
+    "Llano Sánchez",
+    "Salitrosa",
+    "Vista Hermosa"
+  ],
+  "Virgen del Carmen": [
+    "Barriada Los Santeños",
+    "Cerro Morado",
+    "Las Mineras",
+    "Pocrí",
+    "Residencial Cerro Morado",
+    "Residencial La Libertad"
+  ]
+};
+const corregimientoSelect=document.getElementById("corregimiento");
+const comunidadInput=document.getElementById("area");
+const comunidadList=document.getElementById("comunidadesAguadulce");
+function actualizarComunidades(){
+  const opciones=AGUADULCE_COMUNIDADES[corregimientoSelect.value]||[];
+  comunidadList.replaceChildren(...opciones.map(nombre=>{
+    const option=document.createElement("option");
+    option.value=nombre;
+    return option;
+  }));
+  comunidadInput.placeholder=corregimientoSelect.value
+    ?"Escribe o selecciona una comunidad..."
+    :"Primero selecciona un corregimiento...";
+}
+corregimientoSelect.addEventListener("change",()=>{
+  comunidadInput.value="";
+  actualizarComunidades();
+});
+document.getElementById("reportForm").addEventListener("reset",()=>{
+  requestAnimationFrame(actualizarComunidades);
+});
+actualizarComunidades();
+
 /* ENVÍO DE REPORTES */
 
 $("reportForm").addEventListener(
@@ -3961,12 +4076,15 @@ $("reportForm").addEventListener(
     clearAlert();
 
     const category=$("category").value;
-    const area=$("area").value.trim();
+    const corregimiento=$("corregimiento").value.trim();
+    const sector=$("area").value.trim();
+    const area=sector ? `${sector}, ${corregimiento}` : corregimiento;
 
     let description=
       $("description").value.trim();
 
-    const visibility=$("visibility").value;
+    // Publicación pública solicitada; la aprobación sigue siendo administrativa.
+    const visibility="public";
 
     if(!category){
       reportAlert(
@@ -3975,7 +4093,7 @@ $("reportForm").addEventListener(
       return;
     }
 
-    if(!area||area.length>120){
+    if(!corregimiento || !Object.prototype.hasOwnProperty.call(AGUADULCE_COMUNIDADES,corregimiento) || area.length>120){
       reportAlert(
         "⚠️ Escribe una ubicación válida."
       );
