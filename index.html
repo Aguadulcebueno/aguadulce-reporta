@@ -1598,6 +1598,24 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
 .redactor-actions button{font-size:.8rem;padding:9px 12px}
 .redactor-confirm{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;line-height:1.5}
 .redactor-confirm input{margin-top:4px;flex:none}
+
+/* Lectura ampliada de afiches y publicaciones, sin cambiar archivos originales */
+.detail-overlay{position:fixed;inset:0;z-index:900000;background:rgba(4,24,16,.82);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:18px}
+.detail-overlay.active{display:flex}
+.detail-panel{background:#fff;border-radius:22px;width:min(920px,100%);max-height:calc(100dvh - 36px);overflow:auto;position:relative;box-shadow:0 25px 90px #0007;overscroll-behavior:contain}
+.detail-close{position:sticky;top:12px;float:right;margin:12px 12px -52px 0;z-index:3;border:0;border-radius:50%;width:43px;height:43px;background:#083d2d;color:#fff;font-size:28px;cursor:pointer}
+.detail-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0}
+.detail-photo{background:#f2f6f1;min-height:260px;display:flex;align-items:center;justify-content:center;padding:14px}
+.detail-photo img{display:block;max-width:100%;width:auto;height:auto;max-height:76dvh;object-fit:contain;border-radius:9px;cursor:zoom-in}
+.detail-info{padding:36px 28px;min-width:0}
+.detail-info h2{font-size:clamp(23px,3vw,32px);line-height:1.2;margin:12px 0;color:#103c2a;overflow-wrap:anywhere}
+.detail-description{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8;font-size:16px;color:#24372e;margin:18px 0}
+.detail-meta{font-size:13px;color:#60786c;margin-top:14px}
+.detail-hint{font-size:12px;color:#56786a;margin-top:10px}
+.report-card .detail-open{display:block;margin:12px 0 0;padding:9px 12px;border-radius:10px;border:1px solid #b7dcc5;background:#ecf8ed;color:#075638;font-size:12px;font-weight:800;cursor:pointer;width:100%;text-align:center}
+.report-card .report-photo-wrap{cursor:zoom-in}
+@media(max-width:700px){.detail-overlay{padding:8px}.detail-panel{max-height:calc(100dvh - 16px);border-radius:15px}.detail-layout{grid-template-columns:1fr}.detail-photo{min-height:0;padding:10px}.detail-photo img{max-height:49dvh}.detail-info{padding:18px 18px 26px}.detail-description{font-size:16px}.detail-close{top:8px;margin:8px 8px -50px 0}}
+
 </style>
 <style>
 /* AGUADULCE REPORTA — PREMIUM UX 2026 (no altera Supabase ni Turnstile) */
@@ -2754,6 +2772,25 @@ html{scroll-padding-top:92px}
   </div>
 </footer>
 
+
+<!-- Vista completa de publicaciones: afiche y texto legibles -->
+<div id="reportDetail" class="detail-overlay" role="dialog" aria-modal="true" aria-label="Publicación completa" aria-hidden="true">
+  <div class="detail-panel" role="document">
+    <button type="button" class="detail-close" id="detailClose" aria-label="Cerrar publicación">×</button>
+    <div class="detail-layout">
+      <div class="detail-photo" id="detailPhoto"></div>
+      <div class="detail-info">
+        <span id="detailCategory" class="report-category"></span>
+        <h2 id="detailTitle"></h2>
+        <div id="detailDescription" class="detail-description"></div>
+        <div id="detailMeta" class="detail-meta"></div>
+        <p class="detail-hint">Toca la imagen para verla todavía más grande.</p>
+        <div id="detailShare"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- VISOR DE FOTOGRAFÍAS -->
 
 <div id="photoLightbox"
@@ -3007,7 +3044,7 @@ function closePhoto(){
   lightbox.classList.remove("active");
   lightbox.setAttribute("aria-hidden","true");
 
-  document.body.classList.remove("modal-open");
+  if(!detailDialog.classList.contains("active"))document.body.classList.remove("modal-open");
   lightboxImage.removeAttribute("src");
 
   if(previousFocus &&
@@ -3018,7 +3055,7 @@ function closePhoto(){
 
 document.addEventListener("click",event=>{
   const image=event.target.closest(
-    ".report-photo-wrap img,.admin-photo"
+    ".admin-photo"
   );
 
   if(image && image.complete &&
@@ -3222,6 +3259,53 @@ function revealLinkedReport(){
   setTimeout(()=>card.scrollIntoView({behavior:"smooth",block:"center"}),250);
 }
 
+
+/* Abrir publicación completa desde afiches o cualquier tarjeta */
+const detailDialog=$("reportDetail");
+const detailClose=$("detailClose");
+let detailPreviousFocus=null;
+function openReportDetail(report){
+  detailPreviousFocus=document.activeElement;
+  $("detailCategory").textContent=categoryText(report.category);
+  $("detailTitle").textContent=report.area||"Publicación comunitaria";
+  $("detailDescription").textContent=report.description||"Sin descripción adicional.";
+  $("detailMeta").textContent="Publicado: "+dateText(report.created_at)+" · "+statusText(report.status);
+  const photo=$("detailPhoto");photo.replaceChildren();
+  const img=document.createElement("img");
+  img.src=safePhotoUrl(report.id);
+  img.alt="Afiche o fotografía de "+(report.area||"la publicación");
+  img.loading="eager";
+  img.referrerPolicy="no-referrer";
+  img.onerror=()=>{photo.textContent="Esta publicación no tiene una imagen disponible.";};
+  img.addEventListener("click",()=>openPhoto(img));
+  photo.appendChild(img);
+  const share=$("detailShare");share.replaceChildren(makeShareActions(report));
+  detailDialog.classList.add("active");
+  detailDialog.setAttribute("aria-hidden","false");
+  document.body.classList.add("modal-open");
+  detailClose.focus();
+}
+function closeReportDetail(){
+  detailDialog.classList.remove("active");
+  detailDialog.setAttribute("aria-hidden","true");
+  $("detailPhoto").replaceChildren();
+  document.body.classList.remove("modal-open");
+  if(detailPreviousFocus&&document.contains(detailPreviousFocus))detailPreviousFocus.focus();
+}
+detailClose.addEventListener("click",closeReportDetail);
+detailDialog.addEventListener("click",e=>{if(e.target===detailDialog)closeReportDetail();});
+document.addEventListener("keydown",e=>{
+  if(!detailDialog.classList.contains("active")||lightbox.classList.contains("active"))return;
+  if(e.key==="Escape")closeReportDetail();
+  if(e.key==="Tab"){
+    const focusable=[...detailDialog.querySelectorAll('button,a[href],summary,[tabindex]:not([tabindex="-1"])')].filter(x=>x.getClientRects().length);
+    if(!focusable.length)return;
+    const first=focusable[0],last=focusable[focusable.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  }
+});
+
 /* TARJETAS */
 
 function buildReportCard(report){
@@ -3260,9 +3344,10 @@ function buildReportCard(report){
       image.naturalWidth>0
     ){
       event.preventDefault();
-      openPhoto(image);
+      openReportDetail(report);
     }
   });
+  image.addEventListener("click",()=>openReportDetail(report));
 
   photoBox.appendChild(image);
   card.appendChild(photoBox);
@@ -3291,6 +3376,10 @@ function buildReportCard(report){
   );
 
   body.appendChild(bottom);
+  const readButton=el("button","🔎 Ver afiche y leer publicación completa","detail-open");
+  readButton.type="button";
+  readButton.addEventListener("click",()=>openReportDetail(report));
+  body.appendChild(readButton);
   body.appendChild(makeShareActions(report));
   card.appendChild(body);
 
