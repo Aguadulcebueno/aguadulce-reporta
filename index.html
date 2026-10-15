@@ -5455,5 +5455,52 @@ window.addEventListener("hashchange",markNav);
 markNav();
 })();
 </script>
+<script id="social-app-deeplinks">
+/* Enlaces sociales: priorizar la app cuando el sistema lo permita. */
+(function(){
+  const accounts={
+    instagram:{user:'aguadulcebueno',web:'https://www.instagram.com/aguadulcebueno/'},
+    tiktok:{user:'aguadulcemalo',web:'https://www.tiktok.com/@aguadulcemalo'}
+  };
+  function openSocialApp(event){
+    if(event.defaultPrevented || event.button!==0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const a=event.currentTarget;
+    const url=a.getAttribute('href')||'';
+    const type=url.includes('instagram.com/')?'instagram':url.includes('tiktok.com/')?'tiktok':null;
+    if(!type) return;
+    const ua=navigator.userAgent||'';
+    const ios=/iPhone|iPad|iPod/i.test(ua) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+    const android=/Android/i.test(ua);
+    if(!ios && !android) return; // Escritorio: web normal
+    event.preventDefault();
+    const account=accounts[type];
+    if(android){
+      const host=type==='instagram'?'www.instagram.com/'+account.user+'/':'www.tiktok.com/@'+account.user;
+      const pkg=type==='instagram'?'com.instagram.android':'com.zhiliaoapp.musically';
+      const fallback=encodeURIComponent(account.web);
+      window.location.href='intent://'+host+'#Intent;scheme=https;package='+pkg+';S.browser_fallback_url='+fallback+';end';
+      return;
+    }
+    if(type==='tiktok'){
+      // En iOS el enlace universal es más fiable que un esquema TikTok no documentado.
+      window.location.href=account.web;
+      return;
+    }
+    // iOS: Instagram dispone de esquema de usuario; si no abre, volver a la web.
+    let leftPage=false;
+    const onVisibility=()=>{if(document.hidden) leftPage=true;};
+    document.addEventListener('visibilitychange',onVisibility,{passive:true});
+    window.location.href='instagram://user?username='+encodeURIComponent(account.user);
+    setTimeout(()=>{
+      document.removeEventListener('visibilitychange',onVisibility);
+      if(!leftPage && !document.hidden) window.location.href=account.web;
+    },1400);
+  }
+  document.querySelectorAll('a[href*="instagram.com/"],a[href*="tiktok.com/"]').forEach(a=>{
+    a.addEventListener('click',openSocialApp);
+    a.setAttribute('title',a.getAttribute('title')||'Abrir perfil en la aplicación si está instalada');
+  });
+})();
+</script>
 </body>
 </html>
