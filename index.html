@@ -1675,7 +1675,19 @@ html{scroll-padding-top:92px}
  .premium-dock a,.premium-dock button{min-width:0;padding-left:1px!important;padding-right:1px!important}
  .premium-dock small{font-size:10px!important;letter-spacing:-.2px}
 }
-@media(max-width:420px){.premium-posters-feed{grid-template-columns:1fr}}
+/* Dos afiches por fila incluso en pantallas pequeñas; solo cambia la presentación. */
+@media(max-width:420px){.premium-posters-feed{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}}
+@media(max-width:720px){
+ .premium-posters-feed .report-photo-wrap{aspect-ratio:4/5;height:auto!important;max-height:none}
+ .premium-posters-feed .report-photo-wrap img{object-fit:contain!important;width:100%;height:100%}
+ .premium-posters-feed .report-body{padding:10px 9px}
+ .premium-posters-feed .report-body h3{font-size:14px;line-height:1.25;overflow-wrap:anywhere}
+ .premium-posters-feed .report-body p{font-size:11px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+ .premium-posters-feed .report-category{font-size:10px}
+ .premium-posters-feed .report-bottom{font-size:10px;flex-wrap:wrap;gap:4px}
+ .premium-posters-feed .share-actions{gap:4px;flex-wrap:wrap}
+ .premium-posters-feed .share-action{font-size:10px;min-height:32px;padding:5px}
+}
 </style>
 </head>
 
@@ -3297,7 +3309,7 @@ function renderSpecialSections(){
   // Vista destacada al comienzo de la página, siempre sincronizada con los avisos aprobados.
   renderCardList(
     "featuredAcopios",
-    publicReports.filter(isAcopio).slice(0, 6),
+    publicReports.filter(isAcopio),
     "Aún no hay afiches aprobados. ¡Puedes compartir el primero!"
   );
 
