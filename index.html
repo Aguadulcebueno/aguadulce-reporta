@@ -10,9 +10,9 @@
   <meta property="og:site_name" content="Aguadulce Reporta">
   <meta property="og:title" content="Aguadulce Reporta | Aguadulce Malo & Bueno">
   <meta property="og:description" content="La voz de nuestra comunidad. Una iniciativa de Aguadulce Malo & Bueno: reportes ciudadanos, mascotas, centros de acopio y avisos en Aguadulce.">
-  <meta property="og:url" content="https://aguadulcebueno.github.io/aguadulce-reporta/">
-  <meta property="og:image" content="https://aguadulcebueno.github.io/aguadulce-reporta/portada-facebook-aguadulce-premium.jpg">
-  <meta property="og:image:secure_url" content="https://aguadulcebueno.github.io/aguadulce-reporta/portada-facebook-aguadulce-premium.jpg">
+  <meta property="og:url" content="https://aguadulcereporta.com/">
+  <meta property="og:image" content="https://aguadulcereporta.com/portada-facebook-aguadulce-premium.jpg">
+  <meta property="og:image:secure_url" content="https://aguadulcereporta.com/portada-facebook-aguadulce-premium.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -20,8 +20,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Aguadulce Reporta | Aguadulce Malo & Bueno">
   <meta name="twitter:description" content="Reportes ciudadanos y avisos para nuestra comunidad de Aguadulce.">
-  <meta name="twitter:image" content="https://aguadulcebueno.github.io/aguadulce-reporta/portada-facebook-aguadulce-premium.jpg">
-  <link rel="canonical" href="https://aguadulcebueno.github.io/aguadulce-reporta/">
+  <meta name="twitter:image" content="https://aguadulcereporta.com/portada-facebook-aguadulce-premium.jpg">
+  <link rel="canonical" href="https://aguadulcereporta.com/">
 
 <meta charset="UTF-8">
 <meta name="color-scheme" content="light">
@@ -1599,9 +1599,68 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
 .redactor-confirm{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;line-height:1.5}
 .redactor-confirm input{margin-top:4px;flex:none}
 </style>
+<style>
+/* AGUADULCE REPORTA — PREMIUM UX 2026 (no altera Supabase ni Turnstile) */
+:root{--premium-ink:#08251b;--premium-forest:#135d40;--premium-gold:#d7f568}
+html{scroll-padding-top:92px}
+.premium-skip{position:fixed;left:12px;top:-80px;z-index:99999;background:#fff;color:#08251b;padding:12px 18px;border-radius:10px;font-weight:800}
+.premium-skip:focus{top:12px}
+.header{position:sticky;top:0;z-index:8500;backdrop-filter:blur(14px)}
+.header-inner{min-height:76px}
+.nav{gap:13px;flex-wrap:wrap;justify-content:center}
+.nav a{font-size:12px;line-height:1.4}
+.nav a:hover,.nav a:focus-visible{text-decoration:underline;text-underline-offset:6px}
+.hero h1{max-width:800px}
+.report-photo-wrap{height:auto;aspect-ratio:4/5;max-height:400px}
+.report-photo-wrap img{object-fit:cover}
+.report-grid{align-items:stretch}
+.report-card{border-radius:23px}
+.report-body h3{letter-spacing:-.4px}
+.report-card .share-actions{margin-top:auto;padding-top:15px}
+.premium-explore-heading{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:0 0 14px}
+.premium-explore-heading h3{font-size:clamp(21px,3vw,29px);margin:4px 0 0;letter-spacing:-.6px}
+.premium-eyebrow{color:#27754b;font-size:10px;font-weight:900;letter-spacing:1.3px}
+.premium-text-link{font-size:12px;font-weight:800;color:#1a744b;text-align:right}
+.premium-community-bar{display:flex;overflow-x:auto;gap:8px;padding:2px 0 15px;scrollbar-width:thin}
+.premium-community-bar button{flex:0 0 auto;background:#fff;border:1px solid #d4e4d7;border-radius:999px;padding:10px 14px;color:#315b43;font-weight:800;font-size:12px;min-height:42px}
+.premium-community-bar button[aria-pressed="true"]{background:#125b3c;border-color:#125b3c;color:white}
+.premium-community-bar button:hover{border-color:#207c50}
+.premium-photo-hint{font-size:12px;color:#60786a;margin:10px 0;line-height:1.5}
+#reportButton{min-height:55px;font-size:14px;letter-spacing:.2px}
+#reportButton[disabled]{cursor:wait}
+.form-card{box-shadow:0 24px 70px #0a452018}
+.premium-more-panel{display:none}
+.premium-back-top{position:fixed;right:19px;bottom:24px;z-index:7999;width:46px;height:46px;border-radius:50%;border:1px solid #cee0d3;background:#fff;color:#135b3e;box-shadow:0 8px 30px #071f1928;font-size:22px;font-weight:900;opacity:0;pointer-events:none;transform:translateY(10px);transition:.2s}
+.premium-back-top.is-visible{opacity:1;pointer-events:auto;transform:translateY(0)}
+.premium-toast{position:fixed;z-index:99999;left:50%;bottom:90px;transform:translateX(-50%);background:#092b1f;color:#fff;padding:12px 17px;border-radius:12px;box-shadow:0 12px 35px #0004;font-size:12px;font-weight:700;max-width:min(90vw,400px);text-align:center}
+@media(max-width:1100px){.header{position:relative}.nav{display:none}}
+@media(max-width:600px){
+ body{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+ .premium-dock{grid-template-columns:repeat(5,minmax(0,1fr));padding:7px 5px calc(7px + env(safe-area-inset-bottom,0px));gap:2px;z-index:9000}
+ .premium-dock a,.premium-dock button{min-width:0;min-height:56px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1px;border:0;background:transparent;color:#214936;border-radius:12px;font-weight:800;padding:5px 1px}
+ .premium-dock a span,.premium-dock button span{font-size:23px;line-height:1.1}
+ .premium-dock small{font-size:10px;white-space:nowrap}
+ .premium-dock .dock-primary{background:#d7f568;color:#09291c}
+ .premium-dock a[aria-current="location"]{color:#0b7744;background:#edf7ed}
+ .premium-more-panel:not([hidden]){display:block;position:fixed;z-index:8999;bottom:calc(77px + env(safe-area-inset-bottom,0px));left:10px;right:10px;background:#fff;border:1px solid #d8e8dc;border-radius:22px;box-shadow:0 20px 70px #001c1560;padding:20px;max-height:70vh;overflow-y:auto}
+ .premium-more-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+ .premium-more-header strong{font:800 19px "Outfit",sans-serif}
+ .premium-more-header button{border:0;background:#edf4ee;border-radius:9px;width:36px;height:36px}
+ .premium-more-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+ .premium-more-grid a{padding:15px 10px;border:1px solid #e1ebe3;border-radius:13px;background:#f8fbf8;font-size:12px;font-weight:800}
+ .premium-back-top{bottom:calc(93px + env(safe-area-inset-bottom,0px));right:13px;width:40px;height:40px}
+ .premium-explore-heading{align-items:start;flex-direction:column}
+ .premium-text-link{text-align:left}
+ .report-photo-wrap{max-height:none}
+ .hero-inner{padding-top:32px}
+ .header{position:relative}
+}
+@media(prefers-reduced-motion:reduce){.premium-back-top{transition:none}}
+</style>
 </head>
 
 <body>
+<a class="premium-skip" href="#reportes">Saltar a los reportes</a>
 <div id="arScrollProgress" aria-hidden="true"></div>
 
 <div class="topbar">
@@ -1664,11 +1723,25 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
 </nav>
 
 
-<nav class="mobile-dock" aria-label="Navegación rápida">
+<nav class="mobile-dock premium-dock" aria-label="Navegación principal móvil">
   <a href="#inicio" aria-label="Ir al inicio"><span aria-hidden="true">⌂</span><small>Inicio</small></a>
-  <a href="#reportes" aria-label="Ver reportes"><span aria-hidden="true">▤</span><small>Reportes</small></a>
-  <a href="#enviar" class="dock-primary" aria-label="Enviar reporte"><span aria-hidden="true">＋</span><small>Reportar</small></a>
+  <a href="#reportes" aria-label="Explorar reportes"><span aria-hidden="true">⌕</span><small>Explorar</small></a>
+  <a href="#enviar" class="dock-primary" aria-label="Publicar reporte"><span aria-hidden="true">＋</span><small>Reportar</small></a>
+  <a href="#mascotas" aria-label="Ver mascotas"><span aria-hidden="true">♧</span><small>Mascotas</small></a>
+  <button type="button" id="premiumMoreToggle" class="premium-more-toggle" aria-expanded="false" aria-controls="premiumMorePanel"><span aria-hidden="true">☰</span><small>Más</small></button>
 </nav>
+<div id="premiumMorePanel" class="premium-more-panel" hidden>
+  <div class="premium-more-header"><strong>Explora Aguadulce Reporta</strong><button type="button" id="premiumMoreClose" aria-label="Cerrar menú">✕</button></div>
+  <div class="premium-more-grid">
+    <a href="#documentos">🪪 Documentos</a>
+    <a href="#acopios">📦 Centros de acopio</a>
+    <a href="#donaciones">💚 Donaciones</a>
+    <a href="#emergencias">☎ Emergencias</a>
+    <a href="#sismos">🌎 Sismos</a>
+    <a href="#contacto">✉ Contacto</a>
+    <a href="#redes">↗ Redes sociales</a>
+  </div>
+</div>
 
 <section class="hero" id="inicio">
   <div class="container hero-inner">
@@ -1902,6 +1975,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
             id="compressionStatus"
             role="status"></p>
 
+          <div class="premium-photo-hint" id="premiumPhotoHint">📸 Al elegir una foto podrás verla antes de enviar. Evita mostrar información privada.</div>
           <img id="photoPreview" class="preview"
             alt="Vista previa" hidden>
           <div id="documentRedactor" class="document-redactor" hidden>
@@ -1966,6 +2040,18 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
     <div class="reports-layout">
 
       <main class="reports-main" aria-label="Publicaciones ciudadanas">
+        <div class="premium-explore-heading">
+          <div><span class="premium-eyebrow">EXPLORA TU COMUNIDAD</span><h3>Encuentra lo que importa.</h3></div>
+          <a href="#enviar" class="premium-text-link">¿Tienes algo que reportar? ↗</a>
+        </div>
+        <div class="premium-community-bar" aria-label="Búsquedas rápidas por comunidad">
+          <button type="button" data-community="">Todo Aguadulce</button>
+          <button type="button" data-community="El Roble">El Roble</button>
+          <button type="button" data-community="Pocrí">Pocrí</button>
+          <button type="button" data-community="Barrios Unidos">Barrios Unidos</button>
+          <button type="button" data-community="El Salado">El Salado</button>
+          <button type="button" data-community="El Cristo">El Cristo</button>
+        </div>
         <div class="reports-toolbar">
           <input
             id="searchReports"
@@ -4525,7 +4611,7 @@ $("forgotButton").addEventListener(
         email,
         {
           redirectTo:
-            "https://aguadulcebueno.github.io/aguadulce-reporta/"
+            "https://aguadulcereporta.com/"
         }
       );
 
@@ -4779,6 +4865,58 @@ initialize();
     },{rootMargin:'-20% 0px -65% 0px',threshold:0});
     observed.forEach(el=>observer.observe(el));
   }
+})();
+</script>
+<button type="button" class="premium-back-top" id="premiumBackTop" aria-label="Volver arriba" title="Volver arriba">↑</button>
+<script>
+/* Mejoras independientes: los reportes y la autenticación originales permanecen intactos. */
+(function(){
+"use strict";
+const menu=document.getElementById("premiumMorePanel");
+const toggle=document.getElementById("premiumMoreToggle");
+const close=document.getElementById("premiumMoreClose");
+function setMenu(open){
+ if(!menu||!toggle)return;
+ menu.hidden=!open;
+ toggle.setAttribute("aria-expanded",String(open));
+}
+toggle?.addEventListener("click",()=>setMenu(menu.hidden));
+close?.addEventListener("click",()=>setMenu(false));
+menu?.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>setMenu(false)));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")setMenu(false)});
+document.addEventListener("click",e=>{if(menu&&!menu.hidden&&!menu.contains(e.target)&&!toggle.contains(e.target))setMenu(false)});
+const search=document.getElementById("searchReports");
+const chips=[...document.querySelectorAll("[data-community]")];
+function syncChips(){
+ const current=(search?.value||"").trim().toLowerCase();
+ chips.forEach(chip=>chip.setAttribute("aria-pressed",String(chip.dataset.community.toLowerCase()===current)));
+}
+chips.forEach(chip=>chip.addEventListener("click",()=>{
+ if(!search)return;
+ search.value=chip.dataset.community;
+ search.dispatchEvent(new Event("input",{bubbles:true}));
+ syncChips();
+ document.getElementById("reportes")?.scrollIntoView({behavior:"smooth",block:"start"});
+}));
+search?.addEventListener("input",syncChips);
+document.getElementById("clearFilters")?.addEventListener("click",()=>setTimeout(syncChips,0));
+syncChips();
+const back=document.getElementById("premiumBackTop");
+let ticking=false;
+function updateScroll(){
+ back?.classList.toggle("is-visible",window.scrollY>700);
+ ticking=false;
+}
+window.addEventListener("scroll",()=>{if(!ticking){ticking=true;requestAnimationFrame(updateScroll)}},{passive:true});
+updateScroll();
+back?.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+const dockLinks=[...document.querySelectorAll(".premium-dock a[href^='#']")];
+function markNav(){
+ const hash=location.hash||"#inicio";
+ dockLinks.forEach(a=>a.setAttribute("aria-current",a.getAttribute("href")===hash?"location":"false"));
+}
+window.addEventListener("hashchange",markNav);
+markNav();
 })();
 </script>
 </body>
