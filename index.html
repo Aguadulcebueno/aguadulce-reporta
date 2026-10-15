@@ -1688,6 +1688,29 @@ html{scroll-padding-top:92px}
  .premium-posters-feed .share-actions{gap:4px;flex-wrap:wrap}
  .premium-posters-feed .share-action{font-size:10px;min-height:32px;padding:5px}
 }
+
+/* Afiches adaptativos: más publicaciones = tarjetas más compactas.
+   Solo modifica la presentación, nunca el archivo o compresión de la foto. */
+.premium-posters-feed{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+.premium-posters-feed.poster-count-4{grid-template-columns:repeat(3,minmax(0,1fr))}
+.premium-posters-feed.poster-count-8{grid-template-columns:repeat(4,minmax(0,1fr))}
+.premium-posters-feed.poster-count-15{grid-template-columns:repeat(5,minmax(0,1fr))}
+.premium-posters-feed .report-card{overflow:hidden;min-width:0}
+.premium-posters-feed .report-photo-wrap{aspect-ratio:4/5;height:auto!important;max-height:none!important}
+.premium-posters-feed .report-photo-wrap img{object-fit:contain!important;width:100%;height:100%}
+.premium-posters-feed .report-body{padding:9px}
+.premium-posters-feed .report-body h3{font-size:clamp(11px,1.15vw,15px);line-height:1.25;overflow-wrap:anywhere}
+.premium-posters-feed .report-body p{font-size:11px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.premium-posters-feed .report-bottom{font-size:10px;flex-wrap:wrap;gap:4px}
+@media(max-width:720px){
+ .premium-posters-feed,.premium-posters-feed.poster-count-4{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .premium-posters-feed.poster-count-8,.premium-posters-feed.poster-count-15{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .premium-posters-feed.poster-count-8 .report-body,.premium-posters-feed.poster-count-15 .report-body{padding:5px}
+ .premium-posters-feed.poster-count-8 .report-body h3,.premium-posters-feed.poster-count-15 .report-body h3{font-size:11px}
+ .premium-posters-feed.poster-count-8 .report-body p,.premium-posters-feed.poster-count-15 .report-body p{font-size:10px;-webkit-line-clamp:2}
+ .premium-posters-feed.poster-count-8 .report-bottom,.premium-posters-feed.poster-count-15 .report-bottom{font-size:9px}
+ .premium-posters-feed .report-body h3{font-size:12px}
+}
 </style>
 <style id="admin-category-editor-style">
 .admin-category-editor{margin:16px 0;padding:14px;border:1px solid rgba(21,110,73,.24);border-radius:14px;background:rgba(21,110,73,.055)}
@@ -3364,10 +3387,16 @@ function renderSpecialSections(){
     publicReports.filter(isAcopio),
     "Todavía no hay centros de acopio publicados."
   );
-  // Vista destacada al comienzo de la página, siempre sincronizada con los avisos aprobados.
+  // La cuadrícula se adapta a la cantidad de afiches aprobados, sin ocultar ninguno.
+  const afichesAprobados=publicReports.filter(isAcopio);
+  const featuredBox=$("featuredAcopios");
+  featuredBox.classList.remove("poster-count-4","poster-count-8","poster-count-15");
+  if(afichesAprobados.length>=15)featuredBox.classList.add("poster-count-15");
+  else if(afichesAprobados.length>=8)featuredBox.classList.add("poster-count-8");
+  else if(afichesAprobados.length>=4)featuredBox.classList.add("poster-count-4");
   renderCardList(
     "featuredAcopios",
-    publicReports.filter(isAcopio),
+    afichesAprobados,
     "Aún no hay afiches aprobados. ¡Puedes compartir el primero!"
   );
 
