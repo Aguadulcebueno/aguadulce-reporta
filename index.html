@@ -2167,7 +2167,7 @@ html{scroll-padding-top:92px}
     <div class="premium-posters-feed" id="featuredAcopios" aria-live="polite">
       <div class="empty">Cargando afiches publicados...</div>
     </div>
-    <a class="premium-posters-more" href="#acopios">Ver información sobre afiches y centros de acopio →</a>
+    <a class="premium-posters-more" href="#acopios">Información y recomendaciones sobre centros de acopio →</a>
   </div>
 </section>
 
@@ -2388,17 +2388,10 @@ html{scroll-padding-top:92px}
           por sus organizadores y revisadas antes de
           aparecer en la página.
         </p>
-        <a href="#acopioPublicaciones" class="btn btn-soft">
-          VER CENTROS PUBLICADOS ↓
+        <a href="#afichesDestacados" class="btn btn-soft">
+          VER AFICHES PUBLICADOS ↑
         </a>
       </article>
-    </div>
-
-    <div id="acopioPublicaciones" style="padding-top:35px">
-      <h3 style="font-size:26px">Afiches y jornadas publicadas</h3>
-      <div class="special-feed" id="acopioList">
-        <div class="empty">Cargando centros de acopio...</div>
-      </div>
     </div>
 
     <div class="notice">
@@ -3471,11 +3464,6 @@ function renderSpecialSections(){
     "Todavía no hay avisos públicos de mascotas."
   );
 
-  renderCardList(
-    "acopioList",
-    publicReports.filter(isAcopio),
-    "Todavía no hay centros de acopio publicados."
-  );
   // La cuadrícula se adapta a la cantidad de afiches aprobados, sin ocultar ninguno.
   const afichesAprobados=publicReports.filter(isAcopio);
   const featuredBox=$("featuredAcopios");
@@ -3623,7 +3611,7 @@ async function loadPublicReports(){
     );
 
     ["publicReports","petsList",
-     "acopioList","documentsList"].forEach(id=>{
+     "featuredAcopios","documentsList"].forEach(id=>{
       $(id).replaceChildren(el(
         "div",
         "No se pudo cargar la información.",
