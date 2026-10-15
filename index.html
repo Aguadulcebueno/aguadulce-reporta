@@ -1657,6 +1657,26 @@ html{scroll-padding-top:92px}
 }
 @media(prefers-reduced-motion:reduce){.premium-back-top{transition:none}}
 </style>
+<style id="premium-afiches-featured-styles">
+.premium-posters-section{padding:48px 0 52px;background:linear-gradient(180deg,#eff9f0 0%,#fff 100%);scroll-margin-top:90px}
+.premium-posters-top{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:20px}
+.premium-posters-top .section-description{margin-bottom:0}
+.premium-posters-top .btn{flex-shrink:0}
+.premium-posters-feed{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
+.premium-posters-feed .report-card{width:100%;min-width:0}
+.premium-posters-more{display:inline-block;margin-top:20px;font-weight:800;color:#146a43;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:720px){
+ .premium-posters-section{padding:26px 0 34px;scroll-margin-top:65px}
+ .premium-posters-top{display:block}
+ .premium-posters-top .btn{margin-top:15px;width:100%}
+ .premium-posters-feed{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .premium-posters-feed .report-card{min-width:0}
+ .premium-dock{grid-template-columns:repeat(6,minmax(0,1fr))!important}
+ .premium-dock a,.premium-dock button{min-width:0;padding-left:1px!important;padding-right:1px!important}
+ .premium-dock small{font-size:10px!important;letter-spacing:-.2px}
+}
+@media(max-width:420px){.premium-posters-feed{grid-template-columns:1fr}}
+</style>
 </head>
 
 <body>
@@ -1728,6 +1748,7 @@ html{scroll-padding-top:92px}
   <a href="#reportes" aria-label="Explorar reportes"><span aria-hidden="true">⌕</span><small>Explorar</small></a>
   <a href="#enviar" class="dock-primary" aria-label="Publicar reporte"><span aria-hidden="true">＋</span><small>Reportar</small></a>
   <a href="#mascotas" aria-label="Ver mascotas"><span aria-hidden="true">♧</span><small>Mascotas</small></a>
+  <a href="#afichesDestacados" aria-label="Ver afiches publicados"><span aria-hidden="true">▣</span><small>Afiches</small></a>
   <button type="button" id="premiumMoreToggle" class="premium-more-toggle" aria-expanded="false" aria-controls="premiumMorePanel"><span aria-hidden="true">☰</span><small>Más</small></button>
 </nav>
 <div id="premiumMorePanel" class="premium-more-panel" hidden>
@@ -2026,6 +2047,24 @@ html{scroll-padding-top:92px}
   </div>
 </section>
 
+
+<!-- AFICHES DESTACADOS: visibles antes del listado general -->
+<section class="section premium-posters-section" id="afichesDestacados" aria-labelledby="afichesDestacadosTitulo">
+  <div class="container">
+    <div class="premium-posters-top">
+      <div>
+        <div class="section-label">AVISOS PARA NUESTRA COMUNIDAD</div>
+        <h2 class="section-title" id="afichesDestacadosTitulo">📢 Afiches y jornadas comunitarias</h2>
+        <p class="section-description">Conoce las actividades y centros de acopio compartidos por vecinos y organizaciones. Solo aparecen publicaciones aprobadas.</p>
+      </div>
+      <button type="button" class="btn btn-green" onclick="prepareReport('Centros de acopio')">＋ Publicar afiche</button>
+    </div>
+    <div class="premium-posters-feed" id="featuredAcopios" aria-live="polite">
+      <div class="empty">Cargando afiches publicados...</div>
+    </div>
+    <a class="premium-posters-more" href="#acopios">Ver información sobre afiches y centros de acopio →</a>
+  </div>
+</section>
 
 <section class="section reports-section" id="reportes">
   <div class="container">
@@ -3254,6 +3293,12 @@ function renderSpecialSections(){
     "acopioList",
     publicReports.filter(isAcopio),
     "Todavía no hay centros de acopio publicados."
+  );
+  // Vista destacada al comienzo de la página, siempre sincronizada con los avisos aprobados.
+  renderCardList(
+    "featuredAcopios",
+    publicReports.filter(isAcopio).slice(0, 6),
+    "Aún no hay afiches aprobados. ¡Puedes compartir el primero!"
   );
 
   const box=$("documentsList");
