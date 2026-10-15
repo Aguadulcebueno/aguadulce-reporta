@@ -1694,6 +1694,52 @@ html{scroll-padding-top:92px}
 .admin-category-editor .field{margin:8px 0 10px;width:100%}
 .admin-category-editor .hint{margin:10px 0 0;font-size:12px}
 </style>
+<style id="ar-mobile-cleanup-2026">
+/* Tarjetas, botones y separación: más contenido visible sin alterar imágenes subidas. */
+.reports-section{padding-top:26px!important;padding-bottom:34px!important}
+.reports-section .section-description{margin-bottom:14px!important}
+.reports-layout{gap:18px!important}
+.reports-toolbar{gap:8px!important;margin-bottom:10px!important}
+.report-grid{gap:13px!important}
+.report-card .report-body{padding:13px!important}
+.report-card .report-body p{margin-bottom:8px!important}
+.share-actions{margin-top:8px!important;padding-top:5px!important;display:block!important}
+.share-more summary{list-style:none;cursor:pointer;font-size:12px;font-weight:800;color:#126e47;border:1px solid #dcece2;border-radius:9px;padding:7px 11px;display:inline-flex;align-items:center;min-height:34px;background:#f4fbf6}
+.share-more summary::-webkit-details-marker{display:none}
+.share-more-options{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.share-more-options .share-action{font-size:11px!important;min-height:32px!important;padding:5px 8px!important}
+.admin-full-editor{margin:14px 0;padding:12px;border:1px solid #b7d8c3;border-radius:13px;background:#f7fcf8}
+.admin-full-editor>summary{font-weight:850;cursor:pointer;color:#0b6540;padding:4px 0}
+.admin-edit-form{display:grid;gap:11px;margin-top:14px}
+.admin-edit-field .label{display:grid;gap:6px}
+.admin-edit-form textarea{min-height:120px;resize:vertical}
+.admin-publish-label{display:flex;gap:10px;align-items:center;font-weight:700;font-size:14px}
+.admin-publish-label input{width:20px;height:20px;flex:none}
+@media(max-width:720px){
+ .hero-inner{padding-bottom:24px!important}
+ .premium-posters-section{padding:20px 0 24px!important}
+ .reports-section{padding:22px 0 24px!important}
+ .reports-toolbar{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px!important}
+ .reports-toolbar #searchReports{grid-column:1/-1}
+ .reports-toolbar #categoryFilter{grid-column:1/-1}
+ .reports-toolbar .btn{min-width:0!important;width:100%;padding:10px 6px!important;font-size:12px!important}
+ .reports-main .premium-explore-heading{margin-bottom:10px!important}
+ .premium-community-bar{margin-bottom:10px!important}
+ .report-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+ .report-grid .report-card{min-width:0}
+ .report-grid .report-body{padding:9px!important}
+ .report-grid .report-body h3{font-size:14px!important;overflow-wrap:anywhere}
+ .report-grid .report-body p{font-size:12px!important;line-height:1.4}
+ .report-grid .report-photo-wrap{aspect-ratio:4/5!important;max-height:none!important}
+ .report-grid .report-photo-wrap img{object-fit:contain!important}
+ .report-grid .report-bottom{font-size:10px!important;flex-wrap:wrap}
+ .share-more-options .share-action{flex:0 1 auto!important}
+ .premium-dock a,.premium-dock button{min-height:52px!important}
+ .premium-dock small{font-size:9px!important}
+ .admin-report{padding:13px!important}
+ .admin-actions .btn{max-width:100%;white-space:normal}
+}
+</style>
 </head>
 
 <body>
@@ -1991,6 +2037,7 @@ html{scroll-padding-top:92px}
           <option value="Pocrí">Pocrí</option>
           <option value="Pueblos Unidos">Pueblos Unidos</option>
           <option value="Virgen del Carmen">Virgen del Carmen</option>
+          <option value="Otro lugar (fuera de Aguadulce)">🌎 Otro lugar (fuera del distrito de Aguadulce)</option>
         </select>
         <label class="label" for="area" id="areaLabel">COMUNIDAD, BARRIADA O SECTOR (OPCIONAL)</label>
         <input class="field" id="area" maxlength="85" list="comunidadesAguadulce" autocomplete="off" placeholder="Primero selecciona un corregimiento..." aria-describedby="areaAutocompleteHelp">
@@ -2086,9 +2133,9 @@ html{scroll-padding-top:92px}
 <section class="section reports-section" id="reportes">
   <div class="container">
     <div class="section-label">EL PULSO DE AGUADULCE</div>
-    <h2 class="section-title">Últimos reportes de Aguadulce.</h2>
+    <h2 class="section-title">Publicaciones de la comunidad.</h2>
     <p class="section-description">
-      Reportes de vecinos, revisados antes de publicarse.
+      Explora denuncias, afiches, mascotas y documentos. Todas las publicaciones se revisan antes de aparecer.
     </p>
 
     <div class="reports-layout">
@@ -3131,7 +3178,12 @@ function makeShareActions(report){
   });
   const copy=shareButton('copy','Copiar enlace');
   copy.addEventListener('click',()=>copyReportLink(report));
-  actions.append(share,whatsapp,instagram,facebook,email,copy);
+  const more=el("details","","share-more");
+  const summary=el("summary","↗ Compartir","share-compact-trigger");
+  more.append(summary);
+  const options=el("div","","share-more-options");
+  options.append(share,whatsapp,instagram,facebook,email,copy);
+  more.append(options);actions.appendChild(more);
   return actions;
 }
 
@@ -3290,8 +3342,9 @@ function showSearchSuggestions(){
 }
 function renderReports(){
   const matches=matchingReports();
-  renderCardList("publicReports",matches.filter(report=>!isSpecial(report)),
-    "No hay reportes de esta categoría. Prueba otra palabra o elige una sugerencia.");
+  const filtered=!!$("searchReports").value.trim()||!!$("categoryFilter").value;
+  renderCardList("publicReports",filtered?matches:matches.filter(report=>!isSpecial(report)),
+    "No hay publicaciones con esos filtros. Prueba otra palabra o categoría.");
   showSearchSuggestions();
   const query=normalizeSearch($("searchReports").value);
   if(query){
@@ -4111,13 +4164,16 @@ const corregimientoSelect=document.getElementById("corregimiento");
 const comunidadInput=document.getElementById("area");
 const comunidadList=document.getElementById("comunidadesAguadulce");
 function actualizarComunidades(){
+  const otro=corregimientoSelect.value==="Otro lugar (fuera de Aguadulce)";
   const opciones=AGUADULCE_COMUNIDADES[corregimientoSelect.value]||[];
+  comunidadInput.required=otro;
+  document.getElementById("areaLabel").textContent=otro?"DISTRITO, PROVINCIA Y COMUNIDAD (OBLIGATORIO)":"COMUNIDAD, BARRIADA O SECTOR (OPCIONAL)";
   comunidadList.replaceChildren(...opciones.map(nombre=>{
     const option=document.createElement("option");
     option.value=nombre;
     return option;
   }));
-  comunidadInput.placeholder=corregimientoSelect.value
+  comunidadInput.placeholder=otro?"Ej.: Penonomé, Coclé · barrio o sector":corregimientoSelect.value
     ?"Escribe o selecciona una comunidad..."
     :"Primero selecciona un corregimiento...";
 }
@@ -4140,7 +4196,9 @@ $("reportForm").addEventListener(
     const category=$("category").value;
     const corregimiento=$("corregimiento").value.trim();
     const sector=$("area").value.trim();
-    const area=sector ? `${sector}, ${corregimiento}` : corregimiento;
+    const area=corregimiento==="Otro lugar (fuera de Aguadulce)"
+      ?`Fuera de Aguadulce: ${sector}`
+      :(sector ? `${sector}, ${corregimiento}` : corregimiento);
 
     let description=
       $("description").value.trim();
@@ -4155,7 +4213,7 @@ $("reportForm").addEventListener(
       return;
     }
 
-    if(!corregimiento || !Object.prototype.hasOwnProperty.call(AGUADULCE_COMUNIDADES,corregimiento) || area.length>120){
+    if(!corregimiento || (!Object.prototype.hasOwnProperty.call(AGUADULCE_COMUNIDADES,corregimiento) && corregimiento!=="Otro lugar (fuera de Aguadulce)") || (corregimiento==="Otro lugar (fuera de Aguadulce)" && sector.length<5) || area.length>120){
       reportAlert(
         "⚠️ Escribe una ubicación válida."
       );
@@ -4629,51 +4687,70 @@ async function loadAdminReports(){
 
       actions.append(select,save);
 
-      // Corregir la categoría sin borrar ni volver a subir el reporte.
-      const categoryBox=el("div","","admin-category-editor");
-      const categoryLabel=el("label","✏️ Corregir categoría","label");
-      const categorySelect=el("select","","field");
-      categorySelect.setAttribute("aria-label","Categoría de la publicación");
-      const formCategory=$('category');
-      const knownCategories=Array.from(formCategory.options)
-        .filter(option=>option.value)
-        .map(option=>[option.value,option.textContent]);
-      if(!knownCategories.some(([value])=>value===report.category)){
-        knownCategories.push([report.category,report.category+" (actual)"]);
-      }
+      // Edición administrativa completa: antes o después de publicar.
+      const editor=el("details","","admin-full-editor");
+      const summary=el("summary","✏️ Editar publicación completa");
+      editor.appendChild(summary);
+      const form=el("form","","admin-edit-form");
+      form.noValidate=true;
+      const makeField=(labelText,control)=>{
+        const wrap=el("div","","admin-edit-field");
+        const label=el("label",labelText,"label");
+        label.appendChild(control);wrap.appendChild(label);return wrap;
+      };
+      const editCategory=el("select","","field");
+      const knownCategories=Array.from($("category").options).filter(o=>o.value)
+        .map(o=>[o.value,o.textContent]);
+      if(!knownCategories.some(([v])=>v===report.category))knownCategories.push([report.category,report.category]);
       knownCategories.forEach(([value,label])=>{
-        const option=el("option",label);
-        option.value=value;
-        categorySelect.appendChild(option);
+        const opt=el("option",label);opt.value=value;editCategory.appendChild(opt);
       });
-      categorySelect.value=report.category;
-      const saveCategory=el("button","Guardar categoría","btn btn-soft");
-      saveCategory.type="button";
-      saveCategory.disabled=true;
-      categorySelect.addEventListener("change",()=>{
-        saveCategory.disabled=categorySelect.value===report.category;
+      editCategory.value=report.category;
+      const editArea=el("input","","field");
+      editArea.type="text";editArea.maxLength=120;editArea.value=report.area||"";
+      editArea.placeholder="Comunidad, corregimiento o ubicación";
+      const editDescription=el("textarea","","field");
+      editDescription.rows=5;editDescription.maxLength=1500;
+      editDescription.value=report.description||"";
+      const editStatus=el("select","","field");
+      [["pending","Pendiente"],["reviewing","En revisión"],
+       ["referred","Remitido"],["resolved","Resuelto"],
+       ["rejected","Rechazado"]].forEach(([value,label])=>{
+        const opt=el("option",label);opt.value=value;editStatus.appendChild(opt);
       });
-      const categoryHint=el("p","Si te enviaron un afiche como denuncia comunitaria, selecciona «Centros de acopio» para mostrarlo en Afiches. La fotografía original se conserva.","hint");
-      saveCategory.addEventListener("click",async()=>{
-        if(categorySelect.value===report.category)return;
-        if(!confirm("¿Cambiar la categoría de esta publicación? No se borrará su foto ni cambiará su estado de aprobación."))return;
-        saveCategory.disabled=true;
-        saveCategory.textContent="Guardando...";
-        const {error:categoryError}=await db.from("reports")
-          .update({category:categorySelect.value})
-          .eq("id",report.id);
-        if(categoryError){
-          message.textContent="No se pudo corregir la categoría: "+categoryError.message+
-            ". Revisa los permisos de edición de administrador en Supabase.";
-          saveCategory.textContent="Guardar categoría";
-          saveCategory.disabled=false;
-          return;
+      editStatus.value=report.status;
+      const editPublish=el("input");editPublish.type="checkbox";
+      editPublish.checked=!!report.is_published;
+      const publishLabel=el("label"," Publicar después de guardar (o mantener publicada)","admin-publish-label");
+      publishLabel.prepend(editPublish);
+      const editSubmit=el("button","💾 Guardar todos los cambios","btn btn-green");
+      editSubmit.type="submit";
+      const editMessage=el("p","","message");editMessage.setAttribute("role","status");
+      form.append(makeField("Categoría",editCategory),makeField("Ubicación",editArea),
+        makeField("Descripción / contenido",editDescription),makeField("Estado",editStatus),
+        publishLabel,editSubmit,editMessage);
+      editor.appendChild(form);actions.appendChild(editor);
+      form.addEventListener("submit",async event=>{
+        event.preventDefault();
+        const area=editArea.value.trim();const description=editDescription.value.trim();
+        if(!area||area.length>120||description.length<10||description.length>1500){
+          editMessage.textContent="Revisa la ubicación y la descripción (mínimo 10 caracteres).";return;
         }
-        await loadAdminReports();
-        await loadPublicReports();
+        if(editStatus.value==="rejected"&&editPublish.checked){
+          editMessage.textContent="Una publicación rechazada no puede publicarse.";return;
+        }
+        if(editPublish.checked&&!report.is_published && !confirm("¿Revisaste el contenido, la imagen y los datos personales antes de publicar?"))return;
+        editSubmit.disabled=true;editSubmit.textContent="Guardando...";
+        const {error:editError}=await db.from("reports").update({
+          category:editCategory.value,area,description,status:editStatus.value,
+          is_published:editPublish.checked
+        }).eq("id",report.id);
+        if(editError){
+          editMessage.textContent="No se pudo guardar: "+editError.message+". Verifica permisos de actualización de administradores en Supabase.";
+          editSubmit.disabled=false;editSubmit.textContent="💾 Guardar todos los cambios";return;
+        }
+        await loadAdminReports();await loadPublicReports();
       });
-      categoryBox.append(categoryLabel,categorySelect,saveCategory,categoryHint);
-      actions.appendChild(categoryBox);
 
       if(
         report.visibility_requested==="public"
