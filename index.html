@@ -1781,6 +1781,28 @@ html{scroll-padding-top:92px}
  .admin-actions .btn{max-width:100%;white-space:normal}
 }
 </style>
+
+<style id="fallback-report-images">
+/* Ilustración local solo cuando el reporte no tiene fotografía disponible. */
+.report-photo-wrap .report-placeholder,.detail-photo .report-placeholder{
+ width:100%;height:100%;min-height:180px;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;text-align:center;gap:12px;
+ padding:20px 14px;background:linear-gradient(150deg,#e8f5e8,#d5ecdc 58%,#f6fbef);
+ color:#114632;overflow:hidden;box-sizing:border-box
+}
+.report-placeholder .placeholder-symbol{font-size:clamp(48px,7vw,82px);line-height:1;filter:drop-shadow(0 8px 8px #164b2520)}
+.report-placeholder .placeholder-type{font-size:clamp(12px,1.4vw,17px);font-weight:900;line-height:1.3}
+.report-placeholder .placeholder-label{font-size:11px;line-height:1.4;color:#47695a;font-weight:700}
+.detail-photo .report-placeholder{min-height:320px;border-radius:12px}
+.detail-photo .report-placeholder .placeholder-symbol{font-size:90px}
+@media(max-width:720px){
+ .report-photo-wrap .report-placeholder{min-height:0;padding:12px 5px;gap:7px}
+ .report-photo-wrap .placeholder-symbol{font-size:clamp(35px,9vw,65px)}
+ .report-photo-wrap .placeholder-type{font-size:11px}
+ .report-photo-wrap .placeholder-label{font-size:9px}
+ .detail-photo .report-placeholder{min-height:210px}
+}
+</style>
 </head>
 
 <body>
@@ -3257,6 +3279,32 @@ function revealLinkedReport(){
 const detailDialog=$("reportDetail");
 const detailClose=$("detailClose");
 let detailPreviousFocus=null;
+
+/* Portadas visuales por tipo de aviso. No se generan ni alteran archivos subidos. */
+function makeReportPlaceholder(report){
+  const category=categoryText(report.category||"");
+  const content=(category+" "+(report.description||"")).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+  let symbol="📢",title="Aviso comunitario";
+  if(isPet(report)){symbol="🐾";title="Mascota perdida o encontrada";}
+  else if(isDocument(report)){symbol="🪪";title="Documento encontrado";}
+  else if(isAcopio(report)){symbol="📦";title="Afiche o centro de acopio";}
+  else if(/bache|hueco|calle|carretera|pavimento|via|acera/.test(content)){symbol="🚧";title="Reporte de vías";}
+  else if(/agua|tuberia|fuga|alcantarill|inundacion|drenaje/.test(content)){symbol="💧";title="Reporte de agua";}
+  else if(/luz|poste|alumbrado|electric|energia|apag[oó]n/.test(content)){symbol="💡";title="Alumbrado o electricidad";}
+  else if(/basura|desecho|residuo|vertedero|limpieza/.test(content)){symbol="♻️";title="Limpieza comunitaria";}
+  else if(/arbol|parque|ambiente|vegetacion/.test(content)){symbol="🌳";title="Espacios públicos";}
+  else if(/sismo|temblor|derrumbe|estructura/.test(content)){symbol="🏠";title="Aviso de infraestructura";}
+  const box=el("div","","report-placeholder");
+  box.setAttribute("role","img");
+  box.setAttribute("aria-label","Ilustración genérica de "+title+"; no es una fotografía del incidente");
+  box.append(
+    el("span",symbol,"placeholder-symbol"),
+    el("strong",title,"placeholder-type"),
+    el("span","Publicación sin fotografía","placeholder-label")
+  );
+  return box;
+}
+
 function openReportDetail(report){
   detailPreviousFocus=document.activeElement;
   $("detailCategory").textContent=categoryText(report.category);
@@ -3269,7 +3317,7 @@ function openReportDetail(report){
   img.alt="Afiche o fotografía de "+(report.area||"la publicación");
   img.loading="eager";
   img.referrerPolicy="no-referrer";
-  img.onerror=()=>{photo.textContent="Esta publicación no tiene una imagen disponible.";};
+  img.onerror=()=>{photo.replaceChildren(makeReportPlaceholder(report));};
   img.addEventListener("click",()=>openPhoto(img));
   photo.appendChild(img);
   const share=$("detailShare");share.replaceChildren(makeShareActions(report));
@@ -3326,7 +3374,15 @@ function buildReportCard(report){
   );
 
   image.onerror=()=>{
-    photoBox.remove();
+    photoBox.replaceChildren(makeReportPlaceholder(report));
+    photoBox.style.cursor="pointer";
+    photoBox.tabIndex=0;
+    photoBox.setAttribute("role","button");
+    photoBox.setAttribute("aria-label","Leer publicación completa");
+    photoBox.addEventListener("click",()=>openReportDetail(report));
+    photoBox.addEventListener("keydown",event=>{
+      if(event.key==="Enter"||event.key===" "){event.preventDefault();openReportDetail(report);}
+    });
   };
 
   image.addEventListener("keydown",event=>{
