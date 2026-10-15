@@ -1803,6 +1803,64 @@ html{scroll-padding-top:92px}
  .detail-photo .report-placeholder{min-height:210px}
 }
 </style>
+
+<style id="aguadulce-future-2026">
+:root{--future-ink:#092d24;--future-lime:#c9f36b;--future-green:#0c533c}
+html{scroll-padding-top:96px;scroll-behavior:smooth}
+body{background:linear-gradient(180deg,#f1f8f3 0,#fff 720px)}
+.header{box-shadow:0 8px 32px #062f2118;backdrop-filter:blur(16px)}
+.hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 87% 14%,#245b47 0,transparent 44%),linear-gradient(135deg,#071f1a,#104a35 70%,#163f31);color:#fff}
+.hero:after{content:"";position:absolute;pointer-events:none;width:380px;height:380px;right:-180px;bottom:-240px;border:1px solid #c9f36b44;border-radius:50%;box-shadow:0 0 0 50px #c9f36b0a,0 0 0 100px #c9f36b08}
+.hero h1{letter-spacing:-.055em;line-height:1.03}.hero h1 span{color:var(--future-lime)}
+.hero .hero-tag{border-radius:100px;letter-spacing:.12em}
+.hero-buttons .btn{border-radius:13px;min-height:45px}
+.future-shortcuts{padding:20px 0 5px;background:#f4faf5}
+.future-shortcuts-inner{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.future-shortcuts a{display:flex;align-items:center;gap:4px;flex-direction:column;text-align:center;text-decoration:none;color:#173d2e;padding:16px 8px;background:#fff;border:1px solid #e3eee7;border-radius:18px;box-shadow:0 6px 25px #113d2810;transition:transform .2s,box-shadow .2s}
+.future-shortcuts a:hover{transform:translateY(-3px);box-shadow:0 10px 25px #113d2825}
+.future-shortcuts span{font-size:27px}.future-shortcuts strong{font-size:13px}.future-shortcuts small{font-size:11px;color:#6a8173}
+.reports-section{padding-top:36px}.reports-section .section-title{letter-spacing:-.04em}
+.reports-main{min-width:0}.reports-toolbar{background:#fff;border-radius:18px;padding:12px;border:1px solid #e4efe7;box-shadow:0 8px 30px #173d2e0d}
+.report-grid .report-card{transition:transform .2s,box-shadow .2s}.report-grid .report-card:hover{transform:translateY(-2px);box-shadow:0 12px 30px #173d2e16}
+.premium-posters-section{background:linear-gradient(180deg,#f3faf5,#fff)}
+.form-section{background:linear-gradient(160deg,#e9f7ec,#f8fcf8)}
+.form-card{border-radius:22px;box-shadow:0 18px 48px #092d2412}
+@media(max-width:760px){
+ body{padding-bottom:84px}
+ .header{position:sticky;top:0;z-index:900}
+ .header-inner{min-height:62px}
+ .brand img{width:39px;height:39px;object-fit:contain}
+ .brand-name{font-size:13px;line-height:1.02}.brand-sub{font-size:7px}
+ .header .btn-lime{font-size:11px;padding:10px 11px;white-space:nowrap}
+ .mobile-nav{display:none!important}
+ .hero{padding:28px 0 26px;min-height:0}
+ .hero-inner{display:block}
+ .hero h1{font-size:clamp(33px,9vw,52px);margin:13px 0 12px}
+ .hero p{font-size:14px;line-height:1.6;max-width:38ch}
+ .hero-card,.hero-points,.hero-follow{display:none!important}
+ .hero-buttons{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:17px}
+ .hero-buttons .btn{font-size:11px;line-height:1.25;min-height:48px;padding:10px 6px;text-align:center;display:flex;justify-content:center;align-items:center}
+ .hero-buttons .btn:nth-child(3){display:none}
+ .future-shortcuts{padding:12px 0 0}.future-shortcuts-inner{gap:7px}
+ .future-shortcuts a{border-radius:13px;padding:11px 2px 9px;min-width:0;gap:4px}
+ .future-shortcuts span{font-size:24px}.future-shortcuts strong{font-size:11px}.future-shortcuts small{font-size:9px}
+ .reports-section{padding-top:26px!important}.reports-section .section-title{font-size:clamp(24px,7vw,34px)}
+ .reports-section .section-description{font-size:13px;margin-bottom:13px}
+ .premium-explore-heading{margin-top:10px}.premium-explore-heading h3{font-size:19px}
+ .reports-toolbar{padding:10px;gap:8px}.reports-toolbar .field{min-height:44px;font-size:14px}
+ .premium-community-bar{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;padding-bottom:8px}
+ .premium-community-bar button{flex:none;white-space:nowrap}
+ .mobile-dock.premium-dock{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));padding-bottom:max(7px,env(safe-area-inset-bottom));box-shadow:0 -9px 25px #071f1a1a}
+ .mobile-dock.premium-dock a,.mobile-dock.premium-dock button{min-width:0}
+ .mobile-dock.premium-dock small{font-size:10px}
+ .metrics{margin-top:14px;gap:7px}.metric{padding:10px 8px}.metric-icon{display:none}.metric strong{font-size:20px}.metric small{font-size:9px}
+ .report-quickbar{margin-top:16px}
+ .premium-posters-top .section-title{font-size:24px}
+ .form-section{padding-top:38px}
+}
+@media(max-width:360px){.future-shortcuts small{display:none}.hero h1{font-size:32px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.future-shortcuts a,.report-grid .report-card{transition:none}}
+</style>
 </head>
 
 <body>
@@ -1874,12 +1932,12 @@ html{scroll-padding-top:92px}
   <a href="#reportes" aria-label="Explorar reportes"><span aria-hidden="true">⌕</span><small>Explorar</small></a>
   <a href="#enviar" class="dock-primary" aria-label="Publicar reporte"><span aria-hidden="true">＋</span><small>Reportar</small></a>
   <a href="#mascotas" aria-label="Ver mascotas"><span aria-hidden="true">♧</span><small>Mascotas</small></a>
-  <a href="#afichesDestacados" aria-label="Ver afiches publicados"><span aria-hidden="true">▣</span><small>Afiches</small></a>
   <button type="button" id="premiumMoreToggle" class="premium-more-toggle" aria-expanded="false" aria-controls="premiumMorePanel"><span aria-hidden="true">☰</span><small>Más</small></button>
 </nav>
 <div id="premiumMorePanel" class="premium-more-panel" hidden>
   <div class="premium-more-header"><strong>Explora Aguadulce Reporta</strong><button type="button" id="premiumMoreClose" aria-label="Cerrar menú">✕</button></div>
   <div class="premium-more-grid">
+    <a href="#afichesDestacados">📢 Afiches publicados</a>
     <a href="#documentos">🪪 Documentos</a>
     <a href="#acopios">📦 Centros de acopio</a>
     <a href="#donaciones">💚 Donaciones</a>
@@ -1893,12 +1951,12 @@ html{scroll-padding-top:92px}
 <section class="hero" id="inicio">
   <div class="container hero-inner">
     <div>
-      <div class="hero-tag">● LA VOZ DE NUESTRA COMUNIDAD</div>
+      <div class="hero-tag">● AGUADULCE · COCLÉ · PANAMÁ</div>
 
-      <h1>Lo que pasa en<br><span>Aguadulce,</span><br>contado por su gente.</h1>
+      <h1>Tu comunidad.<br><span>Tu voz.</span><br>En tiempo real.</h1>
 
       <p>
-        Tu comunidad tiene voz. Comparte un reporte, ayuda a encontrar mascotas y descubre avisos útiles para Aguadulce.
+        Reportes ciudadanos, avisos y ayuda comunitaria en un solo lugar. Explora lo que sucede o publica tu aviso.
       </p>
 
       <div class="hero-buttons">
@@ -1933,6 +1991,140 @@ html{scroll-padding-top:92px}
     </div>
   </div>
 </section>
+<section class="future-shortcuts" aria-label="Accesos rápidos">
+ <div class="container future-shortcuts-inner">
+  <a href="#reportes"><span>📍</span><strong>Explorar</strong><small>Mi comunidad</small></a>
+  <a href="#afichesDestacados"><span>📢</span><strong>Afiches</strong><small>Actividades</small></a>
+  <a href="#mascotas"><span>🐾</span><strong>Mascotas</strong><small>Encontrar</small></a>
+  <a href="#documentos"><span>🪪</span><strong>Documentos</strong><small>Recuperar</small></a>
+ </div>
+</section>
+<section class="section reports-section" id="reportes">
+  <div class="container">
+    <div class="section-label">EL PULSO DE AGUADULCE</div>
+    <h2 class="section-title">Publicaciones de la comunidad.</h2>
+    <p class="section-description">
+      Explora denuncias, afiches, mascotas y documentos. Todas las publicaciones se revisan antes de aparecer.
+    </p>
+
+    <div class="reports-layout">
+
+      <main class="reports-main" aria-label="Publicaciones ciudadanas">
+        <div class="premium-explore-heading">
+          <div><span class="premium-eyebrow">EXPLORA TU COMUNIDAD</span><h3>Encuentra lo que importa.</h3></div>
+          <a href="#enviar" class="premium-text-link">¿Tienes algo que reportar? ↗</a>
+        </div>
+        <div class="premium-community-bar" aria-label="Búsquedas rápidas por comunidad">
+          <button type="button" data-community="">Todo Aguadulce</button>
+          <button type="button" data-community="El Roble">El Roble</button>
+          <button type="button" data-community="Pocrí">Pocrí</button>
+          <button type="button" data-community="Barrios Unidos">Barrios Unidos</button>
+          <button type="button" data-community="El Salado">El Salado</button>
+          <button type="button" data-community="El Cristo">El Cristo</button>
+        </div>
+        <div class="reports-toolbar">
+          <input
+            id="searchReports"
+            class="field"
+            autocomplete="off"
+            aria-controls="searchSuggestions"
+            aria-expanded="false"
+            placeholder="🔎 Buscar comunidad o situación..."
+            aria-label="Buscar reportes"
+          >
+
+          <select id="categoryFilter" class="field" aria-label="Filtrar categoría">
+            <option value="">Todas las categorías</option>
+          </select>
+
+          <button id="clearFilters" class="btn btn-soft" type="button">Limpiar filtros</button>
+          <button id="refreshPublic" class="btn btn-soft" type="button">
+            ↻ Actualizar
+          </button>
+        </div>
+
+        <div id="searchSuggestions" class="search-suggestions" role="listbox" aria-label="Publicaciones encontradas" hidden></div>
+        <p class="message" id="publicMessage" role="status"></p>
+        <p class="hint" id="filterHelp">Busca por palabra o categoría.</p>
+
+        <div class="report-grid" id="publicReports" aria-live="polite">
+          <div class="empty">Cargando reportes...</div>
+        </div>
+      </main>
+
+      <aside class="sidebar">
+
+        <div class="quake-widget" id="sismos">
+          <div class="quake-heading">
+            <div class="icon">🌎</div>
+            <div>
+              <h3>Últimos sismos</h3>
+              <small>Panamá y alrededores</small>
+            </div>
+          </div>
+
+          <p class="quake-status" id="quakeStatus">
+            Consultando USGS...
+          </p>
+
+          <div class="quake-list" id="quakeList"></div>
+
+          <button
+            id="refreshQuakes"
+            class="btn btn-lime"
+            type="button"
+          >
+            ↻ ACTUALIZAR
+          </button>
+
+          <div class="quake-links">
+            <a href="https://earthquake.usgs.gov/earthquakes/map/" target="_blank" rel="noopener noreferrer">Ver todos los sismos en USGS ↗</a>
+            <a href="https://sismosgeociencias.up.ac.pa/" target="_blank" rel="noopener noreferrer">Instituto de Geociencias ↗</a>
+          </div>
+
+          <p class="quake-note">
+            Muestra hasta 3 registros recientes.
+            Se actualiza cada 5 minutos.
+            No constituye un sistema de alerta temprana.
+          </p>
+        </div>
+
+        <div class="sidebar-card">
+          <div style="font-size:30px">💚</div>
+          <h3>Tu voz importa</h3>
+          <p>
+            ¿Hay algo en tu comunidad que necesita atención?
+            Compártelo con nosotros.
+          </p>
+          <a href="#enviar" class="btn btn-green" style="width:100%">
+            ENVIAR REPORTE →
+          </a>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+</section>
+<section class="section premium-posters-section" id="afichesDestacados" aria-labelledby="afichesDestacadosTitulo">
+  <div class="container">
+    <div class="premium-posters-top">
+      <div>
+        <div class="section-label">AVISOS PARA NUESTRA COMUNIDAD</div>
+        <h2 class="section-title" id="afichesDestacadosTitulo">📢 Afiches y jornadas comunitarias</h2>
+        <p class="section-description">Conoce las actividades y centros de acopio compartidos por vecinos y organizaciones. Solo aparecen publicaciones aprobadas.</p>
+      </div>
+      <button type="button" class="btn btn-green" onclick="prepareReport('Centros de acopio')">＋ Publicar afiche</button>
+    </div>
+    <div class="premium-posters-feed" id="featuredAcopios" aria-live="polite">
+      <div class="empty">Cargando afiches publicados...</div>
+    </div>
+    <a class="premium-posters-more" href="#acopios">Información y recomendaciones sobre centros de acopio →</a>
+  </div>
+</section>
+
+
+
+
 
 
 
@@ -2176,129 +2368,8 @@ html{scroll-padding-top:92px}
 
 
 <!-- AFICHES DESTACADOS: visibles antes del listado general -->
-<section class="section premium-posters-section" id="afichesDestacados" aria-labelledby="afichesDestacadosTitulo">
-  <div class="container">
-    <div class="premium-posters-top">
-      <div>
-        <div class="section-label">AVISOS PARA NUESTRA COMUNIDAD</div>
-        <h2 class="section-title" id="afichesDestacadosTitulo">📢 Afiches y jornadas comunitarias</h2>
-        <p class="section-description">Conoce las actividades y centros de acopio compartidos por vecinos y organizaciones. Solo aparecen publicaciones aprobadas.</p>
-      </div>
-      <button type="button" class="btn btn-green" onclick="prepareReport('Centros de acopio')">＋ Publicar afiche</button>
-    </div>
-    <div class="premium-posters-feed" id="featuredAcopios" aria-live="polite">
-      <div class="empty">Cargando afiches publicados...</div>
-    </div>
-    <a class="premium-posters-more" href="#acopios">Información y recomendaciones sobre centros de acopio →</a>
-  </div>
-</section>
 
-<section class="section reports-section" id="reportes">
-  <div class="container">
-    <div class="section-label">EL PULSO DE AGUADULCE</div>
-    <h2 class="section-title">Publicaciones de la comunidad.</h2>
-    <p class="section-description">
-      Explora denuncias, afiches, mascotas y documentos. Todas las publicaciones se revisan antes de aparecer.
-    </p>
 
-    <div class="reports-layout">
-
-      <main class="reports-main" aria-label="Publicaciones ciudadanas">
-        <div class="premium-explore-heading">
-          <div><span class="premium-eyebrow">EXPLORA TU COMUNIDAD</span><h3>Encuentra lo que importa.</h3></div>
-          <a href="#enviar" class="premium-text-link">¿Tienes algo que reportar? ↗</a>
-        </div>
-        <div class="premium-community-bar" aria-label="Búsquedas rápidas por comunidad">
-          <button type="button" data-community="">Todo Aguadulce</button>
-          <button type="button" data-community="El Roble">El Roble</button>
-          <button type="button" data-community="Pocrí">Pocrí</button>
-          <button type="button" data-community="Barrios Unidos">Barrios Unidos</button>
-          <button type="button" data-community="El Salado">El Salado</button>
-          <button type="button" data-community="El Cristo">El Cristo</button>
-        </div>
-        <div class="reports-toolbar">
-          <input
-            id="searchReports"
-            class="field"
-            autocomplete="off"
-            aria-controls="searchSuggestions"
-            aria-expanded="false"
-            placeholder="🔎 Buscar comunidad o situación..."
-            aria-label="Buscar reportes"
-          >
-
-          <select id="categoryFilter" class="field" aria-label="Filtrar categoría">
-            <option value="">Todas las categorías</option>
-          </select>
-
-          <button id="clearFilters" class="btn btn-soft" type="button">Limpiar filtros</button>
-          <button id="refreshPublic" class="btn btn-soft" type="button">
-            ↻ Actualizar
-          </button>
-        </div>
-
-        <div id="searchSuggestions" class="search-suggestions" role="listbox" aria-label="Publicaciones encontradas" hidden></div>
-        <p class="message" id="publicMessage" role="status"></p>
-        <p class="hint" id="filterHelp">Busca por palabra o categoría.</p>
-
-        <div class="report-grid" id="publicReports" aria-live="polite">
-          <div class="empty">Cargando reportes...</div>
-        </div>
-      </main>
-
-      <aside class="sidebar">
-
-        <div class="quake-widget" id="sismos">
-          <div class="quake-heading">
-            <div class="icon">🌎</div>
-            <div>
-              <h3>Últimos sismos</h3>
-              <small>Panamá y alrededores</small>
-            </div>
-          </div>
-
-          <p class="quake-status" id="quakeStatus">
-            Consultando USGS...
-          </p>
-
-          <div class="quake-list" id="quakeList"></div>
-
-          <button
-            id="refreshQuakes"
-            class="btn btn-lime"
-            type="button"
-          >
-            ↻ ACTUALIZAR
-          </button>
-
-          <div class="quake-links">
-            <a href="https://earthquake.usgs.gov/earthquakes/map/" target="_blank" rel="noopener noreferrer">Ver todos los sismos en USGS ↗</a>
-            <a href="https://sismosgeociencias.up.ac.pa/" target="_blank" rel="noopener noreferrer">Instituto de Geociencias ↗</a>
-          </div>
-
-          <p class="quake-note">
-            Muestra hasta 3 registros recientes.
-            Se actualiza cada 5 minutos.
-            No constituye un sistema de alerta temprana.
-          </p>
-        </div>
-
-        <div class="sidebar-card">
-          <div style="font-size:30px">💚</div>
-          <h3>Tu voz importa</h3>
-          <p>
-            ¿Hay algo en tu comunidad que necesita atención?
-            Compártelo con nosotros.
-          </p>
-          <a href="#enviar" class="btn btn-green" style="width:100%">
-            ENVIAR REPORTE →
-          </a>
-        </div>
-
-      </aside>
-    </div>
-  </div>
-</section>
 
 <section class="section" id="categorias">
   <div class="container">
