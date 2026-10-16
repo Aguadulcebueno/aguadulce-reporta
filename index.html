@@ -1628,6 +1628,10 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
 .report-card .report-photo-wrap{cursor:zoom-in}
 @media(max-width:700px){.detail-overlay{padding:8px}.detail-panel{max-height:calc(100dvh - 16px);border-radius:15px}.detail-layout{grid-template-columns:1fr}.detail-photo{min-height:0;padding:10px}.detail-photo img{max-height:49dvh}.detail-info{padding:18px 18px 26px}.detail-description{font-size:16px}.detail-close{top:8px;margin:8px 8px -50px 0}}
 
+
+/* Eliminar reportes: acción destructiva separada */
+.btn-danger-admin{background:#fff1f0;color:#9d2424;border:1px solid #efb8b4;margin-top:12px}
+.btn-danger-admin:hover{background:#ffe2df}
 </style>
 <style>
 /* AGUADULCE REPORTA — PREMIUM UX 2026 (no altera Supabase ni Turnstile) */
@@ -5450,9 +5454,38 @@ async function loadAdminReports(){
         ));
       }
 
+      const remove=el("button","🗑 Eliminar publicación","btn btn-danger-admin");
+      remove.type="button";
+      remove.setAttribute("aria-label","Eliminar definitivamente esta publicación");
+      remove.onclick=async()=>{
+        if(!confirm("¿Eliminar definitivamente esta publicación? No podrás recuperarla desde el panel."))return;
+        if(!confirm("Confirma por segunda vez: se eliminará el reporte y dejará de aparecer en la página."))return;
+        remove.disabled=true;remove.textContent="Eliminando...";
+        try{
+          const {data:deleted,error:deleteError}=await db.from("reports")
+            .delete().eq("id",report.id).select("id");
+          if(deleteError)throw deleteError;
+          if(!deleted||deleted.length!==1)throw new Error("No se eliminó el registro. Revisa los permisos DELETE del administrador en Supabase.");
+          const group=groupFor(report);
+          card.remove();
+          counts[group]=Math.max(0,counts[group]-1);
+          const tab=tabs.querySelector(`button[data-group="${group}"] .admin-tab-count`);
+          if(tab)tab.textContent=String(counts[group]);
+          const section=buckets.get(group);
+          const heading=section?.querySelector(".admin-group-heading");
+          if(heading)heading.textContent=groups.find(g=>g.id===group).label+" ("+counts[group]+")";
+          if(section&&!counts[group])section.appendChild(el("p","No hay reportes en esta sección.","empty"));
+          showMessage("adminMessage","✓ Publicación eliminada. Permaneces en la misma sección.",true);
+          await loadPublicReports();
+        }catch(err){
+          message.textContent="No se pudo eliminar: "+(err?.message||"error desconocido")+". No se borró de la lista.";
+          remove.disabled=false;remove.textContent="🗑 Eliminar publicación";
+        }
+      };
+      actions.appendChild(remove);
       actions.appendChild(message);
       card.appendChild(actions);
-      box.appendChild(card);
+      buckets.get(groupFor(report)).appendChild(card);
     }
 
   }catch(error){
