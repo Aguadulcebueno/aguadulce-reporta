@@ -899,6 +899,18 @@ textarea.field{min-height:145px;resize:vertical}
   line-height:1.8;
 }
 
+/* ORGANIZACIÓN DEL PANEL ADMINISTRATIVO */
+.admin-tabs{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0 12px}
+.admin-tab{border:1px solid #d3e3d6;background:#fff;color:#20503a;border-radius:12px;padding:12px 14px;font-weight:800;font-size:12px;min-height:44px}
+.admin-tab[aria-selected="true"]{background:#14583e;color:#fff;border-color:#14583e}
+.admin-tab-count{display:inline-block;margin-left:6px;padding:2px 7px;border-radius:999px;background:#e8f4e8;color:#14583e}
+.admin-tab[aria-selected="true"] .admin-tab-count{background:#d7f568;color:#071f19}
+.admin-group[hidden]{display:none!important}
+.admin-group-heading{font-size:19px;margin:18px 0 10px}
+.admin-group-note{font-size:12px;color:#66796e}
+.admin-group .admin-report{margin-top:12px}
+@media(max-width:600px){.admin-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.admin-tab{padding:10px 8px}}
+
 /* ADMIN */
 
 .admin-section{background:#edf3ed}
@@ -3000,6 +3012,10 @@ body.ar-sponsor-modal-open{overflow:hidden}
         </div>
 
         <p id="adminMessage" class="message" role="status"></p>
+        <div class="admin-board" id="adminBoard" hidden>
+          <div class="admin-tabs" id="adminTabs" role="tablist" aria-label="Filtrar reportes administrativos"></div>
+          <p class="hint" id="adminFilterHelp">Las publicaciones están separadas por su situación. Al guardar, la tarjeta permanece en su lugar; pulsa Actualizar para reorganizar.</p>
+        </div>
         <div id="adminReports"></div>
       </div>
 
@@ -4187,7 +4203,7 @@ async function loadEarthquakes(){
       }
 
       card.append(mag,info);
-      box.appendChild(card);
+      buckets.get(groupFor(report)).appendChild(card);
     });
 
     const updated=new Date().toLocaleTimeString(
@@ -5015,6 +5031,7 @@ async function loadAdminReports(){
 
   const box=$("adminReports");
   box.replaceChildren();
+  $("adminBoard").hidden=true;
 
   showMessage(
     "adminMessage",
@@ -5039,6 +5056,50 @@ async function loadAdminReports(){
       "Reportes encontrados: "+data.length,
       true
     );
+
+    // Cada caso aparece en un solo grupo. Los publicados no se mezclan con los pendientes.
+    const groups=[
+      {id:"pending",label:"⏳ Sin aprobar",description:"Publicaciones que todavía no están aprobadas"},
+      {id:"reviewing",label:"🔎 En revisión",description:"Casos que requieren revisión"},
+      {id:"referred",label:"↗ Remitidos",description:"Casos remitidos para seguimiento"},
+      {id:"published",label:"✅ Publicados",description:"Publicaciones visibles al público"},
+      {id:"other",label:"📁 Otros",description:"Resueltos, rechazados y reportes privados"}
+    ];
+    const groupFor=r=>{
+      if(r.status==="reviewing")return "reviewing";
+      if(r.status==="referred")return "referred";
+      if(r.status==="resolved"||r.status==="rejected"||r.visibility_requested!=="public")return "other";
+      return r.is_published?"published":"pending";
+    };
+    const board=$("adminBoard");
+    const tabs=$("adminTabs");
+    tabs.replaceChildren();
+    board.hidden=false;
+    const buckets=new Map();
+    const counts=Object.fromEntries(groups.map(g=>[g.id,0]));
+    data.forEach(r=>counts[groupFor(r)]++);
+    const setTab=id=>{
+      tabs.querySelectorAll("button[data-group]").forEach(b=>{
+        const active=b.dataset.group===id;
+        b.setAttribute("aria-selected",String(active));
+        b.tabIndex=active?0:-1;
+      });
+      buckets.forEach((section,key)=>{section.hidden=key!==id;});
+    };
+    groups.forEach(g=>{
+      const tab=el("button",g.label+" ","admin-tab");
+      tab.type="button";tab.dataset.group=g.id;tab.setAttribute("role","tab");
+      tab.appendChild(el("span",String(counts[g.id]),"admin-tab-count"));
+      tab.onclick=()=>{window.arAdminTab=g.id;setTab(g.id);};
+      tabs.appendChild(tab);
+      const section=el("section","","admin-group");
+      section.dataset.group=g.id;
+      section.append(el("h4",g.label+" ("+counts[g.id]+")","admin-group-heading"),el("p",g.description,"admin-group-note"));
+      buckets.set(g.id,section);box.appendChild(section);
+      if(!counts[g.id])section.appendChild(el("p","No hay reportes en esta sección.","empty"));
+    });
+    const chosen=groups.some(g=>g.id===window.arAdminTab)?window.arAdminTab:"pending";
+    setTab(chosen);
 
     for(const report of data){
       const card=el(
@@ -5196,9 +5257,11 @@ async function loadAdminReports(){
       const message=el(
         "p","","message"
       );
+      let publish=null;
 
       save.onclick=async()=>{
         save.disabled=true;
+        save.textContent="Guardando...";
 
         const changes={
           status:select.value
@@ -5217,10 +5280,22 @@ async function loadAdminReports(){
           message.textContent=
             "Error: "+error.message;
           save.disabled=false;
+          save.textContent="Guardar estado";
           return;
         }
 
-        await loadAdminReports();
+        report.status=select.value;
+        if(changes.is_published===false)report.is_published=false;
+        card.querySelectorAll(":scope > p")[2].textContent="Estado: "+statusText(report.status);
+        card.querySelectorAll(":scope > p")[4].textContent="Publicado: "+(report.is_published?"Sí":"No");
+        editStatus.value=report.status;
+        editPublish.checked=!!report.is_published;
+        if(typeof publish!=="undefined" && publish){
+          publish.textContent=report.is_published?"Retirar publicación":"✓ Aprobar publicación";
+          publish.className=report.is_published?"btn btn-soft":"btn btn-green";
+        }
+        save.textContent="Guardar estado";
+        message.textContent="✓ Estado guardado correctamente.";
         await loadPublicReports();
       };
 
@@ -5288,13 +5363,25 @@ async function loadAdminReports(){
           editMessage.textContent="No se pudo guardar: "+editError.message+". Verifica permisos de actualización de administradores en Supabase.";
           editSubmit.disabled=false;editSubmit.textContent="💾 Guardar todos los cambios";return;
         }
-        await loadAdminReports();await loadPublicReports();
+        report.category=editCategory.value;report.area=area;report.description=description;
+        report.status=editStatus.value;report.is_published=editPublish.checked;
+        card.querySelector("h4").textContent=categoryText(report.category)+" · "+report.area;
+        const paragraphs=card.querySelectorAll(":scope > p");
+        paragraphs[0].textContent=report.description;
+        paragraphs[2].textContent="Estado: "+statusText(report.status);
+        paragraphs[4].textContent="Publicado: "+(report.is_published?"Sí":"No");
+        select.value=report.status;save.disabled=true;
+        if(publish){publish.textContent=report.is_published?"Retirar publicación":"✓ Aprobar publicación";
+          publish.className=report.is_published?"btn btn-soft":"btn btn-green";}
+        editSubmit.disabled=false;editSubmit.textContent="💾 Guardar todos los cambios";
+        editMessage.textContent="✓ Cambios guardados. Puedes seguir editando aquí.";
+        await loadPublicReports();
       });
 
       if(
         report.visibility_requested==="public"
       ){
-        const publish=el(
+        publish=el(
           "button",
           report.is_published
             ?"Retirar publicación"
@@ -5342,7 +5429,14 @@ async function loadAdminReports(){
             return;
           }
 
-          await loadAdminReports();
+          report.is_published=next;
+          editPublish.checked=next;
+          const paragraphs=card.querySelectorAll(":scope > p");
+          paragraphs[4].textContent="Publicado: "+(next?"Sí":"No");
+          publish.textContent=next?"Retirar publicación":"✓ Aprobar publicación";
+          publish.className=next?"btn btn-soft":"btn btn-green";
+          publish.disabled=false;
+          message.textContent=next?"✓ Publicación aprobada. Puedes continuar aquí.":"✓ Publicación retirada. Puedes continuar aquí.";
           await loadPublicReports();
         };
 
