@@ -2671,6 +2671,7 @@ body.ar-sponsor-modal-open{overflow:hidden}
       o encontró y una descripción para facilitar su identificación.
     </p>
 
+    <p><a class="btn btn-lime" href="#adopciones">💚 Ver mascotas en adopción ↓</a></p>
     <div class="special-grid">
       <article class="special-card">
         <div class="special-icon">🐕</div>
@@ -2703,6 +2704,13 @@ body.ar-sponsor-modal-open{overflow:hidden}
         <p>Publica perros o gatos disponibles para adopción responsable, con foto, características y estado de adopción.</p>
         <button type="button" class="btn btn-green" onclick="prepareReport('Mascotas perdidas y encontradas','Mascota en adopción')">PUBLICAR EN ADOPCIÓN →</button>
       </article>
+    </div>
+
+    <div class="adoption-access" id="adopciones" style="margin-top:25px;padding:22px;border:1px solid #c5e3ca;border-radius:18px;background:#f4fbf1;scroll-margin-top:22px">
+      <h3 style="font-size:25px;margin:0 0 8px">💚 Mascotas en adopción</h3>
+      <p style="font-size:13px;color:#496452;margin:0 0 15px">Conoce las mascotas que buscan hogar o publica un aviso de adopción responsable.</p>
+      <button type="button" class="btn btn-green" onclick="prepareReport('Mascotas perdidas y encontradas','Mascota en adopción')">+ Dar una mascota en adopción</button>
+      <div class="special-feed" id="adoptionsList" style="margin-top:18px"><div class="empty">Cargando adopciones...</div></div>
     </div>
 
     <h3 style="font-size:25px;margin-top:40px">
@@ -3862,6 +3870,11 @@ function renderReports(){
 }
 
 function renderSpecialSections(){
+  renderCardList(
+    "adoptionsList",
+    publicReports.filter(report=>isPet(report) && /AVISO:\s*Mascota en adopci[oó]n/i.test(String(report.description||""))),
+    "Aún no hay mascotas en adopción publicadas. Puedes enviar la primera."
+  );
   renderCardList(
     "petsList",
     publicReports.filter(isPet),
