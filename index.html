@@ -2447,12 +2447,23 @@ body.ar-sponsor-modal-open{overflow:hidden}
           <select id="petType" class="field">
             <option value="Mascota perdida">Mascota perdida</option>
             <option value="Mascota encontrada">Mascota encontrada</option>
+            <option value="Mascota en adopción">Mascota en adopción</option>
           </select>
 
-          <p>
-            Incluye características, fecha y zona general.
-            Puedes adjuntar una fotografía de la mascota.
-          </p>
+          <div id="adoptionExtra" hidden>
+            <label class="label" for="adoptionName">NOMBRE DE LA MASCOTA (OPCIONAL)</label>
+            <input class="field" id="adoptionName" maxlength="60" placeholder="Ej.: Luna">
+            <label class="label" for="adoptionSpecies">ESPECIE</label>
+            <select class="field" id="adoptionSpecies"><option value="Perro">Perro</option><option value="Gato">Gato</option><option value="Otro">Otro</option></select>
+            <label class="label" for="adoptionAge">EDAD APROXIMADA</label>
+            <input class="field" id="adoptionAge" maxlength="60" placeholder="Ej.: 8 meses">
+            <label class="label" for="adoptionSex">SEXO</label>
+            <select class="field" id="adoptionSex"><option value="No especificado">No especificado</option><option value="Hembra">Hembra</option><option value="Macho">Macho</option></select>
+            <label class="label" for="adoptionStatus">ESTADO</label>
+            <select class="field" id="adoptionStatus"><option value="Disponible">Disponible</option><option value="En proceso">En proceso</option><option value="Adoptada">Adoptada</option></select>
+            <p>Describe su carácter, necesidades y condiciones para una adopción responsable. No publiques tu dirección ni datos privados.</p>
+          </div>
+          <p>Incluye características y zona general. Puedes adjuntar una fotografía.</p>
         </div>
 
         <div id="acopioExtra" class="extra-fields" hidden>
@@ -2503,10 +2514,10 @@ body.ar-sponsor-modal-open{overflow:hidden}
 
         <div id="quakeExtra" class="extra-fields" hidden>
           <h4>🏠 Daños por sismo</h4>
-          <p>
-            Describe solo daños visibles desde un lugar seguro.
-            Ante una emergencia llama al 911.
-          </p>
+          <p>Describe solo daños visibles desde un lugar seguro. Ante una emergencia llama al 911.</p>
+          <label class="label" for="quakeDamageType">TIPO DE DAÑO</label>
+          <select class="field" id="quakeDamageType"><option value="Vivienda">Vivienda</option><option value="Calle">Calle</option><option value="Infraestructura">Infraestructura</option><option value="Otro">Otro</option></select>
+          <p>⚠️ Para proteger tu privacidad, no escribas teléfono, nombre completo ni dirección exacta en la descripción pública. El seguimiento privado requiere habilitar almacenamiento seguro en Supabase.</p>
         </div>
 
         <label class="label" for="corregimiento">CORREGIMIENTO DE AGUADULCE</label>
@@ -2623,7 +2634,7 @@ body.ar-sponsor-modal-open{overflow:hidden}
 <section class="section special-section" id="mascotas">
   <div class="container">
     <div class="section-label">HUELLITAS DE AGUADULCE</div>
-    <h2 class="section-title">🐾 Mascotas perdidas y encontradas.</h2>
+    <h2 class="section-title">🐾 Mascotas perdidas, encontradas y en adopción.</h2>
     <p class="section-description">
       Ayudemos a que las mascotas regresen a casa.
       Publica una fotografía, la comunidad donde se perdió
@@ -2655,6 +2666,12 @@ body.ar-sponsor-modal-open{overflow:hidden}
           onclick="prepareReport('Mascotas perdidas y encontradas','Mascota encontrada')">
           PUBLICAR MASCOTA ENCONTRADA →
         </button>
+      </article>
+      <article class="special-card">
+        <div class="special-icon">💚</div>
+        <h3>¿Buscas hogar para una mascota?</h3>
+        <p>Publica perros o gatos disponibles para adopción responsable, con foto, características y estado de adopción.</p>
+        <button type="button" class="btn btn-green" onclick="prepareReport('Mascotas perdidas y encontradas','Mascota en adopción')">PUBLICAR EN ADOPCIÓN →</button>
       </article>
     </div>
 
@@ -4180,6 +4197,7 @@ function updateCategory(){
   const earthquake=category==="Daños por sismo";
 
   $("petsExtra").hidden=!pets;
+  $("adoptionExtra").hidden=!pets || $("petType").value!=="Mascota en adopción";
   $("acopioExtra").hidden=!acopio;
   $("documentExtra").hidden=!documents;
   $("quakeExtra").hidden=!earthquake;
@@ -4237,6 +4255,7 @@ function updateCategory(){
 $("category").addEventListener(
   "change",updateCategory
 );
+$("petType").addEventListener("change",updateCategory);
 
 /* BOTONES DE AVISOS */
 
@@ -4246,6 +4265,7 @@ function prepareReport(category,petType=""){
 
   if(petType){
     $("petType").value=petType;
+    updateCategory();
   }
 
   $("visibility").value="public";
@@ -4692,9 +4712,22 @@ $("reportForm").addEventListener(
     if(category===PETS){
       const petType=$("petType").value;
 
-      description=
-        "AVISO: "+petType+"\n\n"+
-        description;
+      if(petType==="Mascota en adopción"){
+        const details=[
+          "Nombre: "+($("adoptionName").value.trim()||"Sin nombre"),
+          "Especie: "+$("adoptionSpecies").value,
+          "Edad aproximada: "+($("adoptionAge").value.trim()||"No especificada"),
+          "Sexo: "+$("adoptionSex").value,
+          "Estado de adopción: "+$("adoptionStatus").value
+        ];
+        description="AVISO: Mascota en adopción\n"+details.join("\n")+"\n\n"+description;
+      }else{
+        description="AVISO: "+petType+"\n\n"+description;
+      }
+    }
+
+    if(category==="Daños por sismo"){
+      description="TIPO DE DAÑO: "+$("quakeDamageType").value+"\n\n"+description;
     }
 
     if(category===ACOPIO){
