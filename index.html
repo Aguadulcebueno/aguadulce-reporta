@@ -1969,6 +1969,54 @@ body{background:radial-gradient(circle at 95% 12%,#dff5e6 0,transparent 29%),#f6
   .header .btn-lime{font-size:10px!important;padding:9px 10px!important;}
 }
 </style>
+
+<style id="ar-future-mobile-refinements">
+/* Cinco espacios exactamente iguales: Reportar queda centrado, Más llega al borde derecho. */
+@media(max-width:900px){
+ .mobile-dock.premium-dock{
+  display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  width:100%!important;max-width:100vw!important;left:0!important;right:0!important;
+  box-sizing:border-box!important;gap:0!important;
+  padding:8px max(7px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(7px,env(safe-area-inset-left))!important;
+ }
+ .mobile-dock.premium-dock>a,.mobile-dock.premium-dock>button{
+  width:100%!important;min-width:0!important;max-width:none!important;
+  margin:0!important;padding:7px 2px!important;box-sizing:border-box!important;
+  justify-self:stretch!important;text-align:center!important;
+ }
+ .mobile-dock.premium-dock .dock-primary{grid-column:3!important;grid-row:1!important}
+ .mobile-dock.premium-dock a[href="#inicio"]{grid-column:1!important;grid-row:1!important}
+ .mobile-dock.premium-dock a[href="#reportes"]{grid-column:2!important;grid-row:1!important}
+ .mobile-dock.premium-dock a[href="#mascotas"]{grid-column:4!important;grid-row:1!important}
+ .mobile-dock.premium-dock #premiumMoreToggle{grid-column:5!important;grid-row:1!important}
+ .future-shortcuts a strong{line-height:1.15}
+ .future-shortcuts a[href="#acopios"] strong{font-size:clamp(9px,2.5vw,12px)}
+}
+/* Publicidad compacta: el cierre de la tarjeta también elimina su altura con suavidad. */
+.ar-sponsors{
+ overflow:hidden;max-height:520px;opacity:1;
+ transition:max-height .65s cubic-bezier(.2,.75,.2,1),opacity .42s ease,padding .55s ease;
+}
+.ar-sponsors.ar-sponsors-collapsed{max-height:0!important;opacity:0;padding-top:0!important;padding-bottom:0!important;pointer-events:none}
+.ar-sponsors-head{margin-bottom:8px}
+.ar-sponsors-grid{grid-template-columns:repeat(auto-fit,minmax(120px,175px));gap:10px}
+.ar-sponsor-link{border-radius:14px;box-shadow:0 7px 22px #062f2421;overflow:hidden}
+.ar-sponsor-link img{width:100%;height:auto;display:block}
+.ar-sponsors-return{padding:0 16px 5px;text-align:center;background:transparent}
+.ar-sponsors-return[hidden]{display:none!important}
+.ar-sponsors-return button{border:1px solid #b8dec8;background:#f0faf2;color:#15563a;
+ font:700 11px/1.2 inherit;border-radius:999px;padding:7px 13px;cursor:pointer}
+@media(max-width:600px){
+ .ar-sponsors{max-height:360px;padding:12px 0 7px}
+ .ar-sponsors-head h2{font-size:16px}
+ .ar-sponsors-grid{display:flex;overflow-x:auto;scroll-snap-type:x proximity;gap:9px}
+ .ar-sponsor-link{flex:0 0 min(35vw,155px)!important;scroll-snap-align:start}
+ .ar-sponsor-link img{width:100%;height:auto;object-fit:contain}
+}
+@media(prefers-reduced-motion:reduce){
+ .ar-sponsors{transition:none!important}
+}
+</style>
 </head>
 
 <body>
@@ -2102,7 +2150,7 @@ body{background:radial-gradient(circle at 95% 12%,#dff5e6 0,transparent 29%),#f6
 <section class="future-shortcuts" aria-label="Accesos rápidos">
  <div class="container future-shortcuts-inner">
   <a href="#reportes"><span>📍</span><strong>Explorar</strong><small>Mi comunidad</small></a>
-  <a href="#afichesDestacados"><span>📢</span><strong>Afiches</strong><small>Actividades</small></a>
+  <a href="#acopios"><span>📦</span><strong>Centros de acopio</strong><small>Ayuda comunitaria</small></a>
   <a href="#mascotas"><span>🐾</span><strong>Mascotas</strong><small>Encontrar</small></a>
   <a href="#documentos"><span>🪪</span><strong>Documentos</strong><small>Recuperar</small></a>
  </div>
@@ -2115,6 +2163,9 @@ body{background:radial-gradient(circle at 95% 12%,#dff5e6 0,transparent 29%),#f6
   <div id="ar-sponsors-grid" class="ar-sponsors-grid"></div>
  </div>
 </section>
+<div id="ar-sponsors-return" class="ar-sponsors-return" hidden>
+ <button id="ar-sponsors-reopen" type="button" aria-controls="patrocinadores" aria-expanded="false">✦ Ver aliados y publicidad</button>
+</div>
 <section class="section reports-section" id="reportes">
   <div class="container">
     <div class="section-label">EL PULSO DE AGUADULCE</div>
@@ -5698,6 +5749,46 @@ const PATROCINADORES = [
   card.append(img);grid.append(card);
  }
  if(grid.children.length)section.hidden=false;
+})();
+</script>
+
+<script id="ar-sponsor-compact-timing">
+(function(){
+ const section=document.getElementById('patrocinadores');
+ const returnBox=document.getElementById('ar-sponsors-return');
+ const reopen=document.getElementById('ar-sponsors-reopen');
+ if(!section||!returnBox||!reopen)return;
+ let closed=false;
+ function collapse(){
+  if(closed||section.hidden||!section.querySelector('.ar-sponsor-link'))return;
+  closed=true;
+  section.classList.add('ar-sponsors-collapsed');
+  section.setAttribute('aria-hidden','true');
+  returnBox.hidden=false;
+  reopen.setAttribute('aria-expanded','false');
+ }
+ function expand(){
+  closed=false;
+  section.classList.remove('ar-sponsors-collapsed');
+  section.removeAttribute('aria-hidden');
+  returnBox.hidden=true;
+  reopen.setAttribute('aria-expanded','true');
+  section.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});
+ }
+ reopen.addEventListener('click',expand);
+ /* Solo ocultar tras 7 segundos en pantalla; no cortar una interacción con el afiche. */
+ let timer=null;
+ const observer=new IntersectionObserver(entries=>{
+  if(closed)return;
+  if(entries.some(e=>e.isIntersecting&&e.intersectionRatio>=.25)){
+   if(!timer)timer=setTimeout(()=>{timer=null;collapse()},7000);
+  }else if(timer){clearTimeout(timer);timer=null}
+ },{threshold:[0,.25,.5]});
+ observer.observe(section);
+ section.addEventListener('pointerenter',()=>{if(timer){clearTimeout(timer);timer=null}});
+ section.addEventListener('pointerleave',()=>{if(!closed&&!timer)timer=setTimeout(()=>{timer=null;collapse()},7000)});
+ section.addEventListener('focusin',()=>{if(timer){clearTimeout(timer);timer=null}});
+ section.addEventListener('focusout',()=>{if(!closed&&!timer)timer=setTimeout(()=>{timer=null;collapse()},7000)});
 })();
 </script>
 </body>
