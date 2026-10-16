@@ -2017,6 +2017,23 @@ body{background:radial-gradient(circle at 95% 12%,#dff5e6 0,transparent 29%),#f6
  .ar-sponsors{transition:none!important}
 }
 </style>
+
+<style id="ar-3-2-afiches-before-reports">
+/* El bloque de afiches vive dentro del explorador, debajo de sus filtros. */
+.reports-main .premium-posters-section{padding:20px 0 22px;margin:12px 0 18px;
+  border-top:1px solid #d5e8d9;border-bottom:1px solid #d5e8d9;
+  background:transparent;scroll-margin-top:110px}
+.reports-main .premium-posters-section>.container{max-width:none;width:100%;padding:0;margin:0}
+.reports-main .premium-posters-top{gap:12px}
+.reports-main .premium-posters-top .section-title{font-size:clamp(20px,2.8vw,29px)}
+.premium-report-divider{padding:7px 0 15px}
+.premium-report-divider h3{margin:6px 0 0;font-size:clamp(19px,2.6vw,26px);color:#123a2d}
+@media(max-width:650px){
+ .reports-main .premium-posters-section{padding:16px 0 20px;margin:10px 0 18px}
+ .reports-main .premium-posters-top{align-items:flex-start}
+ .reports-main .premium-posters-top .btn{font-size:11px}
+}
+</style>
 </head>
 
 <body>
@@ -2222,6 +2239,28 @@ body{background:radial-gradient(circle at 95% 12%,#dff5e6 0,transparent 29%),#f6
         <p class="message" id="publicMessage" role="status"></p>
         <p class="hint" id="filterHelp">Busca por palabra o categoría.</p>
 
+        <!-- Afiches visibles después de los filtros y antes de los reportes -->
+<section class="section premium-posters-section" id="afichesDestacados" aria-labelledby="afichesDestacadosTitulo">
+  <div class="container">
+    <div class="premium-posters-top">
+      <div>
+        <div class="section-label">AVISOS PARA NUESTRA COMUNIDAD</div>
+        <h2 class="section-title" id="afichesDestacadosTitulo">📢 Afiches y jornadas comunitarias</h2>
+        <p class="section-description">Conoce las actividades y centros de acopio compartidos por vecinos y organizaciones. Solo aparecen publicaciones aprobadas.</p>
+      </div>
+      <button type="button" class="btn btn-green" onclick="prepareReport('Centros de acopio')">＋ Publicar afiche</button>
+    </div>
+    <div class="premium-posters-feed" id="featuredAcopios" aria-live="polite">
+      <div class="empty">Cargando afiches publicados...</div>
+    </div>
+    <a class="premium-posters-more" href="#acopios">Información y recomendaciones sobre centros de acopio →</a>
+  </div>
+</section>
+
+        <div class="premium-report-divider">
+          <span class="section-label">REPORTES CIUDADANOS</span>
+          <h3>Últimos reportes de la comunidad</h3>
+        </div>
         <div class="report-grid" id="publicReports" aria-live="polite">
           <div class="empty">Cargando reportes...</div>
         </div>
@@ -2280,22 +2319,7 @@ body{background:radial-gradient(circle at 95% 12%,#dff5e6 0,transparent 29%),#f6
     </div>
   </div>
 </section>
-<section class="section premium-posters-section" id="afichesDestacados" aria-labelledby="afichesDestacadosTitulo">
-  <div class="container">
-    <div class="premium-posters-top">
-      <div>
-        <div class="section-label">AVISOS PARA NUESTRA COMUNIDAD</div>
-        <h2 class="section-title" id="afichesDestacadosTitulo">📢 Afiches y jornadas comunitarias</h2>
-        <p class="section-description">Conoce las actividades y centros de acopio compartidos por vecinos y organizaciones. Solo aparecen publicaciones aprobadas.</p>
-      </div>
-      <button type="button" class="btn btn-green" onclick="prepareReport('Centros de acopio')">＋ Publicar afiche</button>
-    </div>
-    <div class="premium-posters-feed" id="featuredAcopios" aria-live="polite">
-      <div class="empty">Cargando afiches publicados...</div>
-    </div>
-    <a class="premium-posters-more" href="#acopios">Información y recomendaciones sobre centros de acopio →</a>
-  </div>
-</section>
+
 
 
 
