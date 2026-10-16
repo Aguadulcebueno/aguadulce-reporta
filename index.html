@@ -2063,7 +2063,37 @@ body.ar-sponsor-modal-open{overflow:hidden}
 #patrocinadores .ar-sponsor-link{display:block;flex:0 0 clamp(108px,18vw,150px)!important;max-width:150px!important;min-width:0!important;overflow:hidden;border-radius:12px;scroll-snap-align:start}
 #patrocinadores .ar-sponsor-link>img{display:block;width:100%!important;height:auto!important;max-height:190px!important;object-fit:contain!important;background:#e9f2eb}
 @media(max-width:600px){#patrocinadores .ar-sponsor-link{flex-basis:clamp(94px,29vw,135px)!important}#patrocinadores .ar-sponsor-link>img{max-height:175px!important}}
-</style></head>
+</style>
+<!-- Ajustes exclusivos para pantallas de escritorio; vista móvil intacta -->
+<style id="ar-desktop-wide-v4">
+@media (min-width:1101px) {
+  .container { width:min(1500px,calc(100% - 96px)); max-width:none; }
+  .header-inner { min-height:92px; }
+  .hero-inner { grid-template-columns:minmax(0,1.25fr) minmax(340px,.75fr); gap:76px; padding-top:105px; padding-bottom:120px; }
+  .hero h1 { font-size:clamp(62px,5.5vw,94px); max-width:1020px; line-height:1.04; }
+  .hero p { font-size:18px; max-width:760px; }
+  .hero-card { width:100%; max-width:530px; justify-self:end; }
+  .section { padding-top:78px; padding-bottom:78px; }
+  .section-title { font-size:clamp(34px,3vw,49px); }
+  .reports-layout { grid-template-columns:minmax(0,1fr) 320px; gap:32px; }
+  .report-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; }
+  .report-card .report-body { padding:21px; }
+  .report-photo-wrap { height:230px; }
+  .premium-posters-feed { grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; }
+  .premium-posters-feed.poster-count-4, .premium-posters-feed.poster-count-8 { grid-template-columns:repeat(4,minmax(0,1fr)); }
+  .ar-sponsors-grid { gap:14px!important; }
+  #patrocinadores .ar-sponsor-link { flex-basis:160px!important; max-width:160px!important; }
+  .reports-toolbar { gap:14px; }
+  .reports-toolbar input { min-width:260px; }
+  .form-layout { gap:52px; }
+}
+@media (min-width:1600px) {
+  .container { width:min(1600px,calc(100% - 128px)); }
+  .reports-layout { grid-template-columns:minmax(0,1fr) 350px; gap:38px; }
+  .report-grid { gap:24px; }
+}
+</style>
+</head>
 
 <body>
 <a class="premium-skip" href="#reportes">Saltar a los reportes</a>
