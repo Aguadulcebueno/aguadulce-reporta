@@ -1652,6 +1652,14 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
 .agr-note textarea{min-height:82px}
 .agr-case{font-weight:900;color:#155a3b;font-size:12px;letter-spacing:.3px}
 @media(max-width:600px){.agr-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.agr-metric{padding:9px}.agr-metric strong{font-size:21px}}
+
+/* CIERRE CIUDADANO · estilos discretos, compatibles con el diseño actual */
+.ar-final-box{background:#f1f8ef;border:1px solid #cfe5d0;border-radius:16px;padding:20px;margin:18px 0}
+.ar-final-box h3{margin:0 0 8px;font-size:21px}.ar-final-box p{font-size:13px;line-height:1.7;color:#496452}
+.ar-final-inline{display:flex;flex-wrap:wrap;gap:9px;align-items:center}.ar-final-inline .field{flex:1 1 220px}
+.ar-final-result{margin-top:12px;font-size:13px;line-height:1.7}.ar-case-label{display:block;margin-top:9px;color:#185f37;font-size:12px;font-weight:900}
+.ar-privacy details{background:#fff;border:1px solid #dbe8dc;border-radius:12px;margin:10px 0;padding:14px}
+.ar-privacy summary{font-weight:900;cursor:pointer}.ar-privacy p,.ar-privacy li{font-size:13px;line-height:1.8;color:#496452}
 </style>
 <style>
 /* AGUADULCE REPORTA — PREMIUM UX 2026 (no altera Supabase ni Turnstile) */
@@ -3164,6 +3172,34 @@ body.ar-sponsor-modal-open{overflow:hidden}
  </div>
 </section>
 
+
+<section class="section" id="consultar-caso" aria-labelledby="consultarCasoTitulo" style="background:#eaf3e8">
+ <div class="container">
+  <div class="section-label">CONSULTA CIUDADANA</div>
+  <h2 class="section-title" id="consultarCasoTitulo">Consulta un caso publicado.</h2>
+  <p class="section-description">Escribe el código AGR de una publicación para encontrarla entre los reportes públicos. Los reportes pendientes o privados no se muestran. Este buscador no permite consultar información confidencial.</p>
+  <div class="ar-final-box">
+   <form id="arCaseLookup" class="ar-final-inline">
+    <input class="field" id="arCaseInput" maxlength="24" autocomplete="off" placeholder="Ej.: AGR-1234ABCD..." aria-label="Número de caso">
+    <button class="btn btn-green" type="submit">🔎 Buscar caso</button>
+   </form>
+   <div id="arCaseResult" class="ar-final-result" role="status" aria-live="polite"></div>
+  </div>
+  <p class="hint">¿Tu reporte aún está pendiente? La revisión corresponde al equipo administrador. Para consultas o solicitudes de retiro, utiliza el formulario de contacto e indica el número de caso si lo tienes.</p>
+ </div>
+</section>
+<section class="section ar-privacy" id="privacidad" aria-labelledby="privacidadTitulo">
+ <div class="container">
+  <div class="section-label">TRANSPARENCIA Y CUIDADO DE DATOS</div>
+  <h2 class="section-title" id="privacidadTitulo">Privacidad y reglas de publicación.</h2>
+  <p class="section-description">Aguadulce Reporta es una iniciativa comunitaria. Antes de publicar, conoce cómo se revisa la información y cómo solicitar correcciones.</p>
+  <details><summary>🔒 ¿Qué información se hace pública?</summary><p>Los reportes aprobados pueden mostrar la categoría, comunidad, descripción y fotografía enviada. No incluyas nombres completos, teléfonos, direcciones exactas, documentos de identidad ni datos de otras personas en esos campos. Las notas internas del administrador y las solicitudes privadas de adopción no deben publicarse.</p></details>
+  <details><summary>📝 Reglas de publicación</summary><p>Envía información veraz y relacionada con la comunidad. Evita acusaciones personales, insultos, fotografías de documentos, datos privados y contenido que ponga en riesgo a otras personas. El equipo puede revisar, corregir, rechazar o retirar publicaciones.</p></details>
+  <details><summary>✉ Solicitar corrección o retiro</summary><p>Si necesitas corregir o retirar una publicación, usa el <a href="#contacto" style="color:#14583e;text-decoration:underline;font-weight:800">formulario de contacto</a>. Incluye el número de caso o enlace público y explica el motivo. No envíes datos sensibles innecesarios.</p></details>
+  <details><summary>ℹ️ Servicios externos y conservación de datos</summary><p>La página utiliza servicios de alojamiento y procesamiento, como Supabase para los reportes y FormSubmit para mensajes de contacto. La conservación y eliminación de datos depende de la configuración efectiva de estos servicios y de las decisiones administrativas. No se anuncia aquí un plazo fijo de eliminación porque aún debe definirse y verificarse.</p></details>
+ </div>
+</section>
+
 <!-- REDES DESTACADAS -->
 <section class="social-section" id="redes" aria-labelledby="socialTitle">
   <div class="container">
@@ -3192,6 +3228,7 @@ body.ar-sponsor-modal-open{overflow:hidden}
     <div>
       <p>Aguadulce, Coclé · Panamá</p>
       <p>© <span id="year"></span> Aguadulce Reporta</p>
+      <p><a href="#privacidad" style="text-decoration:underline">Privacidad y reglas</a> · <a href="#consultar-caso" style="text-decoration:underline">Consultar caso</a></p>
     </div>
   </div>
 </footer>
@@ -3839,6 +3876,7 @@ function buildReportCard(report){
     )
   );
 
+  if(report.id)body.appendChild(el("span","🆔 "+agrCaseId(report.id),"ar-case-label"));
   body.appendChild(bottom);
   body.appendChild(makeShareActions(report));
   card.appendChild(body);
@@ -4999,10 +5037,11 @@ $("reportForm").addEventListener(
 
       updateCategory();
 
+      const newId=result.report_id||result.reportId||result.id||result.report?.id;
+      const validId=typeof newId==="string" && /^[0-9a-f]{8}-[0-9a-f-]{27,}$/i.test(newId);
       reportAlert(
-        "✅ ¡Enviado correctamente! "+
-        "Tu publicación quedó pendiente "+
-        "de revisión.",
+        "✅ ¡Enviado correctamente! Tu publicación quedó pendiente de revisión."+
+        (validId?" Guarda tu número de caso: "+agrCaseId(newId)+".":" El servidor no devolvió un número de caso; puedes solicitarlo mediante Contacto."),
         true
       );
 
@@ -6200,6 +6239,27 @@ const PATROCINADORES = [
  closeButton.addEventListener('click',close);
  modal.addEventListener('click',e=>{if(e.target===modal)close();});
  document.addEventListener('keydown',e=>{if(!modal.hidden&&e.key==='Escape')close();});
+})();
+</script>
+<script>
+
+/* Consulta únicamente el conjunto de reportes publicados recibido por la página. */
+(function(){
+ const form=document.getElementById("arCaseLookup");
+ if(!form)return;
+ form.addEventListener("submit",function(e){
+  e.preventDefault();
+  const box=document.getElementById("arCaseResult");
+  const code=String(document.getElementById("arCaseInput").value||"").trim().toUpperCase();
+  box.replaceChildren();
+  if(!/^AGR-[0-9A-F]{8,16}$/.test(code)){box.textContent="Escribe un número de caso válido, por ejemplo AGR- seguido de letras y números.";return;}
+  const report=publicReports.find(r=>agrCaseId(r.id)===code);
+  if(!report){box.textContent="No se encontró este caso entre las publicaciones públicas cargadas. Puede estar pendiente, retirado o fuera del listado actual.";return;}
+  const title=document.createElement("strong");title.textContent="Caso encontrado: "+(report.area||"Publicación comunitaria");
+  const p=document.createElement("p");p.textContent="Estado registrado: "+statusText(report.status)+". Fecha: "+dateText(report.created_at);
+  const a=document.createElement("a");a.className="btn btn-soft";a.href="?reporte="+encodeURIComponent(report.id)+"#reportes";a.textContent="Ver publicación pública →";
+  box.append(title,p,a);
+ });
 })();
 </script>
 </body>
