@@ -6346,5 +6346,67 @@ const PATROCINADORES = [
  });
 })();
 </script>
+<style id="ar-one-tap-navigation-style">
+/* Navegación móvil: objetivos visibles y pulsación cómoda. */
+html.ar-one-tap-jump{scroll-behavior:auto!important}
+#reportes,#enviar,#mascotas,#adopciones,#categorias,#acopios,#documentos,#donaciones,#consultar-caso,#emergencias,#afichesDestacados{scroll-margin-top:12px}
+.category-tile,.premium-dock a,.mobile-dock a{touch-action:manipulation}
+</style>
+<script id="ar-one-tap-navigation">
+/* Navegación fiable incluso al tocar dos veces el mismo destino. */
+(function(){
+ 'use strict';
+ function jump(target,hash){
+   if(!target)return;
+   const root=document.documentElement;
+   root.classList.add('ar-one-tap-jump');
+   target.scrollIntoView({behavior:'instant',block:'start'});
+   if(hash && location.hash!==hash){
+     try{history.replaceState(history.state,'',location.pathname+location.search+hash)}catch(_e){}
+   }
+   requestAnimationFrame(()=>{
+     // El diseño puede reajustarse al filtrar: asegurar destino en la misma pulsación.
+     if(Math.abs(target.getBoundingClientRect().top)>35)target.scrollIntoView({behavior:'instant',block:'start'});
+     root.classList.remove('ar-one-tap-jump');
+   });
+   document.querySelectorAll('.premium-dock a[href^="#"]').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')===hash?'location':'false'));
+ }
+ document.addEventListener('click',function(e){
+   if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+   const link=e.target.closest('a[href^="#"]');
+   if(link){
+     const hash=link.getAttribute('href');
+     if(!hash||hash==='#')return;
+     let id;try{id=decodeURIComponent(hash.slice(1))}catch(_e){return}
+     const target=document.getElementById(id);
+     if(!target)return;
+     e.preventDefault();
+     jump(target,hash);
+     return;
+   }
+   const tile=e.target.closest('button.category-tile');
+   if(!tile)return;
+   const category=tile.querySelector('.name')?.textContent?.trim();
+   if(!category)return;
+   // La navegación de categorías se ejecuta aquí, sin depender de un hash distinto.
+   e.preventDefault();e.stopImmediatePropagation();
+   const text=category.toLocaleLowerCase('es');
+   const special=text.includes('mascota')||text.includes('animal')?'mascotas':text.includes('acopio')?'acopios':text.includes('documento')?'documentos':null;
+   if(special){jump(document.getElementById(special),'#'+special);return}
+   const filter=document.getElementById('categoryFilter');
+   const search=document.getElementById('searchReports');
+   const option=filter&&Array.from(filter.options).find(o=>o.value===category);
+   if(option){
+     filter.value=category;
+     if(search)search.value='';
+     if(typeof renderReports==='function')renderReports();
+     jump(document.getElementById('reportes'),'#reportes');
+   }else if(typeof prepareReport==='function'){
+     prepareReport(category);
+     jump(document.getElementById('enviar'),'#enviar');
+   }
+ },true);
+})();
+</script>
 </body>
 </html>
