@@ -28,7 +28,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#071f19">
 <meta name="description" content="Aguadulce Reporta: reportes ciudadanos, mascotas perdidas, centros de acopio y noticias de nuestra comunidad.">
-<title>Aguadulce Reporta | Aguadulce Malo & Bueno</title>
+<title>Aguadulce Reporta 5.0 | La voz de nuestra comunidad</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2137,6 +2137,92 @@ body.ar-sponsor-modal-open{overflow:hidden}
   .report-grid { gap:24px; }
 }
 </style>
+<style id="ar-v5-premium-minimalista">
+/* =============================================================
+   AGUADULCE REPORTA 5.0 · PREMIUM MINIMALISTA
+   Capa de presentación: preserva formularios, IDs y lógica existente.
+   ============================================================= */
+:root{--bg:#f7f9f6;--border:#e2eae3;--shadow:0 12px 36px rgba(10,44,29,.055)}
+body{background:#f7f9f6;color:#12291f}
+.container{width:min(1160px,calc(100% - 40px))}
+.section{padding-block:clamp(38px,5.2vw,68px)}
+.section-title{font-size:clamp(30px,3.6vw,45px);line-height:1.12;letter-spacing:-1.25px;max-width:790px}
+.section-description{max-width:680px;line-height:1.7}
+.header{background:#09261d;border-bottom:1px solid #ffffff17}
+.header-inner{min-height:84px}
+.nav{gap:25px}
+.nav a{font-size:12px;letter-spacing:.08px}
+.nav a:hover{color:#d7f568}
+.brand-name{letter-spacing:-.75px}
+.hero{background:radial-gradient(ellipse at 87% 17%,#235d4566,transparent 43%),linear-gradient(117deg,#061d17 3%,#0d3428 100%)}
+.hero::after{opacity:.075!important}
+.hero-inner{grid-template-columns:1.15fr .85fr;gap:64px;padding-top:88px;padding-bottom:112px}
+.hero h1{font-size:clamp(47px,5.5vw,77px);line-height:1.065;letter-spacing:-2.8px;margin:20px 0}
+.hero p{font-size:16px;max-width:530px;line-height:1.72;color:#d0e2d5}
+.hero-tag{font-size:10px;letter-spacing:1.25px;padding:9px 13px}
+.hero-buttons{margin-top:30px;gap:11px}
+.hero-buttons .btn{min-height:53px;padding-inline:23px;font-size:12px;letter-spacing:.2px}
+.hero-buttons .btn-lime{box-shadow:none}
+.hero-points{margin-top:22px;gap:18px;font-size:11px}
+.hero-follow{margin-top:23px;background:#ffffff0b;box-shadow:none;border-color:#ffffff24}
+.hero-card{transform:none!important;animation:none!important;border-radius:25px;padding:37px;box-shadow:0 25px 75px #0003;border:1px solid #e3ebe4}
+.hero-card>*{transform:none!important}
+.hero-card-icon{width:49px;height:49px;font-size:25px;background:#eff7e8;color:#205b3e}
+.ar-v5-card-label{margin-top:24px;font-size:10px;letter-spacing:1.6px;font-weight:900;color:#4a8d60}
+.hero-card h3{font-size:clamp(26px,2.8vw,37px);letter-spacing:-1px;line-height:1.16;margin:12px 0 14px}
+.hero-card p{font-size:13px;line-height:1.8}
+.future-shortcuts{background:#fff;border-bottom:1px solid #e8eee7}
+.future-shortcuts-inner{gap:12px}
+.future-shortcuts-inner a{border-radius:15px;transition:transform .2s,border-color .2s}
+.future-shortcuts-inner a:hover{transform:translateY(-2px)}
+.reports-section{background:#f1f5f0}
+.report-card,.special-card,.category-tile,.location-card,.sidebar-card,.metric{border-color:#e2eae3!important;box-shadow:0 9px 28px #0b2e1b0a!important}
+.report-card{border-radius:19px;overflow:hidden}
+.report-card:hover{box-shadow:0 15px 38px #0b2e1b16!important}
+.report-body h3{font-size:21px;letter-spacing:-.35px}
+.report-body p{line-height:1.68}
+.report-category{border-radius:999px;font-size:10px;letter-spacing:.2px}
+.reports-toolbar{gap:10px;margin-block:21px 16px}
+.reports-toolbar .field{background:#fff;border-radius:12px}
+.category-tile{border-radius:17px}
+.category-tile strong{font-size:25px}
+.category-tile .name{font-size:14px}
+.form-section{background:#fff}
+.form-card{background:#fff!important;box-shadow:0 18px 55px #0b2e1b0e!important;border:1px solid #d8e8da!important;border-radius:22px}
+.field{border-radius:11px;background:#fbfdfb}
+.field:focus{background:#fff}
+.btn{border-radius:11px}
+.admin-section{background:#f2f6f1}
+.admin-report{box-shadow:none;border-color:#dce8de}
+.admin-tab{border-radius:10px}
+.footer{border-top:1px solid #ffffff1b}
+#consultar-caso{background:#edf5ea!important}
+#privacidad{background:#fff}
+/* Preserve controls, avoid animated movement for form and admin actions */
+.admin-section .btn:hover,.form-section .btn:hover{transform:none}
+@media(max-width:950px){.nav{gap:14px}.nav a{font-size:11px}.hero-inner{gap:30px}.hero-card{padding:26px}}
+@media(max-width:850px){.hero-inner{grid-template-columns:1fr;padding:62px 0 78px}.hero-card{display:none}.nav{display:none}}
+@media(max-width:600px){
+ .container{width:calc(100% - 32px)}
+ .section{padding-block:36px}
+ .header-inner{min-height:70px}
+ .hero-inner{padding:43px 0 64px}
+ .hero h1{font-size:clamp(38px,10vw,51px);letter-spacing:-1.55px;line-height:1.1}
+ .hero p{font-size:14px;line-height:1.7}
+ .hero-buttons{display:grid;grid-template-columns:1fr;gap:10px}
+ .hero-buttons .btn{width:100%;min-height:51px}
+ .hero-follow{margin-top:17px}
+ .hero-points{gap:10px;font-size:10px}
+ .section-title{font-size:clamp(29px,8vw,36px)}
+ .future-shortcuts-inner{gap:7px}
+ .future-shortcuts-inner a{min-width:0}
+ .form-card{padding:19px;border-radius:17px}
+ .report-body{padding:18px}
+ .premium-dock{background:#fffffff5;border-top:1px solid #e1ebe3;backdrop-filter:blur(18px)}
+ .premium-more-panel:not([hidden]){border-radius:17px}
+}
+@media(prefers-reduced-motion:reduce){.hero-card,.future-shortcuts-inner a{animation:none!important;transition:none!important}}
+</style>
 </head>
 
 <body>
@@ -2179,11 +2265,8 @@ body.ar-sponsor-modal-open{overflow:hidden}
       <a href="#inicio">Inicio</a>
       <a href="#reportes">Reportes</a>
       <a href="#mascotas">Mascotas</a>
-      <a href="#documentos">Documentos</a>
-      <a href="#enviar">Publicar</a>
-      <a href="#acopios">Acopios</a>
-      <a href="#donaciones">Donaciones</a>
-      <a href="#emergencias">Emergencias</a>
+      <a href="#consultar-caso">Consultar caso</a>
+      <a href="#categorias">Servicios</a>
     </nav>
 
     <a href="#enviar" class="btn btn-lime">＋ REPORTAR</a>
@@ -2229,16 +2312,16 @@ body.ar-sponsor-modal-open{overflow:hidden}
     <div>
       <div class="hero-tag">● AGUADULCE · COCLÉ · PANAMÁ</div>
 
-      <h1>Tu comunidad.<br><span>Tu voz.</span><br>En tiempo real.</h1>
+      <h1>Tu comunidad.<br><span>Tu voz.</span><br>Un mismo lugar.</h1>
 
       <p>
-        Reportes ciudadanos, avisos y ayuda comunitaria en un solo lugar. Explora lo que sucede o publica tu aviso.
+        Comparte lo que sucede en Aguadulce. Publica un reporte, descubre avisos y consulta información útil de nuestra comunidad.
       </p>
 
       <div class="hero-buttons">
         <a href="#enviar" class="btn btn-lime">＋ ENVIAR REPORTE</a>
         <a href="#reportes" class="btn btn-outline">EXPLORAR REPORTES</a>
-        <button type="button" class="btn btn-outline" onclick="prepareReport('Centros de acopio')">📢 SUBIR AFICHE</button>
+
       </div>
 
       <div class="hero-follow" aria-label="Sigue a Aguadulce Reporta en redes sociales">
@@ -2255,8 +2338,9 @@ body.ar-sponsor-modal-open{overflow:hidden}
     </div>
 
     <div class="hero-card">
-      <div class="hero-card-icon">📢</div>
-      <h3>Lo que pasa en tu comunidad importa.</h3>
+      <div class="hero-card-icon">✦</div>
+      <div class="ar-v5-card-label">UNA COMUNIDAD MÁS CONECTADA</div>
+      <h3>Lo que importa, merece ser escuchado.</h3>
       <p>
         Un espacio para dar visibilidad a los problemas,
         conectar a los vecinos y compartir información útil.
@@ -2270,9 +2354,9 @@ body.ar-sponsor-modal-open{overflow:hidden}
 <section class="future-shortcuts" aria-label="Accesos rápidos">
  <div class="container future-shortcuts-inner">
   <a href="#reportes"><span>📍</span><strong>Explorar</strong><small>Mi comunidad</small></a>
-  <a href="#acopios"><span>📦</span><strong>Centros de acopio</strong><small>Ayuda comunitaria</small></a>
+  <a href="#consultar-caso"><span>⌕</span><strong>Consultar caso</strong><small>Seguimiento público</small></a>
   <a href="#mascotas"><span>🐾</span><strong>Mascotas</strong><small>Encontrar</small></a>
-  <a href="#documentos"><span>🪪</span><strong>Documentos</strong><small>Recuperar</small></a>
+  <a href="#categorias"><span>▦</span><strong>Servicios</strong><small>Ver categorías</small></a>
  </div>
 </section>
 
