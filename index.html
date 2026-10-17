@@ -1632,6 +1632,26 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
 /* Eliminar reportes: acción destructiva separada */
 .btn-danger-admin{background:#fff1f0;color:#9d2424;border:1px solid #efb8b4;margin-top:12px}
 .btn-danger-admin:hover{background:#ffe2df}
+
+/* Centro de control: herramientas complementarias */
+.agr-tools{margin:18px 0;padding:17px;border:1px solid #d7e7da;border-radius:17px;background:#f8fcf8}
+.agr-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:15px}
+.agr-metric{padding:14px;border:1px solid #d9e8dc;border-radius:12px;background:white}
+.agr-metric strong{display:block;font:900 25px 'Outfit',sans-serif;color:#14583e}
+.agr-metric small{font-size:11px;color:#526b5c}
+.agr-tool-row{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.agr-tool-row .field{width:auto;flex:1 1 145px}
+.agr-tool-row label{font-size:12px;font-weight:800}
+.agr-adoptions{margin-top:16px;background:white;border:1px solid #d4e7d7;border-radius:13px;overflow:hidden}
+.agr-adoptions>summary{cursor:pointer;padding:15px;font-weight:900;color:#14583e}
+.agr-adoption-content{padding:15px;border-top:1px solid #e3eee5}
+.agr-private-card{border:1px solid #dce9de;border-radius:12px;padding:13px;margin-top:10px;background:#fafdfa;overflow-wrap:anywhere}
+.agr-private-card p{font-size:12px;line-height:1.65;white-space:pre-wrap}
+.agr-private-card h5{margin:0 0 8px;font-size:15px}
+.agr-note{margin-top:14px;border-top:1px dashed #cde1d1;padding-top:12px}
+.agr-note textarea{min-height:82px}
+.agr-case{font-weight:900;color:#155a3b;font-size:12px;letter-spacing:.3px}
+@media(max-width:600px){.agr-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.agr-metric{padding:9px}.agr-metric strong{font-size:21px}}
 </style>
 <style>
 /* AGUADULCE REPORTA — PREMIUM UX 2026 (no altera Supabase ni Turnstile) */
@@ -3016,6 +3036,21 @@ body.ar-sponsor-modal-open{overflow:hidden}
         </div>
 
         <p id="adminMessage" class="message" role="status"></p>
+        <div class="agr-tools" aria-label="Herramientas del administrador">
+          <div class="agr-metrics" id="agrMetrics" role="status" aria-live="polite"></div>
+          <label class="label" for="agrAdminSearch">Buscar reportes</label>
+          <input class="field" id="agrAdminSearch" type="search" placeholder="Buscar por caso, comunidad, categoría o descripción" autocomplete="off">
+          <div class="agr-tool-row">
+            <label for="agrDateFilter">Fecha</label>
+            <select class="field" id="agrDateFilter"><option value="all">Todas las fechas</option><option value="7">Últimos 7 días</option><option value="30">Últimos 30 días</option></select>
+            <label for="agrOrderFilter">Orden</label>
+            <select class="field" id="agrOrderFilter"><option value="new">Más recientes primero</option><option value="old">Más antiguos primero</option></select>
+          </div>
+          <p id="agrSearchSummary" class="hint" role="status"></p>
+          <details class="agr-adoptions"><summary>🐾 Panel de adopciones y solicitudes privadas <span id="agrAdoptionBadge"></span></summary>
+            <div class="agr-adoption-content"><button type="button" class="btn btn-soft" id="agrRefreshAdoptions">↻ Actualizar adopciones</button><div id="agrAdoptionList"></div><div id="agrRequestList"></div></div>
+          </details>
+        </div>
         <div class="admin-board" id="adminBoard" hidden>
           <div class="admin-tabs" id="adminTabs" role="tablist" aria-label="Filtrar reportes administrativos"></div>
           <p class="hint" id="adminFilterHelp">Las publicaciones están separadas por su situación. Al guardar, la tarjeta permanece en su lugar; pulsa Actualizar para reorganizar.</p>
@@ -5030,6 +5065,60 @@ async function showAdminPanel(){
   await loadAdminReports();
 }
 
+
+function agrCaseId(id){return "AGR-"+String(id||"").replace(/-/g,"").slice(0,16).toUpperCase();}
+function agrPlain(value){return value==null?"—":String(value);}
+function agrPrivateCard(title, fields){
+  const card=el("article","","agr-private-card");card.appendChild(el("h5",title));
+  fields.forEach(([label,value])=>card.appendChild(el("p",label+": "+agrPlain(value))));
+  return card;
+}
+async function agrLoadAdoptions(){
+  if(!db||$("adminPanel").hidden)return;
+  const pets=$("agrAdoptionList"),requests=$("agrRequestList");
+  pets.replaceChildren();requests.replaceChildren();
+  pets.appendChild(el("p","Cargando adopciones...","hint"));
+  try{
+    const [petResult,requestResult]=await Promise.all([
+      db.from("pet_adoptions").select("*").order("created_at",{ascending:false}).limit(100),
+      db.from("adoption_requests").select("*").limit(100)
+    ]);
+    pets.replaceChildren();
+    if(petResult.error)throw petResult.error;
+    if(requestResult.error)throw requestResult.error;
+    const allPets=petResult.data||[],allRequests=requestResult.data||[];
+    pets.appendChild(el("h4","Mascotas registradas ("+allPets.length+")"));
+    if(!allPets.length)pets.appendChild(el("p","No hay mascotas registradas.","hint"));
+    allPets.forEach(p=>pets.appendChild(agrPrivateCard("🐾 "+agrPlain(p.pet_name),[["ID de adopción",p.id],["Especie",p.species],["Estado",p.adoption_status],["Caso",p.report_id?agrCaseId(p.report_id):"—"]])));
+    requests.appendChild(el("h4","Solicitudes privadas ("+allRequests.length+")"));
+    if(!allRequests.length)requests.appendChild(el("p","Todavía no hay solicitudes de adopción.","hint"));
+    allRequests.forEach(r=>requests.appendChild(agrPrivateCard("🔒 Solicitud de adopción",[["Mascota / adopción",r.adoption_id],["Nombre",r.name],["Teléfono",r.phone],["Mensaje",r.message],["Estado",r.status],["Fecha",r.created_at?dateText(r.created_at):"—"]])));
+    $("agrAdoptionBadge").textContent="("+allRequests.length+" solicitudes)";
+  }catch(err){pets.replaceChildren();requests.replaceChildren();pets.appendChild(el("p","No se pudieron cargar las adopciones: "+(err?.message||"Error")+". Revisa permisos de lectura para administradores.","alert"));}
+}
+$("agrRefreshAdoptions").addEventListener("click",agrLoadAdoptions);
+document.querySelector(".agr-adoptions").addEventListener("toggle",event=>{if(event.target.open)agrLoadAdoptions();});
+function agrApplyFilters(){
+  const term=$("agrAdminSearch").value.trim().toLocaleLowerCase("es");
+  const days=$("agrDateFilter").value;
+  const old=$("agrOrderFilter").value==="old";
+  const now=Date.now();let shown=0;
+  document.querySelectorAll("#adminReports .admin-group").forEach(group=>{
+    const cards=[...group.querySelectorAll(".admin-report")];
+    cards.sort((a,b)=>old?Number(a.dataset.created)-Number(b.dataset.created):Number(b.dataset.created)-Number(a.dataset.created));
+    cards.forEach(card=>{
+      const age=now-Number(card.dataset.created);
+      const validDate=days==="all"||age<=Number(days)*86400000;
+      const validTerm=!term||(card.dataset.search||"").includes(term);
+      card.hidden=!(validDate&&validTerm);
+      if(!card.hidden&& !group.hidden)shown++;
+      group.appendChild(card);
+    });
+  });
+  $("agrSearchSummary").textContent="Mostrando "+shown+" reportes en la pestaña seleccionada. Los filtros también se aplican a las demás pestañas.";
+}
+["agrAdminSearch","agrDateFilter","agrOrderFilter"].forEach(id=>$(id).addEventListener(id==="agrAdminSearch"?"input":"change",agrApplyFilters));
+
 async function loadAdminReports(){
   if(!db||$("adminPanel").hidden)return;
 
@@ -5082,6 +5171,11 @@ async function loadAdminReports(){
     const buckets=new Map();
     const counts=Object.fromEntries(groups.map(g=>[g.id,0]));
     data.forEach(r=>counts[groupFor(r)]++);
+    const metrics=$("agrMetrics");metrics.replaceChildren();
+    [["Pendientes",counts.pending],["En revisión",counts.reviewing],["Publicados",counts.published]].forEach(([label,num])=>{
+      const item=el("div","","agr-metric");item.append(el("strong",String(num)),el("small",label));metrics.appendChild(item);
+    });
+    document.title=(counts.pending?"("+counts.pending+") ":"")+"Aguadulce Reporta | Administración";
     const setTab=id=>{
       tabs.querySelectorAll("button[data-group]").forEach(b=>{
         const active=b.dataset.group===id;
@@ -5094,7 +5188,7 @@ async function loadAdminReports(){
       const tab=el("button",g.label+" ","admin-tab");
       tab.type="button";tab.dataset.group=g.id;tab.setAttribute("role","tab");
       tab.appendChild(el("span",String(counts[g.id]),"admin-tab-count"));
-      tab.onclick=()=>{window.arAdminTab=g.id;setTab(g.id);};
+      tab.onclick=()=>{window.arAdminTab=g.id;setTab(g.id);agrApplyFilters();};
       tabs.appendChild(tab);
       const section=el("section","","admin-group");
       section.dataset.group=g.id;
@@ -5109,6 +5203,11 @@ async function loadAdminReports(){
       const card=el(
         "article","","admin-report"
       );
+      card.dataset.created=String(new Date(report.created_at).getTime()||0);
+      card.dataset.search=[agrCaseId(report.id),report.id,report.category,report.area,report.description,report.status].join(" ").toLocaleLowerCase("es");
+      const caseRow=el("p","🆔 Caso: "+agrCaseId(report.id),"agr-case");
+      caseRow.title="Identificador completo: "+report.id;
+
 
       card.append(
         el(
@@ -5140,6 +5239,8 @@ async function loadAdminReports(){
           (report.is_published?"Sí":"No")
         )
       );
+
+      card.appendChild(caseRow);
 
       if(
         isDocument(report) ||
@@ -5485,8 +5586,25 @@ async function loadAdminReports(){
       actions.appendChild(remove);
       actions.appendChild(message);
       card.appendChild(actions);
+      const noteWrap=el("div","","agr-note");
+      const noteTitle=el("label","🔒 Nota interna privada (solo administradores)","label");
+      const noteText=el("textarea","","field");noteText.maxLength=3000;noteText.placeholder="Seguimiento, verificación o contacto con entidades. No es público.";
+      const noteButton=el("button","Guardar nota privada","btn btn-soft");noteButton.type="button";
+      const noteStatus=el("p","","hint");
+      noteWrap.append(noteTitle,noteText,noteButton,noteStatus);card.appendChild(noteWrap);
+      db.from("report_admin_notes").select("note").eq("report_id",report.id).maybeSingle().then(({data,error})=>{
+        if(error){noteStatus.textContent="No se pudo consultar la nota: "+error.message;return;}
+        if(data)noteText.value=data.note||"";
+      });
+      noteButton.onclick=async()=>{
+        noteButton.disabled=true;noteStatus.textContent="Guardando...";
+        const {error}=await db.from("report_admin_notes").upsert({report_id:report.id,note:noteText.value.trim(),updated_at:new Date().toISOString()},{onConflict:"report_id"});
+        noteStatus.textContent=error?"Error: "+error.message:"✓ Nota guardada de forma privada";
+        noteButton.disabled=false;
+      };
       buckets.get(groupFor(report)).appendChild(card);
     }
+    agrApplyFilters();
 
   }catch(error){
     console.error(error);
