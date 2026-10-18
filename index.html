@@ -1669,6 +1669,19 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
 .ar-final-result{margin-top:12px;font-size:13px;line-height:1.7}.ar-case-label{display:block;margin-top:9px;color:#185f37;font-size:12px;font-weight:900}
 .ar-privacy details{background:#fff;border:1px solid #dbe8dc;border-radius:12px;margin:10px 0;padding:14px}
 .ar-privacy summary{font-weight:900;cursor:pointer}.ar-privacy p,.ar-privacy li{font-size:13px;line-height:1.8;color:#496452}
+
+/* Firma visual oficial dentro de las publicaciones, visible en capturas */
+.ar-detail-brand{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 25px;background:linear-gradient(110deg,#062c22,#105039);color:#fff;border-top:3px solid #d7f568}
+.ar-detail-brand-identity{display:flex;align-items:center;gap:14px;min-width:0}
+.ar-detail-brand-identity img{width:68px;height:68px;object-fit:contain;background:#fff;border-radius:13px;padding:5px;flex:none}
+.ar-detail-brand-name strong{display:block;font:900 25px/.95 "Outfit",sans-serif;letter-spacing:-.6px}
+.ar-detail-brand-name strong span{color:#d7f568}
+.ar-detail-brand-name small{display:block;font-size:10px;line-height:1.4;margin-top:6px;color:#c5dfd0}
+.ar-detail-brand-social{text-align:right;display:flex;flex-direction:column;gap:3px;font-size:12px}
+.ar-detail-brand-social strong{font-size:11px;letter-spacing:.7px}
+.ar-detail-brand-social span{color:#c8e4d3;font-size:10px}
+.ar-detail-brand-social b{font-size:14px}
+@media(max-width:520px){.ar-detail-brand{padding:12px;gap:8px}.ar-detail-brand-identity{gap:8px}.ar-detail-brand-identity img{width:45px;height:45px;border-radius:9px}.ar-detail-brand-name strong{font-size:17px}.ar-detail-brand-name small{font-size:8px;max-width:145px}.ar-detail-brand-social strong{font-size:9px}.ar-detail-brand-social span{font-size:8px}.ar-detail-brand-social b{font-size:10px}}
 </style>
 <style>
 /* AGUADULCE REPORTA — PREMIUM UX 2026 (no altera Supabase ni Turnstile) */
@@ -2314,7 +2327,7 @@ body{background:#f7f9f6;color:#12291f}
 .ar-public-contact strong{font-size:15px;color:#173e28}
 .ar-contact-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .ar-contact-actions a{padding:10px 8px;border-radius:9px;text-align:center;font-weight:800;font-size:12px;min-height:42px;display:flex;justify-content:center;align-items:center}
-.ar-contact-call{background:#14583e;color:white}.ar-contact-wa{background:#e0f4df;color:#14583e;border:1px solid #b5dbb6}
+.ar-contact-call{background:#14583e;color:white}.ar-contact-wa{background:#e0f4df;color:#14583e;border:1px solid #b5dbb6;display:inline-flex;align-items:center;justify-content:center;gap:7px}
 </style>
 </head>
 
@@ -3384,6 +3397,13 @@ body{background:#f7f9f6;color:#12291f}
         <div id="detailShare"></div>
       </div>
     </div>
+    <div class="ar-detail-brand" aria-label="Marca oficial Aguadulce Reporta">
+      <div class="ar-detail-brand-identity">
+        <img src="logo.png" alt="Logo oficial de Aguadulce Reporta" loading="eager">
+        <div class="ar-detail-brand-name"><strong>AGUADULCE<br><span>REPORTA</span></strong><small>Una iniciativa de Aguadulce Malo &amp; Bueno</small></div>
+      </div>
+      <div class="ar-detail-brand-social"><strong>SÍGUENOS EN REDES</strong><span>Instagram · Facebook · TikTok</span><b>@aguadulcebueno</b></div>
+    </div>
   </div>
 </div>
 
@@ -3939,7 +3959,7 @@ function arContactButtons(report){
   const phone=document.createElement("strong");phone.textContent=raw;box.appendChild(phone);
   const actions=document.createElement("div");actions.className="ar-contact-actions";
   const call=document.createElement("a");call.href="tel:"+digits;call.textContent="📞 Llamar";call.className="ar-contact-call";
-  const whatsapp=document.createElement("a");whatsapp.href="https://wa.me/"+wa;whatsapp.target="_blank";whatsapp.rel="noopener noreferrer";whatsapp.textContent="💬 WhatsApp";whatsapp.className="ar-contact-wa";
+  const whatsapp=document.createElement("a");whatsapp.href="https://wa.me/"+wa;whatsapp.target="_blank";whatsapp.rel="noopener noreferrer";whatsapp.innerHTML='<svg aria-hidden="true" viewBox="0 0 32 32" width="19" height="19" fill="currentColor" style="vertical-align:middle;flex:none"><path d="M16 .8A15.1 15.1 0 0 0 3 23.6L.9 31l7.6-2A15.2 15.2 0 1 0 16 .8Zm0 27.5c-2.4 0-4.7-.7-6.7-2l-.5-.3-4.5 1.2 1.2-4.4-.3-.5A12.3 12.3 0 1 1 16 28.3Zm6.8-9.2c-.4-.2-2.2-1.1-2.6-1.2-.3-.1-.6-.2-.9.2-.3.4-1 1.2-1.2 1.4-.2.2-.5.3-.9.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8l.7-.8c.2-.2.3-.4.4-.7.1-.3 0-.5 0-.7l-1.2-2.9c-.3-.7-.6-.6-.9-.6h-.8c-.3 0-.8.1-1.2.5-.4.4-1.6 1.6-1.6 3.8s1.6 4.4 1.8 4.7c.2.3 3.1 4.8 7.6 6.6 1.1.5 2 .8 2.7 1 1.1.4 2.1.3 2.9.2.9-.1 2.2-.9 2.5-1.8.3-.9.3-1.7.2-1.8-.1-.2-.4-.3-.8-.5Z"/></svg><span>WhatsApp</span>';whatsapp.className="ar-contact-wa";
   actions.append(call,whatsapp);box.appendChild(actions);return box;
 }
 
