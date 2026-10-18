@@ -2232,6 +2232,39 @@ body{background:#f7f9f6;color:#12291f}
 }
 @media(prefers-reduced-motion:reduce){.hero-card,.future-shortcuts-inner a{animation:none!important;transition:none!important}}
 </style>
+<style id="ar-5-1-escritorio-limpio">
+/* AGUADULCE REPORTA 5.1 — ESCRITORIO EDITORIAL, AFICHES LIMPIOS */
+@media(min-width:1101px){
+  .container{width:min(1540px,calc(100% - 112px))!important;max-width:none!important}
+  .hero-inner{grid-template-columns:minmax(0,1.45fr) minmax(340px,.65fr)!important;gap:clamp(45px,5vw,110px)!important;padding-block:96px 108px!important}
+  .hero h1{font-size:clamp(64px,5.7vw,100px)!important;max-width:950px!important;line-height:1.025!important}
+  .hero p{max-width:710px!important;font-size:18px!important}
+  .hero-card{max-width:420px!important}
+  .reports-layout{grid-template-columns:minmax(0,1fr) 282px!important;gap:30px!important}
+  .reports-main{min-width:0}
+  .report-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px!important}
+  .report-grid .report-photo-wrap{height:215px!important}
+  .premium-posters-feed,.premium-posters-feed.poster-count-4,.premium-posters-feed.poster-count-8,.premium-posters-feed.poster-count-15{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:16px!important}
+  .premium-posters-feed .report-card{max-width:none!important}
+  .premium-posters-feed .report-body{padding:12px!important}
+  .premium-posters-feed .report-body h3{font-size:14px!important}
+  .form-layout{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr)!important;gap:clamp(35px,5vw,100px)!important}
+  .form-card{max-width:none!important}
+}
+@media(min-width:1600px){.container{width:min(1640px,calc(100% - 144px))!important}}
+/* Los afiches son visuales: se ve imagen y título, los detalles se consultan tocando la imagen. */
+.premium-posters-feed .report-body{padding:11px 12px!important;gap:0!important}
+.premium-posters-feed .report-body h3{font-size:clamp(13px,1.1vw,15px)!important;line-height:1.3!important;margin:8px 0 0!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.premium-posters-feed .report-body>p,.premium-posters-feed .report-bottom,.premium-posters-feed .share-actions,.premium-posters-feed .ar-case-label{display:none!important}
+.premium-posters-feed .report-category{font-size:10px!important;letter-spacing:0!important}
+.premium-posters-feed .report-photo-wrap:after,.report-card .report-photo-wrap:after{content:none!important;display:none!important}
+.report-card .report-zoom-button,.report-card .ar-case-label{display:none!important}
+.premium-posters-feed .report-photo-wrap{cursor:zoom-in}
+@media(max-width:600px){
+ .premium-posters-feed .report-body{padding:9px!important}
+ .premium-posters-feed .report-body h3{font-size:12px!important}
+}
+</style>
 </head>
 
 <body>
@@ -2311,7 +2344,6 @@ body{background:#f7f9f6;color:#12291f}
     <a href="#donaciones">💚 Donaciones</a>
     <a href="#emergencias">☎ Emergencias</a>
     <a href="#sismos">🌎 Sismos</a>
-    <a href="#contacto">✉ Contacto</a>
     <a href="#redes">↗ Redes sociales</a>
   </div>
 </div>
@@ -3240,32 +3272,6 @@ body{background:#f7f9f6;color:#12291f}
 </section>
 
 <!-- CONTACTO: FormSubmit requiere confirmar el correo al recibir el primer mensaje -->
-<section class="contact-section" id="contacto" aria-labelledby="contactTitle">
- <div class="container contact-shell">
-  <div class="contact-info">
-   <div class="section-label">HABLEMOS</div>
-   <h2 id="contactTitle">Contáctanos.</h2>
-   <p>¿Tienes una consulta, sugerencia o propuesta? Escríbenos aquí y recibiremos tu mensaje por correo.</p>
-   <a class="contact-email" href="mailto:aguadulce507@hotmail.com">✉ aguadulce507@hotmail.com</a>
-  </div>
-  <form class="contact-card" action="https://formsubmit.co/aguadulce507@hotmail.com" method="POST" accept-charset="UTF-8">
-   <input type="hidden" name="_subject" value="Nuevo mensaje desde Aguadulce Reporta">
-   <input type="hidden" name="_template" value="table">
-   <input type="hidden" name="_captcha" value="true">
-   <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
-   <div class="contact-fields">
-    <label class="contact-field">Nombre <input type="text" name="nombre" maxlength="90" autocomplete="name" placeholder="Tu nombre" required></label>
-    <label class="contact-field">Tu correo <input type="email" name="email" maxlength="150" autocomplete="email" placeholder="nombre@correo.com" required></label>
-    <label class="contact-field full">Asunto <select name="asunto" required><option value="" disabled selected>Selecciona el motivo</option><option>Consulta general</option><option>Sugerencia</option><option>Publicidad o colaboración</option><option>Problema con una publicación</option><option>Otro</option></select></label>
-    <label class="contact-field full">Mensaje <textarea name="mensaje" minlength="10" maxlength="3000" placeholder="Escribe tu mensaje aquí..." required></textarea></label>
-   </div>
-   <button class="contact-send" type="submit">✉ Enviar mensaje →</button>
-   <p class="contact-note">Al enviar, tus datos se procesarán mediante FormSubmit para entregar el mensaje a nuestro correo. No incluyas contraseñas ni información sensible.</p>
-  </form>
- </div>
-</section>
-
-
 <section class="section" id="consultar-caso" aria-labelledby="consultarCasoTitulo" style="background:#eaf3e8">
  <div class="container">
   <div class="section-label">CONSULTA CIUDADANA</div>
@@ -3278,7 +3284,7 @@ body{background:#f7f9f6;color:#12291f}
    </form>
    <div id="arCaseResult" class="ar-final-result" role="status" aria-live="polite"></div>
   </div>
-  <p class="hint">¿Tu reporte aún está pendiente? La revisión corresponde al equipo administrador. Para consultas o solicitudes de retiro, utiliza el formulario de contacto e indica el número de caso si lo tienes.</p>
+  <p class="hint">¿Tu reporte aún está pendiente? La revisión corresponde al equipo administrador. Para consultas o solicitudes de retiro, escribe al correo de atención indicado en Privacidad e incluye el número de caso si lo tienes.</p>
  </div>
 </section>
 <section class="section ar-privacy" id="privacidad" aria-labelledby="privacidadTitulo">
@@ -3288,8 +3294,8 @@ body{background:#f7f9f6;color:#12291f}
   <p class="section-description">Aguadulce Reporta es una iniciativa comunitaria. Antes de publicar, conoce cómo se revisa la información y cómo solicitar correcciones.</p>
   <details><summary>🔒 ¿Qué información se hace pública?</summary><p>Los reportes aprobados pueden mostrar la categoría, comunidad, descripción y fotografía enviada. No incluyas nombres completos, teléfonos, direcciones exactas, documentos de identidad ni datos de otras personas en esos campos. Las notas internas del administrador y las solicitudes privadas de adopción no deben publicarse.</p></details>
   <details><summary>📝 Reglas de publicación</summary><p>Envía información veraz y relacionada con la comunidad. Evita acusaciones personales, insultos, fotografías de documentos, datos privados y contenido que ponga en riesgo a otras personas. El equipo puede revisar, corregir, rechazar o retirar publicaciones.</p></details>
-  <details><summary>✉ Solicitar corrección o retiro</summary><p>Si necesitas corregir o retirar una publicación, usa el <a href="#contacto" style="color:#14583e;text-decoration:underline;font-weight:800">formulario de contacto</a>. Incluye el número de caso o enlace público y explica el motivo. No envíes datos sensibles innecesarios.</p></details>
-  <details><summary>ℹ️ Servicios externos y conservación de datos</summary><p>La página utiliza servicios de alojamiento y procesamiento, como Supabase para los reportes y FormSubmit para mensajes de contacto. La conservación y eliminación de datos depende de la configuración efectiva de estos servicios y de las decisiones administrativas. No se anuncia aquí un plazo fijo de eliminación porque aún debe definirse y verificarse.</p></details>
+  <details><summary>✉ Solicitar corrección o retiro</summary><p>Si necesitas corregir o retirar una publicación, escríbenos a <a href="mailto:aguadulce507@hotmail.com?subject=Correcci%C3%B3n%20o%20retiro%20de%20publicaci%C3%B3n" style="color:#14583e;text-decoration:underline;font-weight:800">nuestro correo de atención</a>. Incluye el número de caso o enlace público y explica el motivo. No envíes datos sensibles innecesarios.</p></details>
+  <details><summary>ℹ️ Servicios externos y conservación de datos</summary><p>La página utiliza servicios de alojamiento y procesamiento, como Supabase para los reportes. La conservación y eliminación de datos depende de la configuración efectiva de estos servicios y de las decisiones administrativas. No se anuncia aquí un plazo fijo de eliminación porque aún debe definirse y verificarse.</p></details>
  </div>
 </section>
 
@@ -3938,12 +3944,6 @@ function buildReportCard(report){
   image.addEventListener("click",()=>openReportDetail(report));
 
   photoBox.appendChild(image);
-  const zoomButton=el("button","🔎","report-zoom-button");
-  zoomButton.type="button";
-  zoomButton.setAttribute("aria-label","Ver afiche y leer información completa");
-  zoomButton.title="Ver publicación completa";
-  zoomButton.addEventListener("click",()=>openReportDetail(report));
-  photoBox.appendChild(zoomButton);
   card.appendChild(photoBox);
 
   const body=el("div","","report-body");
@@ -3969,7 +3969,6 @@ function buildReportCard(report){
     )
   );
 
-  if(report.id)body.appendChild(el("span","🆔 "+agrCaseId(report.id),"ar-case-label"));
   body.appendChild(bottom);
   body.appendChild(makeShareActions(report));
   card.appendChild(body);
