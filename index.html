@@ -2304,6 +2304,18 @@ body{background:#f7f9f6;color:#12291f}
 @keyframes agrSuccessPop{0%{transform:scale(.65)}75%{transform:scale(1.1)}100%{transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){#agrSuccessOverlay .agr-success-dialog,#agrSuccessOverlay .agr-success-check{animation:none}}
 </style>
+<style id="ar54-contact-styles">
+.ar-phone-fields{margin:20px 0;padding:18px;border:1px solid #cfe6d2;background:#f5fbf4;border-radius:15px}
+.ar-phone-consent{display:flex;align-items:flex-start;gap:10px;margin-top:14px;font-size:13px;line-height:1.6;color:#234934;cursor:pointer}
+.ar-phone-consent input{width:19px;height:19px;flex-shrink:0;margin-top:2px;accent-color:#17653d}
+.ar-public-contact{margin-top:13px;padding:13px;border:1px solid #d5e9d8;background:#f3faf3;border-radius:12px;display:flex;flex-direction:column;gap:7px}
+.ar-public-contact:empty{display:none}
+.ar-public-contact small{color:#587461;font-size:11px}
+.ar-public-contact strong{font-size:15px;color:#173e28}
+.ar-contact-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ar-contact-actions a{padding:10px 8px;border-radius:9px;text-align:center;font-weight:800;font-size:12px;min-height:42px;display:flex;justify-content:center;align-items:center}
+.ar-contact-call{background:#14583e;color:white}.ar-contact-wa{background:#e0f4df;color:#14583e;border:1px solid #b5dbb6}
+</style>
 </head>
 
 <body>
@@ -2640,6 +2652,7 @@ body{background:#f7f9f6;color:#12291f}
           <option value="Otros problemas comunitarios">Otros problemas comunitarios</option>
           <option value="Documentos encontrados">Documentos encontrados</option>
           <option value="Centros de acopio">Centros de acopio</option>
+          <option value="Daños por sismo">Daños por sismo</option>
         </select>
 
         <div id="petsExtra" class="extra-fields" hidden>
@@ -2740,6 +2753,13 @@ body{background:#f7f9f6;color:#12291f}
         <input class="field" id="area" maxlength="85" list="comunidadesAguadulce" autocomplete="off" placeholder="Primero selecciona un corregimiento..." aria-describedby="areaAutocompleteHelp">
         <datalist id="comunidadesAguadulce"></datalist>
         <p class="hint" id="areaAutocompleteHelp">Selecciona un corregimiento y empieza a escribir la comunidad. Verás sugerencias de esa zona, pero también puedes escribir otro sector o una referencia.</p>
+
+        <div class="ar-phone-fields" id="arPhoneFields">
+          <label class="label" for="arReportPhone">TELÉFONO O WHATSAPP <span id="arPhoneRequired">(OPCIONAL)</span></label>
+          <input class="field" id="arReportPhone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="Ej.: 6123-4567" aria-describedby="arPhoneHint">
+          <p class="hint" id="arPhoneHint">Obligatorio para daños por sismo y mascotas en adopción. En las demás categorías es opcional.</p>
+          <label class="ar-phone-consent"><input type="checkbox" id="arPublishPhone"> <span>Autorizo que este número aparezca públicamente en mi reporte, con botones para llamarme o escribirme por WhatsApp. Entiendo que cualquier visitante podrá verlo y copiarlo.</span></label>
+        </div>
 
         <label class="label" for="description">
           DESCRIPCIÓN
@@ -3880,6 +3900,7 @@ function openReportDetail(report){
   img.addEventListener("click",()=>openPhoto(img));
   photo.appendChild(img);
   const share=$("detailShare");share.replaceChildren(makeShareActions(report));
+  share.appendChild(arContactButtons(report));
   detailDialog.classList.add("active");
   detailDialog.setAttribute("aria-hidden","false");
   document.body.classList.add("modal-open");
@@ -3907,6 +3928,20 @@ document.addEventListener("keydown",e=>{
 });
 
 /* TARJETAS */
+
+function arContactButtons(report){
+  const box=document.createElement("div");box.className="ar-public-contact";
+  const raw=String(report.contact_phone_public||"").trim();
+  const digits=raw.replace(/\D/g,"");
+  if(digits.length<7||digits.length>15)return box;
+  const wa=digits.length===8?"507"+digits:digits;
+  const label=document.createElement("small");label.textContent="Contacto autorizado por quien publicó";box.appendChild(label);
+  const phone=document.createElement("strong");phone.textContent=raw;box.appendChild(phone);
+  const actions=document.createElement("div");actions.className="ar-contact-actions";
+  const call=document.createElement("a");call.href="tel:"+digits;call.textContent="📞 Llamar";call.className="ar-contact-call";
+  const whatsapp=document.createElement("a");whatsapp.href="https://wa.me/"+wa;whatsapp.target="_blank";whatsapp.rel="noopener noreferrer";whatsapp.textContent="💬 WhatsApp";whatsapp.className="ar-contact-wa";
+  actions.append(call,whatsapp);box.appendChild(actions);return box;
+}
 
 function buildReportCard(report){
   const card=el("article","","report-card");
@@ -3984,6 +4019,7 @@ function buildReportCard(report){
   );
 
   body.appendChild(bottom);
+  body.appendChild(arContactButtons(report));
   body.appendChild(makeShareActions(report));
   card.appendChild(body);
 
@@ -4145,7 +4181,7 @@ async function loadPublicReports(){
     const {data,error}=await publicDb
       .from("reports")
       .select(
-        "id,category,area,description,status,created_at"
+        "id,category,area,description,status,created_at,contact_phone_public"
       )
       .order("created_at",{ascending:false})
       .limit(500);
@@ -4275,6 +4311,9 @@ function updateCategory(){
   $("acopioExtra").hidden=!acopio;
   $("documentExtra").hidden=!documents;
   $("quakeExtra").hidden=!earthquake;
+  const phoneRequired=earthquake || (pets && $("petType").value==="Mascota en adopción");
+  $("arReportPhone").required=phoneRequired;
+  $("arPhoneRequired").textContent=phoneRequired?"(OBLIGATORIO)":"(OPCIONAL)";
 
   $("photoSection").hidden=false;
   $("photo").disabled=false;
@@ -4846,6 +4885,15 @@ $("reportForm").addEventListener(
       return;
     }
 
+    const contactPhone=$("arReportPhone").value.trim();
+    const phoneDigits=contactPhone.replace(/\D/g,"");
+    const phoneRequired=category==="Daños por sismo" || (category===PETS && $("petType").value==="Mascota en adopción");
+    if((phoneRequired && !contactPhone) || (contactPhone && (phoneDigits.length<7 || phoneDigits.length>15 || contactPhone.length>20))){
+      reportAlert("⚠️ "+(phoneRequired?"El teléfono es obligatorio para esta categoría. ":"")+"Introduce un número válido de 7 a 15 dígitos.");
+      $("arReportPhone").focus();return;
+    }
+    if($("arPublishPhone").checked && !contactPhone){reportAlert("⚠️ Escribe un teléfono antes de autorizar su publicación.");$("arReportPhone").focus();return;}
+
     if(compressionPending){
       reportAlert(
         "⏳ Espera a que termine la compresión."
@@ -4907,6 +4955,8 @@ $("reportForm").addEventListener(
       visibility
     );
     form.append("turnstile_token",token);
+    form.append("contact_phone",contactPhone);
+    form.append("publish_phone",contactPhone && $("arPublishPhone").checked ? "true" : "false");
 
     if(
       optimizedPhoto
