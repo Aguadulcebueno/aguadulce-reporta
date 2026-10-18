@@ -4178,29 +4178,40 @@ async function loadPublicReports(){
   showMessage("publicMessage","Cargando publicaciones...");
 
   try{
-    // Carga segura: los afiches y reportes no dependen del campo de contacto.
-    // Se recorren páginas para no ocultar publicaciones antiguas por el límite 500.
+    // Cargar primero todas las publicaciones, sin condicionar los afiches
+    // a los permisos de la columna de teléfono público.
     const columnsBase="id,category,area,description,status,created_at";
-    const columnsContact=columnsBase+",contact_phone_public";
-    let withContact=true;
     const loaded=[];
     for(let offset=0;offset<10000;offset+=500){
-      let response=await publicDb.from("reports")
-        .select(withContact?columnsContact:columnsBase)
+      const response=await publicDb.from("reports")
+        .select(columnsBase)
         .order("created_at",{ascending:false})
         .range(offset,offset+499);
-      if(response.error && withContact){
-        console.warn("Consulta de teléfonos no disponible; cargando publicaciones sin teléfonos:",response.error.message);
-        withContact=false;
-        response=await publicDb.from("reports")
-          .select(columnsBase)
-          .order("created_at",{ascending:false})
-          .range(offset,offset+499);
-      }
       if(response.error)throw response.error;
       const batch=response.data||[];
       loaded.push(...batch);
       if(batch.length<500)break;
+    }
+    // Consulta independiente de teléfonos: un error de permisos nunca
+    // debe ocultar publicaciones, mascotas ni centros de acopio.
+    // Solo se consulta el teléfono público, jamás report_contacts.
+    const phoneById=new Map();
+    for(let offset=0;offset<loaded.length;offset+=300){
+      const ids=loaded.slice(offset,offset+300).map(r=>r.id);
+      if(!ids.length)continue;
+      const {data:phones,error:phoneError}=await publicDb.from("reports")
+        .select("id,contact_phone_public")
+        .in("id",ids);
+      if(phoneError){
+        console.warn("No se pueden consultar los teléfonos públicos. Revisa el permiso SELECT de contact_phone_public para anon:",phoneError.message);
+        break;
+      }
+      for(const item of phones||[]){
+        if(item.contact_phone_public)phoneById.set(item.id,item.contact_phone_public);
+      }
+    }
+    for(const report of loaded){
+      report.contact_phone_public=phoneById.get(report.id)||null;
     }
     publicReports=loaded;
 
