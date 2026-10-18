@@ -3235,6 +3235,7 @@ body{background:#f7f9f6;color:#12291f}
   </div>
 </section>
 
+<style>#arContactForm [hidden],#arContactSuccess[hidden]{display:none!important}</style>
 <!-- CONTACTO CIUDADANO: servicio FormSubmit (activación por correo requerida) -->
 <section class="section ar-contact-section" id="contacto" aria-labelledby="contactTitle">
   <div class="container ar-contact-layout">
@@ -3249,7 +3250,14 @@ body{background:#f7f9f6;color:#12291f}
         <input type="hidden" name="_subject" value="Nuevo contacto desde Aguadulce Reporta">
         <input type="hidden" name="_captcha" value="true">
         <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://aguadulcereporta.com/?contacto=enviado#contacto">
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="ar-contact-trap" aria-hidden="true">
+        <div id="arContactSuccess" role="status" aria-live="polite" hidden tabindex="-1" style="padding:28px 22px;border-radius:18px;background:#e8f7e9;border:1px solid #a9dcb6;color:#164d2b;text-align:center;box-shadow:0 10px 26px rgba(15,75,39,.08)">
+          <div aria-hidden="true" style="font-size:44px;line-height:1;margin-bottom:12px">✓</div>
+          <h3 style="font-size:24px;line-height:1.25;margin:0 0 10px;color:#164d2b">¡Tu mensaje fue enviado!</h3>
+          <p style="font-size:16px;line-height:1.6;margin:0 0 16px;color:#24533a">Gracias por contactar a Aguadulce Reporta. Hemos recibido tu mensaje y te responderemos lo antes posible a través de los datos que nos compartiste.</p>
+          <a class="btn btn-green" href="#inicio" style="display:inline-flex;justify-content:center;text-decoration:none">Volver al inicio</a>
+        </div>
         <div class="ar-contact-row">
           <label>Nombre <input class="field" name="nombre" maxlength="100" autocomplete="name" required placeholder="Tu nombre"></label>
           <label>Correo electrónico <input class="field" type="email" name="email" maxlength="160" autocomplete="email" required placeholder="correo@ejemplo.com"></label>
@@ -6242,6 +6250,28 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').catch(error => console.warn('Acceso directo: service worker no disponible', error));
   });
 }
+</script>
+<script>
+// Confirmación de regreso desde FormSubmit. No almacena datos personales en la URL.
+(function(){
+  try {
+    const url = new URL(window.location.href);
+    if (url.searchParams.get('contacto') !== 'enviado') return;
+    const success = document.getElementById('arContactSuccess');
+    if (success) {
+      success.hidden = false;
+      const form = document.getElementById('arContactForm');
+      if (form) Array.from(form.children).forEach(el => { if (el !== success) el.hidden = true; });
+      // El destino del enlace de FormSubmit puede abrirse antes de terminar el desplazamiento del navegador.
+      requestAnimationFrame(() => {
+        document.getElementById('contacto')?.scrollIntoView({block:'start',behavior:'instant'});
+        success.focus({preventScroll:true});
+      });
+    }
+    url.searchParams.delete('contacto');
+    window.history.replaceState(window.history.state, '', url.pathname + url.search + url.hash);
+  } catch (error) { console.warn('No se pudo mostrar la confirmación de contacto', error); }
+})();
 </script>
 </body>
 </html>
