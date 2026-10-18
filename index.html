@@ -2304,6 +2304,15 @@ body{background:#f7f9f6;color:#12291f}
 @keyframes agrSuccessPop{0%{transform:scale(.65)}75%{transform:scale(1.1)}100%{transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){#agrSuccessOverlay .agr-success-dialog,#agrSuccessOverlay .agr-success-check{animation:none}}
 </style>
+<style id="ar-phone-styles">
+.ar-phone-field{margin:18px 0;padding:16px;border:1px solid #dce8e0;border-radius:16px;background:#f8fcf9}
+.ar-phone-consent{display:flex;align-items:flex-start;gap:10px;line-height:1.45;font-size:.92rem;margin-top:12px;cursor:pointer}
+.ar-phone-consent input{width:20px;height:20px;flex:0 0 20px;accent-color:#166534}
+.ar-public-phone{margin-top:13px;padding:11px;border-radius:12px;background:#edf9ef;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ar-phone-label{flex:1 1 100%;font-size:.87rem;font-weight:700;color:#14532d}
+.ar-phone-action{display:inline-flex;align-items:center;justify-content:center;border-radius:9px;background:#166534;color:white!important;padding:9px 13px;text-decoration:none;font-size:.85rem;font-weight:700}
+.ar-phone-action.ar-wa{background:#087d48}
+</style>
 </head>
 
 <body>
@@ -2748,6 +2757,14 @@ body{background:#f7f9f6;color:#12291f}
           minlength="10" maxlength="1500"
           placeholder="Cuéntanos qué está pasando..."
           required></textarea>
+
+        <div class="ar-phone-field">
+          <label class="label" for="reportPhone">TELÉFONO O WHATSAPP (OBLIGATORIO)</label>
+          <input class="field" id="reportPhone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="Ej.: 6123-4567" required aria-describedby="reportPhoneHelp">
+          <p class="hint" id="reportPhoneHelp">Escribe un número donde podamos contactarte sobre este reporte. No lo incluyas en la descripción.</p>
+          <label class="ar-phone-consent"><input type="checkbox" id="reportPhonePublic"> <span><strong>Autorizo publicar mi número</strong> para que otras personas puedan llamarme o escribirme por WhatsApp sobre este reporte.</span></label>
+          <p class="hint">Si no marcas la casilla, tu número solo será visible para administración. Si la marcas, cualquier visitante podrá verlo, copiarlo o compartirlo.</p>
+        </div>
 
         <div id="photoSection">
           <label class="label" for="photo" id="photoLabel">
@@ -3879,7 +3896,9 @@ function openReportDetail(report){
   img.onerror=()=>{photo.replaceChildren(makeReportPlaceholder(report));};
   img.addEventListener("click",()=>openPhoto(img));
   photo.appendChild(img);
-  const share=$("detailShare");share.replaceChildren(makeShareActions(report));
+  const share=$("detailShare");share.replaceChildren();
+  const publicPhone=makePublicPhone(report);if(publicPhone)share.appendChild(publicPhone);
+  share.appendChild(makeShareActions(report));
   detailDialog.classList.add("active");
   detailDialog.setAttribute("aria-hidden","false");
   document.body.classList.add("modal-open");
@@ -3907,6 +3926,20 @@ document.addEventListener("keydown",e=>{
 });
 
 /* TARJETAS */
+
+function makePublicPhone(report){
+  const digits=String(report.contact_phone_public||"").replace(/\D/g,"");
+  if(digits.length<7||digits.length>15)return null;
+  const wrap=el("div","","ar-public-phone");
+  wrap.appendChild(el("span","📞 Contacto autorizado: "+report.contact_phone_public,"ar-phone-label"));
+  const call=el("a","Llamar","ar-phone-action");
+  call.href="tel:"+digits;
+  const wa=el("a","WhatsApp","ar-phone-action ar-wa");
+  wa.href="https://wa.me/"+(digits.length===8?"507":"")+digits;
+  wa.target="_blank";wa.rel="noopener noreferrer";
+  wrap.append(call,wa);
+  return wrap;
+}
 
 function buildReportCard(report){
   const card=el("article","","report-card");
@@ -3984,6 +4017,7 @@ function buildReportCard(report){
   );
 
   body.appendChild(bottom);
+  const publicPhone=makePublicPhone(report);if(publicPhone)body.appendChild(publicPhone);
   body.appendChild(makeShareActions(report));
   card.appendChild(body);
 
@@ -4145,7 +4179,7 @@ async function loadPublicReports(){
     const {data,error}=await publicDb
       .from("reports")
       .select(
-        "id,category,area,description,status,created_at"
+        "id,category,area,description,status,created_at,contact_phone_public"
       )
       .order("created_at",{ascending:false})
       .limit(500);
@@ -4160,7 +4194,7 @@ async function loadPublicReports(){
        !publicReports.some(report=>report.id===linkedId)){
       const {data:linked,error:linkedError}=await publicDb
         .from("reports")
-        .select("id,category,area,description,status,created_at")
+        .select("id,category,area,description,status,created_at,contact_phone_public")
         .eq("id",linkedId)
         .maybeSingle();
       if(!linkedError && linked)publicReports.unshift(linked);
@@ -4899,6 +4933,15 @@ $("reportForm").addEventListener(
 
     const form=new FormData();
 
+    const phoneRaw=$("reportPhone").value.trim();
+    const phoneDigits=phoneRaw.replace(/\D/g,"");
+    if(phoneDigits.length<7 || phoneDigits.length>15){
+      reportAlert("⚠️ Escribe un teléfono válido (entre 7 y 15 dígitos).");
+      $("reportPhone").focus();
+      return;
+    }
+    form.append("contact_phone",phoneRaw);
+    form.append("publish_phone",$("reportPhonePublic").checked?"true":"false");
     form.append("category",category);
     form.append("area",area);
     form.append("description",description);
