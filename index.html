@@ -2374,6 +2374,54 @@ body{background:#f7f9f6;color:#12291f}
 }
 @media(prefers-reduced-motion:reduce){.ar178-hero .hero-card{animation:none!important}}
 </style>
+
+<style id="ar178-futuro-motion">
+/* Animación conmemorativa: movimiento compositor-friendly y sin librerías */
+.ar178-hero{isolation:isolate}
+.ar178-hero::before{content:"";position:absolute;inset:-35%;pointer-events:none;z-index:0;background:conic-gradient(from 0deg at 65% 45%,transparent 0deg,#a5f4b914 36deg,transparent 74deg,#f6dc8c12 126deg,transparent 170deg,#d0ecca13 270deg,transparent 330deg);animation:ar178-orbit 28s linear infinite}
+.ar178-hero::after{background-size:42px 42px!important;animation:ar178-grid-drift 22s linear infinite;opacity:.25!important}
+.ar178-scene{animation:ar178-scene-in 1.5s ease both,ar178-scene-float 13s ease-in-out 1.5s infinite;transform-origin:center bottom}
+.ar178-hero .ar178-number{position:relative;animation:ar178-appear 1.2s cubic-bezier(.2,.8,.25,1) both,ar178-goldglow 5s ease-in-out 1.2s infinite}
+.ar178-hero .ar178-years{animation:ar178-appear .9s .25s ease both}
+.ar178-ribbon strong{animation:ar178-goldglow 5s ease-in-out infinite}
+.ar178-ribbon{background-size:200% 100%;animation:ar178-ribbon-shift 14s ease-in-out infinite}
+.ar178-motifs span{animation:ar178-chip-in .6s ease both}
+.ar178-motifs span:nth-child(2){animation-delay:.15s}.ar178-motifs span:nth-child(3){animation-delay:.3s}
+.ar178-hero .hero-card{animation:ar178-card-arrive .9s .35s ease both,ar178-card-float 8s ease-in-out 1.25s infinite}
+.ar178-hero .hero-card-icon{animation:ar178-bob 4s ease-in-out infinite}
+.ar178-sparks{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.ar178-spark{position:absolute;left:var(--x);top:var(--y);width:var(--sz);height:var(--sz);border-radius:50%;background:#ffe4a4;box-shadow:0 0 14px 2px #ffe4a450;opacity:0;animation:ar178-spark-float var(--dur) ease-in-out var(--delay) infinite}
+.ar178-hero .hero-inner{z-index:2}
+.ar178-message-mark{animation:ar178-goldglow 5s ease-in-out infinite}
+/* Revelado progresivo, solo se activa cuando JS observa el elemento */
+.ar178-reveal{transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.3,1)}
+.ar178-reveal.ar178-wait{opacity:0;transform:translateY(20px)}
+.ar178-reveal.ar178-shown{opacity:1;transform:translateY(0)}
+.report-card,.special-card,.location-card,.category-tile{transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
+@media(hover:hover) and (pointer:fine){
+.report-card:hover,.special-card:hover,.location-card:hover,.category-tile:hover{transform:translateY(-6px);box-shadow:0 18px 42px #0b48231c}
+.ar178-hero .hero-buttons .btn:hover{transform:translateY(-4px) scale(1.02)}
+}
+.ar178-ribbon a,.ar178-message a{transition:transform .2s ease,background .2s ease}
+.ar178-ribbon a:hover,.ar178-message a:hover{transform:translateY(-2px)}
+@keyframes ar178-orbit{to{transform:rotate(360deg)}}
+@keyframes ar178-grid-drift{to{background-position:42px 42px}}
+@keyframes ar178-scene-in{from{opacity:0;transform:translateY(28px)}to{opacity:.23;transform:translateY(0)}}
+@keyframes ar178-scene-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes ar178-appear{from{opacity:0;transform:translateY(26px) scale(.92)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes ar178-goldglow{0%,100%{filter:drop-shadow(0 0 0 transparent)}50%{filter:drop-shadow(0 0 12px #f6d9877b)}}
+@keyframes ar178-ribbon-shift{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+@keyframes ar178-chip-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ar178-card-arrive{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ar178-card-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes ar178-bob{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(5deg)}}
+@keyframes ar178-spark-float{0%,100%{opacity:0;transform:translate3d(0,12px,0) scale(.5)}25%,65%{opacity:.75}75%{opacity:0;transform:translate3d(14px,-26px,0) scale(1.1)}}
+@media(max-width:600px){.ar178-spark:nth-child(n+9){display:none}.ar178-hero::before{animation-duration:45s}.ar178-hero .hero-card{animation:none}}
+@media(prefers-reduced-motion:reduce){
+.ar178-hero::before,.ar178-hero::after,.ar178-scene,.ar178-hero .ar178-number,.ar178-hero .ar178-years,.ar178-ribbon,.ar178-ribbon strong,.ar178-motifs span,.ar178-hero .hero-card,.ar178-hero .hero-card-icon,.ar178-spark,.ar178-message-mark{animation:none!important}
+.ar178-reveal,.ar178-reveal.ar178-wait,.ar178-reveal.ar178-shown{opacity:1!important;transform:none!important;transition:none!important}
+}
+</style>
 </head>
 
 <body>
@@ -2460,7 +2508,7 @@ body{background:#f7f9f6;color:#12291f}
 </div>
 
 <div class="ar178-ribbon" aria-label="Homenaje a los 178 años de fundación de Aguadulce"><div class="container ar178-ribbon-inner"><strong>✦ AGUADULCE · 178 AÑOS ✦</strong><span>Celebramos nuestra historia, nuestra gente y el futuro que construimos juntos.</span><a href="#reportes">Conoce tu comunidad ↗</a></div></div>
-<section class="hero ar178-hero" id="inicio"><div class="ar-3-ambient" aria-hidden="true"></div><div class="ar178-scene" aria-hidden="true"><svg viewBox="0 0 700 440" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="520" cy="120" r="86" opacity=".45"/><path d="M0 365Q120 300 240 365T480 355T700 360V440H0Z" fill="currentColor" opacity=".11"/><path d="M75 440V300h60V265h30v175M95 300v-42h20v42M105 255v-30M65 330h110M90 350h30m-30 35h30m-30 35h30M245 440V310h120v130M270 310v-38h70v38M305 272v-52M260 355h30m20 0h30m-80 40h30m20 0h30M410 440V350h150v90M435 350v-40h100v40M445 380h30m25 0h30M590 440V330h60v110M605 330v-30h30v30M625 300v-45" opacity=".55"/><path d="M0 437H700M15 438c10-70 12-130 4-190m-4 80c-15-20-22-43-21-68m22 58c18-21 26-47 25-75m-17 128c-17-16-25-38-29-55m29 46c18-19 28-39 32-60M672 438c-10-70-12-130-4-190m4 80c15-20 22-43 21-68m-22 58c-18-21-26-47-25-75m17 128c17-16 25-38 29-55m-29 46c-18-19-28-39-32-60" opacity=".75"/></svg></div>
+<section class="hero ar178-hero" id="inicio"><div class="ar178-sparks" aria-hidden="true"><i class="ar178-spark" style="--x:12%;--y:20%;--sz:3px;--dur:7s;--delay:0s"></i><i class="ar178-spark" style="--x:22%;--y:68%;--sz:4px;--dur:8s;--delay:2s"></i><i class="ar178-spark" style="--x:35%;--y:11%;--sz:3px;--dur:6s;--delay:1s"></i><i class="ar178-spark" style="--x:47%;--y:48%;--sz:4px;--dur:9s;--delay:3s"></i><i class="ar178-spark" style="--x:61%;--y:23%;--sz:3px;--dur:7s;--delay:4s"></i><i class="ar178-spark" style="--x:73%;--y:72%;--sz:5px;--dur:8s;--delay:1s"></i><i class="ar178-spark" style="--x:88%;--y:18%;--sz:3px;--dur:10s;--delay:2s"></i><i class="ar178-spark" style="--x:92%;--y:59%;--sz:4px;--dur:8s;--delay:5s"></i><i class="ar178-spark" style="--x:17%;--y:84%;--sz:3px;--dur:9s;--delay:4s"></i><i class="ar178-spark" style="--x:55%;--y:84%;--sz:4px;--dur:7s;--delay:2s"></i><i class="ar178-spark" style="--x:79%;--y:42%;--sz:3px;--dur:8s;--delay:0s"></i><i class="ar178-spark" style="--x:42%;--y:33%;--sz:3px;--dur:6s;--delay:3s"></i></div><div class="ar-3-ambient" aria-hidden="true"></div><div class="ar178-scene" aria-hidden="true"><svg viewBox="0 0 700 440" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="520" cy="120" r="86" opacity=".45"/><path d="M0 365Q120 300 240 365T480 355T700 360V440H0Z" fill="currentColor" opacity=".11"/><path d="M75 440V300h60V265h30v175M95 300v-42h20v42M105 255v-30M65 330h110M90 350h30m-30 35h30m-30 35h30M245 440V310h120v130M270 310v-38h70v38M305 272v-52M260 355h30m20 0h30m-80 40h30m20 0h30M410 440V350h150v90M435 350v-40h100v40M445 380h30m25 0h30M590 440V330h60v110M605 330v-30h30v30M625 300v-45" opacity=".55"/><path d="M0 437H700M15 438c10-70 12-130 4-190m-4 80c-15-20-22-43-21-68m22 58c18-21 26-47 25-75m-17 128c-17-16-25-38-29-55m29 46c18-19 28-39 32-60M672 438c-10-70-12-130-4-190m4 80c15-20 22-43 21-68m-22 58c-18-21-26-47-25-75m17 128c17-16 25-38 29-55m-29 46c-18-19-28-39-32-60" opacity=".75"/></svg></div>
   <div class="container hero-inner">
     <div>
       <div class="hero-tag">✦ HOMENAJE A AGUADULCE · COCLÉ · PANAMÁ</div>
@@ -2471,7 +2519,8 @@ body{background:#f7f9f6;color:#12291f}
         <span class="ar178-intro"><strong>Celebramos 178 años de fundación.</strong> Un homenaje a nuestros barrios, comunidades, tradiciones y a la gente que hace grande a Aguadulce. Sigamos contando lo que sucede hoy y construyendo juntos lo que viene.</span>
       </p>
 
-      <div class="ar178-motifs" aria-label="Nuestra identidad"><span>🌾 Tierra de trabajo</span><span>🏘️ Barrios y comunidades</span><span>💚 Nuestra gente</span></div>\n      <div class="hero-buttons">
+      <div class="ar178-motifs" aria-label="Nuestra identidad"><span>🌾 Tierra de trabajo</span><span>🏘️ Barrios y comunidades</span><span>💚 Nuestra gente</span></div>
+      <div class="hero-buttons">
         <a href="#enviar" class="btn btn-lime">＋ ENVIAR REPORTE</a>
         <a href="#reportes" class="btn btn-outline">EXPLORAR REPORTES</a>
 
@@ -6548,6 +6597,24 @@ if ('serviceWorker' in navigator) {
     close.focus();
     ping();
   };
+})();
+</script>
+<script id="ar178-futuro-script">
+(function(){
+  if(!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.remove('ar178-wait');entry.target.classList.add('ar178-shown');observer.unobserve(entry.target)}})
+  },{threshold:.06,rootMargin:'0px 0px 45px 0px'});
+  const watch=()=>document.querySelectorAll('.ar178-message,.report-card,.special-card,.location-card,.category-tile').forEach(el=>{
+    if(el.dataset.ar178Observed)return;
+    el.dataset.ar178Observed='1';el.classList.add('ar178-reveal');
+    const rect=el.getBoundingClientRect();
+    if(rect.top>window.innerHeight+30){el.classList.add('ar178-wait');observer.observe(el)}
+  });
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',watch,{once:true});else watch();
+  /* Las tarjetas de Supabase se crean de forma asíncrona; observar su contenedor, no el documento entero. */
+  const attach=()=>{const root=document.querySelector('#reportGrid,.report-grid');if(root){new MutationObserver(watch).observe(root,{childList:true,subtree:false})}};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',attach,{once:true});else attach();
 })();
 </script>
 </body>
