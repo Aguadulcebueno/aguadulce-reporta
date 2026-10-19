@@ -2329,6 +2329,51 @@ body{background:#f7f9f6;color:#12291f}
 .ar-contact-actions a{padding:10px 8px;border-radius:9px;text-align:center;font-weight:800;font-size:12px;min-height:42px;display:flex;justify-content:center;align-items:center}
 .ar-contact-call{background:#14583e;color:white}.ar-contact-wa{background:#e0f4df;color:#14583e;border:1px solid #b5dbb6;display:inline-flex;align-items:center;justify-content:center;gap:7px}
 </style>
+
+<style id="ar-178-aniversario">
+/* Homenaje editorial 178 años — conserva la estructura funcional del sitio */
+:root{--ar178-gold:#f4cc74;--ar178-cream:#fff3d5}
+.ar178-ribbon{background:linear-gradient(105deg,#0b392d,#176348 52%,#0b392d);color:#fff;border-block:1px solid #d5b76d66;position:relative;overflow:hidden}
+.ar178-ribbon:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(120deg,transparent 0 42px,#ffffff07 43px 44px);pointer-events:none}
+.ar178-ribbon-inner{display:flex;align-items:center;justify-content:center;gap:16px;padding:11px 12px;text-align:center;position:relative}
+.ar178-ribbon strong{color:#ffe29c;font:900 16px "Outfit",sans-serif;letter-spacing:.03em}
+.ar178-ribbon span{font-size:12px;font-weight:700;color:#e8f7ed}
+.ar178-ribbon a{color:#123b2b;background:#f4cc74;border-radius:30px;padding:7px 13px;font-size:11px;font-weight:900;white-space:nowrap}
+.hero.ar178-hero{background:radial-gradient(ellipse at 80% 25%,#2b80634d,transparent 50%),linear-gradient(125deg,#06291f,#11533c 66%,#073326)}
+.ar178-hero .hero-inner{position:relative;z-index:1}
+.ar178-hero .hero-tag{background:#f4cc741b;border-color:#f4cc7480;color:#ffe5a7}
+.ar178-hero h1 .ar178-number{display:inline-block;font:900 clamp(74px,10vw,148px)/.88 "Outfit",sans-serif;letter-spacing:-.08em;color:#f7d98b!important;background:none!important;-webkit-text-fill-color:#f7d98b;filter:drop-shadow(0 8px 22px #0004)}
+.ar178-hero h1 .ar178-years{display:inline-block;vertical-align:middle;margin-left:14px;color:#fff;font-size:clamp(19px,3vw,37px);line-height:1.06;letter-spacing:-.03em}
+.ar178-hero .ar178-intro{max-width:590px;color:#f3f7ed}
+.ar178-hero .ar178-intro strong{color:#ffe4a2}
+.ar178-hero .hero-card{border:1px solid #f4cc7470;background:linear-gradient(150deg,#fffef8,#eaf5eb);box-shadow:0 22px 65px #0003}
+.ar178-hero .hero-card-icon{background:#fff0c5;color:#815a1a}
+.ar178-hero .hero-card-bottom{color:#206345}
+.ar178-motifs{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 4px}
+.ar178-motifs span{border:1px solid #ffffff42;border-radius:30px;padding:6px 10px;color:#e9f6e9;font-size:11px;font-weight:800;background:#ffffff0b}
+.ar178-scene{position:absolute;right:0;bottom:0;width:min(58%,750px);height:100%;pointer-events:none;opacity:.23;color:#cceecb}
+.ar178-scene svg{width:100%;height:100%;display:block}
+.ar178-message{background:linear-gradient(100deg,#fff8e7,#edf7e9);border-bottom:1px solid #e9d9ad}
+.ar178-message-inner{display:flex;align-items:center;gap:16px;padding:18px 0}
+.ar178-message-mark{font:900 31px "Outfit",sans-serif;color:#176247;white-space:nowrap}
+.ar178-message p{margin:0;color:#385c4c;font-size:13px;line-height:1.6}
+.ar178-message strong{color:#0f4c37}
+.ar178-message a{margin-left:auto;white-space:nowrap;font-size:12px;font-weight:900;color:#0c5e40}
+@media(max-width:720px){
+ .ar178-ribbon-inner{flex-wrap:wrap;gap:5px 12px;padding:9px 4px}
+ .ar178-ribbon strong{font-size:14px}
+ .ar178-ribbon span{font-size:11px}
+ .ar178-ribbon a{display:none}
+ .ar178-hero h1 .ar178-number{font-size:clamp(73px,20vw,105px)}
+ .ar178-hero h1 .ar178-years{font-size:clamp(18px,5vw,27px)}
+ .ar178-scene{width:100%;opacity:.12}
+ .ar178-message-inner{align-items:flex-start;gap:9px;padding:13px 0}
+ .ar178-message-mark{font-size:24px}
+ .ar178-message p{font-size:12px}
+ .ar178-message a{display:none}
+}
+@media(prefers-reduced-motion:reduce){.ar178-hero .hero-card{animation:none!important}}
+</style>
 </head>
 
 <body>
@@ -2414,18 +2459,19 @@ body{background:#f7f9f6;color:#12291f}
   </div>
 </div>
 
-<section class="hero" id="inicio"><div class="ar-3-ambient" aria-hidden="true"></div>
+<div class="ar178-ribbon" aria-label="Homenaje a los 178 años de fundación de Aguadulce"><div class="container ar178-ribbon-inner"><strong>✦ AGUADULCE · 178 AÑOS ✦</strong><span>Celebramos nuestra historia, nuestra gente y el futuro que construimos juntos.</span><a href="#reportes">Conoce tu comunidad ↗</a></div></div>
+<section class="hero ar178-hero" id="inicio"><div class="ar-3-ambient" aria-hidden="true"></div><div class="ar178-scene" aria-hidden="true"><svg viewBox="0 0 700 440" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="520" cy="120" r="86" opacity=".45"/><path d="M0 365Q120 300 240 365T480 355T700 360V440H0Z" fill="currentColor" opacity=".11"/><path d="M75 440V300h60V265h30v175M95 300v-42h20v42M105 255v-30M65 330h110M90 350h30m-30 35h30m-30 35h30M245 440V310h120v130M270 310v-38h70v38M305 272v-52M260 355h30m20 0h30m-80 40h30m20 0h30M410 440V350h150v90M435 350v-40h100v40M445 380h30m25 0h30M590 440V330h60v110M605 330v-30h30v30M625 300v-45" opacity=".55"/><path d="M0 437H700M15 438c10-70 12-130 4-190m-4 80c-15-20-22-43-21-68m22 58c18-21 26-47 25-75m-17 128c-17-16-25-38-29-55m29 46c18-19 28-39 32-60M672 438c-10-70-12-130-4-190m4 80c15-20 22-43 21-68m-22 58c-18-21-26-47-25-75m17 128c17-16 25-38 29-55m-29 46c-18-19-28-39-32-60" opacity=".75"/></svg></div>
   <div class="container hero-inner">
     <div>
-      <div class="hero-tag">● AGUADULCE · COCLÉ · PANAMÁ</div>
+      <div class="hero-tag">✦ HOMENAJE A AGUADULCE · COCLÉ · PANAMÁ</div>
 
-      <h1>Tu comunidad.<br><span>Tu voz.</span><br>Un mismo lugar.</h1>
+      <h1><span class="ar178-number">178</span><span class="ar178-years">AÑOS DE<br>HISTORIA</span><br><span>Aguadulce, nuestra tierra.</span></h1>
 
       <p>
-        Comparte lo que sucede en Aguadulce. Publica un reporte, descubre avisos y consulta información útil de nuestra comunidad.
+        <span class="ar178-intro"><strong>Celebramos 178 años de fundación.</strong> Un homenaje a nuestros barrios, comunidades, tradiciones y a la gente que hace grande a Aguadulce. Sigamos contando lo que sucede hoy y construyendo juntos lo que viene.</span>
       </p>
 
-      <div class="hero-buttons">
+      <div class="ar178-motifs" aria-label="Nuestra identidad"><span>🌾 Tierra de trabajo</span><span>🏘️ Barrios y comunidades</span><span>💚 Nuestra gente</span></div>\n      <div class="hero-buttons">
         <a href="#enviar" class="btn btn-lime">＋ ENVIAR REPORTE</a>
         <a href="#reportes" class="btn btn-outline">EXPLORAR REPORTES</a>
 
@@ -2445,19 +2491,20 @@ body{background:#f7f9f6;color:#12291f}
     </div>
 
     <div class="hero-card">
-      <div class="hero-card-icon">✦</div>
-      <div class="ar-v5-card-label">UNA COMUNIDAD MÁS CONECTADA</div>
-      <h3>Lo que importa, merece ser escuchado.</h3>
+      <div class="hero-card-icon">🎉</div>
+      <div class="ar-v5-card-label">178 AÑOS · PASADO, PRESENTE Y FUTURO</div>
+      <h3>Nuestra historia sigue escribiéndose.</h3>
       <p>
         Un espacio para dar visibilidad a los problemas,
         conectar a los vecinos y compartir información útil.
       </p>
       <div class="hero-card-bottom">
-        💚 Aguadulce, Coclé · Panamá
+        ✦ 178 años de orgullo aguadulceño
       </div>
     </div>
   </div>
 </section>
+<div class="ar178-message"><div class="container ar178-message-inner"><span class="ar178-message-mark">178 ✦</span><p><strong>¡Feliz aniversario, Aguadulce!</strong> Desde Aguadulce Reporta celebramos a las comunidades que nos unen. Esta plataforma sigue al servicio de las noticias, los avisos y las historias de nuestra gente.</p><a href="#afichesDestacados">Ver avisos comunitarios ↗</a></div></div>
 <section class="future-shortcuts" aria-label="Accesos rápidos">
  <div class="container future-shortcuts-inner">
   <a href="#reportes"><span>📍</span><strong>Explorar</strong><small>Mi comunidad</small></a>
