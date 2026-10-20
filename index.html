@@ -1682,6 +1682,29 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;op
 .ar-detail-brand-social span{color:#c8e4d3;font-size:10px}
 .ar-detail-brand-social b{font-size:14px}
 @media(max-width:520px){.ar-detail-brand{padding:12px;gap:8px}.ar-detail-brand-identity{gap:8px}.ar-detail-brand-identity img{width:45px;height:45px;border-radius:9px}.ar-detail-brand-name strong{font-size:17px}.ar-detail-brand-name small{font-size:8px;max-width:145px}.ar-detail-brand-social strong{font-size:9px}.ar-detail-brand-social span{font-size:8px}.ar-detail-brand-social b{font-size:10px}}
+
+/* Edición: vista pública limpia. Los controles internos permanecen en DOM para compatibilidad JS. */
+#reportes .premium-explore-heading,
+#reportes .premium-community-bar,
+#reportes #ar3Categories,
+#reportes .ar-3-helper,
+#reportes .reports-toolbar,
+#reportes #searchSuggestions,
+#reportes #filterHelp{display:none!important}
+#reportes .reports-layout{margin-top:16px}
+#reportes .premium-posters-section{padding-top:8px}
+/* Panel administrativo sencillo */
+#adminPanel .agr-tool-row{display:none}
+#adminPanel .admin-group-note{margin-top:0}
+#adminPanel .admin-report{background:#fff}
+#adminPanel .admin-actions{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+#adminPanel .admin-actions>.label{flex-basis:100%;margin:0}
+#adminPanel .admin-actions>.field{flex:1 1 150px;max-width:230px}
+#adminPanel .admin-actions>.btn{margin:0}
+#adminPanel .admin-actions>.admin-full-editor,
+#adminPanel .admin-actions>.message{flex-basis:100%}
+@media(max-width:600px){#adminPanel .admin-actions>.field{max-width:none}}
+
 </style>
 <style>
 /* AGUADULCE REPORTA — PREMIUM UX 2026 (no altera Supabase ni Turnstile) */
@@ -2644,6 +2667,7 @@ body{background:#f7f9f6;color:#12291f}
         <p class="message" id="publicMessage" role="status"></p>
         <p class="hint" id="filterHelp">Busca por palabra o categoría.</p>
 
+        <div style="display:flex;justify-content:flex-end;margin:0 0 8px"><button type="button" class="btn btn-soft" id="arSimpleRefresh" onclick="document.getElementById('refreshPublic').click()">↻ Actualizar publicaciones</button></div>
         <!-- Afiches visibles después de los filtros y antes de los reportes -->
 <section class="section premium-posters-section" id="afichesDestacados" aria-labelledby="afichesDestacadosTitulo">
   <div class="container">
@@ -3276,10 +3300,7 @@ body{background:#f7f9f6;color:#12291f}
       <div id="adminPanel" hidden>
         <div class="section-label">CENTRO DE CONTROL</div>
         <h3 style="margin-top:15px">📋 Panel de reportes</h3>
-        <p>
-          Revisa fotografías, aprueba publicaciones
-          y actualiza los estados.
-        </p>
+        <p>Revisa los nuevos reportes, aprueba o elimina publicaciones y marca los casos como resueltos cuando corresponda.</p>
 
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px">
           <button type="button" id="refreshAdmin"
@@ -3307,7 +3328,7 @@ body{background:#f7f9f6;color:#12291f}
         </div>
         <div class="admin-board" id="adminBoard" hidden>
           <div class="admin-tabs" id="adminTabs" role="tablist" aria-label="Filtrar reportes administrativos"></div>
-          <p class="hint" id="adminFilterHelp">Las publicaciones están separadas por su situación. Al guardar, la tarjeta permanece en su lugar; pulsa Actualizar para reorganizar.</p>
+          <p class="hint" id="adminFilterHelp">Elige una sección para revisar sus casos. Después de aprobar, resolver o eliminar, pulsa Actualizar para reorganizar las listas.</p>
         </div>
         <div id="adminReports"></div>
       </div>
@@ -3691,8 +3712,8 @@ function dateText(value){
 function statusText(value){
   return ({
     pending:"Pendiente",
-    reviewing:"En revisión",
-    referred:"Remitido",
+    reviewing:"Sin resolver",
+    referred:"Sin resolver",
     resolved:"Resuelto",
     rejected:"Rechazado"
   })[value]||value||"Sin estado";
@@ -5354,19 +5375,18 @@ async function loadAdminReports(){
       true
     );
 
-    // Cada caso aparece en un solo grupo. Los publicados no se mezclan con los pendientes.
+    // Cuatro secciones claras. Estados heredados se agrupan sin borrar datos.
     const groups=[
-      {id:"pending",label:"⏳ Sin aprobar",description:"Publicaciones que todavía no están aprobadas"},
-      {id:"reviewing",label:"🔎 En revisión",description:"Casos que requieren revisión"},
-      {id:"referred",label:"↗ Remitidos",description:"Casos remitidos para seguimiento"},
-      {id:"published",label:"✅ Publicados",description:"Publicaciones visibles al público"},
-      {id:"other",label:"📁 Otros",description:"Resueltos, rechazados y reportes privados"}
+      {id:"pending",label:"⏳ Pendientes",description:"Reportes nuevos por aprobar o revisar"},
+      {id:"published",label:"✅ Aprobados · sin resolver",description:"Publicaciones aprobadas con el caso todavía abierto"},
+      {id:"resolved",label:"🟢 Resueltos",description:"Publicaciones cuyo problema fue solucionado"},
+      {id:"other",label:"📁 Otros",description:"Reportes rechazados o privados"}
     ];
     const groupFor=r=>{
-      if(r.status==="reviewing")return "reviewing";
-      if(r.status==="referred")return "referred";
-      if(r.status==="resolved"||r.status==="rejected"||r.visibility_requested!=="public")return "other";
-      return r.is_published?"published":"pending";
+      if(r.status==="rejected"||r.visibility_requested!=="public")return "other";
+      if(!r.is_published)return "pending";
+      if(r.status==="resolved")return "resolved";
+      return "published";
     };
     const board=$("adminBoard");
     const tabs=$("adminTabs");
@@ -5376,7 +5396,7 @@ async function loadAdminReports(){
     const counts=Object.fromEntries(groups.map(g=>[g.id,0]));
     data.forEach(r=>counts[groupFor(r)]++);
     const metrics=$("agrMetrics");metrics.replaceChildren();
-    [["Pendientes",counts.pending],["En revisión",counts.reviewing],["Publicados",counts.published]].forEach(([label,num])=>{
+    [["Pendientes",counts.pending],["Aprobados",counts.published],["Resueltos",counts.resolved]].forEach(([label,num])=>{
       const item=el("div","","agr-metric");item.append(el("strong",String(num)),el("small",label));metrics.appendChild(item);
     });
     document.title=(counts.pending?"("+counts.pending+") ":"")+"Aguadulce Reporta | Administración";
@@ -5426,7 +5446,7 @@ async function loadAdminReports(){
         ),
         el(
           "p",
-          "Estado: "+statusText(report.status)
+          "Situación: "+(report.status==="resolved"?"Resuelto":report.is_published?"Sin resolver":"Pendiente de aprobación")
         ),
         el(
           "p",
@@ -5528,7 +5548,7 @@ async function loadAdminReports(){
       );
 
       actions.appendChild(
-        el("label","Cambiar estado","label")
+        el("label","¿Ya se solucionó el caso?","label")
       );
 
       const select=el(
@@ -5537,8 +5557,6 @@ async function loadAdminReports(){
 
       [
         ["pending","Pendiente"],
-        ["reviewing","En revisión"],
-        ["referred","Remitido"],
         ["resolved","Resuelto"],
         ["rejected","Rechazado"]
       ].forEach(([value,label])=>{
@@ -5547,11 +5565,11 @@ async function loadAdminReports(){
         select.appendChild(option);
       });
 
-      select.value=report.status;
+      select.value=["reviewing","referred"].includes(report.status)?"pending":report.status;
 
       const save=el(
         "button",
-        "Guardar estado",
+        "Guardar situación",
         "btn btn-green"
       );
 
@@ -5560,7 +5578,7 @@ async function loadAdminReports(){
 
       select.onchange=()=>{
         save.disabled=
-          select.value===report.status;
+          select.value===(["reviewing","referred"].includes(report.status)?"pending":report.status);
       };
 
       const message=el(
@@ -5589,21 +5607,21 @@ async function loadAdminReports(){
           message.textContent=
             "Error: "+error.message;
           save.disabled=false;
-          save.textContent="Guardar estado";
+          save.textContent="Guardar situación";
           return;
         }
 
         report.status=select.value;
         if(changes.is_published===false)report.is_published=false;
-        card.querySelectorAll(":scope > p")[2].textContent="Estado: "+statusText(report.status);
+        card.querySelectorAll(":scope > p")[2].textContent="Situación: "+(report.status==="resolved"?"Resuelto":report.is_published?"Sin resolver":"Pendiente de aprobación");
         card.querySelectorAll(":scope > p")[4].textContent="Publicado: "+(report.is_published?"Sí":"No");
-        editStatus.value=report.status;
+        editStatus.value=["reviewing","referred"].includes(report.status)?"pending":report.status;
         editPublish.checked=!!report.is_published;
         if(typeof publish!=="undefined" && publish){
           publish.textContent=report.is_published?"Retirar publicación":"✓ Aprobar publicación";
           publish.className=report.is_published?"btn btn-soft":"btn btn-green";
         }
-        save.textContent="Guardar estado";
+        save.textContent="Guardar situación";
         message.textContent="✓ Estado guardado correctamente.";
         await loadPublicReports();
       };
@@ -5612,7 +5630,7 @@ async function loadAdminReports(){
 
       // Edición administrativa completa: antes o después de publicar.
       const editor=el("details","","admin-full-editor");
-      const summary=el("summary","✏️ Editar publicación completa");
+      const summary=el("summary","✏️ Opciones avanzadas · Editar publicación");
       editor.appendChild(summary);
       const form=el("form","","admin-edit-form");
       form.noValidate=true;
@@ -5636,12 +5654,11 @@ async function loadAdminReports(){
       editDescription.rows=5;editDescription.maxLength=1500;
       editDescription.value=report.description||"";
       const editStatus=el("select","","field");
-      [["pending","Pendiente"],["reviewing","En revisión"],
-       ["referred","Remitido"],["resolved","Resuelto"],
+      [["pending","Sin resolver / Pendiente"],["resolved","Resuelto"],
        ["rejected","Rechazado"]].forEach(([value,label])=>{
         const opt=el("option",label);opt.value=value;editStatus.appendChild(opt);
       });
-      editStatus.value=report.status;
+      editStatus.value=["reviewing","referred"].includes(report.status)?"pending":report.status;
       const editPublish=el("input");editPublish.type="checkbox";
       editPublish.checked=!!report.is_published;
       const publishLabel=el("label"," Publicar después de guardar (o mantener publicada)","admin-publish-label");
@@ -5650,7 +5667,7 @@ async function loadAdminReports(){
       editSubmit.type="submit";
       const editMessage=el("p","","message");editMessage.setAttribute("role","status");
       form.append(makeField("Categoría",editCategory),makeField("Ubicación",editArea),
-        makeField("Descripción / contenido",editDescription),makeField("Estado",editStatus),
+        makeField("Descripción / contenido",editDescription),makeField("Situación del caso",editStatus),
         publishLabel,editSubmit,editMessage);
       editor.appendChild(form);actions.appendChild(editor);
       form.addEventListener("submit",async event=>{
@@ -5677,9 +5694,9 @@ async function loadAdminReports(){
         card.querySelector("h4").textContent=categoryText(report.category)+" · "+report.area;
         const paragraphs=card.querySelectorAll(":scope > p");
         paragraphs[0].textContent=report.description;
-        paragraphs[2].textContent="Estado: "+statusText(report.status);
+        paragraphs[2].textContent="Situación: "+(report.status==="resolved"?"Resuelto":report.is_published?"Sin resolver":"Pendiente de aprobación");
         paragraphs[4].textContent="Publicado: "+(report.is_published?"Sí":"No");
-        select.value=report.status;save.disabled=true;
+        select.value=["reviewing","referred"].includes(report.status)?"pending":report.status;save.disabled=true;
         if(publish){publish.textContent=report.is_published?"Retirar publicación":"✓ Aprobar publicación";
           publish.className=report.is_published?"btn btn-soft":"btn btn-green";}
         editSubmit.disabled=false;editSubmit.textContent="💾 Guardar todos los cambios";
